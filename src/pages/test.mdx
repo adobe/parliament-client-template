@@ -1,10 +1,26 @@
-import { Box, Heading, Text } from 'rebass'
+import { Box, Heading, Text } from "rebass"
+import Button from "@react/react-spectrum/Button"
+import Provider from "@react/react-spectrum/Provider"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
-# Here is a JSX block
+<Layout>
+  <SEO title="Markdown" />
 
-It is using imported components!
+# Here is a Markdown block
+
+Everything below this line is JSX.
 
 <Box>
   <Heading>Here's a JSX block</Heading>
   <Text>It's pretty neat</Text>
 </Box>
+
+  <Provider theme='lightest'>
+    <Button
+        label='Submit'
+        variant='cta'
+        modalTrigger
+    />
+  </Provider>
+</Layout>

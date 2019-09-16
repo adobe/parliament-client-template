@@ -35,7 +35,19 @@ module.exports = {
         path: `${__dirname}/src/markdown-pages`,
       },
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 970,
+            },
+          },
+        ],
+      },
+    },
     `gatsby-plugin-mdx`,
     {
       resolve: `gatsby-source-git`,
@@ -45,7 +57,7 @@ module.exports = {
         // Optionally supply a branch. If none supplied, you'll get the default branch.
         branch: `master`,
         // Tailor which files get imported eg. import the docs folder from a codebase.
-        patterns: `*.md`,
+        patterns: `**/*.md`,
       },
     },
     {
@@ -56,7 +68,7 @@ module.exports = {
         // Optionally supply a branch. If none supplied, you'll get the default branch.
         branch: `master`,
         // Tailor which files get imported eg. import the docs folder from a codebase.
-        patterns: `*.md`,
+        patterns: `**/*`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

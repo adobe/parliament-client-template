@@ -66,15 +66,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   `)
 
   data.allFile.edges.forEach(({ node }) => {
-    const folder = node.dir.substring(node.dir.lastIndexOf("/") + 1)
-    const slug = `${folder}/${node.name}`
+    const folder = node.dir.substring(
+      node.dir.lastIndexOf("gatsby-source-git/") + 18
+    )
+    const slug = `${folder}/${node.name}.${node.extension}`
     console.log(slug)
     console.log(node.dir)
     // console.log(JSON.stringify(node))
-    actions.createPage({
-      path: slug,
-      component: require.resolve(`./src/templates/blogTemplate2.js`),
-      context: { slug: node.name, id: node.id },
-    })
+    if (node.extension === "md") {
+      createPage({
+        path: slug,
+        component: require.resolve(`./src/templates/blogTemplate2.js`),
+        context: { slug: node.name, id: node.id },
+      })
+    }
   })
 }

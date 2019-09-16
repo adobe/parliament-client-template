@@ -36,10 +36,45 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: node.frontmatter.path,
-      component: blogPostTemplate,
-      context: {}, // additional data can be passed via context
+    console.log(JSON.stringify(node))
+    if (node.frontmatter.path) {
+      createPage({
+        path: node.frontmatter.path,
+        component: blogPostTemplate,
+        context: {}, // additional data can be passed via context
+      })
+    }
+  })
+
+  const { data } = await graphql(`
+    query {
+      allFile {
+        edges {
+          node {
+            id
+            extension
+            dir
+            modifiedTime
+            name
+            childMarkdownRemark {
+              html
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  data.allFile.edges.forEach(({ node }) => {
+    const folder = node.dir.substring(node.dir.lastIndexOf("/") + 1)
+    const slug = `${folder}/${node.name}`
+    console.log(slug)
+    console.log(node.dir)
+    // console.log(JSON.stringify(node))
+    actions.createPage({
+      path: slug,
+      component: require.resolve(`./src/templates/blogTemplate2.js`),
+      context: { slug: node.name, id: node.id },
     })
   })
 }

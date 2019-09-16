@@ -27,6 +27,12 @@ const IndexPage = () => (
       <li>
         <Link to="/openapi/">Open API Remote</Link>
       </li>
+      <li>
+        <Link to="/jwt-auth/README/">Markdown Remote: jwt-auth</Link>
+      </li>
+      <li>
+        <Link to="/adobeio-auth/README/">Markdown Remote: adobeio-auth</Link>
+      </li>
     </ul>
   </Layout>
 )

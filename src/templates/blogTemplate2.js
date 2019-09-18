@@ -20,9 +20,6 @@ const BlogPosts = props => {
     <Layout>
       <SEO title="Home" />
       <div dangerouslySetInnerHTML={{ __html: html }}></div>
-      <div>
-        <Link to="/">Back to homepage !</Link>
-      </div>
     </Layout>
   )
 }

@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 import { RedocStandalone } from "redoc"
 
 import OpenApiLayout from "../components/openapilayout"

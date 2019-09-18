@@ -1,5 +1,6 @@
 import React from "react"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
+import Link from "@react/react-spectrum/Link"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
@@ -16,22 +17,24 @@ const IndexPage = () => (
     </div>
     <ul>
       <li>
-        <Link to="/page-2/">React i.e. Gatsby page</Link>
+        <Link href="/page-2/">React i.e. Gatsby page</Link>
       </li>
       <li>
-        <Link to="/hockey/">Markdown Page</Link>
+        <Link href="/hockey/">Markdown Page</Link>
       </li>
       <li>
-        <Link to="/test/">MdX Page</Link>
+        <Link href="/test/">MdX Page</Link>
       </li>
       <li>
-        <Link to="/openapi/">Open API Remote</Link>
+        <Link href="/openapi/">Open API Remote</Link>
       </li>
       <li>
-        <Link to="/jwt-auth/README.md">Markdown Remote: jwt-auth</Link>
+        <Link href="/jwt-auth/README.md">Markdown Remote: jwt-auth</Link>
       </li>
       <li>
-        <Link to="/adobeio-auth/README.md">Markdown Remote: adobeio-auth</Link>
+        <Link href="/adobeio-auth/README.md">
+          Markdown Remote: adobeio-auth
+        </Link>
       </li>
     </ul>
   </Layout>

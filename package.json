@@ -10,7 +10,7 @@
     "@react/react-spectrum": "^2.23.0",
     "core-js": "^3.2.1",
     "eslint-plugin-flowtype": "^4.2.0",
-    "gatsby": "^2.13.73",
+    "gatsby": "^2.15.19",
     "gatsby-image": "^2.2.10",
     "gatsby-plugin-manifest": "^2.2.6",
     "gatsby-plugin-mdx": "^1.0.33",
@@ -42,7 +42,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r git@git.corp.adobe.com:smacdona/dev-site.git",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r git@git.corp.adobe.com:devrel/dev-site.git",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",

@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/pages/smacdona/dev-site`,
+  pathPrefix: `/pages/devrel/dev-site`,
   siteMetadata: {
     title: `Adobe I/O Doc Site Prototype`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,

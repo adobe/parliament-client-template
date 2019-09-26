@@ -26,7 +26,7 @@ const tvds = new TreeViewDataSource(new HypermediaDataSource())
 const Hypermedia = () => {
   const [selectedItem, setSelectedItem] = useState({
     label: "Test 1",
-    url: "aaa",
+    url: "/hypermedia/overview",
     children: [{ label: "Child 1" }, { label: "Child 2" }],
   })
   const [content, setContent] = useState("Pane 2a")
@@ -57,7 +57,10 @@ const Hypermedia = () => {
           />
         </div>
         <div style={{ width: "75%" }} id="content">
-          {content}
+          <iframe
+            src={selectedItem.url}
+            style={{ width: "100%", height: "100%" }}
+          />
         </div>
       </div>
     </HypermediaLayout>

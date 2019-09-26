@@ -2,27 +2,30 @@ import TreeDataSource from "@react/react-spectrum/TreeDataSource"
 
 const data = [
   {
-    label: "Test 1",
-    url: "aaa",
+    label: "Overview",
+    url: "/hypermedia/overview",
+  },
+  {
+    label: "Cache",
+    url: "/hypermedia/cache",
+  },
+  {
+    label: "Store",
+    url: "/hypermedia/store",
     children: [
       {
-        label: "Child 1",
-        url: "bbb",
-        children: [
-          { label: "Sub Child 1", url: "ccc" },
-          { label: "Sub Child 2" },
-          { label: "Sub Child 3" },
-          { label: "Sub Child 4" },
-          { label: "Sub Child 5" },
-          { label: "Sub Child 6" },
-          { label: "Sub Child 7" },
-          { label: "Sub Child 8" },
-        ],
+        label: "Users",
+        url: "/hypermedia/users",
+        children: [{ label: "User", url: "/hypermedia/user" }],
       },
-      { label: "Child 2" },
+      { label: "User Accessess", url: "/hypermedia/user_accessess" },
+      {
+        label: "Carts",
+        url: "/hypermedia/carts",
+        children: [{ label: "Cart", url: "/hypermedia/cart" }],
+      },
     ],
   },
-  { label: "Test 2" },
 ]
 
 class HypermediaDataSource extends TreeDataSource {

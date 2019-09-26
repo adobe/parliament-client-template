@@ -22,6 +22,9 @@ _Have another more specific idea? You may want to check out our vibrant collecti
     # create a new Gatsby site using the default starter
     gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
     ```
+1.	**Create an environment File**
+	
+	Create a `.env.development` and `.env.production` files and define a `GIT_CORP_TOKEN` 	specifying a personal access token. Refer: [https://help.github.com/en/articles/creating-a-	personal-access-token-for-the-command-line](https://help.github.com/en/articles/creating-a-	personal-access-token-for-the-command-line)
 
 1.  **Start developing.**
 

@@ -1,3 +1,6 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   pathPrefix: `/pages/devrel/dev-site`,
   siteMetadata: {
@@ -49,6 +52,17 @@ module.exports = {
       },
     },
     `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-source-git`,
+      options: {
+        name: `launch.en`,
+        remote: `https://${process.env.GIT_CORP_TOKEN}@git.corp.adobe.com/AdobeDocs/launch.en.git`,
+        // Optionally supply a branch. If none supplied, you'll get the default branch.
+        branch: `master`,
+        // Tailor which files get imported eg. import the docs folder from a codebase.
+        patterns: `**/*.md`,
+      },
+    },
     {
       resolve: `gatsby-source-git`,
       options: {

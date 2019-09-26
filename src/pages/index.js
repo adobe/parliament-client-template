@@ -40,6 +40,9 @@ const IndexPage = () => (
       <li>
         <Link to="adobeio-auth/README.md">Markdown Remote: adobeio-auth</Link>
       </li>
+      <li>
+        <Link to="hypermedia/">Hypermedia Example</Link>
+      </li>
     </ul>
   </Layout>
 )

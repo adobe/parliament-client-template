@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import "regenerator-runtime/runtime"
+import { withPrefix } from "gatsby"
 // import Link from "@react/react-spectrum/Link"
 import Heading from "@react/react-spectrum/Heading"
 import Folder from "@react/react-spectrum/Icon/Folder"
@@ -26,10 +27,9 @@ const tvds = new TreeViewDataSource(new HypermediaDataSource())
 const Hypermedia = () => {
   const [selectedItem, setSelectedItem] = useState({
     label: "Test 1",
-    url: "/hypermedia/overview",
+    url: "/hypermedia/overview/",
     children: [{ label: "Child 1" }, { label: "Child 2" }],
   })
-  const [content, setContent] = useState("Pane 2a")
   return (
     <HypermediaLayout>
       <SEO title="Hypermedia Example" />
@@ -46,7 +46,6 @@ const Hypermedia = () => {
                 console.log(item[0])
                 if (item[0]) {
                   setSelectedItem(item[0])
-                  setContent(item[0].label)
                   tvds.toggleItem(item[0])
                 } else {
                   tvds.toggleItem(selectedItem)
@@ -58,7 +57,7 @@ const Hypermedia = () => {
         </div>
         <div style={{ width: "75%" }} id="content">
           <iframe
-            src={selectedItem.url}
+            src={withPrefix(selectedItem.url)}
             style={{ width: "100%", height: "100%" }}
           />
         </div>

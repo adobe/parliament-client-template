@@ -3,26 +3,26 @@ import TreeDataSource from "@react/react-spectrum/TreeDataSource"
 const data = [
   {
     label: "Overview",
-    url: "/hypermedia/overview",
+    url: "/hypermedia/overview/",
   },
   {
     label: "Cache",
-    url: "/hypermedia/cache",
+    url: "/hypermedia/cache/",
   },
   {
     label: "Store",
-    url: "/hypermedia/store",
+    url: "/hypermedia/store/",
     children: [
       {
         label: "Users",
-        url: "/hypermedia/users",
-        children: [{ label: "User", url: "/hypermedia/user" }],
+        url: "/hypermedia/users/",
+        children: [{ label: "User", url: "/hypermedia/user/" }],
       },
-      { label: "User Accessess", url: "/hypermedia/user_accessess" },
+      { label: "User Accessess", url: "/hypermedia/user_accessess/" },
       {
         label: "Carts",
-        url: "/hypermedia/carts",
-        children: [{ label: "Cart", url: "/hypermedia/cart" }],
+        url: "/hypermedia/carts/",
+        children: [{ label: "Cart", url: "/hypermedia/cart/" }],
       },
     ],
   },

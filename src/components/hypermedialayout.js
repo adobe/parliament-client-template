@@ -12,8 +12,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Provider from "@react/react-spectrum/Provider"
 // import { TreeView } from "@react/react-spectrum/TreeView"
 
-import Header from "./header"
-import Footer from "./footer"
+import { Header, Footer } from "@parliament/parliament-ui-components"
 import "./layout.css"
 
 const HypermediaLayout = ({ children }) => {

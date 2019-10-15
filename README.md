@@ -24,7 +24,21 @@ _Have another more specific idea? You may want to check out our vibrant collecti
     ```
 1.	**Create an environment File**
 	
-	Create a `.env.development` and `.env.production` files and define a `GIT_CORP_TOKEN` 	specifying a personal access token. Refer: [https://help.github.com/en/articles/creating-a-	personal-access-token-for-the-command-line](https://help.github.com/en/articles/creating-a-	personal-access-token-for-the-command-line)
+	Create a `.env.development` and `.env.production` files and define environment variables as below. 	Refer: [https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
+	
+For local:
+```
+GATSBY_SITE_PATH_PREFIX = 
+GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
+GATSBY_SOURCE = git.corp.adobe.com/<source_org>/<source_repo>.git //Repo URL in given format which you want to use to generate a microsite
+```
+For Jenkins:
+```
+    GATSBY_GIT_CORP_TOKEN = credentials('TOKEN')
+    GATSBY_SOURCE = 'git.corp.adobe.com/<source_org>/<source_repo>.git' //Repo URL in given format which you want to use to generate a microsite
+    GATSBY_TARGET = 'git.corp.adobe.com/<target_org>/<target_repo>.git' // Repo URL in given format where you want to host the static html build output from Gatsby for Gihub Pages
+    GATSBY_SITE_PATH_PREFIX = '/pages/<target_org>/<target_repo>' // Path Prefix for link relationship to work
+```
 
 1.  **Start developing.**
 

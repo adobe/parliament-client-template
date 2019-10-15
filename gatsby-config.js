@@ -2,7 +2,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 module.exports = {
-  pathPrefix: `/pages/devrel/dev-site`,
+  pathPrefix: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
   siteMetadata: {
     title: `Adobe I/O Doc Site Prototype`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
@@ -116,38 +116,13 @@ module.exports = {
     {
       resolve: `gatsby-source-git`,
       options: {
-        name: `launch.en`,
-        remote: `https://${process.env.GIT_CORP_TOKEN}@git.corp.adobe.com/AdobeDocs/launch.en.git`,
-        // Optionally supply a branch. If none supplied, you'll get the default branch.
-        branch: `master`,
-        // Tailor which files get imported eg. import the docs folder from a codebase.
-        patterns: `**/*.md`,
-      },
-    },
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-        name: `jwt-auth`,
-        remote: `https://github.com/adobe/jwt-auth`,
-        // Optionally supply a branch. If none supplied, you'll get the default branch.
-        branch: `master`,
-        // Tailor which files get imported eg. import the docs folder from a codebase.
-        patterns: `**/*.md`,
-      },
-    },
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-        name: `adobeio-auth`,
-        remote: `https://github.com/adobedocs/adobeio-auth`,
+        name: ``,
+        remote: `https://${process.env.GATSBY_GIT_CORP_TOKEN}@${process.env.GATSBY_SOURCE}`,
         // Optionally supply a branch. If none supplied, you'll get the default branch.
         branch: `master`,
         // Tailor which files get imported eg. import the docs folder from a codebase.
         patterns: `**/*`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }

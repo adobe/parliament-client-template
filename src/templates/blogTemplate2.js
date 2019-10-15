@@ -12,13 +12,14 @@ const BlogPosts = props => {
 
   const {
     node: {
-      childMarkdownRemark: { html },
+      childMarkdownRemark: { html, tableOfContents },
     },
   } = edges.find(({ node: { id } }) => id === props.pageContext.id)
 
   return (
     <Layout>
       <SEO title="Home" />
+      <div dangerouslySetInnerHTML={{ __html: tableOfContents }}></div>
       <div dangerouslySetInnerHTML={{ __html: html }}></div>
     </Layout>
   )
@@ -38,6 +39,7 @@ export const query = graphql`
           name
           childMarkdownRemark {
             html
+            tableOfContents
           }
         }
       }

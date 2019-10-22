@@ -117,7 +117,7 @@ module.exports = {
       resolve: `gatsby-source-git`,
       options: {
         name: ``,
-        remote: `https://${process.env.GATSBY_GIT_CORP_TOKEN}@${process.env.GATSBY_SOURCE}`,
+        remote: `${process.env.GATSBY_SOURCE}`,
         // Optionally supply a branch. If none supplied, you'll get the default branch.
         branch: `${process.env.GATSBY_SOURCE_BRANCH}`,
         // Tailor which files get imported eg. import the docs folder from a codebase.

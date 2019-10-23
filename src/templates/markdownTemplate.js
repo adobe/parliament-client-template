@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
+import Heading from "@react/react-spectrum/Heading"
 
 const BlogPosts = props => {
   const {
@@ -23,10 +24,13 @@ const BlogPosts = props => {
           style={{ width: "50%" }}
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
-        <div
-          style={{ width: "25%" }}
-          dangerouslySetInnerHTML={{ __html: tableOfContents }}
-        ></div>
+        <div style={{ width: "25%" }}>
+          <Heading variant="subtitle3">On this page</Heading>
+          <span
+            class="toc"
+            dangerouslySetInnerHTML={{ __html: tableOfContents }}
+          ></span>
+        </div>
       </div>
     </DocLayout>
   )

@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import DocLayout from "../components/doclayout"
 
 const BlogPosts = props => {
   const {
@@ -17,11 +16,19 @@ const BlogPosts = props => {
   } = edges.find(({ node: { id } }) => id === props.pageContext.id)
 
   return (
-    <Layout>
-      <SEO title="Home" />
-      <div dangerouslySetInnerHTML={{ __html: tableOfContents }}></div>
-      <div dangerouslySetInnerHTML={{ __html: html }}></div>
-    </Layout>
+    <DocLayout>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ width: "25%" }}>&nbsp;</div>
+        <div
+          style={{ width: "50%" }}
+          dangerouslySetInnerHTML={{ __html: html }}
+        ></div>
+        <div
+          style={{ width: "25%" }}
+          dangerouslySetInnerHTML={{ __html: tableOfContents }}
+        ></div>
+      </div>
+    </DocLayout>
   )
 }
 

@@ -7,12 +7,14 @@
 // You can delete this file if you're not using it
 const path = require(`path`)
 
-exports.onCreateNode = ({ node, getNode,boundActionCreators }) => {
+exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators
   if (node.internal.type === `MarkdownRemark`) {
     var slug = ""
     if (node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") > -1) {
-      slug = node.fileAbsolutePath.substring(node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") + 18)
+      slug = node.fileAbsolutePath.substring(
+        node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") + 18
+      )
     } else if (node.frontmatter.path) {
       slug = node.frontmatter.path
     }
@@ -36,7 +38,7 @@ exports.onCreateNode = ({ node, getNode,boundActionCreators }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const blogPostTemplate = path.resolve(`src/templates/blogTemplate2.js`)
+  const blogPostTemplate = path.resolve(`src/templates/markdownTemplate.js`)
   const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
 
   const { data } = await graphql(`
@@ -56,7 +58,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   data.allMarkdownRemark.edges.forEach(({ node }) => {
     if (node.fields.slug !== "") {
-      if (node.fields.slug.includes('/hypermedia')) {
+      if (node.fields.slug.includes("/hypermedia")) {
         createPage({
           path: node.fields.slug,
           component: hypermediaTemplate,
@@ -68,12 +70,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           component: blogPostTemplate,
           context: {
             slug: node.fields.slug,
-            id: node.fields.id
+            id: node.fields.id,
           },
         })
       }
-
     }
-
   })
 }

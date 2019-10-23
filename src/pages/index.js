@@ -20,19 +20,10 @@ const IndexPage = () => (
     </p>
     <ul>
       <li>
-        <Link to="page-2/">React i.e. Gatsby page</Link>
-      </li>
-      <li>
-        <Link to="hockey/">Markdown Page</Link>
-      </li>
-      <li>
-        <Link to="test/">MdX Page</Link>
-      </li>
-      <li>
         <Link to="openapi/">Open API Remote</Link>
       </li>
       <li>
-        <Link to="README.md">Markdown git.corp Remote: adobeio-auth</Link>
+        <Link to="README.md">Markdown git.corp repo</Link>
       </li>
       <li>
         <Link to="hypermedia/">Hypermedia Example</Link>

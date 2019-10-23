@@ -1,4 +1,3 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
@@ -14,48 +13,57 @@ _Have another more specific idea? You may want to check out our vibrant collecti
 
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+1. **Clone this repo**
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
+   ```sh
+   git clone git@git.corp.adobe.com:devrel/parliament-client-template.git
+   cd parliament-client-template
+   ```
 
-    ```sh
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
-1.	**Create an environment File**
-	
-	Create a `.env.development` and `.env.production` files and define environment variables as below. 	Refer: [https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
-	
-For local:
-```
-GATSBY_SITE_PATH_PREFIX = 
-GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
-GATSBY_SOURCE = git.corp.adobe.com/<source_org>/<source_repo>.git //Repo URL in given format which you want to use to generate a microsite
-```
-For Jenkins:
-```
-    GATSBY_GIT_CORP_TOKEN = credentials('TOKEN')
-    GATSBY_SOURCE = 'git.corp.adobe.com/<source_org>/<source_repo>.git' //Repo URL in given format which you want to use to generate a microsite
-    GATSBY_TARGET = 'git.corp.adobe.com/<target_org>/<target_repo>.git' // Repo URL in given format where you want to host the static html build output from Gatsby for Gihub Pages
-    GATSBY_SITE_PATH_PREFIX = '/pages/<target_org>/<target_repo>' // Path Prefix for link relationship to work
-```
+1. **Install dependencies**
 
-1.  **Start developing.**
+   ```sh
+   npm install
+   ```
 
-    Navigate into your new site’s directory and start it up.
+1. **Create an environment File**
 
-    ```sh
-    cd my-default-starter/
-    gatsby develop
-    ```
+   Create a `.env.development` and `.env.production` files and define environment variables as below. Refer: [https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
 
-1.  **Open the source code and start editing!**
+   For local:
 
-    Your site is now running at `http://localhost:8000`!
+   ```
+   GATSBY_SITE_PATH_PREFIX =
+   GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
+   GATSBY_SOURCE = git.corp.adobe.com/<source_org>/<source_repo>.git //Repo URL in given format which you want to use to generate a microsite
+   GATSBY_SOURCE_BRANCH=master
+   GATSBY_SOURCE_PATTERNS=**/*
+   ```
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+   For Jenkins:
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+   ```
+   GATSBY_GIT_CORP_TOKEN = credentials('TOKEN')
+   GATSBY_SOURCE = 'git.corp.adobe.com/<source_org>/<source_repo>.git' //Repo URL in given format which you want to use to generate a microsite
+   GATSBY_TARGET = 'git.corp.adobe.com/<target_org>/<target_repo>.git' // Repo URL in given format where you want to host the static html build output from Gatsby for Gihub Pages
+   GATSBY_SITE_PATH_PREFIX = '/pages/<target_org>/<target_repo>' // Path Prefix for link relationship to work
+   GATSBY_SOURCE_BRANCH=master
+   GATSBY_SOURCE_PATTERNS=**/*
+   ```
+
+1. **Start developing.**
+
+   ```sh
+   gatsby develop
+   ```
+
+1. **Open the source code and start editing!**
+
+   Your site is now running at `http://localhost:8000`!
+
+   _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+
+   Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
 
 ## 🧐 What's inside?
 
@@ -106,9 +114,3 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 - **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
 
 - **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->

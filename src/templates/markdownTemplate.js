@@ -2,8 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import Heading from "@react/react-spectrum/Heading"
+import { Feedback } from "@parliament/parliament-ui-components"
 
 const BlogPosts = props => {
+  console.log(props)
+
   const {
     data: {
       allFile: { edges },
@@ -13,6 +16,8 @@ const BlogPosts = props => {
   const {
     node: {
       childMarkdownRemark: { html, tableOfContents },
+      gitRemote: { protocol, resource, full_name, ref },
+      relativePath,
     },
   } = edges.find(({ node: { id } }) => id === props.pageContext.id)
 
@@ -25,6 +30,13 @@ const BlogPosts = props => {
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
         <div style={{ width: "25%" }}>
+          <p>
+            <Feedback
+              gitUrl={`${protocol}://${resource}/${full_name}`}
+              filePath={relativePath}
+              branch={ref}
+            />
+          </p>
           <Heading variant="subtitle3">On this page</Heading>
           <span
             class="toc"
@@ -52,6 +64,13 @@ export const query = graphql`
             html
             tableOfContents
           }
+          gitRemote {
+            protocol
+            resource
+            full_name
+            ref
+          }
+          relativePath
         }
       }
     }

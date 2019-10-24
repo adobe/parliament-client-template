@@ -38,6 +38,7 @@ _Have another more specific idea? You may want to check out our vibrant collecti
    GATSBY_SOURCE = git.corp.adobe.com/<source_org>/<source_repo>.git //Repo URL in given format which you want to use to generate a microsite
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
+   GATSBY_SOURCE_TITLE=My Docs Site
    ```
 
    For Jenkins:
@@ -49,6 +50,7 @@ _Have another more specific idea? You may want to check out our vibrant collecti
    GATSBY_SITE_PATH_PREFIX = '/pages/<target_org>/<target_repo>' // Path Prefix for link relationship to work
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
+   GATSBY_SOURCE_TITLE=My Docs Site
    ```
 
 1. **Start developing.**

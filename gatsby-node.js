@@ -38,7 +38,7 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const blogPostTemplate = path.resolve(`src/templates/markdownTemplate.js`)
+  const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
   const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
 
   const { data } = await graphql(`
@@ -67,7 +67,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       } else {
         createPage({
           path: node.fields.slug,
-          component: blogPostTemplate,
+          component: docTemplate,
           context: {
             slug: node.fields.slug,
             id: node.fields.id,

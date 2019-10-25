@@ -2,27 +2,15 @@ import TreeDataSource from "@react/react-spectrum/TreeDataSource"
 
 const data = [
   {
-    label: "Overview",
-    url: "/hypermedia/overview/",
+    label: "Readme",
+    url: "/README.md",
   },
   {
-    label: "Cache",
-    url: "/hypermedia/cache/",
-  },
-  {
-    label: "Store",
-    url: "/hypermedia/store/",
+    label: "Postman",
     children: [
       {
-        label: "Users",
-        url: "/hypermedia/users/",
-        children: [{ label: "User", url: "/hypermedia/user/" }],
-      },
-      { label: "User Accessess", url: "/hypermedia/user_accessess/" },
-      {
-        label: "Carts",
-        url: "/hypermedia/carts/",
-        children: [{ label: "Cart", url: "/hypermedia/cart/" }],
+        label: "Readme",
+        url: "/postman/README.md",
       },
     ],
   },

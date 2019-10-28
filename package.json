@@ -22,6 +22,8 @@
     "gatsby-remark-prismjs": "^3.3.16",
     "gatsby-source-filesystem": "^2.1.18",
     "gatsby-source-git": "^1.0.1",
+    "gatsby-transformer-json": "^2.2.15",
+    "gatsby-transformer-rawjson": "^1.1.1",
     "gatsby-transformer-remark": "^2.6.19",
     "gatsby-transformer-sharp": "^2.2.7",
     "mobx": "^4.13.0",

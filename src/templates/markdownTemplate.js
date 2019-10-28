@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import Heading from "@react/react-spectrum/Heading"
 import { Feedback } from "@parliament/parliament-ui-components"
+import Nav from "../components/Nav"
 
 const MarkdownTemplate = props => {
   const {
@@ -23,26 +24,28 @@ const MarkdownTemplate = props => {
   return (
     <DocLayout>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ width: "25%" }}>&nbsp;</div>
+        <div style={{ width: "25%" }}>
+          <Nav data={props.data.rawGatsbySourceGitJson.pages} />
+        </div>
         <div
           style={{ width: "50%" }}
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
         <div style={{ width: "25%" }}>
-          <p>
+          <div style={{ paddingBottom: "20px" }}>
             <Feedback
               gitUrl={`${protocol}://${resource}/${full_name}`}
               filePath={relativePath}
               branch={ref}
             />
-          </p>
-          <p>
+          </div>
+          <div>
             <Heading variant="subtitle3">On this page</Heading>
             <span
-              class="toc"
+              className="toc"
               dangerouslySetInnerHTML={{ __html: tableOfContents }}
             ></span>
-          </p>
+          </div>
           <p>
             <span style={{ display: "block" }}>
               Last update: {modifiedTime}
@@ -59,6 +62,10 @@ export default MarkdownTemplate
 
 export const query = graphql`
   query MarkdownTemplateQuery {
+    rawGatsbySourceGitJson {
+      title
+      pages
+    }
     allFile {
       edges {
         node {

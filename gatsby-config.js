@@ -17,6 +17,8 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-transformer-json`,
+    `gatsby-transformer-rawjson`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

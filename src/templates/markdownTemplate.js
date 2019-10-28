@@ -32,20 +32,20 @@ const MarkdownTemplate = props => {
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
         <div style={{ width: "25%" }}>
-          <p>
+          <div style={{ paddingBottom: "20px" }}>
             <Feedback
               gitUrl={`${protocol}://${resource}/${full_name}`}
               filePath={relativePath}
               branch={ref}
             />
-          </p>
-          <p>
+          </div>
+          <div>
             <Heading variant="subtitle3">On this page</Heading>
             <span
               className="toc"
               dangerouslySetInnerHTML={{ __html: tableOfContents }}
             ></span>
-          </p>
+          </div>
           <p>
             <span style={{ display: "block" }}>
               Last update: {modifiedTime}

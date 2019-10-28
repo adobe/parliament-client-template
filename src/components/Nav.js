@@ -1,10 +1,9 @@
-import React, { useState, Fragment } from "react"
+import React, { useEffect, useState, Fragment } from "react"
 import "regenerator-runtime/runtime"
-import { navigate, withPrefix } from "gatsby"
+import { navigate } from "gatsby"
 import Heading from "@react/react-spectrum/Heading"
 import Folder from "@react/react-spectrum/Icon/Folder"
 import Layers from "@react/react-spectrum/Icon/Layers"
-import Link from "@react/react-spectrum/Link"
 
 import { TreeView, TreeViewDataSource } from "@react/react-spectrum/TreeView"
 import HypermediaDataSource from "../components/HypermediaDataSource"
@@ -20,9 +19,15 @@ const renderItem = (showIcons, item) => {
   )
 }
 
-const tvds = new TreeViewDataSource(new HypermediaDataSource())
+const hmds = new HypermediaDataSource()
+const tvds = new TreeViewDataSource(hmds)
 
-const Nav = () => {
+const Nav = ({ data }) => {
+  useEffect(() => {
+    hmds.setData(data)
+    tvds.loadData()
+  }, [])
+
   const [selectedItem, setSelectedItem] = useState({
     label: "Test 1",
     url: "/hypermedia/overview/",

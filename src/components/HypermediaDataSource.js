@@ -1,25 +1,20 @@
 import TreeDataSource from "@react/react-spectrum/TreeDataSource"
 
-const data = [
-  {
-    label: "Readme",
-    url: "/README.md",
-  },
-  {
-    label: "Postman",
-    children: [
-      {
-        label: "Readme",
-        url: "/postman/README.md",
-      },
-    ],
-  },
-]
-
 class HypermediaDataSource extends TreeDataSource {
+  constructor(data = []) {
+    super()
+    this._data = data
+  }
+
+  setData(data) {
+    this.startTransaction()
+    this._data = data
+    this.endTransaction()
+  }
+
   async getChildren(item) {
     if (!item) {
-      return data
+      return this._data
     }
 
     return item.children || []

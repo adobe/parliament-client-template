@@ -22,7 +22,7 @@ const nav = data => {
   return data.map((node, index) => {
     console.log(node)
     return (
-      <Item key={node.id} name={node.label} url={node.url}>
+      <Item key={index} name={node.label} url={node.url}>
         {subnav(node.children)}
       </Item>
     )

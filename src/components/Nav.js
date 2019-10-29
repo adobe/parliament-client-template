@@ -29,13 +29,24 @@ const nav = data => {
   })
 }
 
+const defaultFocus = data => {
+  for (let page of data) {
+    if (page.url === document.location.pathname) {
+      console.log("returning " + page.label)
+      return page.label
+    } else if (page.children) {
+      return defaultFocus(page.children)
+    }
+  }
+}
+
 const Nav = ({ data }) => {
   return (
     <nav>
       <Heading variant="subtitle3">Topics</Heading>
       <SideNav
         autoFocus={true}
-        defaultValue="Topics"
+        defaultValue={defaultFocus(data)}
         isNested={false}
         manageTabIndex={false}
         typeToSelect

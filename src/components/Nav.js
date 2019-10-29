@@ -1,64 +1,60 @@
-import React, { useEffect, useState, Fragment } from "react"
+import React from "react"
 import "regenerator-runtime/runtime"
 import { navigate } from "gatsby"
 import Heading from "@react/react-spectrum/Heading"
+import { SideNav, SideNavItem } from "@react/react-spectrum/SideNav"
 import Folder from "@react/react-spectrum/Icon/Folder"
-import Layers from "@react/react-spectrum/Icon/Layers"
+import WebPage from "@react/react-spectrum/Icon/WebPage"
 
-import { TreeView, TreeViewDataSource } from "@react/react-spectrum/TreeView"
-import HypermediaDataSource from "../components/HypermediaDataSource"
-
-const renderItem = (showIcons, item) => {
-  // return item.item.label ? item.item.label : item.label
-  let icon = item.hasChildren ? <Folder size="S" /> : <Layers size="S" />
-  return (
-    <span id={item.item.label}>
-      {showIcons ? icon : null}
-      {item.item.label ? item.item.label : item.label}
-    </span>
-  )
+const nav = data => {
+  return data.map((node, index) => {
+    return (
+      <SideNavItem
+        key={index}
+        aria-current="page"
+        isNested={false}
+        disabled={false}
+        defaultExpanded={true}
+        icon={!node.children ? <WebPage /> : <Folder />}
+        onClick={() => {
+          if (node.url) navigate(node.url)
+        }}
+        label={node.label}
+        target="_self"
+        value={node.label}
+      >
+        {node.children ? nav(node.children) : ""}
+      </SideNavItem>
+    )
+  })
 }
 
-const hmds = new HypermediaDataSource()
-const tvds = new TreeViewDataSource(hmds)
+const defaultFocus = data => {
+  for (let page of data) {
+    if (page.url === document.location.pathname) {
+      console.log("returning " + page.label)
+      return page.label
+    } else if (page.children) {
+      return defaultFocus(page.children)
+    }
+  }
+}
 
 const Nav = ({ data }) => {
-  useEffect(() => {
-    hmds.setData(data)
-    tvds.loadData()
-  }, [])
-
-  const [selectedItem, setSelectedItem] = useState({
-    label: "Test 1",
-    url: "/hypermedia/overview/",
-    children: [{ label: "Child 1" }, { label: "Child 2" }],
-  })
-
   return (
-    <Fragment>
+    <nav>
       <Heading variant="subtitle3">Topics</Heading>
-      <TreeView
-        dataSource={tvds}
-        renderItem={renderItem}
-        onSelectionChange={item => {
-          console.log(JSON.stringify(item))
-          console.log("selected change")
-          if (Array.isArray(item)) {
-            let page = item[0]
-            console.log(page)
-            if (page && page.url) {
-              navigate(page.url)
-            } else if (page) {
-              setSelectedItem(page)
-              tvds.toggleItem(page)
-            } else {
-              tvds.toggleItem(selectedItem)
-            }
-          }
-        }}
-        allowsSelection
-      />
-    </Fragment>
+      <SideNav
+        autoFocus={true}
+        defaultValue={defaultFocus(data)}
+        isNested={false}
+        manageTabIndex={false}
+        typeToSelect
+        variant="multiLevel"
+      >
+        {nav(data)}
+      </SideNav>
+    </nav>
   )
 }
 

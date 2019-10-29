@@ -4,13 +4,14 @@ import { navigate } from "gatsby"
 import Heading from "@react/react-spectrum/Heading"
 import Folder from "@react/react-spectrum/Icon/Folder"
 import Layers from "@react/react-spectrum/Icon/Layers"
+import WebPage from "@react/react-spectrum/Icon/WebPage"
 
 import { TreeView, TreeViewDataSource } from "@react/react-spectrum/TreeView"
 import HypermediaDataSource from "../components/HypermediaDataSource"
 
 const renderItem = (showIcons, item) => {
   // return item.item.label ? item.item.label : item.label
-  let icon = item.hasChildren ? <Folder size="S" /> : <Layers size="S" />
+  let icon = item.hasChildren ? <Folder size="S" /> : <WebPage size="S" />
   return (
     <span id={item.item.label}>
       {showIcons ? icon : null}
@@ -35,7 +36,7 @@ const Nav = ({ data }) => {
   })
 
   return (
-    <Fragment>
+    <nav>
       <Heading variant="subtitle3">Topics</Heading>
       <TreeView
         dataSource={tvds}
@@ -58,7 +59,7 @@ const Nav = ({ data }) => {
         }}
         allowsSelection
       />
-    </Fragment>
+    </nav>
   )
 }
 

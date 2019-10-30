@@ -2,8 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import Heading from "@react/react-spectrum/Heading"
-import { Feedback } from "@parliament/parliament-ui-components"
-import Nav from "../components/Nav"
+import { Feedback, Nav } from "@parliament/parliament-ui-components"
 
 const MarkdownTemplate = props => {
   const {

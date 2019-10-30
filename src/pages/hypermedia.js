@@ -57,6 +57,7 @@ const Hypermedia = () => {
         </div>
         <div style={{ width: "75%" }} id="content">
           <iframe
+            title="hypermedia"
             src={withPrefix(selectedItem.url)}
             style={{ width: "100%", height: "100%" }}
           />

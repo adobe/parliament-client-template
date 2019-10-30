@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Heading from "@react/react-spectrum/Heading"
 
 import Layout from "../components/layout"

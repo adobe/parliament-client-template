@@ -23,7 +23,10 @@ const MarkdownTemplate = props => {
     <DocLayout>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: "25%" }}>
-          <Nav data={props.data.rawGatsbySourceGitJson.pages} />
+          <Nav
+            data={props.data.allRawGatsbySourceGitJson.edges[0].node.pages}
+            path={props.location.pathname}
+          />
         </div>
         <div
           style={{ width: "50%" }}
@@ -64,9 +67,14 @@ export default MarkdownTemplate
 
 export const query = graphql`
   query MarkdownTemplateQuery {
-    rawGatsbySourceGitJson {
-      title
-      pages
+    allRawGatsbySourceGitJson(filter: { title: { ne: null } }) {
+      edges {
+        node {
+          id
+          pages
+          title
+        }
+      }
     }
     allFile {
       edges {

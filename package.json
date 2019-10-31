@@ -48,7 +48,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r git@git.corp.adobe.com:devrel/dev-site.git",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r git@git.corp.adobe.com:devrel/parliament-client-template.git",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",

@@ -30,7 +30,7 @@ const nav = data => {
 }
 
 const IndexPage = ({ data }) => {
-  const siteInfo = data.rawGatsbySourceGitJson
+  const siteInfo = data.allRawGatsbySourceGitJson.edges[0].node
   const pages = siteInfo.pages
   return (
     <Layout>
@@ -45,9 +45,14 @@ export default IndexPage
 
 export const query = graphql`
   {
-    rawGatsbySourceGitJson {
-      title
-      pages
+    allRawGatsbySourceGitJson(filter: { title: { ne: null } }) {
+      edges {
+        node {
+          id
+          pages
+          title
+        }
+      }
     }
   }
 `

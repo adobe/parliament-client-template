@@ -11,14 +11,13 @@ const MarkdownTemplate = props => {
     },
   } = props
 
-  const {
-    node: {
-      childMarkdownRemark: { html, tableOfContents, timeToRead },
-      gitRemote: { protocol, resource, full_name, ref },
-      modifiedTime,
-      relativePath,
-    },
-  } = edges.find(({ node: { id } }) => id === props.pageContext.id)
+  const { node } = edges.find(({ node: { id } }) => id === props.pageContext.id)
+  let {
+    childMarkdownRemark: { html, tableOfContents, timeToRead },
+    modifiedTime,
+    relativePath,
+    gitRemote,
+  } = node
 
   return (
     <DocLayout>
@@ -32,11 +31,15 @@ const MarkdownTemplate = props => {
         ></div>
         <div style={{ width: "25%" }}>
           <div style={{ paddingBottom: "20px" }}>
-            <Feedback
-              gitUrl={`${protocol}://${resource}/${full_name}`}
-              filePath={relativePath}
-              branch={ref}
-            />
+            {gitRemote !== null ? (
+              <Feedback
+                gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                filePath={relativePath}
+                branch={gitRemote.ref}
+              />
+            ) : (
+              ""
+            )}
           </div>
           <div>
             <Heading variant="subtitle3">On this page</Heading>

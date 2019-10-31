@@ -48,6 +48,7 @@ module.exports = {
           maxDepth: 6,
         },
         plugins: [
+          `gatsby-remark-autolink-headers`,
           {
             resolve: "gatsby-remark-images",
             options: {

@@ -43,12 +43,10 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        tableOfContents: {
-          heading: null,
-          maxDepth: 6,
-        },
         plugins: [
           `gatsby-remark-autolink-headers`,
+          `gatsby-plugin-catch-links`,
+          `gatsby-remark-copy-linked-files`,
           {
             resolve: "gatsby-remark-images",
             options: {
@@ -93,20 +91,18 @@ module.exports = {
               // existing language definition. More details on this option can be
               // found under the header "Add new language definition or extend an
               // existing language" below.
-              languageExtensions: [
-                {
-                  language: "superscript",
-                  extend: "javascript",
-                  definition: {
-                    superscript_types: /(SuperType)/,
-                  },
-                  insertBefore: {
-                    function: {
-                      superscript_keywords: /(superif|superelse)/,
-                    },
+              languageExtensions: [{
+                language: "superscript",
+                extend: "javascript",
+                definition: {
+                  superscript_types: /(SuperType)/,
+                },
+                insertBefore: {
+                  function: {
+                    superscript_keywords: /(superif|superelse)/,
                   },
                 },
-              ],
+              }, ],
               // Customize the prompt used in shell output
               // Values below are default
               prompt: {

@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Heading from "@react/react-spectrum/Heading"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -34,9 +33,9 @@ const IndexPage = ({ data }) => {
   const pages = siteInfo.pages
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title={siteInfo.title} />
       <Heading variant="pageTitle">{siteInfo.title}</Heading>
-      {nav(pages)}
+      <ul>{nav(pages)}</ul>
     </Layout>
   )
 }

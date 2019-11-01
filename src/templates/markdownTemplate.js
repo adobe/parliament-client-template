@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import Heading from "@react/react-spectrum/Heading"
 import { Feedback, Nav } from "@parliament/parliament-ui-components"
+import SEO from "../components/seo"
 
 const MarkdownTemplate = props => {
   const {
@@ -21,6 +22,7 @@ const MarkdownTemplate = props => {
 
   return (
     <DocLayout>
+      <SEO title="Test" />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: "25%" }}>
           <Nav

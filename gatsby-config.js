@@ -47,6 +47,7 @@ module.exports = {
           `gatsby-remark-autolink-headers`,
           `gatsby-plugin-catch-links`,
           `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-check-links`,
           {
             resolve: "gatsby-remark-images",
             options: {

@@ -46,7 +46,6 @@ module.exports = {
         plugins: [
           `gatsby-remark-autolink-headers`,
           `gatsby-plugin-catch-links`,
-          `gatsby-remark-check-links`,
           {
             resolve: "gatsby-remark-external-links",
             options: {

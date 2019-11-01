@@ -20,7 +20,6 @@
     "gatsby-plugin-react-helmet": "^3.1.4",
     "gatsby-plugin-sharp": "^2.2.13",
     "gatsby-remark-autolink-headers": "^2.1.16",
-    "gatsby-remark-check-links": "^2.1.0",
     "gatsby-remark-copy-linked-files": "^2.1.28",
     "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-images": "^3.1.22",

@@ -46,8 +46,19 @@ module.exports = {
         plugins: [
           `gatsby-remark-autolink-headers`,
           `gatsby-plugin-catch-links`,
-          `gatsby-remark-copy-linked-files`,
           `gatsby-remark-check-links`,
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank"
+            }
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+            options: {
+              ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`, `md`],
+            },
+          },
           {
             resolve: "gatsby-remark-images",
             options: {

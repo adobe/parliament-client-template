@@ -20,6 +20,11 @@ const MarkdownTemplate = props => {
     gitRemote,
   } = node
 
+  let urlPrefix = ""
+  if (gitRemote) {
+    urlPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
+  }
+
   return (
     <DocLayout>
       <SEO title="Test" />
@@ -28,6 +33,7 @@ const MarkdownTemplate = props => {
           <Nav
             data={props.data.allRawGatsbySourceGitJson.edges[0].node.pages}
             path={props.location.pathname}
+            urlPrefix={urlPrefix}
           />
         </div>
         <div
@@ -69,12 +75,11 @@ export default MarkdownTemplate
 
 export const query = graphql`
   query MarkdownTemplateQuery {
-    allRawGatsbySourceGitJson(filter: { title: { ne: null } }) {
+    allRawGatsbySourceGitJson(filter: { view_type: { eq: "mdbook" } }) {
       edges {
         node {
           id
           pages
-          title
         }
       }
     }
@@ -93,6 +98,8 @@ export const query = graphql`
             protocol
             resource
             full_name
+            organization
+            name
             ref
           }
           relativePath

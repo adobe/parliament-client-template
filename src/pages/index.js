@@ -57,7 +57,6 @@ export const query = graphql`
         node {
           id
           pages
-          title
         }
       }
     }

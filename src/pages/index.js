@@ -4,25 +4,27 @@ import Heading from "@react/react-spectrum/Heading"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Item = ({ name, url, children }) => (
-  <li>
-    {!children ? <Link to={url}>{name}</Link> : name}
-    {children}
-  </li>
-)
+const Item = ({ name, url, children, path }) => {
+  const splitPath = url ? url.split(path)[1] : ""
+  return (
+    <li>
+      <Link to={splitPath}>{name}</Link>
+      {children}
+    </li>
+  )
+}
 
-const nav = data => {
-  const subnav = children => {
-    if (children) {
-      return <ul>{nav(children)}</ul>
+const nav = (data, path) => {
+  const subnav = pages => {
+    if (pages) {
+      return <ul>{nav(pages, path)}</ul>
     }
   }
 
   return data.map((node, index) => {
-    console.log(node)
     return (
-      <Item key={index} name={node.label} url={node.url}>
-        {subnav(node.children)}
+      <Item key={index} name={node.title} url={node.path} path={path}>
+        {subnav(node.pages, path)}
       </Item>
     )
   })
@@ -31,11 +33,12 @@ const nav = data => {
 const IndexPage = ({ data }) => {
   const siteInfo = data.allRawGatsbySourceGitJson.edges[0].node
   const pages = siteInfo.pages
+  const path = `${data.gitRemote.organization}/${data.gitRemote.name}/${data.gitRemote.ref}`
   return (
     <Layout>
       <SEO title={siteInfo.title} />
       <Heading variant="pageTitle">{siteInfo.title}</Heading>
-      <ul>{nav(pages)}</ul>
+      <ul>{nav(pages, path)}</ul>
     </Layout>
   )
 }
@@ -44,7 +47,12 @@ export default IndexPage
 
 export const query = graphql`
   {
-    allRawGatsbySourceGitJson(filter: { title: { ne: null } }) {
+    gitRemote {
+      organization
+      name
+      ref
+    }
+    allRawGatsbySourceGitJson(filter: { view_type: { eq: "mdbook" } }) {
       edges {
         node {
           id

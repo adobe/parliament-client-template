@@ -40,9 +40,23 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
   const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
+  const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
 
   const { data } = await graphql(`
     query {
+      allRawJsonFile(filter: { swagger: { nin: ["", null] } }) {
+        edges {
+          node {
+            id
+            swagger
+            info
+            host
+            basePath
+            schemes
+            paths
+          }
+        }
+      }
       allMarkdownRemark {
         edges {
           node {
@@ -55,6 +69,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
   `)
+
+  data.allRawJsonFile.edges.forEach(({ node }) => {
+    createPage({
+      path: `/API`,
+      component: openapiTemplate,
+      context: {
+        spec: node,
+      },
+    })
+  })
 
   data.allMarkdownRemark.edges.forEach(({ node }) => {
     if (node.fields.slug !== "") {

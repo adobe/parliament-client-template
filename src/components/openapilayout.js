@@ -35,8 +35,8 @@ const OpenApiLayout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <Footer />
       </div>
+      <Footer />
     </>
   )
 }

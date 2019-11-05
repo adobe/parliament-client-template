@@ -17,7 +17,12 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-transformer-json`,
+      options: {
+        typeName: `JsonFile`,
+      },
+    },
     `gatsby-transformer-rawjson`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -49,8 +54,8 @@ module.exports = {
           {
             resolve: "gatsby-remark-external-links",
             options: {
-              target: "_blank"
-            }
+              target: "_blank",
+            },
           },
           {
             resolve: `gatsby-remark-copy-linked-files`,
@@ -102,18 +107,20 @@ module.exports = {
               // existing language definition. More details on this option can be
               // found under the header "Add new language definition or extend an
               // existing language" below.
-              languageExtensions: [{
-                language: "superscript",
-                extend: "javascript",
-                definition: {
-                  superscript_types: /(SuperType)/,
-                },
-                insertBefore: {
-                  function: {
-                    superscript_keywords: /(superif|superelse)/,
+              languageExtensions: [
+                {
+                  language: "superscript",
+                  extend: "javascript",
+                  definition: {
+                    superscript_types: /(SuperType)/,
+                  },
+                  insertBefore: {
+                    function: {
+                      superscript_keywords: /(superif|superelse)/,
+                    },
                   },
                 },
-              }, ],
+              ],
               // Customize the prompt used in shell output
               // Values below are default
               prompt: {

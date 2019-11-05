@@ -32,7 +32,7 @@ const nav = (data, path) => {
 }
 
 const IndexPage = ({ data }) => {
-  const siteInfo = data.allRawGatsbySourceGitJson.edges[0].node
+  const siteInfo = data.allRawJsonFile.edges[0].node
   const pages = siteInfo.pages
   const path = `${data.gitRemote.organization}/${data.gitRemote.name}/${data.gitRemote.ref}`
   return (
@@ -53,7 +53,7 @@ export const query = graphql`
       name
       ref
     }
-    allRawGatsbySourceGitJson(filter: { view_type: { eq: "mdbook" } }) {
+    allRawJsonFile(filter: { view_type: { eq: "mdbook" } }) {
       edges {
         node {
           id

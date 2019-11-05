@@ -3,9 +3,10 @@ import { Link, graphql } from "gatsby"
 import Heading from "@react/react-spectrum/Heading"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { stripManifestPath } from "@parliament/parliament-ui-components"
 
 const Item = ({ name, url, children, path }) => {
-  const splitPath = url ? url.split(path)[1] : ""
+  const splitPath = stripManifestPath(url, path)
   return (
     <li>
       <Link to={splitPath}>{name}</Link>

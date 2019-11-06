@@ -18,6 +18,12 @@ module.exports = {
     },
     `gatsby-transformer-rawjson`,
     {
+      resolve: `gatsby-transformer-yaml`,
+      options: {
+        typeName: `YamlFile`,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,

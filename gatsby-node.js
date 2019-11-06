@@ -6,11 +6,13 @@
 
 // You can delete this file if you're not using it
 const path = require(`path`)
+const fs = require(`fs`)
+const YAML = require('yaml')
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
-    var slug = ""
+    let slug = ""
     if (node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") > -1) {
       slug = node.fileAbsolutePath.substring(
         node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") + 18
@@ -47,18 +49,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       allRawJsonFile(filter: { swagger: { nin: ["", null] }}) {
         edges {
           node {
-            id
-            swagger
-            info
-            host
-            basePath
-            schemes
-            paths
             parent {
               parent {
                 ... on File {
                   absolutePath
                 }
+              }
+            }
+          }
+        }
+      }
+      allYamlFile(filter: { swagger: { nin: ["",null] } }) {
+        edges {
+          node {
+            parent {
+              ... on File {
+                absolutePath
               }
             }
           }
@@ -76,19 +82,38 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     } 
   `)
-
-  data.allRawJsonFile.edges.forEach(({ node }) => {
-    var path;
-    if (node.parent.parent.absolutePath.lastIndexOf("gatsby-source-git/") > -1) {
-      path = node.parent.parent.absolutePath.substring(
-        node.parent.parent.absolutePath.lastIndexOf("gatsby-source-git/") + 18
+  data.allYamlFile.edges.forEach(({ node }) => {
+    let path = node.parent.absolutePath;
+    const file = fs.readFileSync(path, 'utf8');
+    const object = YAML.parse(file)
+    if (path.lastIndexOf("gatsby-source-git/") > -1) {
+      path = path.substring(
+        path.lastIndexOf("gatsby-source-git/") + 18
       )
     }
     createPage({
       path: path,
       component: openapiTemplate,
       context: {
-        spec: node,
+        spec: object,
+      },
+    })
+  })
+
+  data.allRawJsonFile.edges.forEach(({ node }) => {
+    let path = node.parent.parent.absolutePath;
+    const file = fs.readFileSync(path, 'utf8');
+    const object = JSON.parse(file)
+    if (path.lastIndexOf("gatsby-source-git/") > -1) {
+      path = path.substring(
+        path.lastIndexOf("gatsby-source-git/") + 18
+      )
+    }
+    createPage({
+      path: path,
+      component: openapiTemplate,
+      context: {
+        spec: object,
       },
     })
   })

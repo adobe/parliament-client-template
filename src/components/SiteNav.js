@@ -34,7 +34,7 @@ const SiteNav = props => {
 
   return (
     <Provider theme="light">
-      <div style={{ width: "256px" }}>
+      <div style={{ width: "280px" }}>
         <div style={{ padding: "30px 24px 24px 24px", width: "256px" }}>
           <a style={{ textDecorationLine: "none" }} href="/">
             <Title />

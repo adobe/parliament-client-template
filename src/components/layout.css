@@ -624,3 +624,8 @@ pre tt:after {
 span.toc ul {
   list-style-type: none;
 }
+
+.toc a {
+  color: rgb(20, 115, 230);
+  text-decoration: none;
+}

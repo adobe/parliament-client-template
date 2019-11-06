@@ -11,10 +11,12 @@ const OpenApiTemplate = props => {
     <DocLayout>
       <SEO title="Open API" />
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ width: "25%" }}>
-          <SiteNav currentPage={props.location.pathname} />
-        </div>
-        <div style={{ width: "75%" }}>
+        <SiteNav currentPage={props.location.pathname} />
+        <div
+          style={{
+            width: "75%",
+          }}
+        >
           <SwaggerUI spec={props.pageContext.spec} />
         </div>
       </div>

@@ -26,14 +26,24 @@ const MarkdownTemplate = props => {
     <DocLayout>
       <SEO title="Test" />
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ width: "25%" }}>
-          <SiteNav currentPage={props.location.pathname} />
-        </div>
+        <SiteNav currentPage={props.location.pathname} />
         <div
-          style={{ width: "50%" }}
+          style={{
+            width: "50%",
+            paddingTop: "30px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+          }}
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
-        <div style={{ width: "25%" }}>
+        <div
+          style={{
+            width: "25%",
+            paddingTop: "30px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+          }}
+        >
           <div style={{ paddingBottom: "20px" }}>
             {gitRemote !== null ? (
               <Feedback

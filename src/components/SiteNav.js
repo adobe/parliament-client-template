@@ -2,6 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
+import Provider from "@react/react-spectrum/Provider"
+import Heading from "@react/react-spectrum/Heading"
+import Logo from "../images/adobe_logo-2.svg"
+import Title from "./Title"
+import SearchBar from "./SearchBar"
 
 const SiteNav = props => {
   const data = useStaticQuery(
@@ -30,11 +35,21 @@ const SiteNav = props => {
   const urlPrefix = `${data.gitRemote.organization}/${data.gitRemote.name}/${data.gitRemote.ref}`
 
   return (
-    <Nav
-      data={data.allRawJsonFile.edges[0].node.pages}
-      path={props.currentPage}
-      urlPrefix={urlPrefix}
-    />
+    <Provider theme="light">
+      <div style={{ width: "256px" }}>
+        <div style={{ padding: "30px 24px 24px 24px", width: "256px" }}>
+          <Title />
+          <SearchBar />
+        </div>
+        <div style={{ padding: "0px 24px 24px 24px", width: "256px" }}>
+          <Nav
+            data={data.allRawJsonFile.edges[0].node.pages}
+            path={props.currentPage}
+            urlPrefix={urlPrefix}
+          />
+        </div>
+      </div>
+    </Provider>
   )
 }
 

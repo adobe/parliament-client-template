@@ -11,6 +11,13 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-transformer-json`,
+      options: {
+        typeName: `JsonFile`,
+      },
+    },
+    `gatsby-transformer-rawjson`,
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -25,13 +32,6 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-transformer-json`,
-      options: {
-        typeName: `JsonFile`,
-      },
-    },
-    `gatsby-transformer-rawjson`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

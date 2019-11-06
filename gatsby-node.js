@@ -44,7 +44,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const { data } = await graphql(`
     query {
-      allRawJsonFile(filter: { swagger: { nin: ["", null] } }) {
+      allRawJsonFile(filter: { swagger: { nin: ["", null] }}) {
         edges {
           node {
             id
@@ -54,6 +54,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             basePath
             schemes
             paths
+            parent {
+              parent {
+                ... on File {
+                  absolutePath
+                }
+              }
+            }
           }
         }
       }
@@ -67,12 +74,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
-    }
+    } 
   `)
 
   data.allRawJsonFile.edges.forEach(({ node }) => {
+    var path;
+    if (node.parent.parent.absolutePath.lastIndexOf("gatsby-source-git/") > -1) {
+      path = node.parent.parent.absolutePath.substring(
+        node.parent.parent.absolutePath.lastIndexOf("gatsby-source-git/") + 18
+      )
+    }
     createPage({
-      path: `/API`,
+      path: path,
       component: openapiTemplate,
       context: {
         spec: node,

@@ -44,7 +44,7 @@ const SiteNav = props => {
         <div style={{ padding: "0px 24px 24px 24px", width: "256px" }}>
           <Nav
             data={data.allRawJsonFile.edges[0].node.pages}
-            path={props.currentPage}
+            selected={props.currentPage}
             urlPrefix={urlPrefix}
           />
         </div>

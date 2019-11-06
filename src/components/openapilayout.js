@@ -7,7 +7,6 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 
 import { Footer } from "@parliament/parliament-ui-components"
 import "./layout.css"

@@ -3,8 +3,6 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
 import Provider from "@react/react-spectrum/Provider"
-import Heading from "@react/react-spectrum/Heading"
-import Logo from "../images/adobe_logo-2.svg"
 import Title from "./Title"
 import SearchBar from "./SearchBar"
 
@@ -38,8 +36,10 @@ const SiteNav = props => {
     <Provider theme="light">
       <div style={{ width: "256px" }}>
         <div style={{ padding: "30px 24px 24px 24px", width: "256px" }}>
-          <Title />
-          <SearchBar />
+          <a style={{ textDecorationLine: "none" }} href="/">
+            <Title />
+            <SearchBar />
+          </a>
         </div>
         <div style={{ padding: "0px 24px 24px 24px", width: "256px" }}>
           <Nav

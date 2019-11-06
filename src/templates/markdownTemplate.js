@@ -2,7 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import Heading from "@react/react-spectrum/Heading"
-import { Feedback, Nav } from "@parliament/parliament-ui-components"
+import { Feedback } from "@parliament/parliament-ui-components"
+import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 
 const MarkdownTemplate = props => {
@@ -17,24 +18,16 @@ const MarkdownTemplate = props => {
     childMarkdownRemark: { html, tableOfContents, timeToRead },
     modifiedTime,
     relativePath,
-    gitRemote,
   } = node
 
-  let urlPrefix = ""
-  if (gitRemote) {
-    urlPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
-  }
+  const gitRemote = props.data.gitRemote
 
   return (
     <DocLayout>
       <SEO title="Test" />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: "25%" }}>
-          <Nav
-            data={props.data.allRawJsonFile.edges[0].node.pages}
-            path={props.location.pathname}
-            urlPrefix={urlPrefix}
-          />
+          <SiteNav currentPage={props.location.pathname} />
         </div>
         <div
           style={{ width: "50%" }}
@@ -83,6 +76,14 @@ export const query = graphql`
         }
       }
     }
+    gitRemote {
+      protocol
+      resource
+      full_name
+      organization
+      name
+      ref
+    }
     allFile {
       edges {
         node {
@@ -93,14 +94,6 @@ export const query = graphql`
             html
             tableOfContents
             timeToRead
-          }
-          gitRemote {
-            protocol
-            resource
-            full_name
-            organization
-            name
-            ref
           }
           relativePath
         }

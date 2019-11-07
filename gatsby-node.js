@@ -44,98 +44,126 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
 
-  const { data } = await graphql(`
-    query {
-      allRawJsonFile(filter: { swagger: { nin: ["", null] }}) {
-        edges {
-          node {
-            parent {
-              parent {
-                ... on File {
-                  absolutePath
-                }
+  try{
+    let { data } = await graphql(`
+      query {
+        allMarkdownRemark {
+          edges {
+            node {
+              fields {
+                id
+                slug
               }
             }
           }
         }
-      }
-      allYamlFile(filter: { swagger: { nin: ["",null] } }) {
-        edges {
-          node {
-            parent {
-              ... on File {
-                absolutePath
-              }
+      } 
+    `)
+    if(data)
+    {
+      data.allMarkdownRemark.edges.forEach(({ node }) => {
+        if (node.fields.slug !== "") {
+          if (node.fields.slug.includes("/hypermedia")) {
+            createPage({
+              path: node.fields.slug,
+              component: hypermediaTemplate,
+              context: {}, // additional data can be passed via context
+            })
+          } else {
+            createPage({
+              path: node.fields.slug,
+              component: docTemplate,
+              context: {
+                slug: node.fields.slug,
+                id: node.fields.id,
+              },
+            })
+          }
+        }
+      })
+    }
+  } catch(e) {
+    console.log("Skipping Markdown files")
+    console.log(e)
+  }
+
+  try {
+    let { data:jsonData } = await graphql(`
+      query {
+        allFile(filter: {extension: {eq: "json"}}) {
+          edges {
+            node {
+              absolutePath
             }
           }
         }
       }
-      allMarkdownRemark {
-        edges {
-          node {
-            fields {
-              id
-              slug
+    `)
+    if(jsonData.allFile.edges.length > 0)
+    {
+      jsonData.allFile.edges.forEach(({ node }) => {
+        let path = node.absolutePath;
+        const file = fs.readFileSync(path, 'utf8');
+        const object = JSON.parse(file)
+        if(object.swagger && object.swagger!=="" && object.swagger!==null)
+        {
+          if (path.lastIndexOf("gatsby-source-git/") > -1) {
+            path = path.substring(
+              path.lastIndexOf("gatsby-source-git/") + 18
+            )
+          }
+          createPage({
+            path: path,
+            component: openapiTemplate,
+            context: {
+              spec: object,
+            },
+          })
+        }
+      })
+    }
+  } catch(e) {
+    console.log("Skipping JSON files")
+    console.log(e)
+  }
+
+  try{
+    let { data:yamlData } = await graphql(`
+      query {
+        allFile(filter: {extension: {in: ["yaml","yml"]}}) {
+          edges {
+            node {
+              absolutePath
             }
           }
         }
       }
-    } 
-  `)
-  data.allYamlFile.edges.forEach(({ node }) => {
-    let path = node.parent.absolutePath;
-    const file = fs.readFileSync(path, 'utf8');
-    const object = YAML.parse(file)
-    if (path.lastIndexOf("gatsby-source-git/") > -1) {
-      path = path.substring(
-        path.lastIndexOf("gatsby-source-git/") + 18
-      )
+    `)
+    if(yamlData.allFile.edges.length > 0)
+    {
+      yamlData.allFile.edges.forEach(({ node }) => {
+        let path = node.absolutePath;
+        const file = fs.readFileSync(path, 'utf8');
+        const object = YAML.parse(file)
+        if(object.swagger && object.swagger!=="" && object.swagger!==null)
+        {
+          if (path.lastIndexOf("gatsby-source-git/") > -1) {
+            path = path.substring(
+              path.lastIndexOf("gatsby-source-git/") + 18
+            )
+          }
+          createPage({
+            path: path,
+            component: openapiTemplate,
+            context: {
+              spec: object,
+            },
+          })
+        }
+      })
     }
-    createPage({
-      path: path,
-      component: openapiTemplate,
-      context: {
-        spec: object,
-      },
-    })
-  })
-
-  data.allRawJsonFile.edges.forEach(({ node }) => {
-    let path = node.parent.parent.absolutePath;
-    const file = fs.readFileSync(path, 'utf8');
-    const object = JSON.parse(file)
-    if (path.lastIndexOf("gatsby-source-git/") > -1) {
-      path = path.substring(
-        path.lastIndexOf("gatsby-source-git/") + 18
-      )
-    }
-    createPage({
-      path: path,
-      component: openapiTemplate,
-      context: {
-        spec: object,
-      },
-    })
-  })
-
-  data.allMarkdownRemark.edges.forEach(({ node }) => {
-    if (node.fields.slug !== "") {
-      if (node.fields.slug.includes("/hypermedia")) {
-        createPage({
-          path: node.fields.slug,
-          component: hypermediaTemplate,
-          context: {}, // additional data can be passed via context
-        })
-      } else {
-        createPage({
-          path: node.fields.slug,
-          component: docTemplate,
-          context: {
-            slug: node.fields.slug,
-            id: node.fields.id,
-          },
-        })
-      }
-    }
-  })
+  } catch(e) {
+    console.log("Skipping yaml files")
+    console.log(e)
+  }
 }

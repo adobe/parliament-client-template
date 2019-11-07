@@ -101,24 +101,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (jsonData.allFile.edges.length > 0) {
       jsonData.allFile.edges.forEach(({ node }) => {
         let path = node.absolutePath
-        const file = fs.readFileSync(path, "utf8")
-        const object = JSON.parse(file)
-        if (
-          object.swagger &&
-          object.swagger !== "" &&
-          object.swagger !== null
-        ) {
-          if (path.lastIndexOf("gatsby-source-git/") > -1) {
-            path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
-          }
-          createPage({
-            path: path,
-            component: openapiTemplate,
-            context: {
-              spec: object,
-            },
-          })
-        }
+        const object = JSON.parse(fs.readFileSync(path, "utf8"))
+        createOpenApiPage(createPage, openapiTemplate, object, path)
       })
     }
   } catch (e) {
@@ -141,28 +125,28 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (yamlData.allFile.edges.length > 0) {
       yamlData.allFile.edges.forEach(({ node }) => {
         let path = node.absolutePath
-        const file = fs.readFileSync(path, "utf8")
-        const object = YAML.parse(file)
-        if (
-          object.swagger &&
-          object.swagger !== "" &&
-          object.swagger !== null
-        ) {
-          if (path.lastIndexOf("gatsby-source-git/") > -1) {
-            path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
-          }
-          createPage({
-            path: path,
-            component: openapiTemplate,
-            context: {
-              spec: object,
-            },
-          })
-        }
+        const object = YAML.parse(fs.readFileSync(path, "utf8"))
+        createOpenApiPage(createPage, openapiTemplate, object, path)
       })
     }
   } catch (e) {
     console.log("Skipping yaml files")
     console.log(e)
+  }
+}
+
+const createOpenApiPage = (createPage, openapiTemplate, object, path) => {
+  if (object.swagger) {
+    if (path.lastIndexOf("gatsby-source-git/") > -1) {
+      path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
+    }
+    console.log("createing page" + path)
+    createPage({
+      path: path,
+      component: openapiTemplate,
+      context: {
+        spec: object,
+      },
+    })
   }
 }

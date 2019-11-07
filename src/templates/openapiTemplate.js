@@ -1,15 +1,13 @@
 import React from "react"
-import SwaggerUI from "swagger-ui-react"
-import "swagger-ui-react/swagger-ui.css"
 import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
-import DocLayout from "../components/doclayout"
+import OpenApiLayout from "../components/openapilayout"
 import SEO from "../components/seo"
 
 const OpenApiTemplate = props => {
   return (
-    <DocLayout>
+    <OpenApiLayout>
       <SEO title="Open API" />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <SiteNav currentPage={props.location.pathname} />
@@ -21,7 +19,7 @@ const OpenApiTemplate = props => {
           <RedocStandalone spec={props.pageContext.spec} />
         </div>
       </div>
-    </DocLayout>
+    </OpenApiLayout>
   )
 }
 

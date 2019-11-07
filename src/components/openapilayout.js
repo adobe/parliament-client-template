@@ -14,14 +14,7 @@ import "./layout.css"
 const OpenApiLayout = ({ children }) => {
   return (
     <>
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 2048,
-          padding: `0px`,
-          paddingTop: 0,
-        }}
-      >
+      <div>
         <main>{children}</main>
       </div>
       <Footer />

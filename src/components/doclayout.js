@@ -16,16 +16,7 @@ import "./layout.css"
 const DocLayout = ({ children }) => {
   return (
     <Provider theme="lightest">
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 2048,
-          padding: `0px`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-      </div>
+      <main>{children}</main>
       <Footer />
     </Provider>
   )

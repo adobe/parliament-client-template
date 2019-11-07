@@ -7,7 +7,7 @@
 // You can delete this file if you're not using it
 const path = require(`path`)
 const fs = require(`fs`)
-const YAML = require('yaml')
+const YAML = require("yaml")
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -44,7 +44,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
 
-  try{
+  try {
     let { data } = await graphql(`
       query {
         allMarkdownRemark {
@@ -57,10 +57,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
-      } 
+      }
     `)
-    if(data)
-    {
+    if (data) {
       data.allMarkdownRemark.edges.forEach(({ node }) => {
         if (node.fields.slug !== "") {
           if (node.fields.slug.includes("/hypermedia")) {
@@ -82,15 +81,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       })
     }
-  } catch(e) {
+  } catch (e) {
     console.log("Skipping Markdown files")
     console.log(e)
   }
 
   try {
-    let { data:jsonData } = await graphql(`
+    let { data: jsonData } = await graphql(`
       query {
-        allFile(filter: {extension: {eq: "json"}}) {
+        allFile(filter: { extension: { eq: "json" } }) {
           edges {
             node {
               absolutePath
@@ -99,18 +98,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
     `)
-    if(jsonData.allFile.edges.length > 0)
-    {
+    if (jsonData.allFile.edges.length > 0) {
       jsonData.allFile.edges.forEach(({ node }) => {
-        let path = node.absolutePath;
-        const file = fs.readFileSync(path, 'utf8');
+        let path = node.absolutePath
+        const file = fs.readFileSync(path, "utf8")
         const object = JSON.parse(file)
-        if(object.swagger && object.swagger!=="" && object.swagger!==null)
-        {
+        if (
+          object.swagger &&
+          object.swagger !== "" &&
+          object.swagger !== null
+        ) {
           if (path.lastIndexOf("gatsby-source-git/") > -1) {
-            path = path.substring(
-              path.lastIndexOf("gatsby-source-git/") + 18
-            )
+            path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
           }
           createPage({
             path: path,
@@ -122,15 +121,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       })
     }
-  } catch(e) {
+  } catch (e) {
     console.log("Skipping JSON files")
     console.log(e)
   }
 
-  try{
-    let { data:yamlData } = await graphql(`
+  try {
+    let { data: yamlData } = await graphql(`
       query {
-        allFile(filter: {extension: {in: ["yaml","yml"]}}) {
+        allFile(filter: { extension: { in: ["yaml", "yml"] } }) {
           edges {
             node {
               absolutePath
@@ -139,18 +138,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
     `)
-    if(yamlData.allFile.edges.length > 0)
-    {
+    if (yamlData.allFile.edges.length > 0) {
       yamlData.allFile.edges.forEach(({ node }) => {
-        let path = node.absolutePath;
-        const file = fs.readFileSync(path, 'utf8');
+        let path = node.absolutePath
+        const file = fs.readFileSync(path, "utf8")
         const object = YAML.parse(file)
-        if(object.swagger && object.swagger!=="" && object.swagger!==null)
-        {
+        if (
+          object.swagger &&
+          object.swagger !== "" &&
+          object.swagger !== null
+        ) {
           if (path.lastIndexOf("gatsby-source-git/") > -1) {
-            path = path.substring(
-              path.lastIndexOf("gatsby-source-git/") + 18
-            )
+            path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
           }
           createPage({
             path: path,
@@ -162,7 +161,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       })
     }
-  } catch(e) {
+  } catch (e) {
     console.log("Skipping yaml files")
     console.log(e)
   }

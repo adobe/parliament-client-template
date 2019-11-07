@@ -1,6 +1,7 @@
 import React from "react"
 import SwaggerUI from "swagger-ui-react"
 import "swagger-ui-react/swagger-ui.css"
+import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
 import DocLayout from "../components/doclayout"
@@ -17,7 +18,7 @@ const OpenApiTemplate = props => {
             width: "75%",
           }}
         >
-          <SwaggerUI spec={props.pageContext.spec} />
+          <RedocStandalone spec={props.pageContext.spec} />
         </div>
       </div>
     </DocLayout>

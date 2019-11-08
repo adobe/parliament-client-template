@@ -8,6 +8,7 @@
 const path = require(`path`)
 const fs = require(`fs`)
 const YAML = require("yaml")
+const swaggerSnippet = require(`swagger-snippet`)
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -140,7 +141,32 @@ const createOpenApiPage = (createPage, openapiTemplate, object, path) => {
     if (path.lastIndexOf("gatsby-source-git/") > -1) {
       path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
     }
-    console.log("createing page" + path)
+    try {
+      const targets = ['shell_curl', 'node_request', 'php_http1', 'java_unirest', 'go_native', 'python_python3', 'csharp_restsharp', 'ruby_native']
+      const result = swaggerSnippet.getSwaggerSnippets(object, targets)
+      const keys = Object.keys(object.paths)
+      keys.forEach(key => {
+        let res = result.filter(function(res) {
+          return res.url.endsWith(key)
+        })
+        let methodKeys = Object.keys(object.paths[key])
+        methodKeys.forEach(methodKey => {
+          let methodRes = res.find(function(methodRes) {
+            return methodRes.method.toLowerCase() == methodKey.toLowerCase()
+          })
+          object.paths[key][methodKey]["x-code-samples"] = []
+          methodRes.snippets.forEach(function(snippet) {
+            object.paths[key][methodKey]["x-code-samples"].push({
+              lang: snippet.id.split('_')[0],
+              source: snippet.content,
+            })
+          })
+        })
+      })
+    } catch (e) {
+      console.log("Skipping code samples for Swagger")
+    }
+    console.log("creating page " + path)
     createPage({
       path: path,
       component: openapiTemplate,

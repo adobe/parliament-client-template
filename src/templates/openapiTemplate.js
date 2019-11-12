@@ -13,7 +13,7 @@ const OpenApiTemplate = props => {
         <SiteNav currentPage={props.location.pathname} />
         <div
           style={{
-            width: "75%",
+            width: "calc(100% - 280px)",
           }}
         >
           <RedocStandalone spec={props.pageContext.spec} />

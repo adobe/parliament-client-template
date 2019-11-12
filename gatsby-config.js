@@ -83,6 +83,7 @@ module.exports = {
               maxWidth: 970,
             },
           },
+          `gatsby-remark-embedder`,
           {
             resolve: `gatsby-remark-prismjs`,
             options: {

@@ -24,7 +24,7 @@ const MarkdownTemplate = props => {
 
   return (
     <DocLayout>
-      <SEO title="Test" />
+      <SEO title={props.pageContext.seo} />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <SiteNav currentPage={props.location.pathname} />
         <div

@@ -10,6 +10,36 @@ const fs = require(`fs`)
 const YAML = require("yaml")
 const swaggerSnippet = require(`swagger-snippet`)
 
+const searchTree = (theObject, matchingFilename) => {
+  var result = null
+  if (theObject instanceof Array) {
+    for (var i = 0; i < theObject.length; i++) {
+      result = searchTree(theObject[i], matchingFilename)
+      if (result) {
+        break
+      }
+    }
+  } else {
+    for (var prop in theObject) {
+      if (prop === "path") {
+        if (theObject[prop].endsWith(matchingFilename)) {
+          return theObject.title
+        }
+      }
+      if (
+        theObject[prop] instanceof Object ||
+        theObject[prop] instanceof Array
+      ) {
+        result = searchTree(theObject[prop], matchingFilename)
+        if (result) {
+          break
+        }
+      }
+    }
+  }
+  return result
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
@@ -46,6 +76,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
 
   try {
+    let { data: manifest } = await graphql(`
+      query {
+        allRawJsonFile(filter: { view_type: { eq: "mdbook" } }) {
+          edges {
+            node {
+              id
+              pages
+            }
+          }
+        }
+      }
+    `)
+    let pages = manifest.allRawJsonFile.edges[0].node.pages
+
     let { data } = await graphql(`
       query {
         allMarkdownRemark {
@@ -70,12 +114,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               context: {}, // additional data can be passed via context
             })
           } else {
+            let seo = searchTree(pages, node.fields.slug)
             createPage({
               path: node.fields.slug,
               component: docTemplate,
               context: {
                 slug: node.fields.slug,
                 id: node.fields.id,
+                seo: seo,
               },
             })
           }
@@ -136,13 +182,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 }
 
-const createOpenApiPage = (createPage, openapiTemplate, object, path) => {
+const createOpenApiPage = (createPage, openapiTemplate, object, path, seo) => {
   if (object.swagger) {
     if (path.lastIndexOf("gatsby-source-git/") > -1) {
       path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
     }
     try {
-      const targets = ['shell_curl', 'node_request', 'php_http1', 'java_unirest', 'go_native', 'python_python3', 'csharp_restsharp', 'ruby_native']
+      const targets = [
+        "shell_curl",
+        "node_request",
+        "php_http1",
+        "java_unirest",
+        "go_native",
+        "python_python3",
+        "csharp_restsharp",
+        "ruby_native",
+      ]
       const result = swaggerSnippet.getSwaggerSnippets(object, targets)
       const keys = Object.keys(object.paths)
       keys.forEach(key => {
@@ -157,7 +212,7 @@ const createOpenApiPage = (createPage, openapiTemplate, object, path) => {
           object.paths[key][methodKey]["x-code-samples"] = []
           methodRes.snippets.forEach(function(snippet) {
             object.paths[key][methodKey]["x-code-samples"].push({
-              lang: snippet.id.split('_')[0],
+              lang: snippet.id.split("_")[0],
               source: snippet.content,
             })
           })
@@ -172,6 +227,7 @@ const createOpenApiPage = (createPage, openapiTemplate, object, path) => {
       component: openapiTemplate,
       context: {
         spec: object,
+        seo: seo,
       },
     })
   }

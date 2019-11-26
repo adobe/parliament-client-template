@@ -40,6 +40,28 @@ const searchTree = (theObject, matchingFilename) => {
   return result
 }
 
+const readManifest = async graphql => {
+  let pages = []
+  try {
+    let { data: manifest } = await graphql(`
+      query {
+        allRawJsonFile(filter: { view_type: { eq: "mdbook" } }) {
+          edges {
+            node {
+              id
+              pages
+            }
+          }
+        }
+      }
+    `)
+    pages = manifest.allRawJsonFile.edges[0].node.pages
+  } catch (e) {
+    console.log("Could not read the manifest")
+  }
+  return pages
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
@@ -75,21 +97,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
 
-  try {
-    let { data: manifest } = await graphql(`
-      query {
-        allRawJsonFile(filter: { view_type: { eq: "mdbook" } }) {
-          edges {
-            node {
-              id
-              pages
-            }
-          }
-        }
-      }
-    `)
-    let pages = manifest.allRawJsonFile.edges[0].node.pages
+  const pages = await readManifest(graphql)
 
+  try {
     let { data } = await graphql(`
       query {
         allMarkdownRemark {
@@ -140,6 +150,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           edges {
             node {
               absolutePath
+              name
+              ext
             }
           }
         }
@@ -149,7 +161,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       jsonData.allFile.edges.forEach(({ node }) => {
         let path = node.absolutePath
         const object = JSON.parse(fs.readFileSync(path, "utf8"))
-        createOpenApiPage(createPage, openapiTemplate, object, path)
+        let seo = searchTree(pages, `${node.name}${node.ext}`)
+        createOpenApiPage(createPage, openapiTemplate, object, path, seo)
       })
     }
   } catch (e) {
@@ -164,6 +177,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           edges {
             node {
               absolutePath
+              name
+              ext
             }
           }
         }
@@ -173,7 +188,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       yamlData.allFile.edges.forEach(({ node }) => {
         let path = node.absolutePath
         const object = YAML.parse(fs.readFileSync(path, "utf8"))
-        createOpenApiPage(createPage, openapiTemplate, object, path)
+        let seo = searchTree(pages, `${node.name}${node.ext}`)
+        createOpenApiPage(createPage, openapiTemplate, object, path, seo)
       })
     }
   } catch (e) {

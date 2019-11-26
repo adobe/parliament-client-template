@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 const OpenApiTemplate = props => {
   return (
     <OpenApiLayout>
-      <SEO title="Open API" />
+      <SEO title={props.pageContext.seo} />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <SiteNav currentPage={props.location.pathname} />
         <div

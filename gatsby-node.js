@@ -10,6 +10,18 @@ const fs = require(`fs`)
 const YAML = require("yaml")
 const swaggerSnippet = require(`swagger-snippet`)
 
+const stripManifestPath = (path, urlPrefix = "") => {
+  if (!path) {
+    return ""
+  }
+  let location = path.toLowerCase().indexOf(urlPrefix.toLowerCase())
+  if (location > -1) {
+    return path.substring(location + urlPrefix.length)
+  } else {
+    return path
+  }
+}
+
 const searchTree = (theObject, matchingFilename) => {
   var result = null
   if (theObject instanceof Array) {
@@ -62,6 +74,19 @@ const readManifest = async graphql => {
   return pages
 }
 
+const gitRepoInfo = async graphql => {
+  let { data } = await graphql(`
+    query {
+      gitRemote {
+        organization
+        name
+        ref
+      }
+    }
+  `)
+  return data.gitRemote
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
@@ -96,6 +121,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
   const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
+  const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
   const pages = await readManifest(graphql)
 
@@ -196,6 +222,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.log("Skipping yaml files")
     console.log(e)
   }
+
+  // redirect home page to main page
+  const homePage = pages[0]
+  const { organization, name, ref } = await gitRepoInfo(graphql)
+  createPage({
+    path: `/`,
+    component: indexTemplate,
+    context: {
+      slug: `/`,
+      redirect: stripManifestPath(
+        homePage.path,
+        `${organization}/${name}/${ref}`
+      ),
+    },
+  })
 }
 
 const createOpenApiPage = (createPage, openapiTemplate, object, path, seo) => {

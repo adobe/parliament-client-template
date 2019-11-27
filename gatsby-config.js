@@ -16,6 +16,10 @@ module.exports = {
         typeName: `JsonFile`,
       },
     },
+    {
+      resolve: `gatsby-plugin-emotion`,
+      options: {},
+    },
     `gatsby-transformer-rawjson`,
     {
       resolve: `gatsby-transformer-yaml`,

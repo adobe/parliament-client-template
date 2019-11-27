@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
+import { useState } from "react"
 import "regenerator-runtime/runtime"
 import { withPrefix } from "gatsby"
 // import Link from "@react/react-spectrum/Link"
@@ -34,8 +36,18 @@ const Hypermedia = () => {
     <HypermediaLayout>
       <SEO title="Hypermedia Example" />
       <Heading>Hypermedia Example</Heading>
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ width: "25%", height: "60vh" }}>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+        `}
+      >
+        <div
+          css={css`
+            width: 25%;
+            height: 60vh;
+          `}
+        >
           <TreeView
             dataSource={tvds}
             renderItem={renderItem}
@@ -55,11 +67,19 @@ const Hypermedia = () => {
             allowsSelection
           />
         </div>
-        <div style={{ width: "75%" }} id="content">
+        <div
+          css={css`
+            width: 75%;
+          `}
+          id="content"
+        >
           <iframe
             title="hypermedia"
             src={withPrefix(selectedItem.url)}
-            style={{ width: "100%", height: "100%" }}
+            css={css`
+              width: 100%;
+              height: 100%;
+            `}
           />
         </div>
       </div>

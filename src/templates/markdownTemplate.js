@@ -1,4 +1,5 @@
-import React from "react"
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import Heading from "@react/react-spectrum/Heading"
@@ -25,26 +26,35 @@ const MarkdownTemplate = props => {
   return (
     <DocLayout>
       <SEO title={props.pageContext.seo} />
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+        `}
+      >
         <SiteNav currentPage={props.location.pathname} />
         <div
-          style={{
-            width: "50%",
-            paddingTop: "30px",
-            paddingLeft: "16px",
-            paddingRight: "16px",
-          }}
+          css={css`
+            width: 50%;
+            padding-top: 30px;
+            padding-left: 16px;
+            padding-right: 16px;
+          `}
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
         <div
-          style={{
-            width: "25%",
-            paddingTop: "30px",
-            paddingLeft: "16px",
-            paddingRight: "16px",
-          }}
+          css={css`
+            width: 25%;
+            padding-top: 30px;
+            padding-left: 16px;
+            padding-right: 16px;
+          `}
         >
-          <div style={{ paddingBottom: "20px" }}>
+          <div
+            css={css`
+              padding-bottom: 20px;
+            `}
+          >
             {gitRemote !== null ? (
               <Feedback
                 gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
@@ -63,10 +73,20 @@ const MarkdownTemplate = props => {
             ></span>
           </div>
           <p>
-            <span style={{ display: "block" }}>
+            <span
+              css={css`
+                display: block;
+              `}
+            >
               Last update: {modifiedTime}
             </span>
-            <span style={{ display: "block" }}>{timeToRead} min read</span>
+            <span
+              css={css`
+                display: block;
+              `}
+            >
+              {timeToRead} min read
+            </span>
           </p>
         </div>
       </div>

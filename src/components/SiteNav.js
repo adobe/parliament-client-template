@@ -1,4 +1,5 @@
-import React from "react"
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
@@ -34,14 +35,33 @@ const SiteNav = props => {
 
   return (
     <Provider theme="light">
-      <div style={{ width: "280px" }}>
-        <div style={{ padding: "30px 24px 24px 24px", width: "256px" }}>
-          <a style={{ textDecorationLine: "none" }} href="/">
+      <div
+        css={css`
+          width: 280px;
+        `}
+      >
+        <div
+          css={css`
+            padding: 30px 24px 24px 24px;
+            width: 256px;
+          `}
+        >
+          <a
+            css={css`
+              text-decoration-line: none;
+            `}
+            href="/"
+          >
             <Title />
             <SearchBar />
           </a>
         </div>
-        <div style={{ padding: "0px 24px 24px 24px", width: "256px" }}>
+        <div
+          css={css`
+            padding: 0px 24px 24px 24px;
+            width: 256px;
+          `}
+        >
           <Nav
             data={data.allRawJsonFile.edges[0].node.pages}
             selected={props.currentPage}

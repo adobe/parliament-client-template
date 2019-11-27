@@ -1,4 +1,5 @@
-import React from "react"
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
 import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
@@ -9,12 +10,17 @@ const OpenApiTemplate = props => {
   return (
     <OpenApiLayout>
       <SEO title={props.pageContext.seo} />
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+        `}
+      >
         <SiteNav currentPage={props.location.pathname} />
         <div
-          style={{
-            width: "calc(100% - 280px)",
-          }}
+          css={css`
+            width: calc(100% - 280px);
+          `}
         >
           <RedocStandalone spec={props.pageContext.spec} />
         </div>

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
 import Provider from "@react/react-spectrum/Provider"
 import Title from "./Title"
@@ -46,15 +46,15 @@ const SiteNav = props => {
             width: 256px;
           `}
         >
-          <a
+          <Link
             css={css`
               text-decoration-line: none;
             `}
-            href="/"
+            to="/"
           >
             <Title />
             <SearchBar />
-          </a>
+          </Link>
         </div>
         <div
           css={css`

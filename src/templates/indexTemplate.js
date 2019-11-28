@@ -6,7 +6,7 @@ const IndexTemplate = props => {
     navigate(props.pageContext.redirect, {
       replace: true,
     })
-  }, [])
+  })
   return null
 }
 

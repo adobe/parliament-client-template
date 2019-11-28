@@ -5,8 +5,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { stripManifestPath } from "@parliament/parliament-ui-components"
 
-const Item = ({ name, url, children, path }) => {
-  const splitPath = stripManifestPath(url, path)
+const Item = ({ name, url, children, gitInfo }) => {
+  const splitPath = stripManifestPath(url, gitInfo)
   return (
     <li>
       <Link to={splitPath}>{name}</Link>
@@ -15,17 +15,17 @@ const Item = ({ name, url, children, path }) => {
   )
 }
 
-const nav = (data, path) => {
+const nav = (data, gitInfo) => {
   const subnav = pages => {
     if (pages) {
-      return <ul>{nav(pages, path)}</ul>
+      return <ul>{nav(pages, gitInfo)}</ul>
     }
   }
 
   return data.map((node, index) => {
     return (
-      <Item key={index} name={node.title} url={node.path} path={path}>
-        {subnav(node.pages, path)}
+      <Item key={index} name={node.title} url={node.path} gitInfo={gitInfo}>
+        {subnav(node.pages, gitInfo)}
       </Item>
     )
   })
@@ -34,12 +34,17 @@ const nav = (data, path) => {
 const IndexPage = ({ data }) => {
   const siteInfo = data.allRawJsonFile.edges[0].node
   const pages = siteInfo.pages
-  const path = `${data.gitRemote.organization}/${data.gitRemote.name}/${data.gitRemote.ref}`
+  const gitInfo = {
+    org: data.gitRemote.organization,
+    name: data.gitRemote.name,
+    branch: data.gitRemote.ref,
+  }
+  console.log(gitInfo)
   return (
     <Layout>
       <SEO title={siteInfo.title} />
       <Heading variant="pageTitle">{siteInfo.title}</Heading>
-      <ul>{nav(pages, path)}</ul>
+      <ul>{nav(pages, gitInfo)}</ul>
     </Layout>
   )
 }

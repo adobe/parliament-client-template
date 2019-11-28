@@ -31,7 +31,11 @@ const SiteNav = props => {
     `
   )
 
-  const urlPrefix = `${data.gitRemote.organization}/${data.gitRemote.name}/${data.gitRemote.ref}`
+  const gitInfo = {
+    org: data.gitRemote.organization,
+    name: data.gitRemote.name,
+    branch: data.gitRemote.ref,
+  }
 
   return (
     <Provider theme="light">
@@ -65,7 +69,7 @@ const SiteNav = props => {
           <Nav
             data={data.allRawJsonFile.edges[0].node.pages}
             selected={props.currentPage}
-            urlPrefix={urlPrefix}
+            gitInfo={gitInfo}
           />
         </div>
       </div>

@@ -116,8 +116,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       slug = node.frontmatter.path
     }
 
-    console.log(slug)
-
     createNodeField({
       node,
       name: `slug`,
@@ -296,7 +294,7 @@ const createOpenApiPage = (createPage, openapiTemplate, object, path, seo) => {
     } catch (e) {
       console.log("Skipping code samples for Swagger")
     }
-    console.log("creating page " + path)
+
     createPage({
       path: path,
       component: openapiTemplate,

@@ -8,18 +8,9 @@ import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 
 const MarkdownTemplate = props => {
-  const {
-    data: {
-      allFile: { edges },
-    },
-  } = props
-
-  const { node } = edges.find(({ node: { id } }) => id === props.pageContext.id)
-  let {
-    childMarkdownRemark: { html, tableOfContents, timeToRead },
-    modifiedTime,
-    relativePath,
-  } = node
+  const { file } = props.data
+  const { modifiedTime, relativePath, childMarkdownRemark } = file
+  const { html, tableOfContents, timeToRead } = childMarkdownRemark
 
   const gitRemote = props.data.gitRemote
 
@@ -97,15 +88,7 @@ const MarkdownTemplate = props => {
 export default MarkdownTemplate
 
 export const query = graphql`
-  query MarkdownTemplateQuery {
-    allRawJsonFile(filter: { view_type: { eq: "mdbook" } }) {
-      edges {
-        node {
-          id
-          pages
-        }
-      }
-    }
+  query MarkdownTemplateQuery($id: String!) {
     gitRemote {
       protocol
       resource
@@ -114,19 +97,15 @@ export const query = graphql`
       name
       ref
     }
-    allFile {
-      edges {
-        node {
-          id
-          modifiedTime(formatString: "YYYY-MM-DD")
-          name
-          childMarkdownRemark {
-            html
-            tableOfContents
-            timeToRead
-          }
-          relativePath
-        }
+    file(id: { eq: $id }) {
+      id
+      modifiedTime(formatString: "YYYY-MM-DD")
+      name
+      relativePath
+      childMarkdownRemark {
+        html
+        tableOfContents
+        timeToRead
       }
     }
   }

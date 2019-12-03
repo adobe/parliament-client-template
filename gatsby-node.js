@@ -92,16 +92,22 @@ const readManifest = async graphql => {
 }
 
 const gitRepoInfo = async graphql => {
-  let { data } = await graphql(`
-    query {
-      gitRemote {
-        organization
-        name
-        ref
+  try {
+    let { data } = await graphql(`
+      query {
+        gitRemote {
+          organization
+          name
+          ref
+        }
       }
-    }
-  `)
-  return data.gitRemote
+    `)
+    return data.gitRemote
+  } catch (e) {
+    console.log("Could not read git remote info")
+    console.log(e)
+  }
+  return {}
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {

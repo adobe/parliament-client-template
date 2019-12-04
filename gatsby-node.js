@@ -273,7 +273,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   })
 }
 
-const createOpenApiPage = (createPage, openapiTemplate, object, path, seo) => {
+const createOpenApiPage = (
+  createPage,
+  openapiTemplate,
+  object,
+  path,
+  seo,
+  gitRemote
+) => {
   if (object.swagger) {
     if (path.lastIndexOf("gatsby-source-git/") > -1) {
       path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)

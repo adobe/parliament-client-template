@@ -16,7 +16,10 @@ const OpenApiTemplate = props => {
           flex-direction: row;
         `}
       >
-        <SiteNav currentPage={props.location.pathname} />
+        <SiteNav
+          currentPage={props.location.pathname}
+          gitRemote={props.pageContext.gitRemote}
+        />
         <div
           css={css`
             width: calc(100% - 280px);

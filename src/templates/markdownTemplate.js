@@ -12,7 +12,7 @@ const MarkdownTemplate = props => {
   const { modifiedTime, relativePath, childMarkdownRemark } = file
   const { html, tableOfContents, timeToRead } = childMarkdownRemark
 
-  const gitRemote = props.data.gitRemote
+  const gitRemote = props.pageContext.gitRemote
 
   return (
     <DocLayout>
@@ -23,7 +23,7 @@ const MarkdownTemplate = props => {
           flex-direction: row;
         `}
       >
-        <SiteNav currentPage={props.location.pathname} />
+        <SiteNav currentPage={props.location.pathname} gitRemote={gitRemote} />
         <div
           css={css`
             width: 50%;
@@ -89,14 +89,6 @@ export default MarkdownTemplate
 
 export const query = graphql`
   query MarkdownTemplateQuery($id: String!) {
-    gitRemote {
-      protocol
-      resource
-      full_name
-      organization
-      name
-      ref
-    }
     file(id: { eq: $id }) {
       id
       modifiedTime(formatString: "YYYY-MM-DD")

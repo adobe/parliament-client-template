@@ -19,22 +19,14 @@ const SiteNav = props => {
             }
           }
         }
-        gitRemote {
-          protocol
-          resource
-          full_name
-          organization
-          name
-          ref
-        }
       }
     `
   )
 
   const gitInfo = {
-    org: data.gitRemote.organization,
-    name: data.gitRemote.name,
-    branch: data.gitRemote.ref,
+    org: props.gitRemote.organization,
+    name: props.gitRemote.name,
+    branch: props.gitRemote.ref,
   }
 
   return (

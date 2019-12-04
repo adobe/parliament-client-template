@@ -5,10 +5,14 @@
  */
 
 // You can delete this file if you're not using it
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 const path = require(`path`)
 const fs = require(`fs`)
 const YAML = require("yaml")
 const swaggerSnippet = require(`swagger-snippet`)
+const GitUrlParse = require(`git-url-parse`)
 
 const stripManifestPath = (path, { org = "", name = "", branch = "" } = {}) => {
   if (!path) {
@@ -91,23 +95,16 @@ const readManifest = async graphql => {
   return pages
 }
 
-const gitRepoInfo = async graphql => {
-  try {
-    let { data } = await graphql(`
-      query {
-        gitRemote {
-          organization
-          name
-          ref
-        }
-      }
-    `)
-    return data.gitRemote
-  } catch (e) {
-    console.log("Could not read git remote info")
-    console.log(e)
+const gitRepoInfo = () => {
+  const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
+  return {
+    protocol: gitInfo.protocol,
+    resource: gitInfo.resource,
+    full_name: `${gitInfo.owner}/${gitInfo.name}`,
+    organization: gitInfo.owner,
+    name: gitInfo.name,
+    ref: process.env.GATSBY_SOURCE_BRANCH,
   }
-  return {}
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
@@ -145,6 +142,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
   const pages = await readManifest(graphql)
+  const gitRemote = gitRepoInfo(graphql)
 
   try {
     let { data } = await graphql(`
@@ -179,6 +177,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 slug: node.fields.slug,
                 id: node.fields.id,
                 seo: seo,
+                gitRemote: gitRemote,
               },
             })
           }
@@ -209,7 +208,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         let path = node.absolutePath
         const object = JSON.parse(fs.readFileSync(path, "utf8"))
         let seo = searchTree(pages, `${node.name}${node.ext}`)
-        createOpenApiPage(createPage, openapiTemplate, object, path, seo)
+        createOpenApiPage(
+          createPage,
+          openapiTemplate,
+          object,
+          path,
+          seo,
+          gitRemote
+        )
       })
     }
   } catch (e) {
@@ -236,7 +242,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         let path = node.absolutePath
         const object = YAML.parse(fs.readFileSync(path, "utf8"))
         let seo = searchTree(pages, `${node.name}${node.ext}`)
-        createOpenApiPage(createPage, openapiTemplate, object, path, seo)
+        createOpenApiPage(
+          createPage,
+          openapiTemplate,
+          object,
+          path,
+          seo,
+          gitRemote
+        )
       })
     }
   } catch (e) {
@@ -246,16 +259,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // redirect home page to main page
   const homePage = pages[0]
-  const { organization, name, ref } = await gitRepoInfo(graphql)
   createPage({
     path: `/`,
     component: indexTemplate,
     context: {
       slug: `/`,
       redirect: stripManifestPath(homePage.path, {
-        org: organization,
-        name: name,
-        branch: ref,
+        org: gitRemote.organization,
+        name: gitRemote.name,
+        branch: gitRemote.ref,
       }),
     },
   })
@@ -307,6 +319,7 @@ const createOpenApiPage = (createPage, openapiTemplate, object, path, seo) => {
       context: {
         spec: object,
         seo: seo,
+        gitRemote: gitRemote,
       },
     })
   }

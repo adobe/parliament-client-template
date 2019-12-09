@@ -597,6 +597,7 @@ code {
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
+  word-break: break-all !important;
 }
 pre code {
   background: none;
@@ -615,6 +616,7 @@ pre tt:before,
 pre tt:after {
   content: "";
 }
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;

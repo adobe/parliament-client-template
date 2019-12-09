@@ -49,8 +49,8 @@ const SiteNav = props => {
             to="/"
           >
             <Title />
-            <SearchBar />
           </Link>
+          <SearchBar gitRemote={props.gitRemote} />
         </div>
         <div
           css={css`

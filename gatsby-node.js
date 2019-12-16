@@ -11,7 +11,7 @@ require("dotenv").config({
 const path = require(`path`)
 const fs = require(`fs`)
 const YAML = require("yaml")
-const swaggerSnippet = require(`swagger-snippet`)
+const openApiSnippet = require(`openapi-snippet`)
 const GitUrlParse = require(`git-url-parse`)
 
 const stripManifestPath = (path, { org = "", name = "", branch = "" } = {}) => {
@@ -296,7 +296,7 @@ const createOpenApiPage = (
         "csharp_restsharp",
         "ruby_native",
       ]
-      const result = swaggerSnippet.getSwaggerSnippets(object, targets)
+      const result = openApiSnippet.getSnippets(object, targets)
       const keys = Object.keys(object.paths)
       keys.forEach(key => {
         let res = result.filter(function(res) {

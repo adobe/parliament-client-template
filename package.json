@@ -38,6 +38,7 @@
     "gatsby-transformer-yaml": "^2.2.15",
     "git-url-parse": "^11.1.2",
     "mobx": "^4.13.0",
+    "openapi-snippet": "^0.7.0",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
@@ -46,7 +47,6 @@
     "rebass": "^4.0.5",
     "redoc": "2.0.0-rc.12",
     "styled-components": "^4.3.2",
-    "swagger-snippet": "^0.6.1",
     "typescript": "^3.6.2",
     "yaml": "^1.7.2"
   },

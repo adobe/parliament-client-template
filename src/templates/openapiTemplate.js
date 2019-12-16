@@ -25,7 +25,13 @@ const OpenApiTemplate = props => {
             width: calc(100% - 280px);
           `}
         >
-          <RedocStandalone spec={props.pageContext.spec} />
+          <RedocStandalone
+            spec={props.pageContext.spec}
+            options={{
+              hideLoading: true,
+              menuToggle : true
+            }}
+          />
         </div>
       </div>
     </OpenApiLayout>

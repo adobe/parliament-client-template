@@ -240,16 +240,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (yamlData.allFile.edges.length > 0) {
       yamlData.allFile.edges.forEach(({ node }) => {
         let path = node.absolutePath
-        const object = YAML.parse(fs.readFileSync(path, "utf8"))
-        let seo = searchTree(pages, `${node.name}${node.ext}`)
-        createOpenApiPage(
-          createPage,
-          openapiTemplate,
-          object,
-          path,
-          seo,
-          gitRemote
-        )
+        try {
+          let object = YAML.parse(fs.readFileSync(path, "utf8"))
+          let seo = searchTree(pages, `${node.name}${node.ext}`)
+          createOpenApiPage(
+            createPage,
+            openapiTemplate,
+            object,
+            path,
+            seo,
+            gitRemote
+          )
+        } catch (e) {
+          console.log(`Skipping file: ${path}`)
+        }
       })
     }
   } catch (e) {

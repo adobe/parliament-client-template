@@ -22,7 +22,7 @@ module.exports = {
     },
     `gatsby-transformer-rawjson`,
     {
-      resolve: `gatsby-transformer-yaml`,
+      resolve: `gatsby-transformer-yaml-full`,
       options: {
         typeName: `YamlFile`,
       },

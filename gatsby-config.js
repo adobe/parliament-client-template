@@ -1,6 +1,7 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(',');
 module.exports = {
   pathPrefix: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
   siteMetadata: {
@@ -161,7 +162,7 @@ module.exports = {
         // Optionally supply a branch. If none supplied, you'll get the default branch.
         branch: `${process.env.GATSBY_SOURCE_BRANCH}`,
         // Tailor which files get imported eg. import the docs folder from a codebase.
-        patterns: `${process.env.GATSBY_SOURCE_PATTERNS}`,
+        patterns: patterns,
       },
     },
   ],

@@ -70,6 +70,7 @@ module.exports = {
         plugins: [
           `gatsby-remark-autolink-headers`,
           `gatsby-plugin-catch-links`,
+          `@parliament/gatsby-remark-afm`,
           {
             resolve: "gatsby-remark-external-links",
             options: {

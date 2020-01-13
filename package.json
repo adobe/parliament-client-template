@@ -48,6 +48,7 @@
     "react-helmet": "^5.2.1",
     "rebass": "^4.0.5",
     "redoc": "2.0.0-rc.12",
+    "rehype-react": "^4.0.1",
     "styled-components": "^4.3.2",
     "typescript": "^3.6.2",
     "yaml": "^1.7.2"

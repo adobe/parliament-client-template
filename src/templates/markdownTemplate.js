@@ -2,15 +2,23 @@
 import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
+import Alert from "@react/react-spectrum/Alert"
 import Heading from "@react/react-spectrum/Heading"
 import { Feedback } from "@parliament/parliament-ui-components"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
+import rehypeReact from "rehype-react"
+import { createElement } from "react"
+
+const renderAst = new rehypeReact({
+  createElement: createElement,
+  components: { alert: Alert },
+}).Compiler
 
 const MarkdownTemplate = props => {
   const { file } = props.data
   const { modifiedTime, relativePath, childMarkdownRemark } = file
-  const { html, tableOfContents, timeToRead } = childMarkdownRemark
+  const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
 
   const gitRemote = props.pageContext.gitRemote
 
@@ -31,8 +39,9 @@ const MarkdownTemplate = props => {
             padding-left: 16px;
             padding-right: 16px;
           `}
-          dangerouslySetInnerHTML={{ __html: html }}
-        ></div>
+        >
+          {renderAst(htmlAst)}
+        </div>
         <div
           css={css`
             width: 25%;
@@ -95,7 +104,7 @@ export const query = graphql`
       name
       relativePath
       childMarkdownRemark {
-        html
+        htmlAst
         tableOfContents
         timeToRead
       }

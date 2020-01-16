@@ -2,18 +2,11 @@
 import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
-import Alert from "@react/react-spectrum/Alert"
 import Heading from "@react/react-spectrum/Heading"
 import { Feedback } from "@parliament/parliament-ui-components"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
-import rehypeReact from "rehype-react"
-import { createElement } from "react"
-
-const renderAst = new rehypeReact({
-  createElement: createElement,
-  components: { alert: Alert },
-}).Compiler
+import renderAst from "../utils/AFMRehype"
 
 const MarkdownTemplate = props => {
   const { file } = props.data

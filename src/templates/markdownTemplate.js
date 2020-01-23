@@ -21,13 +21,13 @@ const MarkdownTemplate = props => {
       <SEO title={props.pageContext.seo} />
       <Grid>
         <GridRow>
-          <GridColumn size={(3, 3, 2, 2, 2)}>
+          <GridColumn size={256}>
             <SiteNav
               currentPage={props.location.pathname}
               gitRemote={gitRemote}
             />
           </GridColumn>
-          <GridColumn size={(9, 9, 10, 10, 10)}>
+          <GridColumn style={{ width: "calc(100%-256)" }}>
             <GridRow>
               <GridColumn size={10}>
                 <div

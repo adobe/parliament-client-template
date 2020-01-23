@@ -10,14 +10,12 @@ import PropTypes from "prop-types"
 
 import Provider from "@react/react-spectrum/Provider"
 
-import { Footer } from "@parliament/parliament-ui-components"
 import "./layout.css"
 
 const DocLayout = ({ children }) => {
   return (
     <Provider theme="lightest">
       <main>{children}</main>
-      <Footer />
     </Provider>
   )
 }

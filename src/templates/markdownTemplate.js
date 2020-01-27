@@ -21,7 +21,7 @@ const MarkdownTemplate = props => {
       <SEO title={props.pageContext.seo} />
       <Grid>
         <GridRow>
-          <GridColumn size={256}>
+          <GridColumn className="spectrum--light" size={256}>
             <SiteNav
               currentPage={props.location.pathname}
               gitRemote={gitRemote}

@@ -3,7 +3,6 @@ import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import Heading from "@react/react-spectrum/Heading"
-import { Grid, GridRow, GridColumn } from "@react/react-spectrum/Grid"
 import { Feedback, Footer } from "@parliament/parliament-ui-components"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
@@ -16,85 +15,119 @@ const MarkdownTemplate = props => {
 
   const gitRemote = props.pageContext.gitRemote
 
+  /*
+.parent {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(2, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 1 / 3 / 2; }
+.div2 { grid-area: 1 / 2 / 2 / 3; }
+.div3 { grid-area: 1 / 3 / 2 / 4; }
+.div4 { grid-area: 2 / 2 / 3 / 4; }
+*/
+
   return (
     <DocLayout>
       <SEO title={props.pageContext.seo} />
-      <Grid>
-        <GridRow>
-          <GridColumn className="spectrum--light" size={256}>
-            <SiteNav
-              currentPage={props.location.pathname}
-              gitRemote={gitRemote}
-            />
-          </GridColumn>
-          <GridColumn style={{ width: "calc(100%-256)" }}>
-            <GridRow>
-              <GridColumn size={10}>
-                <div
-                  css={css`
-                    padding-top: 30px;
-                    padding-left: 16px;
-                    padding-right: 16px;
-                  `}
-                >
-                  {renderAst(htmlAst)}
-                </div>
-              </GridColumn>
-              <GridColumn size={2}>
-                <div
-                  css={css`
-                    padding-top: 30px;
-                    padding-left: 16px;
-                    padding-right: 16px;
-                  `}
-                >
-                  <div
-                    css={css`
-                      padding-bottom: 20px;
-                    `}
-                  >
-                    {gitRemote !== null ? (
-                      <Feedback
-                        gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                        filePath={relativePath}
-                        branch={gitRemote.ref}
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div>
-                    <Heading variant="subtitle3">On this page</Heading>
-                    <span
-                      className="toc"
-                      dangerouslySetInnerHTML={{ __html: tableOfContents }}
-                    ></span>
-                  </div>
-                  <p>
-                    <span
-                      css={css`
-                        display: block;
-                      `}
-                    >
-                      Last update: {modifiedTime}
-                    </span>
-                    <span
-                      css={css`
-                        display: block;
-                      `}
-                    >
-                      {timeToRead} min read
-                    </span>
-                  </p>
-                </div>
-              </GridColumn>
-            </GridRow>
-            <GridRow>
-              <Footer />
-            </GridRow>
-          </GridColumn>
-        </GridRow>
-      </Grid>
+      <div
+        css={css`
+          display: grid;
+          grid-template-columns: minmax(280px, 280px) repeat(11, 1fr);
+          grid-template-rows: 1fr 30px
+          grid-column-gap: 0px;
+          grid-row-gap: 0px;
+        `}
+      >
+        <div
+          css={css`
+            grid-area: 1 / 1 / 2 / 2;
+          `}
+          className="spectrum--light"
+        >
+          <SiteNav
+            currentPage={props.location.pathname}
+            gitRemote={gitRemote}
+          />
+        </div>
+        <div
+          css={css`
+            grid-area: 1 / 2 / 2 / 11;
+          `}
+        >
+          <div
+            css={css`
+              padding-top: 30px;
+              padding-left: 16px;
+              padding-right: 16px;
+            `}
+          >
+            {renderAst(htmlAst)}
+          </div>
+        </div>
+        <div
+          css={css`
+            grid-area: 1 / 11 / 2 / 13;
+          `}
+        >
+          <div
+            css={css`
+              padding-top: 30px;
+              padding-left: 16px;
+              padding-right: 16px;
+            `}
+          >
+            <div
+              css={css`
+                padding-bottom: 20px;
+              `}
+            >
+              {gitRemote !== null ? (
+                <Feedback
+                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                  filePath={relativePath}
+                  branch={gitRemote.ref}
+                />
+              ) : (
+                ""
+              )}
+            </div>
+            <div>
+              <Heading variant="subtitle3">On this page</Heading>
+              <span
+                className="toc"
+                dangerouslySetInnerHTML={{ __html: tableOfContents }}
+              ></span>
+            </div>
+            <p>
+              <span
+                css={css`
+                  display: block;
+                `}
+              >
+                Last update: {modifiedTime}
+              </span>
+              <span
+                css={css`
+                  display: block;
+                `}
+              >
+                {timeToRead} min read
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          css={css`
+            grid-area: 2 / 2 / 3 / 13;
+          `}
+        >
+          <Footer />
+        </div>
+      </div>
     </DocLayout>
   )
 }

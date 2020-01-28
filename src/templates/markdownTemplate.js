@@ -56,77 +56,67 @@ grid-row-gap: 0px;
         <div
           css={css`
             grid-area: 1 / 2 / 2 / 11;
+            padding-top: 30px;
+            padding-left: 16px;
+            padding-right: 16px;
           `}
         >
-          <div
-            css={css`
-              padding-top: 30px;
-              padding-left: 16px;
-              padding-right: 16px;
-            `}
-          >
-            {renderAst(htmlAst)}
-          </div>
+          {renderAst(htmlAst)}
         </div>
         <div
           css={css`
             grid-area: 1 / 11 / 2 / 13;
+            padding-top: 30px;
+            padding-left: 16px;
+            padding-right: 16px;
           `}
         >
           <div
             css={css`
-              padding-top: 30px;
-              padding-left: 16px;
-              padding-right: 16px;
+              padding-bottom: 20px;
             `}
           >
-            <div
+            {gitRemote !== null ? (
+              <Feedback
+                gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                filePath={relativePath}
+                branch={gitRemote.ref}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+          <div>
+            <Heading variant="subtitle3">On this page</Heading>
+            <span
+              className="toc"
+              dangerouslySetInnerHTML={{ __html: tableOfContents }}
+            ></span>
+          </div>
+          <p>
+            <span
               css={css`
-                padding-bottom: 20px;
+                display: block;
               `}
             >
-              {gitRemote !== null ? (
-                <Feedback
-                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                  filePath={relativePath}
-                  branch={gitRemote.ref}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-            <div>
-              <Heading variant="subtitle3">On this page</Heading>
-              <span
-                className="toc"
-                dangerouslySetInnerHTML={{ __html: tableOfContents }}
-              ></span>
-            </div>
-            <p>
-              <span
-                css={css`
-                  display: block;
-                `}
-              >
-                Last update: {modifiedTime}
-              </span>
-              <span
-                css={css`
-                  display: block;
-                `}
-              >
-                {timeToRead} min read
-              </span>
-            </p>
-          </div>
+              Last update: {modifiedTime}
+            </span>
+            <span
+              css={css`
+                display: block;
+              `}
+            >
+              {timeToRead} min read
+            </span>
+          </p>
         </div>
-        <div
-          css={css`
-            grid-area: 2 / 2 / 3 / 13;
-          `}
-        >
-          <Footer />
-        </div>
+      </div>
+      <div
+        css={css`
+          grid-area: 2 / 3 / 3 / 13;
+        `}
+      >
+        <Footer />
       </div>
     </DocLayout>
   )

@@ -46,6 +46,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
+    "react-responsive": "^8.0.3",
     "rebass": "^4.0.5",
     "redoc": "2.0.0-rc.12",
     "rehype-react": "^4.0.1",

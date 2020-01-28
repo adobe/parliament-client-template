@@ -625,6 +625,7 @@ pre tt:after {
 
 span.toc ul {
   list-style-type: none;
+  margin-left: 0.25rem;
 }
 
 .toc a {

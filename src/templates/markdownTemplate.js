@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
+import { useMediaQuery } from "react-responsive"
 import DocLayout from "../components/doclayout"
-import Heading from "@react/react-spectrum/Heading"
-import { Feedback, Footer } from "@parliament/parliament-ui-components"
+import PageActions from "../components/PageActions"
+import { Footer } from "@parliament/parliament-ui-components"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
@@ -14,6 +15,10 @@ const MarkdownTemplate = props => {
   const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
 
   const gitRemote = props.pageContext.gitRemote
+
+  const isDesktop = useMediaQuery({ minWidth: 1201 })
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1200 })
+  const isMobile = useMediaQuery({ maxWidth: 767 })
 
   return (
     <DocLayout>
@@ -56,44 +61,13 @@ const MarkdownTemplate = props => {
             padding-right: 16px;
           `}
         >
-          <div
-            css={css`
-              padding-bottom: 20px;
-            `}
-          >
-            {gitRemote !== null ? (
-              <Feedback
-                gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                filePath={relativePath}
-                branch={gitRemote.ref}
-              />
-            ) : (
-              ""
-            )}
-          </div>
-          <div>
-            <Heading variant="subtitle3">On this page</Heading>
-            <span
-              className="toc"
-              dangerouslySetInnerHTML={{ __html: tableOfContents }}
-            ></span>
-          </div>
-          <p>
-            <span
-              css={css`
-                display: block;
-              `}
-            >
-              Last update: {modifiedTime}
-            </span>
-            <span
-              css={css`
-                display: block;
-              `}
-            >
-              {timeToRead} min read
-            </span>
-          </p>
+          <PageActions
+            gitRemote={gitRemote}
+            modifiedTime={modifiedTime}
+            relativePath={relativePath}
+            tableOfContents={tableOfContents}
+            timeToRead={timeToRead}
+          />
         </div>
         <div
           css={css`

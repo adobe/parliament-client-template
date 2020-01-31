@@ -21,20 +21,30 @@ const MarkdownTemplate = props => {
       <div
         css={css`
         display: grid;
-        grid-template-rows: 1fr 30px
         grid-column-gap: 0px;
         grid-row-gap: 0px;
         @media screen and (min-width: 1201px) {
+          grid-template-rows: 1fr 30px
           grid-template-columns: minmax(280px, 280px) repeat(11, 1fr);
         }
         @media screen and (min-width: 768px) and (max-width: 1200px) {
+          grid-template-rows: 1fr 30px
           grid-template-columns: minmax(280px, 280px) repeat(9, 1fr);
+        }
+        @media screen and (max-width: 767px) {
+          grid-template-rows: 1fr 1fr 30px
+          grid-template-columns: repeat(10, 1fr);
         }
       `}
       >
         <div
           css={css`
-            grid-area: 1 / 1 / 3 / 2;
+            @media screen and (min-width: 768px) {
+              grid-area: 1 / 1 / 3 / 2;
+            }
+            @media screen and (max-width: 767px) {
+              grid-area: 1 / 1 / 2 / 11;
+            }
           `}
           className="spectrum--light"
         >
@@ -54,6 +64,9 @@ const MarkdownTemplate = props => {
             }
             @media screen and (min-width: 768px) and (max-width: 1200px) {
               grid-area: 1 / 2 / 2 / 11;
+            }
+            @media screen and (max-width: 767px) {
+              grid-area: 2 / 1 / 3 / 11;
             }
           `}
         >
@@ -107,6 +120,9 @@ const MarkdownTemplate = props => {
             }
             @media screen and (min-width: 768px) and (max-width: 1200px) {
               grid-area: 2 / 3 / 3 / 11;
+            }
+            @media screen and (max-width: 767px) {
+              grid-area: 3 / 1 / 4 / 11;
             }
           `}
         >

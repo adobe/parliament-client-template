@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
-import { useMediaQuery } from "react-responsive"
 import DocLayout from "../components/doclayout"
 import { Footer } from "@parliament/parliament-ui-components"
 import PageActions from "../components/PageActions"
@@ -28,7 +27,7 @@ const MarkdownTemplate = props => {
         @media screen and (min-width: 1201px) {
           grid-template-columns: minmax(280px, 280px) repeat(11, 1fr);
         }
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 768px) and (max-width: 1200px) {
           grid-template-columns: minmax(280px, 280px) repeat(9, 1fr);
         }
       `}
@@ -53,7 +52,7 @@ const MarkdownTemplate = props => {
             @media screen and (min-width: 1201px) {
               grid-area: 1 / 2 / 2 / 11;
             }
-            @media screen and (min-width: 768px) {
+            @media screen and (min-width: 768px) and (max-width: 1200px) {
               grid-area: 1 / 2 / 2 / 11;
             }
           `}
@@ -63,7 +62,7 @@ const MarkdownTemplate = props => {
               @media screen and (min-width: 1201px) {
                 display: none;
               }
-              @media screen and (min-width: 768px) {
+              @media screen and (min-width: 768px) and (max-width: 1200px) {
                 float: right;
               }
             `}
@@ -88,7 +87,7 @@ const MarkdownTemplate = props => {
             @media screen and (min-width: 1201px) {
               grid-area: 1 / 11 / 2 / 13;
             }
-            @media screen and (min-width: 768px) {
+            @media screen and (min-width: 768px) and (max-width: 1200px) {
               display: none;
             }
           `}
@@ -106,7 +105,7 @@ const MarkdownTemplate = props => {
             @media screen and (min-width: 1201px) {
               grid-area: 2 / 3 / 3 / 13;
             }
-            @media screen and (min-width: 768px) {
+            @media screen and (min-width: 768px) and (max-width: 1200px) {
               grid-area: 2 / 3 / 3 / 11;
             }
           `}

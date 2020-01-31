@@ -33,7 +33,7 @@ const PageActions = ({
           @media screen and (min-width: 1201px) {
             display: block;
           }
-          @media screen and (min-width: 768px) and (max-width: 1200px) {
+          @media screen and (max-width: 1200px) {
             display: none;
           }
         `}

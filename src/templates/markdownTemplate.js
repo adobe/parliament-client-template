@@ -62,7 +62,7 @@ const MarkdownTemplate = props => {
               @media screen and (min-width: 1201px) {
                 display: none;
               }
-              @media screen and (min-width: 768px) and (max-width: 1200px) {
+              @media screen and (max-width: 1200px) {
                 float: right;
               }
             `}
@@ -87,7 +87,7 @@ const MarkdownTemplate = props => {
             @media screen and (min-width: 1201px) {
               grid-area: 1 / 11 / 2 / 13;
             }
-            @media screen and (min-width: 768px) and (max-width: 1200px) {
+            @media screen and (max-width: 1200px) {
               display: none;
             }
           `}

@@ -14,6 +14,7 @@ const SearchBar = props => {
       `}
     >
       <Search
+        aria-label="Search"
         icon={<Magnifier data-testid="searchicon" />}
         placeholder="Enter text"
         onSubmit={e => (document.location.href = `${searchUrl}${e}`)}

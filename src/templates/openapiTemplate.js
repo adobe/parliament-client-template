@@ -1,10 +1,11 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core"
+import { jsx } from "@emotion/core"
 import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
 import OpenApiLayout from "../components/openapilayout"
 import SEO from "../components/seo"
+import { Footer } from "@parliament/parliament-ui-components"
 
 import Grid from "../components/grid/Grid"
 import GridContent from "../components/grid/GridContent"
@@ -19,7 +20,7 @@ const OpenApiTemplate = props => {
         <GridNav className="spectrum--light">
           <SiteNav
             currentPage={props.location.pathname}
-            gitRemote={gitRemote}
+            gitRemote={props.pageContext.gitRemote}
           />
         </GridNav>
         <GridContent>

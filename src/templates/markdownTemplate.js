@@ -8,6 +8,11 @@ import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
 
+import Grid from "../components/grid/Grid"
+import GridContent from "../components/grid/GridContent"
+import GridNav from "../components/grid/GridNav"
+import GridFooter from "../components/grid/GridFooter"
+
 const MarkdownTemplate = props => {
   const { file } = props.data
   const { modifiedTime, relativePath, childMarkdownRemark } = file
@@ -18,58 +23,14 @@ const MarkdownTemplate = props => {
   return (
     <DocLayout>
       <SEO title={props.pageContext.seo} />
-      <div
-        css={css`
-        display: grid;
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
-        @media screen and (min-width: 1201px) {
-          grid-template-rows: 1fr 30px
-          grid-template-columns: minmax(280px, 280px) repeat(11, 1fr);
-        }
-        @media screen and (min-width: 768px) and (max-width: 1200px) {
-          grid-template-rows: 1fr 30px
-          grid-template-columns: minmax(280px, 280px) repeat(9, 1fr);
-        }
-        @media screen and (max-width: 767px) {
-          grid-template-rows: 1fr 1fr 30px
-          grid-template-columns: repeat(10, 1fr);
-        }
-      `}
-      >
-        <div
-          css={css`
-            @media screen and (min-width: 768px) {
-              grid-area: 1 / 1 / 3 / 2;
-            }
-            @media screen and (max-width: 767px) {
-              grid-area: 1 / 1 / 2 / 11;
-            }
-          `}
-          className="spectrum--light"
-        >
+      <Grid>
+        <GridNav className="spectrum--light">
           <SiteNav
             currentPage={props.location.pathname}
             gitRemote={gitRemote}
           />
-        </div>
-        <div
-          css={css`
-            padding-top: 30px;
-            padding-left: 16px;
-            padding-right: 16px;
-
-            @media screen and (min-width: 1201px) {
-              grid-area: 1 / 2 / 2 / 11;
-            }
-            @media screen and (min-width: 768px) and (max-width: 1200px) {
-              grid-area: 1 / 2 / 2 / 11;
-            }
-            @media screen and (max-width: 767px) {
-              grid-area: 2 / 1 / 3 / 11;
-            }
-          `}
-        >
+        </GridNav>
+        <GridContent>
           <div
             css={css`
               @media screen and (min-width: 1201px) {
@@ -90,7 +51,7 @@ const MarkdownTemplate = props => {
           </div>
 
           {renderAst(htmlAst)}
-        </div>
+        </GridContent>
         <div
           css={css`
             padding-top: 30px;
@@ -113,22 +74,10 @@ const MarkdownTemplate = props => {
             timeToRead={timeToRead}
           />
         </div>
-        <div
-          css={css`
-            @media screen and (min-width: 1201px) {
-              grid-area: 2 / 3 / 3 / 13;
-            }
-            @media screen and (min-width: 768px) and (max-width: 1200px) {
-              grid-area: 2 / 3 / 3 / 11;
-            }
-            @media screen and (max-width: 767px) {
-              grid-area: 3 / 1 / 4 / 11;
-            }
-          `}
-        >
+        <GridFooter>
           <Footer />
-        </div>
-      </div>
+        </GridFooter>
+      </Grid>
     </DocLayout>
   )
 }

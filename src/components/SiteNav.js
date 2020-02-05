@@ -4,10 +4,17 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
 import Provider from "@react/react-spectrum/Provider"
+import Button from "@react/react-spectrum/Button"
+import Menu from "@react/react-spectrum/Icon/ShowMenu"
+import OverlayTrigger from "@react/react-spectrum/OverlayTrigger"
+import Popover from "@react/react-spectrum/Popover"
 import Title from "./Title"
 import SearchBar from "./SearchBar"
 
+import { useMediaQuery } from "react-responsive"
+
 const SiteNav = props => {
+  const isMobile = useMediaQuery({ maxWidth: 767 })
   const data = useStaticQuery(
     graphql`
       query SiteNavQuery {
@@ -31,40 +38,98 @@ const SiteNav = props => {
 
   return (
     <Provider theme="light">
-      <div
-        css={css`
-          width: 280px;
-        `}
-      >
+      {!isMobile ? (
         <div
           css={css`
-            padding: 30px 24px 24px 24px;
-            width: 256px;
+            width: 280px;
           `}
         >
-          <Link
+          <div
             css={css`
-              text-decoration-line: none;
+              padding: 30px 24px 24px 24px;
+              width: 256px;
             `}
-            to="/"
           >
-            <Title />
-          </Link>
-          <SearchBar gitRemote={props.gitRemote} />
+            <Link
+              css={css`
+                text-decoration-line: none;
+              `}
+              to="/"
+            >
+              <Title />
+            </Link>
+            <div
+              css={css`
+                width: 256px;
+                margin-top: 24px;
+              `}
+            >
+              <SearchBar gitRemote={props.gitRemote} />
+            </div>
+          </div>
+          <div
+            css={css`
+              padding: 0px 24px 24px 24px;
+              width: 256px;
+            `}
+          >
+            <Nav
+              data={data.allRawJsonFile.edges[0].node.pages}
+              selected={props.currentPage}
+              gitInfo={gitInfo}
+            />
+          </div>
         </div>
-        <div
-          css={css`
-            padding: 0px 24px 24px 24px;
-            width: 256px;
-          `}
-        >
-          <Nav
-            data={data.allRawJsonFile.edges[0].node.pages}
-            selected={props.currentPage}
-            gitInfo={gitInfo}
-          />
+      ) : (
+        <div>
+          <div
+            style={{
+              float: "left",
+              display: "inline-block",
+              padding: "12px",
+              textAlign: "center",
+            }}
+          >
+            <OverlayTrigger trigger="click" placement="right">
+              <Button
+                autoFocus={false}
+                block={false}
+                disabled={false}
+                element="button"
+                holdAffordance={false}
+                icon={<Menu />}
+                invalid={false}
+                label={null}
+                logic={false}
+                onClick={function noRefCheck() {}}
+                quiet
+                selected={false}
+                variant="action"
+              />
+              <Popover
+                title={
+                  <Link
+                    css={css`
+                      text-decoration-line: none;
+                    `}
+                    to="/"
+                  >
+                    <Title />
+                  </Link>
+                }
+                variant="default"
+              >
+                <SearchBar gitRemote={props.gitRemote} />
+                <Nav
+                  data={data.allRawJsonFile.edges[0].node.pages}
+                  selected={props.currentPage}
+                  gitInfo={gitInfo}
+                />
+              </Popover>
+            </OverlayTrigger>
+          </div>
         </div>
-      </div>
+      )}
     </Provider>
   )
 }

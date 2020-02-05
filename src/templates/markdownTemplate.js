@@ -8,10 +8,7 @@ import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
 
-import Grid from "../components/grid/Grid"
-import GridContent from "../components/grid/GridContent"
-import GridNav from "../components/grid/GridNav"
-import GridFooter from "../components/grid/GridFooter"
+import { Grid, GridContent, GridNav, GridFooter } from "../components/grid/Grid"
 
 const MarkdownTemplate = props => {
   const { file } = props.data

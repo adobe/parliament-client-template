@@ -7,10 +7,7 @@ import OpenApiLayout from "../components/openapilayout"
 import SEO from "../components/seo"
 import { Footer } from "@parliament/parliament-ui-components"
 
-import Grid from "../components/grid/Grid"
-import GridContent from "../components/grid/GridContent"
-import GridNav from "../components/grid/GridNav"
-import GridFooter from "../components/grid/GridFooter"
+import { Grid, GridContent, GridNav, GridFooter } from "../components/grid/Grid"
 
 const OpenApiTemplate = props => {
   return (

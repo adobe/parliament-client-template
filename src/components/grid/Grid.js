@@ -18,4 +18,41 @@ const Grid = styled.div`
     }
 `
 
-export default Grid
+const GridContent = styled.div`
+  padding-top: 30px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @media screen and (min-width: 1201px) {
+    grid-area: 1 / 2 / 2 / 11;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1200px) {
+    grid-area: 1 / 2 / 2 / 11;
+  }
+  @media screen and (max-width: 767px) {
+    grid-area: 2 / 1 / 3 / 11;
+  }
+`
+
+const GridFooter = styled.div`
+  @media screen and (min-width: 1201px) {
+    grid-area: 2 / 3 / 3 / 13;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1200px) {
+    grid-area: 2 / 3 / 3 / 11;
+  }
+  @media screen and (max-width: 767px) {
+    grid-area: 3 / 1 / 4 / 11;
+  }
+`
+
+const GridNav = styled.div`
+  @media screen and (min-width: 768px) {
+    grid-area: 1 / 1 / 3 / 2;
+  }
+  @media screen and (max-width: 767px) {
+    grid-area: 1 / 1 / 2 / 11;
+  }
+`
+
+export { Grid, GridContent, GridFooter, GridNav }

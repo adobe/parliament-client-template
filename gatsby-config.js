@@ -1,7 +1,7 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(',');
+const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",")
 module.exports = {
   pathPrefix: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
   siteMetadata: {
@@ -89,7 +89,6 @@ module.exports = {
               maxWidth: 970,
             },
           },
-          `gatsby-remark-embedder`,
           {
             resolve: `gatsby-remark-prismjs`,
             options: {

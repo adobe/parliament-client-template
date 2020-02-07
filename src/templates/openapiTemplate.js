@@ -1,26 +1,36 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core"
+import { css, jsx } from "@emotion/core"
 import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
 import OpenApiLayout from "../components/openapilayout"
 import SEO from "../components/seo"
-import { Footer } from "@parliament/parliament-ui-components"
-
-import { Grid, GridContent, GridNav, GridFooter } from "../components/grid/Grid"
 
 const OpenApiTemplate = props => {
   return (
     <OpenApiLayout>
       <SEO title={props.pageContext.seo} />
-      <Grid>
-        <GridNav className="spectrum--light">
-          <SiteNav
-            currentPage={props.location.pathname}
-            gitRemote={props.pageContext.gitRemote}
-          />
-        </GridNav>
-        <GridContent>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+          @media screen and (max-width: 767px) {
+            flex-direction: column;
+          }
+        `}
+      >
+        <SiteNav
+          currentPage={props.location.pathname}
+          gitRemote={props.pageContext.gitRemote}
+        />
+        <div
+          css={css`
+            width: calc(100% - 280px);
+            @media screen and (max-width: 767px) {
+              width: 100%;
+            }
+          `}
+        >
           <RedocStandalone
             spec={props.pageContext.spec}
             options={{
@@ -28,11 +38,8 @@ const OpenApiTemplate = props => {
               menuToggle: true,
             }}
           />
-        </GridContent>
-        <GridFooter>
-          <Footer />
-        </GridFooter>
-      </Grid>
+        </div>
+      </div>
     </OpenApiLayout>
   )
 }

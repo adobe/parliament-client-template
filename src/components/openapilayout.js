@@ -8,17 +8,15 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { Footer } from "@parliament/parliament-ui-components"
+import Provider from "@react/react-spectrum/Provider"
+
 import "./layout.css"
 
 const OpenApiLayout = ({ children }) => {
   return (
-    <>
-      <div>
-        <main>{children}</main>
-      </div>
-      <Footer />
-    </>
+    <Provider theme="lightest">
+      <main>{children}</main>
+    </Provider>
   )
 }
 

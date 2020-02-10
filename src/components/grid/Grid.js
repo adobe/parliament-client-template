@@ -24,14 +24,16 @@ const GridContent = styled.div`
   padding-right: 16px;
 
   @media screen and (min-width: 1201px) {
-    grid-area: 1 / 3 / 2 / 11;
+    grid-area: 1 / 2 / 2 / 11;
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   @media screen and (min-width: 768px) and (max-width: 1200px) {
-    grid-area: 1 / 3 / 2 / 11;
+    grid-area: 1 / 2 / 2 / 11;
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   @media screen and (max-width: 767px) {
     grid-area: 2 / 1 / 3 / 11;
@@ -52,7 +54,7 @@ const GridFooter = styled.div`
 
 const GridNav = styled.div`
   @media screen and (min-width: 768px) {
-    grid-area: 1 / 1 / 3 / 3;
+    grid-area: 1 / 1 / 3 / 2;
   }
   @media screen and (max-width: 767px) {
     grid-area: 1 / 1 / 2 / 11;

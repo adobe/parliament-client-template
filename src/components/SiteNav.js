@@ -72,7 +72,8 @@ const SiteNav = props => {
               padding: 0px 24px 24px 24px;
               width: 256px;
               height: 80vh;
-              overflow-y: scroll;
+              overflow-y: auto;
+              overflow-x: hidden;
             `}
           >
             <Nav

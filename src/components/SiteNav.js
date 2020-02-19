@@ -95,7 +95,6 @@ const SiteNav = props => {
           >
             <OverlayTrigger trigger="click" placement="right">
               <Button
-                autoFocus={false}
                 block={false}
                 disabled={false}
                 element="button"

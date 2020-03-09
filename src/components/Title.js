@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core"
 import Heading from "@react/react-spectrum/Heading"
 import Logo from "../images/adobe_logo-2.svg"
 
-const Title = () => {
+const Title = ({ siteTitle }) => {
   return (
     <div
       css={css`
@@ -20,9 +20,13 @@ const Title = () => {
           padding-top: 1px;
         `}
       />
-      <Heading variant="subtitle1">{process.env.GATSBY_SOURCE_TITLE}</Heading>
+      <Heading variant="subtitle1">{siteTitle}</Heading>
     </div>
   )
+}
+
+Title.defaultProps = {
+  siteTitle: process.env.GATSBY_SOURCE_TITLE,
 }
 
 export default Title

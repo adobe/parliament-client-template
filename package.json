@@ -82,9 +82,10 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "jest",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+    "test": "npm run test:integration && npm run test:e2e:ci",
+    "test:integration": "jest",
     "test:e2e": "CYPRESS_SUPPORT=y start-server-and-test develop http://localhost:8000 cy:open",
     "test:e2e:ci": "start-server-and-test develop http://localhost:8000 cy:run"
   },

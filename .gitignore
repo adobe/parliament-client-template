@@ -75,3 +75,4 @@ yarn-error.log
 # Environment file
 .env.development
 .env.production
+cypress.env.json

@@ -263,18 +263,26 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // redirect home page to main page
   const homePage = pages[0]
+  const strippedHomePage = stripManifestPath(homePage.path, {
+    org: gitRemote.organization,
+    name: gitRemote.name,
+    branch: gitRemote.ref,
+  })
   createPage({
     path: `/`,
     component: indexTemplate,
     context: {
       slug: `/`,
-      redirect: stripManifestPath(homePage.path, {
-        org: gitRemote.organization,
-        name: gitRemote.name,
-        branch: gitRemote.ref,
-      }),
+      redirect: strippedHomePage,
     },
   })
+
+  // Setup cypress.env.json for testing
+  const cypress = {
+    prefix: process.env.GATSBY_SITE_PATH_PREFIX,
+    homePage: strippedHomePage,
+  }
+  fs.writeFileSync("cypress.env.json", JSON.stringify(cypress))
 }
 
 const createOpenApiPage = (

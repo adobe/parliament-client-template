@@ -7,9 +7,16 @@ const A11Y_OPTIONS = {
   },
 }
 
+// Prefix is empty for during developement, set in production
+const prefix = Cypress.env("prefix") ? Cypress.env("prefix") : ""
+let homePage = Cypress.env("homePage") ? Cypress.env("homePage") : ""
+if (prefix !== "") {
+  homePage = `${prefix}${homePage}/index.html`
+}
+
 context("Home Page", () => {
   beforeEach(() => {
-    cy.visit(`http://localhost:8000/`)
+    cy.visit(`http://localhost:8000${homePage}`)
     cy.injectAxe()
     cy.wait(100)
   })

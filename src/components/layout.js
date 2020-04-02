@@ -12,7 +12,11 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Provider from "@react/react-spectrum/Provider"
 
-import { Header, Footer } from "@parliament/parliament-ui-components"
+import {
+  Header,
+  Footer,
+  useLaunchScript,
+} from "@parliament/parliament-ui-components"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -25,6 +29,10 @@ const Layout = ({ children }) => {
       }
     }
   `)
+
+  useLaunchScript(
+    "//assets.adobedtm.com/00dcc6d24e46/e61b3825fe76/launch-3cd4277d5923.min.js"
+  )
 
   return (
     <Provider theme="lightest">

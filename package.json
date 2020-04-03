@@ -70,6 +70,9 @@
     "react-test-renderer": "^16.8.6",
     "start-server-and-test": "^1.9.1"
   },
+  "peerDependencies": {
+    "cyress": "^4.3.0"
+  },
   "keywords": [
     "gatsby"
   ],

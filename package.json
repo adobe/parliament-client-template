@@ -55,11 +55,14 @@
     "yaml": "^1.7.2"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^6.0.0",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.6",
     "axe-core": "^3.3.1",
     "babel-jest": "^24.8.0",
     "babel-preset-gatsby": "^0.2.7",
+    "cypress": "^4.3.0",
+    "cypress-axe": "^0.8.1",
     "gh-pages": "^2.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
@@ -67,11 +70,6 @@
     "prettier": "^1.18.2",
     "react-test-renderer": "^16.8.6",
     "start-server-and-test": "^1.9.1"
-  },
-  "peerDependencies": {
-    "@testing-library/cypress": "^6.0.0",
-    "cypress": "^4.3.0",
-    "cypress-axe": "^0.8.1"
   },
   "keywords": [
     "gatsby"

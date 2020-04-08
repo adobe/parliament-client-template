@@ -137,7 +137,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
-  const hypermediaTemplate = path.resolve(`src/templates/hypermediaTemplate.js`)
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
@@ -162,25 +161,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (data) {
       data.allMarkdownRemark.edges.forEach(({ node }) => {
         if (node.fields.slug !== "") {
-          if (node.fields.slug.includes("/hypermedia")) {
-            createPage({
-              path: node.fields.slug,
-              component: hypermediaTemplate,
-              context: {}, // additional data can be passed via context
-            })
-          } else {
-            let seo = searchTree(pages, node.fields.slug)
-            createPage({
-              path: node.fields.slug,
-              component: docTemplate,
-              context: {
-                slug: node.fields.slug,
-                id: node.fields.id,
-                seo: seo,
-                gitRemote: gitRemote,
-              },
-            })
-          }
+          let seo = searchTree(pages, node.fields.slug)
+          createPage({
+            path: node.fields.slug,
+            component: docTemplate,
+            context: {
+              slug: node.fields.slug,
+              id: node.fields.id,
+              seo: seo,
+              gitRemote: gitRemote,
+            },
+          })
         }
       })
     }

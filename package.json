@@ -12,9 +12,7 @@
     "@parliament/gatsby-remark-afm": "^0.0.5",
     "@parliament/parliament-ui-components": "^0.0.32",
     "@react/react-spectrum": "^2.23.0",
-    "@testing-library/cypress": "^6.0.0",
     "core-js": "^3.2.1",
-    "cypress-axe": "^0.8.1",
     "eslint-plugin-flowtype": "^4.2.0",
     "gatsby": "^2.15.19",
     "gatsby-image": "^2.2.10",
@@ -71,7 +69,9 @@
     "start-server-and-test": "^1.9.1"
   },
   "peerDependencies": {
-    "cyress": "^4.3.0"
+    "@testing-library/cypress": "^6.0.0",
+    "cypress": "^4.3.0",
+    "cypress-axe": "^0.8.1"
   },
   "keywords": [
     "gatsby"
@@ -88,7 +88,7 @@
     "serve:prod": "NODE_ENV=production gatsby serve -p 8000 --prefix-paths",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "test": "npm run test:integration && npm run test:e2e:ci",
+    "test": "npm run test:integration",
     "test:integration": "jest",
     "test:e2e": "CYPRESS_SUPPORT=y start-server-and-test develop http://localhost:8000 cy:open",
     "test:e2e:ci": "NODE_ENV=production start-server-and-test serve:prod http://localhost:8000$GATSBY_SITE_PATH_PREFIX/do-not-delete/index.html cy:run"

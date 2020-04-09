@@ -38,7 +38,13 @@ const PageActions = ({
           }
         `}
       >
-        <div>
+        <div
+          css={css`
+            height: 70vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+          `}
+        >
           <Heading variant="subtitle3">On this page</Heading>
           <span
             className="toc"

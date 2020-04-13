@@ -1,45 +1,44 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core"
+import { jsx } from "@emotion/core"
 import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
 import OpenApiLayout from "../components/openapilayout"
 import SEO from "../components/seo"
+import { Footer } from "@parliament/parliament-ui-components"
 
-const OpenApiTemplate = props => {
+import {
+  OpenApiGrid,
+  OpenApiGridContent,
+  OpenApiGridNav,
+  OpenApiGridFooter,
+} from "../components/grid/OpenApiGrid"
+
+const OpenApiTemplate = ({ pageContext, location }) => {
   return (
     <OpenApiLayout>
-      <SEO title={props.pageContext.seo} />
-      <div
-        css={css`
-          display: flex;
-          flex-direction: row;
-          @media screen and (max-width: 767px) {
-            flex-direction: column;
-          }
-        `}
-      >
-        <SiteNav
-          currentPage={props.location.pathname}
-          gitRemote={props.pageContext.gitRemote}
-        />
-        <div
-          css={css`
-            width: calc(100% - 280px);
-            @media screen and (max-width: 767px) {
-              width: 100%;
-            }
-          `}
-        >
+      <SEO title={pageContext.seo} />
+      <OpenApiGrid>
+        <OpenApiGridNav>
+          <SiteNav
+            currentPage={location.pathname}
+            gitRemote={pageContext.gitRemote}
+            forceMobile={true}
+          />
+        </OpenApiGridNav>
+        <OpenApiGridContent>
           <RedocStandalone
-            spec={props.pageContext.spec}
+            spec={pageContext.spec}
             options={{
               hideLoading: true,
               menuToggle: true,
             }}
           />
-        </div>
-      </div>
+        </OpenApiGridContent>
+        <OpenApiGridFooter>
+          <Footer />
+        </OpenApiGridFooter>
+      </OpenApiGrid>
     </OpenApiLayout>
   )
 }

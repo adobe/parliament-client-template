@@ -13,7 +13,7 @@ import SearchBar from "./SearchBar"
 
 import { useMediaQuery } from "react-responsive"
 
-const SiteNav = props => {
+const SiteNav = ({ gitRemote, forceMobile, currentPage }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
   const data = useStaticQuery(
     graphql`
@@ -31,14 +31,14 @@ const SiteNav = props => {
   )
 
   const gitInfo = {
-    org: props.gitRemote.organization,
-    name: props.gitRemote.name,
-    branch: props.gitRemote.ref,
+    org: gitRemote.organization,
+    name: gitRemote.name,
+    branch: gitRemote.ref,
   }
 
   return (
     <Provider theme="light">
-      {!isMobile ? (
+      {!isMobile && !forceMobile ? (
         <div
           css={css`
             width: 280px;
@@ -56,7 +56,7 @@ const SiteNav = props => {
               `}
               to="/"
             >
-              <Title />
+              <Title isMobile={isMobile} forceMobile={forceMobile} />
             </Link>
             <div
               css={css`
@@ -64,7 +64,7 @@ const SiteNav = props => {
                 margin-top: 24px;
               `}
             >
-              <SearchBar gitRemote={props.gitRemote} />
+              <SearchBar gitRemote={gitRemote} />
             </div>
           </div>
           <div
@@ -78,7 +78,7 @@ const SiteNav = props => {
           >
             <Nav
               data={data.allRawJsonFile.edges[0].node.pages}
-              selected={props.currentPage}
+              selected={currentPage}
               gitInfo={gitInfo}
             />
           </div>
@@ -86,12 +86,12 @@ const SiteNav = props => {
       ) : (
         <div>
           <div
-            style={{
-              float: "left",
-              display: "inline-block",
-              padding: "12px",
-              textAlign: "center",
-            }}
+            css={css`
+              display: flex;
+              flex-direction: row;
+              padding: 12px;
+              text-align: center;
+            `}
           >
             <OverlayTrigger trigger="click" placement="right">
               <Button
@@ -121,14 +121,15 @@ const SiteNav = props => {
                 }
                 variant="default"
               >
-                <SearchBar gitRemote={props.gitRemote} />
+                <SearchBar gitRemote={gitRemote} />
                 <Nav
                   data={data.allRawJsonFile.edges[0].node.pages}
-                  selected={props.currentPage}
+                  selected={currentPage}
                   gitInfo={gitInfo}
                 />
               </Popover>
             </OverlayTrigger>
+            <Title isMobile={isMobile} forceMobile={forceMobile} />
           </div>
         </div>
       )}
@@ -138,10 +139,12 @@ const SiteNav = props => {
 
 SiteNav.propTypes = {
   currentPage: PropTypes.string,
+  forceMobile: PropTypes.bool,
 }
 
 SiteNav.defaultProps = {
   currentPage: "",
+  forceMobile: false,
 }
 
 export default SiteNav

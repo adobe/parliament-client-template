@@ -31,8 +31,8 @@ const Title = ({ siteTitle, isMobile, forceMobile }) => {
     >
       <Logo
         css={css`
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           margin-right: 16px;
           padding-top: 1px;
         `}

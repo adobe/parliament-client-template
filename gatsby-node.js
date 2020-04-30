@@ -137,6 +137,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
+  const recipeTemplate = path.resolve(`src/templates/recipeTemplate.js`)
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
@@ -149,6 +150,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         allMarkdownRemark {
           edges {
             node {
+              frontmatter {
+                template
+              }
               fields {
                 id
                 slug
@@ -162,16 +166,29 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       data.allMarkdownRemark.edges.forEach(({ node }) => {
         if (node.fields.slug !== "") {
           let seo = searchTree(pages, node.fields.slug)
-          createPage({
-            path: node.fields.slug,
-            component: docTemplate,
-            context: {
-              slug: node.fields.slug,
-              id: node.fields.id,
-              seo: seo,
-              gitRemote: gitRemote,
-            },
-          })
+          if (node.frontmatter.template === "recipe") {
+            createPage({
+              path: node.fields.slug,
+              component: recipeTemplate,
+              context: {
+                slug: node.fields.slug,
+                id: node.fields.id,
+                seo: seo,
+                gitRemote: gitRemote,
+              },
+            })
+          } else {
+            createPage({
+              path: node.fields.slug,
+              component: docTemplate,
+              context: {
+                slug: node.fields.slug,
+                id: node.fields.id,
+                seo: seo,
+                gitRemote: gitRemote,
+              },
+            })
+          }
         }
       })
     }

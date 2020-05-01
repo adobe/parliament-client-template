@@ -38,35 +38,43 @@ const PageActions = ({
           }
         `}
       >
-        <div
-          css={css`
-            height: 70vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-          `}
-        >
-          <Heading variant="subtitle3">On this page</Heading>
-          <span
-            className="toc"
-            dangerouslySetInnerHTML={{ __html: tableOfContents }}
-          ></span>
-        </div>
-        <p>
-          <span
+        {tableOfContents ? (
+          <div
             css={css`
-              display: block;
+              height: 70vh;
+              overflow-y: auto;
+              overflow-x: hidden;
             `}
           >
-            Last update: {modifiedTime}
-          </span>
-          <span
-            css={css`
-              display: block;
-            `}
-          >
-            {timeToRead} min read
-          </span>
-        </p>
+            <Heading variant="subtitle3">On this page</Heading>
+            <span
+              className="toc"
+              dangerouslySetInnerHTML={{ __html: tableOfContents }}
+            ></span>
+          </div>
+        ) : (
+          ""
+        )}
+        {modifiedTime && timeToRead ? (
+          <p>
+            <span
+              css={css`
+                display: block;
+              `}
+            >
+              Last update: {modifiedTime}
+            </span>
+            <span
+              css={css`
+                display: block;
+              `}
+            >
+              {timeToRead} min read
+            </span>
+          </p>
+        ) : (
+          ""
+        )}
       </div>
     </React.Fragment>
   )

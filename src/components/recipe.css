@@ -1,0 +1,29 @@
+.recipeContent > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipeContent h1,
+.recipeContent h2,
+.recipeContent h3,
+.recipeContent h4,
+.recipeContent h5 {
+  flex-basis: 100%;
+}
+
+.recipeContent p {
+  flex-grow: 1;
+  flex-basis: 50%;
+}
+
+@media screen and (max-width: 1200px) {
+  .recipeContent p {
+    flex-grow: 1;
+    flex-basis: 100%;
+  }
+}
+
+.recipeContent .gatsby-highlight {
+  flex-grow: 1;
+  flex-basis: 50%;
+}

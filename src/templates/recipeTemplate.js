@@ -8,6 +8,8 @@ import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
 
+import "../components/recipe.css"
+
 import { Grid, GridContent, GridNav, GridFooter } from "../components/grid/Grid"
 
 const MarkdownTemplate = props => {
@@ -28,49 +30,8 @@ const MarkdownTemplate = props => {
           />
         </GridNav>
         <GridContent>
-          <div
-            css={css`
-              @media screen and (min-width: 1201px) {
-                display: none;
-              }
-              @media screen and (max-width: 1200px) {
-                float: right;
-              }
-            `}
-          >
-            <PageActions
-              gitRemote={gitRemote}
-              modifiedTime={modifiedTime}
-              relativePath={relativePath}
-              tableOfContents={tableOfContents}
-              timeToRead={timeToRead}
-            />
-          </div>
-          This is the recipe template
-          {renderAst(htmlAst)}
+          <div class="recipeContent">{renderAst(htmlAst)}</div>
         </GridContent>
-        <div
-          css={css`
-            padding-top: 30px;
-            padding-left: 16px;
-            padding-right: 16px;
-
-            @media screen and (min-width: 1201px) {
-              grid-area: 1 / 11 / 2 / 13;
-            }
-            @media screen and (max-width: 1200px) {
-              display: none;
-            }
-          `}
-        >
-          <PageActions
-            gitRemote={gitRemote}
-            modifiedTime={modifiedTime}
-            relativePath={relativePath}
-            tableOfContents={tableOfContents}
-            timeToRead={timeToRead}
-          />
-        </div>
         <GridFooter>
           <Footer />
         </GridFooter>

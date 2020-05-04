@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core"
+import { jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import { Footer } from "@parliament/parliament-ui-components"
-import PageActions from "../components/PageActions"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
@@ -14,8 +13,8 @@ import { Grid, GridContent, GridNav, GridFooter } from "../components/grid/Grid"
 
 const MarkdownTemplate = props => {
   const { file } = props.data
-  const { modifiedTime, relativePath, childMarkdownRemark } = file
-  const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
+  const { childMarkdownRemark } = file
+  const { htmlAst } = childMarkdownRemark
 
   const gitRemote = props.pageContext.gitRemote
 
@@ -46,13 +45,9 @@ export const query = graphql`
   query MarkdownTemplateQuery2($id: String!) {
     file(id: { eq: $id }) {
       id
-      modifiedTime(formatString: "YYYY-MM-DD")
       name
-      relativePath
       childMarkdownRemark {
         htmlAst
-        tableOfContents
-        timeToRead
       }
     }
   }

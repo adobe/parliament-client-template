@@ -12,16 +12,9 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-transformer-json`,
-      options: {
-        typeName: `JsonFile`,
-      },
-    },
-    {
       resolve: `gatsby-plugin-emotion`,
       options: {},
     },
-    `gatsby-transformer-rawjson`,
     {
       resolve: `gatsby-transformer-yaml-full`,
       options: {

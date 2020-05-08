@@ -15,7 +15,7 @@ const MarkdownTemplate = props => {
   const { modifiedTime, relativePath, childMarkdownRemark } = file
   const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
 
-  const gitRemote = props.pageContext.gitRemote
+  const { gitRemote, pages } = props.pageContext
 
   return (
     <DocLayout>
@@ -25,6 +25,7 @@ const MarkdownTemplate = props => {
           <SiteNav
             currentPage={props.location.pathname}
             gitRemote={gitRemote}
+            pages={pages}
           />
         </GridNav>
         <GridContent>

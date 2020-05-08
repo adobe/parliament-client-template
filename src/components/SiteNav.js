@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
 import Provider from "@react/react-spectrum/Provider"
 import Button from "@react/react-spectrum/Button"
@@ -13,23 +13,8 @@ import SearchBar from "./SearchBar"
 
 import { useMediaQuery } from "react-responsive"
 
-const SiteNav = ({ gitRemote, forceMobile, currentPage }) => {
+const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
-  const data = useStaticQuery(
-    graphql`
-      query SiteNavQuery {
-        allRawJsonFile(filter: { view_type: { eq: "mdbook" } }) {
-          edges {
-            node {
-              id
-              pages
-            }
-          }
-        }
-      }
-    `
-  )
-
   const gitInfo = {
     org: gitRemote.organization,
     name: gitRemote.name,
@@ -76,11 +61,7 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage }) => {
               overflow-x: hidden;
             `}
           >
-            <Nav
-              data={data.allRawJsonFile.edges[0].node.pages}
-              selected={currentPage}
-              gitInfo={gitInfo}
-            />
+            <Nav data={pages} selected={currentPage} gitInfo={gitInfo} />
           </div>
         </div>
       ) : (
@@ -122,11 +103,7 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage }) => {
                 variant="default"
               >
                 <SearchBar gitRemote={gitRemote} />
-                <Nav
-                  data={data.allRawJsonFile.edges[0].node.pages}
-                  selected={currentPage}
-                  gitInfo={gitInfo}
-                />
+                <Nav data={pages} selected={currentPage} gitInfo={gitInfo} />
               </Popover>
             </OverlayTrigger>
             <Title isMobile={isMobile} forceMobile={forceMobile} />

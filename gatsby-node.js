@@ -76,22 +76,34 @@ const searchTree = (theObject, matchingFilename) => {
 const readManifest = async graphql => {
   let pages = []
   try {
-    let { data: manifest } = await graphql(`
+    let { data } = await graphql(`
       query {
-        allRawJsonFile(filter: { view_type: { eq: "mdbook" } }) {
+        allFile(filter: { extension: { eq: "json" } }) {
           edges {
             node {
-              id
-              pages
+              absolutePath
             }
           }
         }
       }
     `)
-    pages = manifest.allRawJsonFile.edges[0].node.pages
+
+    if (data) {
+      console.log("got data")
+      console.log(data.allFile.edges.length)
+      data.allFile.edges.forEach(({ node }) => {
+        let path = node.absolutePath
+        const object = JSON.parse(fs.readFileSync(path, "utf8"))
+        if (object.view_type === "mdbook") {
+          pages = object.pages
+        }
+      })
+    }
   } catch (e) {
+    console.log(e)
     console.log("Could not read the manifest")
   }
+  console.log(JSON.stringify(pages))
   return pages
 }
 
@@ -175,6 +187,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 id: node.fields.id,
                 seo: seo,
                 gitRemote: gitRemote,
+                pages: pages,
               },
             })
           } else {
@@ -186,6 +199,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 id: node.fields.id,
                 seo: seo,
                 gitRemote: gitRemote,
+                pages: pages,
               },
             })
           }
@@ -222,7 +236,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           object,
           path,
           seo,
-          gitRemote
+          gitRemote,
+          pages
         )
       })
     }
@@ -257,7 +272,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             object,
             path,
             seo,
-            gitRemote
+            gitRemote,
+            pages
           )
         } catch (e) {
           console.log(`Skipping file: ${path}`)
@@ -299,7 +315,8 @@ const createOpenApiPage = (
   object,
   path,
   seo,
-  gitRemote
+  gitRemote,
+  pages
 ) => {
   if (object.swagger) {
     if (path.lastIndexOf("gatsby-source-git/") > -1) {
@@ -347,6 +364,7 @@ const createOpenApiPage = (
         spec: object,
         seo: seo,
         gitRemote: gitRemote,
+        pages: pages,
       },
     })
   }

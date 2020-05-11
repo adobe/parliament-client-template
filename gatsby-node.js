@@ -89,8 +89,6 @@ const readManifest = async graphql => {
     `)
 
     if (data) {
-      console.log("got data")
-      console.log(data.allFile.edges.length)
       data.allFile.edges.forEach(({ node }) => {
         let path = node.absolutePath
         const object = JSON.parse(fs.readFileSync(path, "utf8"))

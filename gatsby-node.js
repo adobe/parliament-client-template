@@ -101,7 +101,6 @@ const readManifest = async graphql => {
     console.log(e)
     console.log("Could not read the manifest")
   }
-  console.log(JSON.stringify(pages))
   return pages
 }
 

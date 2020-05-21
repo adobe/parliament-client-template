@@ -71,6 +71,10 @@ const MarkdownTemplate = props => {
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
           />
+          Powered by{" "}
+          <a href="https://docs.corp.adobe.com/parliament-docs/README.md">
+            Parliament
+          </a>
         </div>
         <GridFooter>
           <Footer />

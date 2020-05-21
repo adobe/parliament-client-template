@@ -20,8 +20,8 @@ const Grid = styled.div`
 
 const GridContent = styled.div`
   padding-top: 30px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
 
   @media screen and (min-width: 1201px) {
     grid-area: 1 / 2 / 2 / 11;

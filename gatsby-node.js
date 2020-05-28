@@ -116,6 +116,20 @@ const gitRepoInfo = () => {
   }
 }
 
+const findHomePage = element => {
+  let result = null
+  if (element.path) {
+    return element
+  } else if (element.pages !== null) {
+    for (let j = 0; result === null && j < element.pages.length; j++) {
+      result = findHomePage(element.pages[j])
+    }
+    return result
+  }
+
+  return result
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
@@ -283,7 +297,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // redirect home page to main page
-  const homePage = pages[0]
+  // const homePage = pages[0]
+  let homePage = null
+  for (let i = 0; i < pages.length; i++) {
+    homePage = findHomePage(pages[i])
+    if (homePage !== null) {
+      break
+    }
+  }
+
   const strippedHomePage = stripManifestPath(homePage.path, {
     org: gitRemote.organization,
     name: gitRemote.name,

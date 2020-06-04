@@ -567,10 +567,12 @@ span.toc ul {
   text-decoration: underline;
 }
 
-a {
+div[class*="-GridContent"] a,
+div[class*="-MarkdownTemplate"] a {
   color: rgb(13, 102, 208);
   text-decoration: none;
 }
-a:hover {
+div[class*="-GridContent"] a:hover,
+div[class*="-MarkdownTemplate"] a:hover {
   text-decoration: underline;
 }

@@ -12,7 +12,7 @@ import {
   OpenApiGridContent,
   OpenApiGridNav,
   OpenApiGridFooter,
-} from "../components/grid/OpenApiGrid"
+} from "@parliament/parliament-ui-components"
 
 const OpenApiTemplate = ({ pageContext, location }) => {
   return (

@@ -8,7 +8,12 @@ import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
 
-import { Grid, GridContent, GridNav, GridFooter } from "../components/grid/Grid"
+import {
+  Grid,
+  GridNav,
+  GridContent,
+  GridFooter,
+} from "@parliament/parliament-ui-components"
 
 const MarkdownTemplate = props => {
   const { file } = props.data

@@ -559,20 +559,12 @@ span.toc ul {
   margin-left: 0.25rem;
 }
 
-.toc a {
-  color: rgb(20, 115, 230);
-  text-decoration: none;
-}
-.toc a:hover {
-  text-decoration: underline;
-}
-
-div[class*="-GridContent"] a,
-div[class*="-MarkdownTemplate"] a {
+#contentMain a,
+#rightRail a {
   color: rgb(13, 102, 208);
   text-decoration: none;
 }
-div[class*="-GridContent"] a:hover,
-div[class*="-MarkdownTemplate"] a:hover {
+#contentMain a:hover,
+#rightRail a:hover {
   text-decoration: underline;
 }

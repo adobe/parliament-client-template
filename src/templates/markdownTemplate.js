@@ -33,7 +33,7 @@ const MarkdownTemplate = props => {
             pages={pages}
           />
         </GridNav>
-        <GridContent>
+        <GridContent id="contentMain">
           <div
             css={css`
               @media screen and (min-width: 1201px) {
@@ -56,6 +56,7 @@ const MarkdownTemplate = props => {
           {renderAst(htmlAst)}
         </GridContent>
         <div
+          id="rightRail"
           css={css`
             padding-top: 30px;
             padding-left: 16px;

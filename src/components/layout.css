@@ -609,3 +609,14 @@ span.toc ul {
   color: rgb(20, 115, 230);
   text-decoration: none;
 }
+.toc a:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: rgb(13, 102, 208);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}

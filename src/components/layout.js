@@ -12,11 +12,8 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Provider from "@react/react-spectrum/Provider"
 
-import {
-  Header,
-  Footer,
-  useLaunchScript,
-} from "@parliament/parliament-ui-components"
+import { Header, Footer } from "@parliament/parliament-ui-components"
+import useLaunchScript from "./useLaunchScript"
 import "./layout.css"
 
 const Layout = ({ children }) => {

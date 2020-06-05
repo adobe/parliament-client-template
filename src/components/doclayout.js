@@ -9,7 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import Provider from "@react/react-spectrum/Provider"
-import { useLaunchScript } from "@parliament/parliament-ui-components"
+import useLaunchScript from "./useLaunchScript"
 
 import "./layout.css"
 

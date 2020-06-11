@@ -557,6 +557,13 @@ tt:after {
 span.toc ul {
   list-style-type: none;
   margin-left: 0.25rem;
+  max-width: 200px;
+}
+
+span.toc * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #contentMain a,

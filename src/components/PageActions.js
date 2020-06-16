@@ -1,8 +1,7 @@
 /** @jsx jsx */
 import React from "react"
 import { css, jsx } from "@emotion/core"
-import { Feedback } from "@parliament/parliament-ui-components"
-import Heading from "@react/react-spectrum/Heading"
+import { Feedback, TableOfContents } from "@parliament/parliament-ui-components"
 
 const PageActions = ({
   gitRemote,
@@ -39,19 +38,7 @@ const PageActions = ({
         `}
       >
         {tableOfContents ? (
-          <div
-            css={css`
-              height: 70vh;
-              overflow-y: auto;
-              overflow-x: hidden;
-            `}
-          >
-            <Heading variant="subtitle3">On this page</Heading>
-            <span
-              className="toc"
-              dangerouslySetInnerHTML={{ __html: tableOfContents }}
-            ></span>
-          </div>
+          <TableOfContents tableOfContents={tableOfContents} />
         ) : (
           ""
         )}

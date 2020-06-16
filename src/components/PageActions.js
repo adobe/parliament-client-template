@@ -1,18 +1,9 @@
 /** @jsx jsx */
 import React from "react"
 import { css, jsx } from "@emotion/core"
-import {
-  ActionButtons,
-  TableOfContents,
-} from "@parliament/parliament-ui-components"
+import { TableOfContents } from "@parliament/parliament-ui-components"
 
-const PageActions = ({
-  gitRemote,
-  relativePath,
-  tableOfContents,
-  modifiedTime,
-  timeToRead,
-}) => {
+const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
   return (
     <React.Fragment>
       <div

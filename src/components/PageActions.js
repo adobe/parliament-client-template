@@ -1,7 +1,10 @@
 /** @jsx jsx */
 import React from "react"
 import { css, jsx } from "@emotion/core"
-import { Feedback, TableOfContents } from "@parliament/parliament-ui-components"
+import {
+  ActionButtons,
+  TableOfContents,
+} from "@parliament/parliament-ui-components"
 
 const PageActions = ({
   gitRemote,
@@ -12,21 +15,6 @@ const PageActions = ({
 }) => {
   return (
     <React.Fragment>
-      <div
-        css={css`
-          padding-bottom: 20px;
-        `}
-      >
-        {gitRemote !== null ? (
-          <Feedback
-            gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-            filePath={relativePath}
-            branch={gitRemote.ref}
-          />
-        ) : (
-          ""
-        )}
-      </div>
       <div
         css={css`
           @media screen and (min-width: 1201px) {

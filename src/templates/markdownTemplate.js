@@ -13,6 +13,7 @@ import {
   GridNav,
   GridContent,
   GridFooter,
+  ActionButtons,
 } from "@parliament/parliament-ui-components"
 
 const MarkdownTemplate = props => {
@@ -36,23 +37,26 @@ const MarkdownTemplate = props => {
         <GridContent id="contentMain">
           <div
             css={css`
-              @media screen and (min-width: 1201px) {
-                display: none;
-              }
-              @media screen and (max-width: 1200px) {
-                float: right;
-              }
+              float: right;
+              z-index: 100;
             `}
           >
-            <PageActions
-              gitRemote={gitRemote}
-              modifiedTime={modifiedTime}
-              relativePath={relativePath}
-              tableOfContents={tableOfContents}
-              timeToRead={timeToRead}
-            />
+            <div
+              css={css`
+                padding-bottom: 20px;
+              `}
+            >
+              {gitRemote !== null ? (
+                <ActionButtons
+                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                  filePath={relativePath}
+                  branch={gitRemote.ref}
+                />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-
           {renderAst(htmlAst)}
         </GridContent>
         <div

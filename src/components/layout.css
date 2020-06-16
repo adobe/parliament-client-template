@@ -230,6 +230,7 @@ h1 {
   text-transform: none;
   margin-bottom: 8px;
   margin-top: 8px;
+  display: inline;
 }
 h2 {
   color: rgb(118, 118, 118);

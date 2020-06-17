@@ -576,3 +576,7 @@ span.toc * {
 #rightRail a:hover {
   text-decoration: underline;
 }
+
+.react-spectrum-SideNav {
+  width: 208px !important;
+}

@@ -26,13 +26,13 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
       {!isMobile && !forceMobile ? (
         <div
           css={css`
-            width: 280px;
+            width: 256px;
+            margin: 0;
           `}
         >
           <div
             css={css`
               padding: 30px 24px 24px 24px;
-              width: 256px;
             `}
           >
             <Link
@@ -45,7 +45,6 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
             </Link>
             <div
               css={css`
-                width: 256px;
                 margin-top: 24px;
               `}
             >
@@ -55,7 +54,6 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
           <div
             css={css`
               padding: 0px 24px 24px 24px;
-              width: 256px;
               height: 80vh;
               overflow-y: auto;
               overflow-x: hidden;

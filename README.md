@@ -79,6 +79,7 @@ To simulate production tests first set the environment variable `GATSBY_SITE_PAT
 
 1. **Run unit tests**
 
+
    ```sh
    npm run test:integration
    ```

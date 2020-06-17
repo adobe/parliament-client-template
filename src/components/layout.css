@@ -577,6 +577,7 @@ span.toc * {
   text-decoration: underline;
 }
 
-.react-spectrum-SideNav {
+.react-spectrum-SideNav,
+.spectrum-Search-input {
   width: 208px !important;
 }

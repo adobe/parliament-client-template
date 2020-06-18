@@ -79,10 +79,9 @@ To simulate production tests first set the environment variable `GATSBY_SITE_PAT
 
 1. **Run unit tests**
 
-
-   ```sh
-   npm run test:integration
-   ```
+```sh
+npm run test:integration
+```
 
 2. ** Run end to end tests**
 
@@ -91,3 +90,7 @@ To simulate production tests first set the environment variable `GATSBY_SITE_PAT
    npm run build:prod
    npm run test:e2e:ci
    ```
+
+## Contributing
+
+Contributions are welcomed! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.

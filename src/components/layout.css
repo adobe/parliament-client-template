@@ -549,6 +549,17 @@ tt:after {
   letter-spacing: -0.2em;
 }
 
+code[class*="language-text"] {
+  color: #4b4b4b !important;
+  font-size: 14px;
+  line-height: 1.45rem !important;
+  background-color: #f5f5f5 !important;
+  border-radius: 4px !important;
+  border-color: #eaeaea !important;
+  padding: 4px 0px 0px 4px !important;
+  white-space: pre-wrap !important;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;

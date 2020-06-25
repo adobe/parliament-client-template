@@ -11,7 +11,7 @@
     "@mdx-js/react": "^1.4.0",
     "@parliament/gatsby-remark-afm": "^0.4.0",
     "@parliament/gatsby-remark-prismjs": "^0.3.0",
-    "@parliament/parliament-ui-components": "0.0.48",
+    "@parliament/parliament-ui-components": "0.0.51",
     "@react/react-spectrum": "^2.23.0",
     "core-js": "^3.2.1",
     "eslint-plugin-flowtype": "^4.2.0",

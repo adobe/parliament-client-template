@@ -8,7 +8,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import Provider from "@react/react-spectrum/Provider"
+import { Provider } from "@react-spectrum/provider"
+import { theme } from "@react-spectrum/theme-default"
 import useLaunchScript from "./useLaunchScript"
 
 import "./layout.css"
@@ -19,7 +20,7 @@ const DocLayout = ({ children }) => {
   )
 
   return (
-    <Provider theme="lightest">
+    <Provider theme={theme} colorScheme="light">
       <main>{children}</main>
     </Provider>
   )

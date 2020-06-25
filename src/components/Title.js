@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import Heading from "@react/react-spectrum/Heading"
+import { Heading } from "@react-spectrum/text"
 import Logo from "../images/adobe_logo-2.svg"
 
 const Title = ({ siteTitle, isMobile, forceMobile }) => {
@@ -20,7 +20,7 @@ const Title = ({ siteTitle, isMobile, forceMobile }) => {
           padding-top: 1px;
         `}
       />
-      <Heading variant="subtitle1">{siteTitle}</Heading>
+      <Heading level={3}>{siteTitle}</Heading>
     </div>
   ) : (
     <div
@@ -37,7 +37,7 @@ const Title = ({ siteTitle, isMobile, forceMobile }) => {
           padding-top: 1px;
         `}
       />
-      <Heading variant="subtitle1">{siteTitle}</Heading>
+      <Heading level={3}>{siteTitle}</Heading>
     </div>
   )
 }

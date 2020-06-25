@@ -1,13 +1,17 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
+import { useState, Fragment } from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
-import Provider from "@react/react-spectrum/Provider"
-import Button from "@react/react-spectrum/Button"
-import Menu from "@react/react-spectrum/Icon/ShowMenu"
-import OverlayTrigger from "@react/react-spectrum/OverlayTrigger"
-import Popover from "@react/react-spectrum/Popover"
+
+import Magnifier from "@spectrum-icons/workflow/Magnify"
+
+import Menu from "@spectrum-icons/workflow/Menu"
+import { ActionButton } from "@react-spectrum/button"
+import { Content } from "@react-spectrum/view"
+import { Dialog, DialogTrigger } from "@react-spectrum/dialog"
+
 import Title from "./Title"
 import SearchBar from "./SearchBar"
 
@@ -20,9 +24,10 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
     name: gitRemote.name,
     branch: gitRemote.ref,
   }
+  let [isPopoverOpen, setPopoverOpen] = useState(false)
 
   return (
-    <Provider theme="light">
+    <Fragment>
       {!isMobile && !forceMobile ? (
         <div
           css={css`
@@ -72,23 +77,27 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
               text-align: center;
             `}
           >
-            <OverlayTrigger trigger="click" placement="right">
-              <Button
+            <DialogTrigger
+              type="popover"
+              isOpen={isPopoverOpen}
+              onOpenChange={setPopoverOpen}
+            >
+              <ActionButton
                 block={false}
                 disabled={false}
                 element="button"
                 holdAffordance={false}
-                icon={<Menu />}
                 invalid={false}
                 label={null}
                 logic={false}
                 onClick={function noRefCheck() {}}
-                quiet
+                isQuiet
                 selected={false}
-                variant="action"
-              />
-              <Popover
-                title={
+              >
+                <Magnifier />
+              </ActionButton>
+              <Dialog>
+                <Content>
                   <Link
                     css={css`
                       text-decoration-line: none;
@@ -97,18 +106,16 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
                   >
                     <Title />
                   </Link>
-                }
-                variant="default"
-              >
-                <SearchBar gitRemote={gitRemote} />
-                <Nav data={pages} selected={currentPage} gitInfo={gitInfo} />
-              </Popover>
-            </OverlayTrigger>
+                  <SearchBar gitRemote={gitRemote} />
+                  <Nav data={pages} selected={currentPage} gitInfo={gitInfo} />
+                </Content>
+              </Dialog>
+            </DialogTrigger>
             <Title isMobile={isMobile} forceMobile={forceMobile} />
           </div>
         </div>
       )}
-    </Provider>
+    </Fragment>
   )
 }
 

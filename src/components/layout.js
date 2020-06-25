@@ -10,7 +10,8 @@ import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Provider from "@react/react-spectrum/Provider"
+import { Provider } from "@react-spectrum/provider"
+import { theme } from "@react-spectrum/theme-default"
 
 import { Header, Footer } from "@parliament/parliament-ui-components"
 import useLaunchScript from "./useLaunchScript"
@@ -32,7 +33,7 @@ const Layout = ({ children }) => {
   )
 
   return (
-    <Provider theme="lightest">
+    <Provider theme={theme} colorScheme="light">
       <Header siteTitle={data.site.siteMetadata.title} />
       <div
         css={css`

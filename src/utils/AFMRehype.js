@@ -1,8 +1,8 @@
 import { createElement } from "react"
 import rehypeReact from "rehype-react"
 
-import Alert from "@react/react-spectrum/Alert"
 import {
+  Alert,
   Table,
   TBody,
   TH,

@@ -5,8 +5,6 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
 
-import Magnifier from "@spectrum-icons/workflow/Magnify"
-
 import Menu from "@spectrum-icons/workflow/Menu"
 import { ActionButton } from "@react-spectrum/button"
 import { Content } from "@react-spectrum/view"
@@ -94,7 +92,7 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
                 isQuiet
                 selected={false}
               >
-                <Magnifier />
+                <Menu />
               </ActionButton>
               <Dialog>
                 <Content>

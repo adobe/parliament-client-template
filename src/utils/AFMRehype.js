@@ -10,7 +10,8 @@ import {
   THead,
   TR,
 } from "@parliament/parliament-ui-components"
-import { TabView, Tab } from "@react/react-spectrum/TabView"
+// import { TabView, Tab } from "@react/react-spectrum/TabView"
+// import { TabView, Tab } from "../components/Tabs"
 import IncludeMarkdown from "../components/IncludeMarkdown"
 
 const renderAst = new rehypeReact({
@@ -18,8 +19,8 @@ const renderAst = new rehypeReact({
   components: {
     alert: Alert,
     includemarkdown: IncludeMarkdown,
-    tab: Tab,
-    tabview: TabView,
+    // tab: Tab,
+    // tabview: TabView,
     spectrumtable: Table,
     spectrumtbody: TBody,
     spectrumth: TH,

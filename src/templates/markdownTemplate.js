@@ -28,7 +28,7 @@ const MarkdownTemplate = props => {
     <DocLayout>
       <SEO title={props.pageContext.seo} />
       <Grid>
-        <GridNav className="spectrum--light">
+        <GridNav>
           <SiteNav
             currentPage={props.location.pathname}
             gitRemote={gitRemote}
@@ -59,7 +59,7 @@ const MarkdownTemplate = props => {
                 )}
               </div>
             </div>
-            {renderAst(htmlAst)}
+            {htmlAst}
           </GridContentInner>
         </GridContent>
         <div

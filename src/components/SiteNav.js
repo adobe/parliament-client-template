@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { Nav } from "@parliament/parliament-ui-components"
 
-import Menu from "@spectrum-icons/workflow/Menu"
+import Menu from "@spectrum-icons/workflow/ShowMenu"
 import { ActionButton } from "@react-spectrum/button"
 import { Content } from "@react-spectrum/view"
 import { Dialog, DialogTrigger } from "@react-spectrum/dialog"
@@ -80,18 +80,7 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
               isOpen={isPopoverOpen}
               onOpenChange={setPopoverOpen}
             >
-              <ActionButton
-                block={false}
-                disabled={false}
-                element="button"
-                holdAffordance={false}
-                invalid={false}
-                label={null}
-                logic={false}
-                onClick={function noRefCheck() {}}
-                isQuiet
-                selected={false}
-              >
+              <ActionButton isQuiet aria-label="Menu button">
                 <Menu />
               </ActionButton>
               <Dialog>
@@ -104,7 +93,14 @@ const SiteNav = ({ gitRemote, forceMobile, currentPage, pages }) => {
                   >
                     <Title />
                   </Link>
-                  <SearchBar gitRemote={gitRemote} />
+                  <div
+                    css={css`
+                      padding-top: 24px;
+                      padding-bottom: 24px;
+                    `}
+                  >
+                    <SearchBar gitRemote={gitRemote} />
+                  </div>
                   <Nav data={pages} selected={currentPage} gitInfo={gitInfo} />
                 </Content>
               </Dialog>

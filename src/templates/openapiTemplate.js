@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core"
 import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
-import OpenApiLayout from "../components/openapilayout"
+import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
 import { Footer } from "@parliament/parliament-ui-components"
 
@@ -16,7 +16,7 @@ import {
 
 const OpenApiTemplate = ({ pageContext, location }) => {
   return (
-    <OpenApiLayout>
+    <DocLayout>
       <SEO title={pageContext.seo} />
       <OpenApiGrid>
         <OpenApiGridNav>
@@ -40,7 +40,7 @@ const OpenApiTemplate = ({ pageContext, location }) => {
           <Footer />
         </OpenApiGridFooter>
       </OpenApiGrid>
-    </OpenApiLayout>
+    </DocLayout>
   )
 }
 

@@ -83,7 +83,7 @@ module.exports = {
           },
           `gatsby-remark-embedder`,
           {
-            resolve: `@parliament/gatsby-remark-prismjs`,
+            resolve: `gatsby-remark-prismjs`,
             options: {
               // Class prefix for <pre> tags containing syntax highlighting;
               // defaults to 'language-' (eg <pre class="language-js">).

@@ -1,0 +1,34 @@
+.spectrum-Site-sideBar.is-open {
+  transform: translateX(100%);
+}
+
+.spectrum-Site-sideBar {
+  right: 100%;
+}
+
+.spectrum-Site-sideBar {
+  background-color: var(--spectrum-global-color-gray-75);
+}
+
+.spectrum-Site-sideBar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  transform: translateX(0);
+  transition: transform var(--spectrum-global-animation-duration-200, 160ms)
+    ease-in-out;
+}
+
+.spectrum-Site-sideBar {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  max-width: 100%;
+  transition: none;
+}

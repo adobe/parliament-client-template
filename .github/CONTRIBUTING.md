@@ -84,3 +84,27 @@ Members can be added to the TC at any time. Any committer can nominate another c
 to the TC and the TC uses its standard consensus seeking process to evaluate whether or
 not to add this new member. Members who do not participate consistently at the level of
 a majority of the other members are expected to resign.
+
+## Code Of Conduct
+
+This project adheres to the Adobe [code of conduct](../CODE_OF_CONDUCT.md). By participating,
+you are expected to uphold this code. Please report unacceptable behavior to
+[Grp-opensourceoffice@adobe.com](mailto:Grp-opensourceoffice@adobe.com).
+
+## Have A Question?
+
+Start by filing an issue. The existing committers on this project work to reach
+consensus around project direction and issue solutions within issue threads
+(when appropriate).
+
+## Contributor License Agreement
+
+All third-party contributions to this project must be accompanied by a signed contributor
+license agreement. This gives Adobe permission to redistribute your contributions
+as part of the project. [Sign our CLA](https://opensource.adobe.com/cla.html). You
+only need to submit an Adobe CLA one time, so if you have submitted one previously,
+you are good to go!
+
+## Security Issues
+
+Security issues shouldn't be reported on this issue tracker. Instead, [file an issue to our security experts](https://helpx.adobe.com/security/alertus.html).

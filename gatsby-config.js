@@ -155,7 +155,7 @@ module.exports = {
               },
             },
           },
-          `@parliament/gatsby-remark-afm`,
+          `@adobe/gatsby-remark-afm`,
         ],
       },
     },

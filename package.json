@@ -5,11 +5,11 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@adobe/gatsby-remark-afm": "^0.4.1",
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
     "@mdx-js/mdx": "^1.4.0",
     "@mdx-js/react": "^1.4.0",
-    "@parliament/gatsby-remark-afm": "^0.4.0",
     "@parliament/parliament-ui-components": "^1.0.4",
     "@react-spectrum/provider": "^3.0.0",
     "@react-spectrum/searchfield": "^3.0.0",

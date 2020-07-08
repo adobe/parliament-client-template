@@ -32,7 +32,7 @@ const DocLayout = ({ children }) => {
   )
 
   return (
-    <Provider theme={theme} colorScheme="light">
+    <Provider theme={theme} colorScheme="light" scale="medium">
       <main>{children}</main>
     </Provider>
   )

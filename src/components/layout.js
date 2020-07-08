@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
   )
 
   return (
-    <Provider theme={theme} colorScheme="light">
+    <Provider theme={theme} colorScheme="light" scale="medium">
       <Header siteTitle={data.site.siteMetadata.title} />
       <div
         css={css`

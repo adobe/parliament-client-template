@@ -12,19 +12,49 @@
 
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
-import { SearchField } from "@react-spectrum/searchfield"
-import Magnifier from "@spectrum-icons/workflow/Magnify"
+import { useState } from "react"
+
+import "@spectrum-css/icon"
+import "@spectrum-css/search"
+import "@spectrum-css/textfield"
+import "@spectrum-css/vars"
 
 const SearchBar = props => {
   const gitRemote = props.gitRemote
-  const searchUrl = `${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/search?q=`
+  const [searchTerm, setSearchTerm] = useState("")
+  const [searchUrl] = useState(
+    `${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/search?q=`
+  )
+
   return (
-    <SearchField
-      aria-label="Search"
-      icon={<Magnifier />}
-      placeholder="Enter text"
-      onSubmit={e => (document.location.href = `${searchUrl}${e}`)}
-    />
+    <form
+      className="spectrum-Search"
+      onSubmit={e => {
+        e.preventDefault()
+        document.location.href = `${searchUrl}${searchTerm}`
+      }}
+    >
+      <div className="spectrum-Textfield">
+        <svg
+          viewBox="0 0 36 36"
+          className="spectrum-Icon spectrum-Textfield-icon"
+          focusable="false"
+          aria-hidden="true"
+          role="img"
+        >
+          <path d="M33.173 30.215L25.4 22.443a12.826 12.826 0 1 0-2.957 2.957l7.772 7.772a2.1 2.1 0 0 0 2.958-2.958zM6 15a9 9 0 1 1 9 9 9 9 0 0 1-9-9z"></path>
+        </svg>
+        <input
+          type="search"
+          placeholder="Search"
+          name="search"
+          value={searchTerm}
+          className="spectrum-Textfield-input spectrum-Search-input"
+          autocomplete="off"
+          onChange={e => setSearchTerm(e.target.value)}
+        />
+      </div>
+    </form>
   )
 }
 

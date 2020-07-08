@@ -99,9 +99,6 @@ sup {
 img {
   border-style: none;
 }
-svg:not(:root) {
-  overflow: hidden;
-}
 code,
 kbd,
 pre,
@@ -426,7 +423,7 @@ form {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0;
 }
 noscript {
   margin-left: 0;
@@ -603,4 +600,7 @@ span.toc * {
 .react-spectrum-SideNav,
 .spectrum-Search-input {
   width: 208px !important;
+}
+.spectrum-Textfield-icon {
+  top: 9px !important;
 }

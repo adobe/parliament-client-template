@@ -12,7 +12,6 @@
     "@mdx-js/react": "^1.4.0",
     "@parliament/parliament-ui-components": "^1.0.4",
     "@react-spectrum/provider": "^3.0.0",
-    "@react-spectrum/searchfield": "^3.0.0",
     "@react-spectrum/text": "^3.0.0",
     "@react-spectrum/theme-default": "^3.0.0",
     "@spectrum-css/icon": "^2.1.1",

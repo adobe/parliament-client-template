@@ -587,6 +587,11 @@ span.toc * {
   text-overflow: ellipsis;
 }
 
+#contentMain,
+#rightRail {
+  background: white;
+}
+
 #contentMain a,
 #rightRail a {
   color: rgb(13, 102, 208);

@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import React from "react"
 import { css, jsx } from "@emotion/core"
-import { TableOfContents } from "@parliament/parliament-ui-components"
+import { TableOfContents } from "@adobe/parliament-ui-components"
 
 const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
   return (

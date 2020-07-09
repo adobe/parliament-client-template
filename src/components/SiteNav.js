@@ -14,7 +14,7 @@
 import { css, jsx } from "@emotion/core"
 import { useEffect, useRef, useState, Fragment } from "react"
 import PropTypes from "prop-types"
-import { ActionButton } from "@parliament/parliament-ui-components"
+import { ActionButton } from "@adobe/parliament-ui-components"
 
 import Menu from "@spectrum-icons/workflow/ShowMenu"
 

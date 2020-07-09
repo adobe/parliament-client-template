@@ -25,7 +25,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Provider } from "@react-spectrum/provider"
 import { theme } from "@react-spectrum/theme-default"
 
-import { Header, Footer } from "@parliament/parliament-ui-components"
+import { Header, Footer } from "@adobe/parliament-ui-components"
 import useLaunchScript from "./useLaunchScript"
 import "./layout.css"
 

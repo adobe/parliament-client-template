@@ -14,7 +14,7 @@
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import { Nav } from "@parliament/parliament-ui-components"
+import { Nav } from "@adobe/parliament-ui-components"
 
 import Title from "./Title"
 import SearchBar from "./SearchBar"

@@ -21,7 +21,7 @@ import {
   TD,
   THead,
   TR,
-} from "@parliament/parliament-ui-components"
+} from "@adobe/parliament-ui-components"
 // import { TabView, Tab } from "@react/react-spectrum/TabView"
 // import { TabView, Tab } from "../components/Tabs"
 import IncludeMarkdown from "../components/IncludeMarkdown"

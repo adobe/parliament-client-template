@@ -14,7 +14,7 @@
 import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
-import { Footer } from "@parliament/parliament-ui-components"
+import { Footer } from "@adobe/parliament-ui-components"
 import PageActions from "../components/PageActions"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
@@ -27,7 +27,7 @@ import {
   GridContentInner,
   GridFooter,
   ActionButtons,
-} from "@parliament/parliament-ui-components"
+} from "@adobe/parliament-ui-components"
 
 const MarkdownTemplate = props => {
   const { file } = props.data

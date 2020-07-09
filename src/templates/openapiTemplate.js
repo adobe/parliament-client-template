@@ -17,14 +17,14 @@ import { RedocStandalone } from "redoc"
 import SiteNav from "../components/SiteNav"
 import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
-import { Footer } from "@parliament/parliament-ui-components"
+import { Footer } from "@adobe/parliament-ui-components"
 
 import {
   OpenApiGrid,
   OpenApiGridContent,
   OpenApiGridNav,
   OpenApiGridFooter,
-} from "@parliament/parliament-ui-components"
+} from "@adobe/parliament-ui-components"
 
 const OpenApiTemplate = ({ pageContext, location }) => {
   return (

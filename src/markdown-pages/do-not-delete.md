@@ -11,9 +11,38 @@ template: "markdown"
 >
 > For some reason we need at least one [markdown](https://example.com) file in the markdown-pages directory in order for the build to succeed
 
+This is some `inline code block` to see if the css works
+
+```html
+<code class="spectrum-Code spectrum-Code--XL"
+  >CodeXL Text <strong>Strong</strong> <em>Emphasis</em>
+</code>
+<code class="spectrum-Code spectrum-Code--L"
+  >CodeL Text <strong>Strong</strong> <em>Emphasis</em>
+</code>
+<code class="spectrum-Code spectrum-Code--M"
+  >CodeM Text <strong>Strong</strong> <em>Emphasis</em>
+</code>
+<code class="spectrum-Code spectrum-Code--S"
+  >CodeS Text <strong>Strong</strong> <em>Emphasis</em>
+</code>
+<code class="spectrum-Code spectrum-Code--XS" aria="true"
+  >CodeXS Text <strong>Strong</strong> <em>Emphasis</em>
+</code>
+<pre><code class="spectrum-Code spectrum-Code--M">CodeM text
+wrapped in
+pre tags for
+multiline
+</code></pre>
+```
+
 ```javascript {tabGroup: test}{tabName: JS}
+// comment
+/*
+ * comment
+ */
 async function simonExploreRootDirectory(access_token) {
-  const requestOptions = {
+  http: const requestOptions = {
     method: "PUT",
     headers: {
       "Cache-Control": "no-cache",

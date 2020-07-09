@@ -17,5 +17,5 @@
  */
 
 // You can delete this file if you're not using it
-require("prismjs/themes/prism-coy.css")
+require("@adobe/prism-adobe/themes/prism-adobe.css")
 require("prismjs/plugins/line-numbers/prism-line-numbers.css")

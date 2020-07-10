@@ -45,6 +45,7 @@ const SearchBar = props => {
           <path d="M33.173 30.215L25.4 22.443a12.826 12.826 0 1 0-2.957 2.957l7.772 7.772a2.1 2.1 0 0 0 2.958-2.958zM6 15a9 9 0 1 1 9 9 9 9 0 0 1-9-9z"></path>
         </svg>
         <input
+          aria-label="search"
           type="search"
           placeholder="Search"
           name="search"

@@ -585,3 +585,24 @@ span.toc * {
       ) + var(--spectrum-global-dimension-size-65)
   ) !important;
 }
+
+.spectrum-ActionButton span {
+  padding-left: var(
+    --spectrum-actionbutton-icon-padding-x,
+    var(--spectrum-global-dimension-size-85)
+  );
+  padding-right: calc(
+    var(
+        --spectrum-actionbutton-text-padding-x,
+        var(--spectrum-global-dimension-size-150)
+      ) -
+      var(
+        --spectrum-actionbutton-icon-padding-x,
+        var(--spectrum-global-dimension-size-85)
+      )
+  );
+}
+
+.parliament-ActionButtons {
+  margin-right: 8px;
+}

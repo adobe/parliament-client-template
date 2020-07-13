@@ -15,6 +15,8 @@ import rehypeReact from "rehype-react"
 
 import {
   Alert,
+  List,
+  Paragraph,
   Table,
   TBody,
   TH,
@@ -39,6 +41,8 @@ const renderAst = new rehypeReact({
     spectrumtd: TD,
     spectrumthead: THead,
     spectrumtr: TR,
+    p: Paragraph,
+    ul: List,
   },
 }).Compiler
 

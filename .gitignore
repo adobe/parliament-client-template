@@ -73,3 +73,6 @@ yarn-error.log
 .env.development
 .env.production
 cypress.env.json
+
+# External content directory for local dev
+src/content/

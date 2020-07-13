@@ -28,6 +28,7 @@
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
+   LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    ```
 
    For Jenkins:
@@ -42,19 +43,34 @@
    GATSBY_SOURCE_TITLE=My Docs Site
    ```
 
-1. **Start developing.**
+1. **Clean environment**
+
+   If you have previously built a production site or switching to a new local project, run this command to remove the `.cache` and `src/content` directories.
 
    ```sh
-   gatsby develop
+   npm run clean
    ```
 
-1. **Open the source code and start editing!**
+2. **Start developing/authoring**
+
+   Start a local instance of this project using the following command:
+
+   ```sh
+   npm run develop
+   ```
+
+   This will create symlinks to the local doc project you specified in your `.env.development` file.
+   These files are located in `src/content`.
+
+3. **Open the source code and start editing!**
 
    Your site is now running at `http://localhost:8000`!
 
    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
 
    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+
+   You can also, edit the linked files under `src/content` and the site will re-generate the content when you save your changes.
 
 ## ✅ Testing
 

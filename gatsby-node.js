@@ -26,6 +26,8 @@ const YAML = require("yaml")
 const openApiSnippet = require(`openapi-snippet`)
 const GitUrlParse = require(`git-url-parse`)
 
+const environment = process.env.NODE_ENV || "development"
+
 const stripManifestPath = (path, { org = "", name = "", branch = "" } = {}) => {
   if (!path) {
     return ""
@@ -113,6 +115,7 @@ const readManifest = async graphql => {
     console.log(e)
     console.log("Could not read the manifest")
   }
+
   return pages
 }
 
@@ -146,12 +149,30 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
     let slug = ""
-    if (node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") > -1) {
-      slug = node.fileAbsolutePath.substring(
-        node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") + 18
-      )
-    } else if (node.frontmatter.path) {
-      slug = node.frontmatter.path
+    switch (environment) {
+      case "production":
+        if (node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") > -1) {
+          slug = node.fileAbsolutePath.substring(
+            node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") + 18
+          )
+        } else if (node.frontmatter.path) {
+          slug = node.frontmatter.path
+        }
+        break
+      case "development":
+        const localFilePath = path.relative(__dirname, node.fileAbsolutePath)
+        const directories = localFilePath.split(path.sep)
+
+        // Remove src/content prefix from slug
+        if (localFilePath.startsWith("src/content")) {
+          // Remove src
+          directories.shift()
+          // Remove content
+          directories.shift()
+        }
+
+        slug = path.join("/", ...directories)
+        break
     }
 
     createNodeField({

@@ -553,3 +553,42 @@ span.toc * {
 .spectrum-Textfield-icon {
   top: 9px !important;
 }
+
+.spectrum-Textfield svg {
+  display: block;
+  position: absolute;
+  height: var(
+    --spectrum-alias-workflow-icon-size,
+    var(--spectrum-global-dimension-size-225)
+  );
+  width: var(
+    --spectrum-alias-workflow-icon-size,
+    var(--spectrum-global-dimension-size-225)
+  );
+  top: calc(
+    var(--spectrum-textfield-height, var(--spectrum-alias-single-line-height)) /
+      2 -
+      var(
+        --spectrum-alias-workflow-icon-size,
+        var(--spectrum-global-dimension-size-225)
+      ) / 2
+  );
+  left: var(
+    --spectrum-textfield-icon-margin-left,
+    var(--spectrum-global-dimension-size-150)
+  );
+}
+
+.spectrum-Textfield .spectrum-Textfield-input,
+.spectrum-Textfield .spectrum-Textfield--quiet .spectrum-Textfield-input {
+  padding-left: calc(
+    var(
+        --spectrum-textfield-icon-margin-left,
+        var(--spectrum-global-dimension-size-150)
+      ) +
+      var(
+        --spectrum-alias-workflow-icon-size,
+        var(--spectrum-global-dimension-size-225)
+      ) + var(--spectrum-global-dimension-size-65)
+  ) !important;
+}

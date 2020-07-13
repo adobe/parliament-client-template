@@ -11,13 +11,13 @@
  */
 
 /** @jsx jsx */
+import { useState } from "react"
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import { Nav } from "@adobe/parliament-ui-components"
+import { Nav, SearchField } from "@adobe/parliament-ui-components"
 
 import Title from "./Title"
-import SearchBar from "./SearchBar"
 
 import "./sitenav.css"
 
@@ -27,6 +27,9 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
     name: gitRemote.name,
     branch: gitRemote.ref,
   }
+  const [searchUrl] = useState(
+    `${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/search?q=`
+  )
 
   return (
     <div
@@ -53,7 +56,11 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
             margin-top: 24px;
           `}
         >
-          <SearchBar gitRemote={gitRemote} />
+          <SearchField
+            onSubmit={searchTerm => {
+              document.location.href = `${searchUrl}${searchTerm}`
+            }}
+          />
         </div>
       </div>
       <div

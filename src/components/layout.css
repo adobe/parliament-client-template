@@ -565,14 +565,7 @@ span.toc * {
     --spectrum-alias-workflow-icon-size,
     var(--spectrum-global-dimension-size-225)
   );
-  top: calc(
-    var(--spectrum-textfield-height, var(--spectrum-alias-single-line-height)) /
-      2 -
-      var(
-        --spectrum-alias-workflow-icon-size,
-        var(--spectrum-global-dimension-size-225)
-      ) / 2
-  );
+  top: 8px;
   left: var(
     --spectrum-textfield-icon-margin-left,
     var(--spectrum-global-dimension-size-150)

@@ -271,14 +271,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     `)
     if (jsonData.allFile.edges.length > 0) {
       jsonData.allFile.edges.forEach(({ node }) => {
-        let path = node.absolutePath
-        const object = JSON.parse(fs.readFileSync(path, "utf8"))
+        let filepath = node.absolutePath
+        const object = JSON.parse(fs.readFileSync(filepath, "utf8"))
         let seo = searchTree(pages, `${node.name}${node.ext}`)
         createOpenApiPage(
           createPage,
           openapiTemplate,
           object,
-          path,
+          filepath,
           seo,
           gitRemote,
           pages
@@ -365,14 +365,34 @@ const createOpenApiPage = (
   createPage,
   openapiTemplate,
   object,
-  path,
+  filepath,
   seo,
   gitRemote,
   pages
 ) => {
   if (object.swagger) {
-    if (path.lastIndexOf("gatsby-source-git/") > -1) {
-      path = path.substring(path.lastIndexOf("gatsby-source-git/") + 18)
+    let slug = filepath
+
+    switch (environment) {
+      case "production":
+        if (filepath.lastIndexOf("gatsby-source-git/") > -1) {
+          slug = path.substring(filepath.lastIndexOf("gatsby-source-git/") + 18)
+        }
+        break
+      case "development":
+        const localFilePath = path.relative(__dirname, filepath)
+        const directories = localFilePath.split(path.sep)
+
+        // Remove src/content prefix from slug
+        if (localFilePath.startsWith("src/content")) {
+          // Remove src
+          directories.shift()
+          // Remove content
+          directories.shift()
+        }
+
+        slug = path.join("/", ...directories)
+        break
     }
     try {
       const targets = [
@@ -410,7 +430,7 @@ const createOpenApiPage = (
     }
 
     createPage({
-      path: path,
+      path: slug,
       component: openapiTemplate,
       context: {
         spec: object,

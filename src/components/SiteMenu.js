@@ -11,7 +11,6 @@
  */
 
 /** @jsx jsx */
-import { useState } from "react"
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
@@ -27,9 +26,6 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
     name: gitRemote.name,
     branch: gitRemote.ref,
   }
-  const [searchUrl] = useState(
-    `${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/search?q=`
-  )
 
   return (
     <div
@@ -58,7 +54,7 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
         >
           <SearchField
             onSubmit={searchTerm => {
-              document.location.href = `${searchUrl}${searchTerm}`
+              document.location.href = `${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/search?q=${searchTerm}`
             }}
           />
         </div>

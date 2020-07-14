@@ -376,7 +376,7 @@ const createOpenApiPage = (
     switch (environment) {
       case "production":
         if (filepath.lastIndexOf("gatsby-source-git/") > -1) {
-          slug = path.substring(filepath.lastIndexOf("gatsby-source-git/") + 18)
+          slug = filepath.substring(filepath.lastIndexOf("gatsby-source-git/") + 18)
         }
         break
       case "development":

@@ -65,11 +65,13 @@ const SiteNav = props => {
             `}
           >
             <ActionButton
-              icon={<Menu size="S" />}
-              onClick={() => {
+              isQuiet
+              onPress={() => {
                 setPopoverOpen(!isPopoverOpen)
               }}
-            ></ActionButton>
+            >
+              <Menu size="S" />
+            </ActionButton>
             <Title isMobile={isMobile} forceMobile={forceMobile} />
           </div>
           <div

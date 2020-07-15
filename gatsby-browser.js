@@ -19,3 +19,4 @@
 // You can delete this file if you're not using it
 require("@adobe/prism-adobe/themes/prism-adobe.css")
 require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+require("@adobe/parliament-ui-components/dist/index.css")

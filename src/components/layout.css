@@ -546,63 +546,14 @@ span.toc * {
   text-decoration: underline;
 }
 
+.spectrum-Body--M {
+  margin-bottom: 1.45rem !important;
+}
+
 .react-spectrum-SideNav,
 .spectrum-Search-input {
   width: 208px !important;
 }
 .spectrum-Textfield-icon {
   top: 9px !important;
-}
-
-.spectrum-Textfield svg {
-  display: block;
-  position: absolute;
-  height: var(
-    --spectrum-alias-workflow-icon-size,
-    var(--spectrum-global-dimension-size-225)
-  );
-  width: var(
-    --spectrum-alias-workflow-icon-size,
-    var(--spectrum-global-dimension-size-225)
-  );
-  top: 8px;
-  left: var(
-    --spectrum-textfield-icon-margin-left,
-    var(--spectrum-global-dimension-size-150)
-  );
-}
-
-.spectrum-Textfield .spectrum-Textfield-input,
-.spectrum-Textfield .spectrum-Textfield--quiet .spectrum-Textfield-input {
-  padding-left: calc(
-    var(
-        --spectrum-textfield-icon-margin-left,
-        var(--spectrum-global-dimension-size-150)
-      ) +
-      var(
-        --spectrum-alias-workflow-icon-size,
-        var(--spectrum-global-dimension-size-225)
-      ) + var(--spectrum-global-dimension-size-65)
-  ) !important;
-}
-
-.spectrum-ActionButton span {
-  padding-left: var(
-    --spectrum-actionbutton-icon-padding-x,
-    var(--spectrum-global-dimension-size-85)
-  );
-  padding-right: calc(
-    var(
-        --spectrum-actionbutton-text-padding-x,
-        var(--spectrum-global-dimension-size-150)
-      ) -
-      var(
-        --spectrum-actionbutton-icon-padding-x,
-        var(--spectrum-global-dimension-size-85)
-      )
-  );
-}
-
-.parliament-ActionButtons {
-  margin-right: 8px;
 }

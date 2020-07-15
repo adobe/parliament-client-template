@@ -22,8 +22,7 @@ import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { Provider } from "@react-spectrum/provider"
-import { theme } from "@react-spectrum/theme-default"
+import { defaultTheme, Provider } from "@adobe/react-spectrum"
 
 import { Header, Footer } from "@adobe/parliament-ui-components"
 import useLaunchScript from "./useLaunchScript"
@@ -45,7 +44,7 @@ const Layout = ({ children }) => {
   )
 
   return (
-    <Provider theme={theme} colorScheme="light" scale="medium">
+    <Provider theme={defaultTheme} colorScheme="light" scale="medium">
       <Header siteTitle={data.site.siteMetadata.title} />
       <div
         css={css`

@@ -19,10 +19,10 @@ import {
   Paragraph,
   Table,
   TBody,
-  TH,
-  TD,
+  Th,
+  Td,
   THead,
-  TR,
+  Tr,
 } from "@adobe/parliament-ui-components"
 // import { TabView, Tab } from "@react/react-spectrum/TabView"
 // import { TabView, Tab } from "../components/Tabs"
@@ -37,10 +37,10 @@ const renderAst = new rehypeReact({
     // tabview: TabView,
     table: Table,
     tbody: TBody,
-    th: TH,
-    td: TD,
+    th: Th,
+    td: Td,
     thead: THead,
-    tr: TR,
+    tr: Tr,
     p: Paragraph,
     ul: List,
   },

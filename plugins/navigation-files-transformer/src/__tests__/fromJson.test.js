@@ -41,3 +41,16 @@ test("manifest-docs.json content", () => {
 
     expect(parsedContent).toMatchSnapshot();
 })
+
+test("Valid json but not a navigation file", () => {
+    const fileContent = `
+{
+    "name": "Yaml file",
+    "id": "112358",
+    "message": "Hello World"
+}    
+`
+    const parsedContent = fromJson(fileContent);
+
+    expect(parsedContent).toBeUndefined();
+})

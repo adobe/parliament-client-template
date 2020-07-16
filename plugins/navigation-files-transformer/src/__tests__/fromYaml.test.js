@@ -30,3 +30,14 @@ pages:
 
   expect(parsedContent).toMatchSnapshot()
 })
+
+test("Valid yaml but not navigation file", () => {
+    const fileContent = `
+name: Yaml file
+id: 112358
+message: Hello World
+`
+    const parsedContent = fromYaml(fileContent)
+
+    expect(parsedContent).toBeUndefined();
+})

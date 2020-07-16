@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Magento devdocs navigation format 1`] = `
+Object {
+  "order": 1,
+  "pages": Array [
+    Object {
+      "pages": Array [],
+      "path": "/",
+      "title": "Home",
+    },
+    Object {
+      "pages": Array [
+        Object {
+          "pages": Array [
+            Object {
+              "pages": Array [],
+              "path": "/nested/page/",
+              "title": "Nest a page",
+            },
+          ],
+          "path": "/example/",
+          "title": "Example",
+        },
+      ],
+      "path": "/page-2/",
+      "title": "Page 2",
+    },
+    Object {
+      "pages": Array [],
+      "path": "/diagrams/",
+      "title": "Diagrams",
+    },
+    Object {
+      "pages": Array [],
+      "path": "/hello/",
+      "title": "Hello World",
+    },
+  ],
+  "path": "/",
+  "section": "section-1",
+  "title": "About",
+}
+`;

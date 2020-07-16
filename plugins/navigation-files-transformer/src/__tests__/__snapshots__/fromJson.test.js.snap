@@ -2,6 +2,8 @@
 
 exports[`manifest-docs.json content 1`] = `
 Object {
+  "homePage": "DevRel/parliament-docs/master/README.md",
+  "order": 0,
   "pages": Array [
     Object {
       "pages": Array [

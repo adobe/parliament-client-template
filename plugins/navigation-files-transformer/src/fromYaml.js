@@ -49,7 +49,7 @@ const fromYaml = content => {
   return {
     section: name,
     title: title,
-    path: url,
+    homePage: url,
     order: order,
     pages: convertPages(pages),
   }

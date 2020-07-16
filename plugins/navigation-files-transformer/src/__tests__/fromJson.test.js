@@ -54,3 +54,43 @@ test("Valid json but not a navigation file", () => {
 
     expect(parsedContent).toBeUndefined();
 })
+
+test("search for a homepage is breadth first", ()=>{
+  const fileContent = `
+{
+  "name": "Parliament Site",
+  "view_type": "mdbook",
+  "pages": [
+    {
+      "pages": [
+        {
+          "pages": [],
+          "path": "DevRel/parliament-docs/master/onboarding.md",
+          "title": "Onboarding"
+        }
+      ],
+      "title": "Overview"
+    },
+    {
+      "pages": [
+      ],
+      "title": "Contributing"
+    },
+    {
+        "pages": [
+            {
+                "pages": [],
+                "path": "not/the/target.md",
+                "title": "Not the target"
+            }
+        ],
+        "path": "target/path.md",
+        "title": "Target"
+    }
+  ]
+}
+`
+    const parsedContent = fromJson(fileContent);
+
+    expect(parsedContent.homePage).toBe('target/path.md');
+})

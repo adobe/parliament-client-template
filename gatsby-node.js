@@ -370,7 +370,7 @@ const createOpenApiPage = (
   gitRemote,
   pages
 ) => {
-  if (object.swagger) {
+  if (object.swagger || object.openapi) {
     let slug = filepath
 
     switch (environment) {

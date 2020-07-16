@@ -12,7 +12,7 @@
 
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { Heading } from "@adobe/react-spectrum"
+import { Heading } from "@react-spectrum/text"
 import Logo from "../images/adobe_logo-2.svg"
 
 const Title = ({ siteTitle, isMobile, forceMobile }) => {

@@ -6,6 +6,8 @@ export const onRenderBody = ({ setHeadComponents }, pluginOptions) => {
     pluginOptions.includeInDevelopment
   ) {
     const scriptUrl = pluginOptions.scriptUrl || ""
-    setHeadComponents([<script key="launch" src={scriptUrl} async />])
+    if (scriptUrl) {
+      setHeadComponents([<script key="launch" src={scriptUrl} async />])
+    }
   }
 }

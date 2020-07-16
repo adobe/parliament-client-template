@@ -159,5 +159,9 @@ module.exports = {
       },
     },
     `gatsby-plugin-mdx`,
+    {
+      resolve: `navigation-files-transformer`,
+      options: {}
+    }
   ],
 }

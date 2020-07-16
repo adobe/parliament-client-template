@@ -16,6 +16,13 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: "add-launch-script",
+      options: {
+        scriptUrl: `${process.env.GATSBY_LAUNCH_SRC}`,
+        includeInDevelopment: false,
+      },
+    },
+    {
       resolve: `gatsby-plugin-emotion`,
       options: {},
     },

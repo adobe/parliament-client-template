@@ -28,6 +28,7 @@
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
+   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js  // url for your analytics script
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    ```
 
@@ -41,6 +42,7 @@
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
+   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js  // url for your analytics script
    ```
 
 1. **Clean environment**
@@ -51,7 +53,7 @@
    npm run clean
    ```
 
-2. **Start developing/authoring**
+1. **Start developing/authoring**
 
    Start a local instance of this project using the following command:
 
@@ -62,7 +64,7 @@
    This will create symlinks to the local doc project you specified in your `.env.development` file.
    These files are located in `src/content`.
 
-3. **Open the source code and start editing!**
+1. **Open the source code and start editing!**
 
    Your site is now running at `http://localhost:8000`!
 

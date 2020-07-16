@@ -21,15 +21,10 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { defaultTheme, Provider } from "@adobe/react-spectrum"
-import useLaunchScript from "./useLaunchScript"
 
 import "./layout.css"
 
 const DocLayout = ({ children }) => {
-  useLaunchScript(
-    "//assets.adobedtm.com/00dcc6d24e46/e61b3825fe76/launch-3cd4277d5923.min.js"
-  )
-
   return (
     <Provider theme={defaultTheme} colorScheme="light" scale="medium">
       <main>{children}</main>

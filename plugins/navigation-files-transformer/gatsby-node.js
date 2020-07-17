@@ -1,6 +1,4 @@
 const fromJson = require("./src/fromJson")
-const { parse } = require("yaml")
-const fromJason = require("./src/fromJson")
 const fromYaml = require("./src/fromYaml")
 
 /**
@@ -33,7 +31,7 @@ const onCreateNode = async (api, options) => {
 
   switch (mediaType) {
     case "application/json":
-      parsedContent = fromJason(content)
+      parsedContent = fromJson(content)
       break
     case "text/yaml":
       parsedContent = fromYaml(content)

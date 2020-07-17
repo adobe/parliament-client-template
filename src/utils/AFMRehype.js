@@ -15,6 +15,12 @@ import rehypeReact from "rehype-react"
 
 import {
   Alert,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
   List,
   Paragraph,
   Table,
@@ -32,6 +38,12 @@ const renderAst = new rehypeReact({
   createElement: createElement,
   components: {
     alert: Alert,
+    h1: Heading1,
+    h2: Heading2,
+    h3: Heading3,
+    h4: Heading4,
+    h5: Heading5,
+    h6: Heading6,
     includemarkdown: IncludeMarkdown,
     // tab: Tab,
     // tabview: TabView,

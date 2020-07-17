@@ -557,3 +557,17 @@ span.toc * {
 .spectrum-Textfield-icon {
   top: 9px !important;
 }
+
+.spectrum-Heading a {
+  visibility: visible;
+  text-decoration: none !important;
+}
+
+.spectrum-Heading a.spectrum-Link,
+.spectrum-Heading:hover a.spectrum-Link {
+  visibility: hidden;
+}
+
+.spectrum-Textfield svg {
+  top: 7px !important;
+}

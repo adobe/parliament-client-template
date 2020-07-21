@@ -38,20 +38,25 @@ const convertPages = pages => {
  * @return {Object} The main data for a GraphQL node object
  */
 const fromYaml = content => {
-  const object = yamlParser.parse(content)
+  try {
+    const object = yamlParser.parse(content)
 
-  if (object === null || object.type !== "navigation") {
+    if (object === null || object.type !== "navigation") {
+      return
+    }
+
+    const { order, title, name, url, pages } = object
+
+    return {
+      section: name,
+      title: title,
+      homePage: url,
+      order: order,
+      pages: convertPages(pages),
+    }
+  } catch (error) {
+    //We should probably do something with the error
     return
-  }
-
-  const { order, title, name, url, pages } = object
-
-  return {
-    section: name,
-    title: title,
-    homePage: url,
-    order: order,
-    pages: convertPages(pages),
   }
 }
 

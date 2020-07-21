@@ -9,17 +9,19 @@
  * @returns {Object[]} A converted array
  */
 const convertPages = pages => {
-  if (pages) {
-    const convertedPages = pages.map(page => {
-      return {
-        title: page.title,
-        path: page.path,
-        pages: convertPages(page.pages),
-      }
-    })
-
-    return convertedPages
+  if (pages === undefined) {
+    return []
   }
+
+  const convertedPages = pages.map(page => {
+    return {
+      title: page.title,
+      path: page.path,
+      pages: convertPages(page.pages),
+    }
+  })
+
+  return convertedPages
 }
 
 /**

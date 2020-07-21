@@ -55,26 +55,31 @@ const getHomePage = pages => {
  * @return {Object} The main data for a GraphQL node object
  */
 const fromJson = content => {
-  if (content === '') return
+  if (content === "") return
 
-  const object = JSON.parse(content)
+  try {
+    const object = JSON.parse(content)
 
-  if (object.view_type !== "mdbook") {
+    if (object.view_type !== "mdbook") {
+      return
+    }
+
+    const { name, pages } = object
+
+    const convertedPages = convertPages(pages)
+
+    const homePage = getHomePage(convertedPages)
+
+    return {
+      section: name,
+      title: name,
+      order: 0,
+      pages: convertedPages,
+      homePage: homePage,
+    }
+  } catch (error) {
+    // We should probably do something with this error
     return
-  }
-
-  const { name, pages } = object
-
-  const convertedPages = convertPages(pages)
-
-  const homePage = getHomePage(convertedPages)
-
-  return {
-    section: name,
-    title: name,
-    order: 0,
-    pages: convertedPages,
-    homePage: homePage,
   }
 }
 

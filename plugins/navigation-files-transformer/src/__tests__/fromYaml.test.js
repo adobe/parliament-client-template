@@ -48,3 +48,18 @@ test("Empty file content", () => {
 
   expect(parsedContent).toBeUndefined()
 })
+
+test("Multiple docs", () => {
+  const fileContent = `
+---
+name: Document 1
+id: 12345
+...
+---
+name: Document 2
+id: 6789
+`
+  const parsedContent = fromYaml(fileContent)
+
+  expect(parsedContent).toBeUndefined()
+})

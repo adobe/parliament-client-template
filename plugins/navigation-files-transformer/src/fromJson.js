@@ -9,15 +9,17 @@
  * @returns {Object[]} A converted array
  */
 const convertPages = pages => {
-  const convertedPages = pages.map(page => {
-    return {
-      title: page.title,
-      path: page.path,
-      pages: convertPages(page.pages),
-    }
-  })
+  if (pages) {
+    const convertedPages = pages.map(page => {
+      return {
+        title: page.title,
+        path: page.path,
+        pages: convertPages(page.pages),
+      }
+    })
 
-  return convertedPages
+    return convertedPages
+  }
 }
 
 /**
@@ -25,7 +27,7 @@ const convertPages = pages => {
  * This search is breadth first.
  *
  * @param {Object[]} pages A nested list of page objects
- * 
+ *
  * @returns {String} The first defined path value encountered.
  */
 const getHomePage = pages => {

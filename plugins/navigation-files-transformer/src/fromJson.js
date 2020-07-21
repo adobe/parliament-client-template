@@ -55,6 +55,8 @@ const getHomePage = pages => {
  * @return {Object} The main data for a GraphQL node object
  */
 const fromJson = content => {
+  if (content === '') return
+
   const object = JSON.parse(content)
 
   if (object.view_type !== "mdbook") {

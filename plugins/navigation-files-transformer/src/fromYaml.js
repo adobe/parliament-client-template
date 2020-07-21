@@ -40,7 +40,7 @@ const convertPages = pages => {
 const fromYaml = content => {
   const object = yamlParser.parse(content)
 
-  if (object.type !== "navigation") {
+  if (object === null || object.type !== "navigation") {
     return
   }
 

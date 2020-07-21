@@ -32,12 +32,19 @@ pages:
 })
 
 test("Valid yaml but not navigation file", () => {
-    const fileContent = `
+  const fileContent = `
 name: Yaml file
 id: 112358
 message: Hello World
 `
-    const parsedContent = fromYaml(fileContent)
+  const parsedContent = fromYaml(fileContent)
 
-    expect(parsedContent).toBeUndefined();
+  expect(parsedContent).toBeUndefined()
+})
+
+test("Empty file content", () => {
+  const fileContent = ``
+  const parsedContent = fromYaml(fileContent)
+
+  expect(parsedContent).toBeUndefined()
 })

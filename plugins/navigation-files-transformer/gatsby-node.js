@@ -4,7 +4,7 @@ const fromYaml = require("./src/fromYaml")
 /**
  * Callback for creating graphql nodes from project navigation files.
  * This file runs when Gatsby creates GraphQL nodes from source nodes.
- * 
+ *
  * @param {Object} api The [Gatsby API]{@link https://www.gatsbyjs.org/docs/api-reference/} object
  * @param {Object} options Plugin options. There are currently none for this plugin.
  */
@@ -26,6 +26,8 @@ const onCreateNode = async (api, options) => {
   }
 
   const content = await loadNodeContent(node)
+
+  if (content === null || content === "") return
 
   let parsedContent = undefined
 

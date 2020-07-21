@@ -37,25 +37,33 @@ test("manifest-docs.json content", () => {
   ]
 }
 `
-    const parsedContent = fromJson(fileContent);
+  const parsedContent = fromJson(fileContent)
 
-    expect(parsedContent).toMatchSnapshot();
+  expect(parsedContent).toMatchSnapshot()
 })
 
 test("Valid json but not a navigation file", () => {
-    const fileContent = `
+  const fileContent = `
 {
     "name": "Yaml file",
     "id": "112358",
     "message": "Hello World"
 }    
 `
-    const parsedContent = fromJson(fileContent);
+  const parsedContent = fromJson(fileContent)
 
-    expect(parsedContent).toBeUndefined();
+  expect(parsedContent).toBeUndefined()
 })
 
-test("search for a homepage is breadth first", ()=>{
+test("empty json file content", () => {
+  const fileContent = ``
+
+  const parsedContent = fromJson(fileContent)
+
+  expect(parsedContent).toBeUndefined()
+})
+
+test("search for a homepage is breadth first", () => {
   const fileContent = `
 {
   "name": "Parliament Site",
@@ -90,7 +98,7 @@ test("search for a homepage is breadth first", ()=>{
   ]
 }
 `
-    const parsedContent = fromJson(fileContent);
+  const parsedContent = fromJson(fileContent)
 
-    expect(parsedContent.homePage).toBe('target/path.md');
+  expect(parsedContent.homePage).toBe("target/path.md")
 })

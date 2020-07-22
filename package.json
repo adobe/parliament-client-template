@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "@adobe/parliament-client-template",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A template for client projects of the developer documentation site",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Adobe",
   "dependencies": {
     "@adobe/gatsby-remark-afm": "^0.6.0",
     "@adobe/parliament-ui-components": "^1.5.2",
@@ -85,7 +85,7 @@
     "build": "gatsby build",
     "build:prod": "gatsby build --prefix-paths",
     "clean": "gatsby clean && rimraf src/content",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r git@git.corp.adobe.com:devrel/parliament-client-template.git",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r git@github.com:adobe/parliament-client-template.git",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
@@ -100,9 +100,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/adobe/parliament-client-template.git"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/adobe/parliament-client-template.git/issues"
   }
 }

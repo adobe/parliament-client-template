@@ -5,7 +5,7 @@
 1. **Clone this repo**
 
    ```sh
-   git clone git@git.corp.adobe.com:devrel/parliament-client-template.git
+   git clone git@github.com:adobe/parliament-client-template.git
    cd parliament-client-template
    ```
 
@@ -24,7 +24,7 @@
    ```
    GATSBY_SITE_PATH_PREFIX =
    GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
-   GATSBY_SOURCE = git.corp.adobe.com/<source_org>/<source_repo>.git //Repo URL in given format which you want to use to generate a microsite
+   GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git //Repo URL in given format which you want to use to generate a microsite
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
@@ -36,8 +36,8 @@
 
    ```
    GATSBY_GIT_CORP_TOKEN = credentials('TOKEN')
-   GATSBY_SOURCE = 'git.corp.adobe.com/<source_org>/<source_repo>.git' //Repo URL in given format which you want to use to generate a microsite
-   GATSBY_TARGET = 'git.corp.adobe.com/<target_org>/<target_repo>.git' // Repo URL in given format where you want to host the static html build output from Gatsby for Gihub Pages
+   GATSBY_SOURCE = 'github.com/<source_org>/<source_repo>.git' //Repo URL in given format which you want to use to generate a microsite
+   GATSBY_TARGET = 'github.com/<target_org>/<target_repo>.git' // Repo URL in given format where you want to host the static html build output from Gatsby for Gihub Pages
    GATSBY_SITE_PATH_PREFIX = '/pages/<target_org>/<target_repo>' // Path Prefix for link relationship to work
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*

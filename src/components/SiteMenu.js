@@ -12,15 +12,27 @@
 
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
+import { graphql } from "gatsby"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
-import { Nav, SearchField } from "@adobe/parliament-ui-components"
+import { Link, useStaticQuery } from "gatsby"
+import { Nav } from "@adobe/parliament-ui-components"
 
+import Search from "./Search"
 import Title from "./Title"
 
 import "./sitenav.css"
 
 const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
+  const { siteSearchIndex } = useStaticQuery(
+    graphql`
+      query {
+        siteSearchIndex {
+          index
+        }
+      }
+    `
+  )
+
   const gitInfo = {
     org: gitRemote.organization,
     name: gitRemote.name,
@@ -52,11 +64,7 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
             margin-top: 24px;
           `}
         >
-          <SearchField
-            onSubmit={searchTerm => {
-              document.location.href = `${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/search?q=${searchTerm}`
-            }}
-          />
+          <Search searchIndex={siteSearchIndex.index} gitRemote={gitRemote} />
         </div>
       </div>
       <div

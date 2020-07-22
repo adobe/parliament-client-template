@@ -163,5 +163,18 @@ module.exports = {
       resolve: `@adobe/parliament-transformer-navigation`,
       options: {},
     },
+    {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        // Fields to index
+        fields: [`html`],
+        resolvers: {
+          MarkdownRemark: {
+            html: node => node.internal.content,
+            path: node => node.fields.slug,
+          },
+        },
+      },
+    },
   ],
 }

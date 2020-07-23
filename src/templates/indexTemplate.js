@@ -12,8 +12,17 @@
 
 import { useEffect } from "react"
 import { navigate } from "gatsby"
+// import { stripManifestPath } from "@adobe/parliament-ui-components"
 
 const IndexTemplate = props => {
+  /*
+  const homePage = stripManifestPath(props.data.parliamentNavigation.homePage, {
+    org: props.pageContext.gitRemote.organization,
+    name: props.pageContext.gitRemote.name,
+    branch: props.pageContext.gitRemote.ref,
+  })
+  */
+
   useEffect(() => {
     navigate(props.pageContext.redirect, {
       replace: true,
@@ -21,5 +30,15 @@ const IndexTemplate = props => {
   })
   return null
 }
+
+/*
+export const query = graphql`
+  query HomePageQuery {
+    parliamentNavigation {
+      homePage
+    }
+  }
+`
+*/
 
 export default IndexTemplate

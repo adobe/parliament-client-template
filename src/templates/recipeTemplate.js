@@ -28,12 +28,12 @@ import {
   GridFooter,
 } from "@adobe/parliament-ui-components"
 
-const MarkdownTemplate = props => {
-  const { file } = props.data
+const MarkdownTemplate = ({ data, location, pageContext }) => {
+  const { file } = data
   const { childMarkdownRemark } = file
   const { htmlAst } = childMarkdownRemark
 
-  const { gitRemote, pages } = props.pageContext
+  const { gitRemote } = pageContext
 
   return (
     <DocLayout>
@@ -44,9 +44,9 @@ const MarkdownTemplate = props => {
       <Grid>
         <GridNav>
           <SiteNav
-            currentPage={props.location.pathname}
+            currentPage={location.pathname}
             gitRemote={gitRemote}
-            pages={pages}
+            pages={pageContext.pages}
           />
         </GridNav>
         <GridContent>
@@ -70,6 +70,9 @@ export const query = graphql`
       childMarkdownRemark {
         htmlAst
       }
+    }
+    parliamentNavigation {
+      pages
     }
   }
 `

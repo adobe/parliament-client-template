@@ -26,7 +26,8 @@ import {
   OpenApiGridFooter,
 } from "@adobe/parliament-ui-components"
 
-const OpenApiTemplate = ({ pageContext, location }) => {
+const OpenApiTemplate = ({ data, pageContext, location }) => {
+  const { parliamentNavigation } = data
   return (
     <DocLayout>
       <SEO title={pageContext.seo} description={pageContext.description} />
@@ -36,7 +37,7 @@ const OpenApiTemplate = ({ pageContext, location }) => {
             currentPage={location.pathname}
             gitRemote={pageContext.gitRemote}
             forceMobile={true}
-            pages={pageContext.pages}
+            pages={parliamentNavigation.pages}
           />
         </OpenApiGridNav>
         <OpenApiGridContent>
@@ -55,5 +56,13 @@ const OpenApiTemplate = ({ pageContext, location }) => {
     </DocLayout>
   )
 }
+
+export const query = graphql`
+  query OpenApiTemplateQuery {
+    parliamentNavigation {
+      pages
+    }
+  }
+`
 
 export default OpenApiTemplate

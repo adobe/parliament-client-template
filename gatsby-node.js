@@ -223,7 +223,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (data) {
       data.allMarkdownRemark.edges.forEach(({ node }) => {
         if (node.fields.slug !== "") {
-          let seo = searchTree(pages, node.fields.slug)
+          // let seo = searchTree(pages, node.fields.slug)
+          let seo = "Fix SEO"
           if (node.frontmatter.template === "recipe") {
             createPage({
               path: node.fields.slug,
@@ -234,7 +235,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 seo: seo,
                 description: description,
                 gitRemote: gitRemote,
-                pages: pages,
               },
             })
           } else {
@@ -247,7 +247,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 seo: seo,
                 description: description,
                 gitRemote: gitRemote,
-                pages: pages,
               },
             })
           }
@@ -277,7 +276,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       jsonData.allFile.edges.forEach(({ node }) => {
         let filepath = node.absolutePath
         const object = JSON.parse(fs.readFileSync(filepath, "utf8"))
-        let seo = searchTree(pages, `${node.name}${node.ext}`)
+        // let seo = searchTree(pages, `${node.name}${node.ext}`)
+        let seo = "Fix SEO"
         createOpenApiPage(
           createPage,
           openapiTemplate,
@@ -314,7 +314,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         let filepath = node.absolutePath
         try {
           let object = YAML.parse(fs.readFileSync(filepath, "utf8"))
-          let seo = searchTree(pages, `${node.name}${node.ext}`)
+          // let seo = searchTree(pages, `${node.name}${node.ext}`)
+          let seo = "Fix SEO"
           createOpenApiPage(
             createPage,
             openapiTemplate,
@@ -446,7 +447,6 @@ const createOpenApiPage = (
         seo: seo,
         description: description,
         gitRemote: gitRemote,
-        pages: pages,
       },
     })
   }

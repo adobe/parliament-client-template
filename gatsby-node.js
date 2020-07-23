@@ -28,35 +28,6 @@ const GitUrlParse = require(`git-url-parse`)
 
 const environment = process.env.NODE_ENV || "development"
 
-const stripManifestPath = (path, { org = "", name = "", branch = "" } = {}) => {
-  if (!path) {
-    return ""
-  }
-  let urlPrefix = ""
-  if (org) {
-    urlPrefix += org
-  }
-  if (name) {
-    urlPrefix += urlPrefix !== "" ? "/" + name : name
-  }
-  if (branch) {
-    urlPrefix += urlPrefix !== "" ? "/" + branch : branch
-  }
-  // Normal case with org/name/branch
-  let location = path.toLowerCase().indexOf(urlPrefix.toLowerCase())
-  if (location > -1) {
-    return path.substring(location + urlPrefix.length)
-  }
-  // Exception case with only name in url
-  else if (path.toLowerCase().indexOf(name.toLowerCase() > -1)) {
-    return path.substring(
-      path.toLowerCase().indexOf(name.toLowerCase()) + name.length
-    )
-  } else {
-    return path
-  }
-}
-
 const searchTree = (theObject, matchingFilename) => {
   var result = null
   if (theObject instanceof Array) {
@@ -87,38 +58,6 @@ const searchTree = (theObject, matchingFilename) => {
   return result
 }
 
-const readManifest = async graphql => {
-  let pages = []
-  try {
-    let { data } = await graphql(`
-      query {
-        allFile(filter: { extension: { eq: "json" } }) {
-          edges {
-            node {
-              absolutePath
-            }
-          }
-        }
-      }
-    `)
-
-    if (data) {
-      data.allFile.edges.forEach(({ node }) => {
-        let path = node.absolutePath
-        const object = JSON.parse(fs.readFileSync(path, "utf8"))
-        if (object.view_type === "mdbook") {
-          pages = object.pages
-        }
-      })
-    }
-  } catch (e) {
-    console.log(e)
-    console.log("Could not read the manifest")
-  }
-
-  return pages
-}
-
 const gitRepoInfo = () => {
   const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
   return {
@@ -129,20 +68,6 @@ const gitRepoInfo = () => {
     name: gitInfo.name,
     ref: process.env.GATSBY_SOURCE_BRANCH,
   }
-}
-
-const findHomePage = element => {
-  let result = null
-  if (element.path) {
-    return element
-  } else if (element.pages !== null) {
-    for (let j = 0; result === null && j < element.pages.length; j++) {
-      result = findHomePage(element.pages[j])
-    }
-    return result
-  }
-
-  return result
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
@@ -215,13 +140,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
+        parliamentNavigation {
+          pages
+        }
       }
     `)
     if (data) {
       data.allMarkdownRemark.edges.forEach(({ node }) => {
         if (node.fields.slug !== "") {
-          // let seo = searchTree(pages, node.fields.slug)
-          let seo = "Fix SEO"
+          let seo = searchTree(
+            data.parliamentNavigation.pages,
+            node.fields.slug
+          )
           if (node.frontmatter.template === "recipe") {
             createPage({
               path: node.fields.slug,
@@ -265,14 +195,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
+        parliamentNavigation {
+          pages
+        }
       }
     `)
     if (jsonData.allFile.edges.length > 0) {
       jsonData.allFile.edges.forEach(({ node }) => {
         let filepath = node.absolutePath
         const object = JSON.parse(fs.readFileSync(filepath, "utf8"))
-        // let seo = searchTree(pages, `${node.name}${node.ext}`)
-        let seo = "Fix SEO"
+        let seo = searchTree(
+          jsonData.parliamentNavigation.pages,
+          `${node.name}${node.ext}`
+        )
         createOpenApiPage(
           createPage,
           openapiTemplate,
@@ -300,6 +235,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
+        parliamentNavigation {
+          pages
+        }
       }
     `)
     if (yamlData.allFile.edges.length > 0) {
@@ -307,8 +245,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         let filepath = node.absolutePath
         try {
           let object = YAML.parse(fs.readFileSync(filepath, "utf8"))
-          // let seo = searchTree(pages, `${node.name}${node.ext}`)
-          let seo = "Fix SEO"
+          let seo = searchTree(
+            yamlData.parliamentNavigation.pages,
+            `${node.name}${node.ext}`
+          )
           createOpenApiPage(
             createPage,
             openapiTemplate,
@@ -328,35 +268,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // redirect home page to main page
-  // const homePage = pages[0]
-  let homePage = null
-  for (let i = 0; i < pages.length; i++) {
-    homePage = findHomePage(pages[i])
-    if (homePage !== null) {
-      break
-    }
-  }
-
-  const strippedHomePage = stripManifestPath(homePage.path, {
-    org: gitRemote.organization,
-    name: gitRemote.name,
-    branch: gitRemote.ref,
-  })
   createPage({
     path: `/`,
     component: indexTemplate,
     context: {
       slug: `/`,
-      redirect: strippedHomePage,
+      gitRemote: {
+        org: gitRemote.organization,
+        name: gitRemote.name,
+        branch: gitRemote.ref,
+      },
     },
   })
-
-  // Setup cypress.env.json for testing
-  const cypress = {
-    prefix: process.env.GATSBY_SITE_PATH_PREFIX,
-    homePage: strippedHomePage,
-  }
-  fs.writeFileSync("cypress.env.json", JSON.stringify(cypress))
 }
 
 const createOpenApiPage = (

@@ -17,6 +17,9 @@ import Layout from "../components/doclayout"
 import SEO from "../components/seo"
 
 const SearchResults = ({ location }) => {
+  return <div>my div</div>
+
+  /*
   console.log(location.state.results)
   return (
     <Layout>
@@ -33,6 +36,7 @@ const SearchResults = ({ location }) => {
       </ul>
     </Layout>
   )
+  */
 }
 
 export default SearchResults

@@ -15,43 +15,67 @@ import { css, jsx } from "@emotion/core"
 import { useState } from "react"
 import { navigate } from "gatsby"
 import { Index } from "elasticlunr"
-import { SearchField } from "@adobe/parliament-ui-components"
+import {
+  Item,
+  Menu,
+  Popover,
+  SearchField,
+} from "@adobe/parliament-ui-components"
+
+//import Menu from "./Menu"
+//import Popover from "./Popover"
 
 const Search = ({ searchIndex, gitRemote }) => {
-  const [index, setIndex] = useState(Index.load(searchIndex))
+  const [index] = useState(Index.load(searchIndex))
+  const [results, setResults] = useState([])
+  const [items, setItems] = useState([])
+  const [isOpen, setIsOpen] = useState(false)
 
   const search = searchTerm => {
-    console.log(searchTerm)
-    const results = index
+    const searchResults = index
       .search(searchTerm, { expand: true })
-      // Map over each ID and return the full document
       .map(({ ref }) => {
         return index.documentStore.getDoc(ref)
       })
-    console.log(results)
-    navigate("/searchResults/", {
-      state: { results },
-    })
-    /*
-    this.setState({
-      query,
-      // Query the index with search string to get an \[\] of IDs
-      results: this.index
-        .search(query, { expand: true })
-        // Map over each ID and return the full document
-        .map(({ ref }) => {
-          return this.index.documentStore.getDoc(ref)
-        }),
-    })
-    */
+    console.log(searchResults)
+
+    setResults(searchResults)
+    const topResults = searchResults.slice(0, 5)
+    setItems(topResults)
+    if (searchResults.length > 0) setIsOpen(true)
   }
 
   return (
-    <SearchField
-      onSubmit={searchTerm => {
-        search(searchTerm)
-      }}
-    />
+    <div style={{ position: "relative" }}>
+      <SearchField
+        onClear={() => {
+          setIsOpen(false)
+          setItems([])
+        }}
+        onChange={searchTerm => {
+          searchTerm.length > 0 ? search(searchTerm) : setIsOpen(false)
+        }}
+        onSubmit={() => {
+          navigate("/searchResults/", {
+            state: { results },
+          })
+        }}
+      />
+      <Popover
+        isOpen={isOpen}
+        style={{
+          position: "absolute",
+          left: "0px",
+          top: "32px",
+          zIndex: "1000",
+        }}
+      >
+        <Menu items={items}>
+          <Item isDivider />
+          <Item>There are {results.length} matches</Item>
+        </Menu>
+      </Popover>
+    </div>
   )
 }
 

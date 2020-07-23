@@ -1,3 +1,4 @@
+const { GraphQLJSON } = require("gatsby/graphql")
 const fromJson = require("./src/fromJson")
 const fromYaml = require("./src/fromYaml")
 
@@ -8,16 +9,11 @@ const fromYaml = require("./src/fromYaml")
  * @param {Object} api The [Gatsby API]{@link https://www.gatsbyjs.org/docs/api-reference/} object
  * @param {Object} options Plugin options. There are currently none for this plugin.
  */
-const onCreateNode = async (api, options) => {
-  const {
-    node,
-    actions,
-    loadNodeContent,
-    createNodeId,
-    createContentDigest,
-  } = api
-
-  const { createNode } = actions
+const onCreateNode = async (
+  { node, actions, loadNodeContent, createNodeId, createContentDigest },
+  options
+) => {
+  const { createNode, createParentChildLink } = actions
 
   const mediaType = node.internal.mediaType
 
@@ -49,11 +45,25 @@ const onCreateNode = async (api, options) => {
       children: [],
       parent: node.id,
       internal: {
+        content: "",
         contentDigest: createContentDigest(parsedContent),
-        type: "parliamentNavigation",
+        type: "ParliamentNavigation",
       },
     }
     createNode(navigationNode)
+    createParentChildLink({ parent: node, child: navigationNode })
+  }
+}
+
+exports.setFieldsOnGraphQLNodeType = args => {
+  const {
+    type: { name, nodes },
+  } = args
+  if (name === "ParliamentNavigation") {
+    return nodes
+      .map(({ id, parent, children, internal, ...rest }) => Object.keys(rest))
+      .reduce((a, f) => a.concat(f), [])
+      .reduce((o, name) => ({ ...o, [name]: GraphQLJSON }), {})
   }
 }
 

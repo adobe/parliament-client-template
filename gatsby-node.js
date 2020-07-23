@@ -197,7 +197,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
-  const pages = await readManifest(graphql)
   const gitRemote = gitRepoInfo(graphql)
 
   try {
@@ -221,7 +220,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (data) {
       data.allMarkdownRemark.edges.forEach(({ node }) => {
         if (node.fields.slug !== "") {
-          let seo = searchTree(pages, node.fields.slug)
+          // let seo = searchTree(pages, node.fields.slug)
+          let seo = "Fix SEO"
           if (node.frontmatter.template === "recipe") {
             createPage({
               path: node.fields.slug,
@@ -231,7 +231,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 id: node.fields.id,
                 seo: seo,
                 gitRemote: gitRemote,
-                pages: pages,
               },
             })
           } else {
@@ -243,7 +242,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 id: node.fields.id,
                 seo: seo,
                 gitRemote: gitRemote,
-                pages: pages,
               },
             })
           }
@@ -273,15 +271,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       jsonData.allFile.edges.forEach(({ node }) => {
         let filepath = node.absolutePath
         const object = JSON.parse(fs.readFileSync(filepath, "utf8"))
-        let seo = searchTree(pages, `${node.name}${node.ext}`)
+        // let seo = searchTree(pages, `${node.name}${node.ext}`)
+        let seo = "Fix SEO"
         createOpenApiPage(
           createPage,
           openapiTemplate,
           object,
           filepath,
           seo,
-          gitRemote,
-          pages
+          gitRemote
         )
       })
     }
@@ -309,15 +307,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         let filepath = node.absolutePath
         try {
           let object = YAML.parse(fs.readFileSync(filepath, "utf8"))
-          let seo = searchTree(pages, `${node.name}${node.ext}`)
+          // let seo = searchTree(pages, `${node.name}${node.ext}`)
+          let seo = "Fix SEO"
           createOpenApiPage(
             createPage,
             openapiTemplate,
             object,
             filepath,
             seo,
-            gitRemote,
-            pages
+            gitRemote
           )
         } catch (e) {
           console.log(`Skipping file: ${filepath}`)
@@ -367,8 +365,7 @@ const createOpenApiPage = (
   object,
   filepath,
   seo,
-  gitRemote,
-  pages
+  gitRemote
 ) => {
   if (object.swagger || object.openapi) {
     let slug = filepath
@@ -376,7 +373,9 @@ const createOpenApiPage = (
     switch (environment) {
       case "production":
         if (filepath.lastIndexOf("gatsby-source-git/") > -1) {
-          slug = filepath.substring(filepath.lastIndexOf("gatsby-source-git/") + 18)
+          slug = filepath.substring(
+            filepath.lastIndexOf("gatsby-source-git/") + 18
+          )
         }
         break
       case "development":
@@ -436,7 +435,6 @@ const createOpenApiPage = (
         spec: object,
         seo: seo,
         gitRemote: gitRemote,
-        pages: pages,
       },
     })
   }

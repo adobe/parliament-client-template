@@ -29,22 +29,21 @@ import {
   ActionButtons,
 } from "@adobe/parliament-ui-components"
 
-const MarkdownTemplate = props => {
-  const { file } = props.data
+const MarkdownTemplate = ({ data, location, pageContext }) => {
+  const { file, parliamentNavigation } = data
   const { modifiedTime, relativePath, childMarkdownRemark } = file
   const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
-
-  const { gitRemote, pages } = props.pageContext
+  const { gitRemote } = pageContext
 
   return (
     <DocLayout>
-      <SEO title={props.pageContext.seo} />
+      <SEO title={pageContext.seo} />
       <Grid>
         <GridNav>
           <SiteNav
-            currentPage={props.location.pathname}
+            currentPage={location.pathname}
             gitRemote={gitRemote}
-            pages={pages}
+            pages={parliamentNavigation.pages}
           />
         </GridNav>
         <GridContent id="contentMain">
@@ -123,6 +122,9 @@ export const query = graphql`
         tableOfContents
         timeToRead
       }
+    }
+    parliamentNavigation {
+      pages
     }
   }
 `

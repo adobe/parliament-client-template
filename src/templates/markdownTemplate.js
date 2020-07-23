@@ -19,6 +19,7 @@ import PageActions from "../components/PageActions"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import {
   Grid,
@@ -31,8 +32,8 @@ import {
 
 const MarkdownTemplate = props => {
   const { file } = props.data
-  const { modifiedTime, relativePath, childMarkdownRemark } = file
-  const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
+  const { modifiedTime, relativePath, childMdx } = file
+  const { body, tableOfContents, timeToRead } = childMdx
 
   const { gitRemote, pages } = props.pageContext
 
@@ -63,7 +64,7 @@ const MarkdownTemplate = props => {
                 {gitRemote !== null ? (
                   <ActionButtons
                     gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                    filePath={relativePath}
+                    filePath={"relativePath"}
                     branch={gitRemote.ref}
                   />
                 ) : (
@@ -71,7 +72,8 @@ const MarkdownTemplate = props => {
                 )}
               </div>
             </div>
-            {renderAst(htmlAst)}
+            {/* {renderAst(body)} */}
+            <MDXRenderer>{body}</MDXRenderer>
           </GridContentInner>
         </GridContent>
         <div
@@ -113,13 +115,13 @@ export default MarkdownTemplate
 
 export const query = graphql`
   query MarkdownTemplateQuery($id: String!) {
-    file(id: { eq: $id }) {
+    file(id: {eq: $id}) {
       id
       modifiedTime(formatString: "YYYY-MM-DD")
       name
       relativePath
-      childMarkdownRemark {
-        htmlAst
+      childMdx {
+        body
         tableOfContents
         timeToRead
       }

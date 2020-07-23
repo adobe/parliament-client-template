@@ -35,6 +35,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `pages`,
+        path: `${projectRootDir}/src/pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `images`,
         path: `${projectRootDir}/src/images`,
       },
@@ -69,9 +76,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           `gatsby-remark-autolink-headers`,
           `gatsby-plugin-catch-links`,
           {
@@ -158,7 +166,6 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-mdx`,
     {
       resolve: `navigation-files-transformer`,
       options: {},

@@ -147,7 +147,7 @@ const findHomePage = element => {
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     let slug = ""
     switch (environment) {
       case "production":
@@ -203,7 +203,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   try {
     let { data } = await graphql(`
       query {
-        allMarkdownRemark {
+        allMdx {
           edges {
             node {
               frontmatter {
@@ -219,7 +219,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     `)
     if (data) {
-      data.allMarkdownRemark.edges.forEach(({ node }) => {
+      data.allMdx.edges.forEach(({ node }) => {
         if (node.fields.slug !== "") {
           let seo = searchTree(pages, node.fields.slug)
           if (node.frontmatter.template === "recipe") {

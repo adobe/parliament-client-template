@@ -18,6 +18,7 @@ import { Footer } from "@adobe/parliament-ui-components"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import "../components/recipe.css"
 
@@ -30,9 +31,8 @@ import {
 
 const MarkdownTemplate = props => {
   const { file } = props.data
-  const { childMarkdownRemark } = file
-  const { htmlAst } = childMarkdownRemark
-
+  const { childMdx } = file
+  const { body } = childMdx
   const { gitRemote, pages } = props.pageContext
 
   return (
@@ -47,7 +47,9 @@ const MarkdownTemplate = props => {
           />
         </GridNav>
         <GridContent>
-          <div class="recipeContent">{renderAst(htmlAst)}</div>
+          <div class="recipeContent">
+            <MDXRenderer>{body}</MDXRenderer>
+          </div>
         </GridContent>
         <GridFooter>
           <Footer />
@@ -60,13 +62,13 @@ const MarkdownTemplate = props => {
 export default MarkdownTemplate
 
 export const query = graphql`
-  query MarkdownTemplateQuery2($id: String!) {
-    file(id: { eq: $id }) {
-      id
-      name
-      childMarkdownRemark {
-        htmlAst
-      }
+query MarkdownTemplateQuery2($id: String!) {
+  file(id: {eq: $id}) {
+    id
+    name
+    childMdx {
+      body
     }
   }
+}
 `

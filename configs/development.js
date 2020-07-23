@@ -16,13 +16,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `pages`,
-        path: `${projectRootDir}/src/pages`,
-      },
-    },
-    {
       resolve: `link-local-project`,
       options: {
         contentDir: `${projectRootDir}/src/content`,

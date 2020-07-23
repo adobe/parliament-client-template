@@ -11,27 +11,23 @@
  */
 
 import { useEffect } from "react"
-import { navigate } from "gatsby"
-// import { stripManifestPath } from "@adobe/parliament-ui-components"
+import { graphql, navigate } from "gatsby"
+import { stripManifestPath } from "@adobe/parliament-ui-components"
 
 const IndexTemplate = props => {
-  /*
-  const homePage = stripManifestPath(props.data.parliamentNavigation.homePage, {
-    org: props.pageContext.gitRemote.organization,
-    name: props.pageContext.gitRemote.name,
-    branch: props.pageContext.gitRemote.ref,
-  })
-  */
+  const homePage = stripManifestPath(
+    props.data.parliamentNavigation.homePage,
+    props.pageContext.gitRemote
+  )
 
   useEffect(() => {
-    navigate(props.pageContext.redirect, {
+    navigate(homePage, {
       replace: true,
     })
   })
   return null
 }
 
-/*
 export const query = graphql`
   query HomePageQuery {
     parliamentNavigation {
@@ -39,6 +35,5 @@ export const query = graphql`
     }
   }
 `
-*/
 
 export default IndexTemplate

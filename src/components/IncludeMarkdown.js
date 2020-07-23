@@ -13,6 +13,8 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import renderAst from "../utils/AFMRehype"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
 
 const IncludeMarkdown = ({ file }) => {
   const { allMdx } = useStaticQuery(
@@ -36,7 +38,13 @@ const IncludeMarkdown = ({ file }) => {
 
   if (markdownRemark) {
     return (
-      <React.Fragment>{renderAst(markdownRemark.node.body)}</React.Fragment>
+      <React.Fragment>
+        <MDXProvider components={renderAst.components}>
+          <MDXRenderer>{markdownRemark.node.body}</MDXRenderer>
+        </MDXProvider>
+
+        {/* {renderAst(markdownRemark.node.body)} */}
+      </React.Fragment>
     )
   } else {
     return <React.Fragment>Could not find {file}</React.Fragment>

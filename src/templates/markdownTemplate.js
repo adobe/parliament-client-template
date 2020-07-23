@@ -20,6 +20,7 @@ import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
 
 import {
   Grid,
@@ -73,7 +74,11 @@ const MarkdownTemplate = props => {
               </div>
             </div>
             {/* {renderAst(body)} */}
-            <MDXRenderer>{body}</MDXRenderer>
+            <MDXProvider components={renderAst.components}>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MDXProvider>
+
+            {/* <MDXRenderer>{body}</MDXRenderer> */}
           </GridContentInner>
         </GridContent>
         <div

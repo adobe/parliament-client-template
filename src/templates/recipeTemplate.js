@@ -19,6 +19,7 @@ import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
 import renderAst from "../utils/AFMRehype"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
 
 import "../components/recipe.css"
 
@@ -48,7 +49,9 @@ const MarkdownTemplate = props => {
         </GridNav>
         <GridContent>
           <div class="recipeContent">
-            <MDXRenderer>{body}</MDXRenderer>
+            <MDXProvider components={renderAst.components}>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MDXProvider>
           </div>
         </GridContent>
         <GridFooter>
@@ -62,13 +65,13 @@ const MarkdownTemplate = props => {
 export default MarkdownTemplate
 
 export const query = graphql`
-query MarkdownTemplateQuery2($id: String!) {
-  file(id: {eq: $id}) {
-    id
-    name
-    childMdx {
-      body
+  query MarkdownTemplateQuery2($id: String!) {
+    file(id: { eq: $id }) {
+      id
+      name
+      childMdx {
+        body
+      }
     }
   }
-}
 `

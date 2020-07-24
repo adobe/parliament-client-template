@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Magento devdocs navigation format 1`] = `
+Object {
+  "homePage": "JSON",
+  "order": "JSON",
+  "pages": "JSON",
+  "section": "JSON",
+  "title": "JSON",
+}
+`;
+
+exports[`manifest-docs.json format 1`] = `
+Object {
+  "homePage": "JSON",
+  "order": "JSON",
+  "pages": "JSON",
+  "section": "JSON",
+  "title": "JSON",
+}
+`;

@@ -1,6 +1,6 @@
-const { GraphQLJSON } = require("gatsby/graphql")
 const fromJson = require("./src/fromJson")
 const fromYaml = require("./src/fromYaml")
+const reduceGraphQLToJson = require("./src/utils")
 
 /**
  * Callback for creating graphql nodes from project navigation files.
@@ -55,15 +55,22 @@ const onCreateNode = async (
   }
 }
 
-exports.setFieldsOnGraphQLNodeType = args => {
-  const {
-    type: { name, nodes },
-  } = args
+/**
+ * Called during the creation of the GraphQL schema.
+ * Allows plugins to add new fields to the types created from data nodes.
+ * It will be called separately for each type.
+ * This function should return an object in the shape of GraphQLFieldConfigMap
+ * which will be appended to fields inferred by Gatsby from data nodes.
+ *
+ * [Gatsby Node API]{@link https://www.gatsbyjs.org/docs/node-apis/#setFieldsOnGraphQLNodeType}
+ *
+ * @param {Object} type An object containing the type `name` and `nodes`
+ */
+exports.setFieldsOnGraphQLNodeType = ({ type }) => {
+  const { name, nodes } = type
   if (name === "ParliamentNavigation") {
-    return nodes
-      .map(({ id, parent, children, internal, ...rest }) => Object.keys(rest))
-      .reduce((a, f) => a.concat(f), [])
-      .reduce((o, name) => ({ ...o, [name]: GraphQLJSON }), {})
+    console.log(JSON.stringify(nodes))
+    return reduceGraphQLToJson(nodes)
   }
 }
 

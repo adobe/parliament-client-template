@@ -77,8 +77,6 @@ const MarkdownTemplate = props => {
             <MDXProvider components={renderAst.components}>
               <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>
-
-            {/* <MDXRenderer>{body}</MDXRenderer> */}
           </GridContentInner>
         </GridContent>
         <div

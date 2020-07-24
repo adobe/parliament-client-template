@@ -42,8 +42,6 @@ const IncludeMarkdown = ({ file }) => {
         <MDXProvider components={renderAst.components}>
           <MDXRenderer>{markdownRemark.node.body}</MDXRenderer>
         </MDXProvider>
-
-        {/* {renderAst(markdownRemark.node.body)} */}
       </React.Fragment>
     )
   } else {

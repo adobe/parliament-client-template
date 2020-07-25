@@ -16,6 +16,24 @@ import renderAst from "../utils/AFMRehype"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 
+import {
+  Alert,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  List,
+  Paragraph,
+  Table,
+  TBody,
+  Th,
+  Td,
+  THead,
+  Tr
+} from "@adobe/parliament-ui-components"
+
 const IncludeMarkdown = ({ file }) => {
   const { allMdx } = useStaticQuery(
     graphql`
@@ -36,10 +54,31 @@ const IncludeMarkdown = ({ file }) => {
     edge.node.fileAbsolutePath.toLowerCase().endsWith(file.toLowerCase())
   )
 
+  const componentsMapping = {
+    alert: Alert,
+    h1: Heading1,
+    h2: Heading2,
+    h3: Heading3,
+    h4: Heading4,
+    h5: Heading5,
+    h6: Heading6,
+    includemarkdown: IncludeMarkdown,
+    // tab: Tab,
+    // tabview: TabView,
+    table: Table,
+    tbody: TBody,
+    th: Th,
+    td: Td,
+    thead: THead,
+    tr: Tr,
+    p: Paragraph,
+    ul: List,
+  }
+
   if (markdownRemark) {
     return (
       <React.Fragment>
-        <MDXProvider components={renderAst.components}>
+        <MDXProvider components={componentsMapping}>
           <MDXRenderer>{markdownRemark.node.body}</MDXRenderer>
         </MDXProvider>
       </React.Fragment>

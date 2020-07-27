@@ -12,9 +12,8 @@
 
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { graphql } from "gatsby"
 import PropTypes from "prop-types"
-import { Link, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
 import { Nav } from "@adobe/parliament-ui-components"
 
 import Search from "./Search"
@@ -23,16 +22,6 @@ import Title from "./Title"
 import "./sitenav.css"
 
 const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
-  const { siteSearchIndex } = useStaticQuery(
-    graphql`
-      query {
-        siteSearchIndex {
-          index
-        }
-      }
-    `
-  )
-
   const gitInfo = {
     org: gitRemote.organization,
     name: gitRemote.name,
@@ -64,7 +53,7 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
             margin-top: 24px;
           `}
         >
-          <Search searchIndex={siteSearchIndex.index} gitRemote={gitRemote} />
+          <Search gitRemote={gitRemote} pages={pages} />
         </div>
       </div>
       <div

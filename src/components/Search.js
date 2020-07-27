@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { useState } from "react"
-import { navigate } from "gatsby"
+import { graphql, navigate, useStaticQuery } from "gatsby"
 import { Index } from "elasticlunr"
 import {
   Item,
@@ -25,8 +25,16 @@ import {
 //import Menu from "./Menu"
 //import Popover from "./Popover"
 
-const Search = ({ searchIndex, gitRemote }) => {
-  const [index] = useState(Index.load(searchIndex))
+const Search = ({ gitRemote, pages }) => {
+  const { ParliamentSearchIndex } = useStaticQuery(
+    graphql`
+      query {
+        ParliamentSearchIndex
+      }
+    `
+  )
+
+  const [index] = useState(Index.load(ParliamentSearchIndex))
   const [results, setResults] = useState([])
   const [items, setItems] = useState([])
   const [isOpen, setIsOpen] = useState(false)
@@ -42,7 +50,7 @@ const Search = ({ searchIndex, gitRemote }) => {
     setResults(searchResults)
     const topResults = searchResults.slice(0, 5)
     setItems(topResults)
-    if (searchResults.length > 0) setIsOpen(true)
+    if (searchTerm.length > 0) setIsOpen(true)
   }
 
   return (

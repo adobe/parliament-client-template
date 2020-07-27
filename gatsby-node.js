@@ -25,6 +25,8 @@ const fs = require(`fs`)
 const YAML = require("yaml")
 const openApiSnippet = require(`openapi-snippet`)
 const GitUrlParse = require(`git-url-parse`)
+const elasticlunr = require(`elasticlunr`)
+const { GraphQLJSONObject } = require("graphql-type-json")
 
 const environment = process.env.NODE_ENV || "development"
 
@@ -370,4 +372,45 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       mainFields: ["browser", "main", "module"],
     },
   })
+}
+
+exports.createResolvers = ({ cache, createResolvers }) => {
+  createResolvers({
+    Query: {
+      ParliamentSearchIndex: {
+        type: GraphQLJSONObject,
+        resolve(source, args, context) {
+          const siteNodes = context.nodeModel.getAllNodes({
+            type: `MarkdownRemark`,
+          })
+          const pages = context.nodeModel.getAllNodes({
+            type: `ParliamentNavigation`,
+          })
+          return createIndex(siteNodes, pages)
+        },
+      },
+    },
+  })
+}
+
+const createIndex = async (nodes, pages) => {
+  const index = elasticlunr()
+  index.setRef(`id`)
+  index.addField(`title`)
+  index.addField(`body`)
+  index.addField(`path`)
+
+  for (node of nodes) {
+    const { slug } = node.fields
+    let title = searchTree(pages, slug)
+    const doc = {
+      id: slug,
+      title: title,
+      body: node.internal.content,
+      path: slug,
+    }
+    index.addDoc(doc)
+  }
+
+  return index.toJSON()
 }

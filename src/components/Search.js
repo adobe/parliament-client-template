@@ -10,9 +10,7 @@
  *  governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { css, jsx } from "@emotion/core"
-import { useState } from "react"
+import { React, useState } from "react"
 import { graphql, navigate, useStaticQuery, Link } from "gatsby"
 import { Index } from "elasticlunr"
 import {
@@ -47,16 +45,15 @@ const Search = ({ gitRemote, pages }) => {
 
     setResults(searchResults)
     const topResults = searchResults.slice(0, 5)
-    let ack = []
+    let topResultMenuItems = []
     for (let result of topResults) {
-      ack.push(
+      topResultMenuItems.push(
         <Link className="searchMenuLink" to={result.path}>
           <Item>{result.title}</Item>
         </Link>
       )
     }
-    console.log(topResults)
-    setItems(ack)
+    setItems(topResultMenuItems)
     if (searchTerm.length > 0) setIsOpen(true)
   }
 

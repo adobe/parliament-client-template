@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { useState } from "react"
-import { graphql, navigate, useStaticQuery } from "gatsby"
+import { graphql, navigate, useStaticQuery, Link } from "gatsby"
 import { Index } from "elasticlunr"
 import {
   Item,
@@ -22,8 +22,7 @@ import {
   SearchField,
 } from "@adobe/parliament-ui-components"
 
-//import Menu from "./Menu"
-//import Popover from "./Popover"
+import "./search.css"
 
 const Search = ({ gitRemote, pages }) => {
   const { ParliamentSearchIndex } = useStaticQuery(
@@ -45,11 +44,21 @@ const Search = ({ gitRemote, pages }) => {
       .map(({ ref }) => {
         return index.documentStore.getDoc(ref)
       })
-    console.log(searchResults)
 
     setResults(searchResults)
     const topResults = searchResults.slice(0, 5)
-    setItems(topResults)
+    let ack = []
+    for (let result of topResults) {
+      ack.push(
+        <Item>
+          <Link className="searchMenuLink" to={result.path}>
+            {result.title}
+          </Link>
+        </Item>
+      )
+    }
+    console.log(topResults)
+    setItems(ack)
     if (searchTerm.length > 0) setIsOpen(true)
   }
 
@@ -65,7 +74,7 @@ const Search = ({ gitRemote, pages }) => {
         }}
         onSubmit={() => {
           navigate("/searchResults/", {
-            state: { results },
+            state: { results, gitRemote },
           })
         }}
       />
@@ -78,9 +87,22 @@ const Search = ({ gitRemote, pages }) => {
           zIndex: "1000",
         }}
       >
-        <Menu items={items}>
+        <Menu>
+          {items}
           <Item isDivider />
-          <Item>There are {results.length} matches</Item>
+          {results.length > 0 ? (
+            <Item>
+              <Link
+                className="searchMenuLink"
+                state={{ results, gitRemote }}
+                to="/searchResults/"
+              >
+                See all {results.length} matches
+              </Link>
+            </Item>
+          ) : (
+            <Item>There are no matching results</Item>
+          )}
         </Menu>
       </Popover>
     </div>

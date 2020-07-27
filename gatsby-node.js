@@ -403,13 +403,15 @@ const createIndex = async (nodes, pages) => {
   for (node of nodes) {
     const { slug } = node.fields
     let title = searchTree(pages, slug)
-    const doc = {
-      id: slug,
-      title: title,
-      body: node.internal.content,
-      path: slug,
+    if (title) {
+      const doc = {
+        id: slug,
+        title: title,
+        body: node.internal.content,
+        path: slug,
+      }
+      index.addDoc(doc)
     }
-    index.addDoc(doc)
   }
 
   return index.toJSON()

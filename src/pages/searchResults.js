@@ -10,33 +10,84 @@
  *  governing permissions and limitations under the License.
  */
 
-import React from "react"
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
 import { Link } from "gatsby"
+import {
+  Grid,
+  GridNav,
+  GridContent,
+  GridContentInner,
+  GridFooter,
+  Footer,
+} from "@adobe/parliament-ui-components"
 
-import Layout from "../components/doclayout"
+import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
+import SiteNav from "../components/SiteNav"
 
-const SearchResults = ({ location }) => {
-  return <div>my div</div>
-
-  /*
+const SearchResults = ({ data, location }) => {
+  const { parliamentNavigation } = data
   console.log(location.state.results)
   return (
-    <Layout>
+    <DocLayout>
       <SEO title="Search Results" />
-      <h1>Results</h1>
-      <ul>
-        {location.state.results.map(result => {
-          return (
-            <li>
-              <Link to={result.path}>${result.id}</Link>
-            </li>
-          )
-        })}
-      </ul>
-    </Layout>
+      <Grid>
+        <GridNav>
+          <SiteNav
+            currentPage={location.pathname}
+            gitRemote={location.state.gitRemote}
+            pages={parliamentNavigation.pages}
+          />
+        </GridNav>
+        <GridContent id="contentMain">
+          <GridContentInner>
+            <h1>Search Results</h1>
+            <ul>
+              {location.state.results.map(result => {
+                return (
+                  <li>
+                    <Link to={result.path}>{result.id}</Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </GridContentInner>
+        </GridContent>
+        <div
+          id="rightRail"
+          css={css`
+            padding-top: 30px;
+            padding-left: 16px;
+            padding-right: 16px;
+
+            @media screen and (min-width: 1201px) {
+              grid-area: 1 / 11 / 2 / 13;
+            }
+            @media screen and (max-width: 1200px) {
+              display: none;
+            }
+          `}
+        >
+          Powered by{" "}
+          <a href="https://docs.corp.adobe.com/parliament-docs/README.md">
+            Parliament
+          </a>
+        </div>
+        <GridFooter>
+          <Footer />
+        </GridFooter>
+      </Grid>
+    </DocLayout>
   )
-  */
 }
 
 export default SearchResults
+
+export const query = graphql`
+  query SearchPageQuery {
+    parliamentNavigation {
+      pages
+    }
+  }
+`

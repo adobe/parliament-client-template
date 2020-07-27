@@ -50,11 +50,9 @@ const Search = ({ gitRemote, pages }) => {
     let ack = []
     for (let result of topResults) {
       ack.push(
-        <Item>
-          <Link className="searchMenuLink" to={result.path}>
-            {result.title}
-          </Link>
-        </Item>
+        <Link className="searchMenuLink" to={result.path}>
+          <Item>{result.title}</Item>
+        </Link>
       )
     }
     console.log(topResults)
@@ -91,15 +89,13 @@ const Search = ({ gitRemote, pages }) => {
           {items}
           <Item isDivider />
           {results.length > 0 ? (
-            <Item>
-              <Link
-                className="searchMenuLink"
-                state={{ results, gitRemote }}
-                to="/searchResults/"
-              >
-                See all {results.length} matches
-              </Link>
-            </Item>
+            <Link
+              className="searchMenuLink"
+              state={{ results, gitRemote }}
+              to="/searchResults/"
+            >
+              <Item>See all {results.length} matches</Item>
+            </Link>
           ) : (
             <Item>There are no matching results</Item>
           )}

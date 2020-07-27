@@ -17,9 +17,9 @@ import DocLayout from "../components/doclayout"
 import { Footer } from "@adobe/parliament-ui-components"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
-import renderAst from "../utils/AFMRehype"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
+import { componentsMapping } from "../components/componentsMapping"
 
 import "../components/recipe.css"
 
@@ -49,7 +49,7 @@ const MarkdownTemplate = props => {
         </GridNav>
         <GridContent>
           <div class="recipeContent">
-            <MDXProvider components={renderAst.components}>
+            <MDXProvider components={componentsMapping}>
               <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>
           </div>

@@ -35,6 +35,8 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
   const { gitRemote } = pageContext
 
+  console.log(JSON.stringify(htmlAst))
+
   return (
     <DocLayout>
       <SEO title={pageContext.seo} />

@@ -33,11 +33,13 @@ import {
 // import { TabView, Tab } from "@react/react-spectrum/TabView"
 // import { TabView, Tab } from "../components/Tabs"
 import IncludeMarkdown from "../components/IncludeMarkdown"
+import Hero from "../components/Hero"
 
 const renderAst = new rehypeReact({
   createElement: createElement,
   components: {
     alert: Alert,
+    hero: Hero,
     h1: Heading1,
     h2: Heading2,
     h3: Heading3,

@@ -72,6 +72,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `@adobe/gatsby-remark-afm`,
           `gatsby-remark-autolink-headers`,
           `gatsby-plugin-catch-links`,
           {
@@ -154,7 +155,6 @@ module.exports = {
               },
             },
           },
-          `@adobe/gatsby-remark-afm`,
         ],
       },
     },

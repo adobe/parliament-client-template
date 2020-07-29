@@ -125,7 +125,7 @@ export const query = graphql`
       relativePath
       childMdx {
         body
-        tableOfContents
+        tableOfContents(maxDepth: 4)
         timeToRead
       }
     }

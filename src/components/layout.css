@@ -519,16 +519,36 @@ abbr[title] {
   }
 }
 
-span.toc ul {
-  list-style-type: none;
-  margin-left: 0.25rem;
-  max-width: 200px;
-}
-
 span.toc * {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+span.toc > ul {
+  list-style-type: none;
+  margin-left:-1em !important;
+  margin-top: -.5em !important;
+  margin-bottom: 0;
+  margin-right: 0;
+  max-width: 200px;
+}
+
+span.toc ul {
+  margin: 0;
+  margin-left: 0rem;
+}
+
+.item {
+  margin-top: .35em;
+  margin-bottom: 0;
+  margin-left: .5em;
+}
+
+span.toc > ul > li > ul > a {
+  display: none;
+  margin: 0;
+  padding: 0;
 }
 
 #contentMain,

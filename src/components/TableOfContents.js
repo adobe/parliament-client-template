@@ -1,57 +1,37 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { parse } from 'node-html-parser'
-import { Heading } from '@react-spectrum/text'
+import React from "react"
+import PropTypes from "prop-types"
+import { Heading } from "@react-spectrum/text"
 
-// const stripOuterH1 = function (toc) {
-//   let html = ''
-//   const root = parse(toc)
-//   console.log(root)
-//   const headerOneList = root.querySelector('ul')
-//   if (headerOneList) {
-//     const headerTwoList = headerOneList.querySelector('ul')
-//     if (headerTwoList) {
-//       html = headerTwoList.toString()
-//     }
-//   }
-//   return html
-// }
-
-/*
-const createToC = (tableOfContents, maxDepth, stripH1) => {
-  const depth = 1
-  const root = parse(tableOfContents)
-}
-*/
-
-const TableOfContents = ({ tableOfContents, depth, stripH1 }) => {
-  // Removing the H1 from the ToC
-  const body = tableOfContents
+const TableOfContents = ({ tableOfContents }) => {
   return (
-    <div
-      style={{
-        height: '70vh',
-        overflowY: 'auto',
-        overflowX: 'hidden'
-      }}
-    >
+    <div style={{ height: "70vh", overflowY: "auto", overflowX: "hidden" }}>
       <Heading level={5}>On this page</Heading>
-      <span className='toc'>
-        <MDXRenderer>{body}</MDXRenderer>
+      <span className="toc">
+        <ul>{tableOfContents.items.map(renderItem)}</ul>
       </span>
     </div>
   )
 }
 
+const renderItem = item => (
+  <li className="item" key={item.title}>
+    {item.items ? (
+      <ul>
+        <a href={item.url}>{item.title}</a>
+        {item.items.map(renderItem)}
+      </ul>
+    ) : (
+      <a href={item.url}>{item.title}</a>
+    )}
+  </li>
+)
+
 TableOfContents.propTypes = {
-  tableOfContents: PropTypes.string,
-  depth: PropTypes.number,
-  stripH1: PropTypes.bool
+  tableOfContents: PropTypes.object,
 }
 
 TableOfContents.defaultProps = {
-  tableOfContents: '',
-  depth: 2,
-  stripH1: true
+  tableOfContents: {},
 }
+
 export default TableOfContents

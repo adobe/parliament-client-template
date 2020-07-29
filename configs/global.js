@@ -14,17 +14,69 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
-    `@adobe/gatsby-remark-afm`,
-    "gatsby-remark-images",
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: "add-launch-script",
+      options: {
+        scriptUrl: `${process.env.GATSBY_LAUNCH_SRC}`,
+        includeInDevelopment: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-emotion`,
+      options: {},
+    },
+    {
+      resolve: `gatsby-transformer-yaml-full`,
+      options: {
+        typeName: `YamlFile`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${projectRootDir}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages`,
+        path: `${projectRootDir}/src/markdown-pages`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-svg`,
+      options: {
+        rule: {
+          include: `${projectRootDir}/src/images`,
+        },
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `gatsby-starter-default`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `${projectRootDir}/src/images/favicon.png`, // This path is relative to the root of the site.
+      },
+    },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
+        remarkPlugins: [require('remark-slug')],
         gatsbyRemarkPlugins: [
+          `@adobe/gatsby-remark-afm`,
           `gatsby-remark-autolink-headers`,
           `gatsby-plugin-catch-links`,
-          `@adobe/gatsby-remark-afm`,
           {
             resolve: "gatsby-remark-external-links",
             options: {
@@ -108,67 +160,6 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: "add-launch-script",
-      options: {
-        scriptUrl: `${process.env.GATSBY_LAUNCH_SRC}`,
-        includeInDevelopment: false,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-emotion`,
-      options: {},
-    },
-    {
-      resolve: `gatsby-transformer-yaml-full`,
-      options: {
-        typeName: `YamlFile`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `pages`,
-        path: `${projectRootDir}/src/pages`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${projectRootDir}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `markdown-pages`,
-        path: `${projectRootDir}/src/markdown-pages`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-react-svg`,
-      options: {
-        rule: {
-          include: `${projectRootDir}/src/images`,
-        },
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `${projectRootDir}/src/images/favicon.png`, // This path is relative to the root of the site.
-      },
-    },
-
     {
       resolve: `navigation-files-transformer`,
       options: {},

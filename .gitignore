@@ -76,3 +76,7 @@ cypress.env.json
 
 # External content directory for local dev
 src/content/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/launch.json

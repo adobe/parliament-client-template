@@ -9,10 +9,12 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
-
-import { React, useState } from "react"
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
+import { useState } from "react"
 import { graphql, navigate, useStaticQuery, Link } from "gatsby"
 import { Index } from "elasticlunr"
+import { Heading, Text } from "@react-spectrum/text"
 import {
   Item,
   Menu,
@@ -44,9 +46,12 @@ const Search = ({ gitRemote, pages }) => {
       })
 
     setResults(searchResults)
-    const topResults = searchResults.slice(0, 5)
-    let topResultMenuItems = []
-    for (let result of topResults) {
+    let topResultMenuItems = [
+      <Item>
+        <h5>Docs</h5>
+      </Item>,
+    ]
+    for (let result of searchResults) {
       topResultMenuItems.push(
         <Link className="searchMenuLink" to={result.path}>
           <Item>{result.title}</Item>
@@ -68,9 +73,9 @@ const Search = ({ gitRemote, pages }) => {
           searchTerm.length > 0 ? search(searchTerm) : setIsOpen(false)
         }}
         onSubmit={() => {
-          navigate("/searchResults/", {
-            state: { results, gitRemote },
-          })
+          if (results.length > 0) {
+            navigate(results[0].path)
+          }
         }}
       />
       <Popover
@@ -80,23 +85,28 @@ const Search = ({ gitRemote, pages }) => {
           left: "0px",
           top: "32px",
           zIndex: "1000",
+          width: "368px",
         }}
       >
-        <Menu>
-          {items}
-          <Item isDivider />
-          {results.length > 0 ? (
-            <Link
-              className="searchMenuLink"
-              state={{ results, gitRemote }}
-              to="/searchResults/"
-            >
-              <Item>See all {results.length} matches</Item>
-            </Link>
-          ) : (
-            <Item>There are no matching results</Item>
-          )}
-        </Menu>
+        {results.length > 0 ? (
+          <Menu>{items}</Menu>
+        ) : (
+          <div
+            css={css`
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 64px;
+              margin-top: 64px;
+            `}
+          >
+            <Heading level={2}>No Results Found</Heading>
+            <Text>
+              <em>Try another search term.</em>
+            </Text>
+          </div>
+        )}
       </Popover>
     </div>
   )

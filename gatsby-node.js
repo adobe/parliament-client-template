@@ -368,17 +368,19 @@ const createOpenApiPage = async (
       },
     })
 
-    // convert openapi to markdown
-    const md = await converter.convert(object, {})
-    console.log(seo)
-    // add open api spec to search index
-    openApiSearchDocs.push({
-      id: slug,
-      title: seo,
-      body: md,
-      path: slug,
-      type: "apis",
-    })
+    // if we have the spec is in the side nav add it to search index
+    if (seo) {
+      // convert openapi to markdown
+      const md = await converter.convert(object, {})
+      // add open api spec to search index
+      openApiSearchDocs.push({
+        id: slug,
+        title: seo,
+        body: md,
+        path: slug,
+        type: "apis",
+      })
+    }
   }
 }
 

@@ -46,18 +46,33 @@ const Search = ({ gitRemote, pages }) => {
       })
 
     setResults(searchResults)
-    let topResultMenuItems = [
+    const docsResultMenuItems = [
       <Item>
         <h5>Docs</h5>
       </Item>,
     ]
+    const apiResultMenuItems = [
+      <Item>
+        <h5>APIs</h5>
+      </Item>,
+    ]
     for (let result of searchResults) {
-      topResultMenuItems.push(
+      let item = (
         <Link className="searchMenuLink" to={result.path}>
           <Item>{result.title}</Item>
         </Link>
       )
+      if (result.type === "apis") {
+        apiResultMenuItems.push(item)
+      } else {
+        docsResultMenuItems.push(item)
+      }
     }
+    let topResultMenuItems = []
+    if (docsResultMenuItems.length > 1)
+      topResultMenuItems.push(...docsResultMenuItems)
+    if (apiResultMenuItems.length > 1)
+      topResultMenuItems.push(...apiResultMenuItems)
     setItems(topResultMenuItems)
     if (searchTerm.length > 0) setIsOpen(true)
   }

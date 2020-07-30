@@ -27,8 +27,10 @@ const openApiSnippet = require(`openapi-snippet`)
 const GitUrlParse = require(`git-url-parse`)
 const elasticlunr = require(`elasticlunr`)
 const { GraphQLJSONObject } = require("graphql-type-json")
+const converter = require("widdershins")
 
 const environment = process.env.NODE_ENV || "development"
+const openApiSearchDocs = []
 
 const searchTree = (theObject, matchingFilename) => {
   var result = null
@@ -210,6 +212,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           jsonData.parliamentNavigation.pages,
           `${node.name}${node.ext}`
         )
+        console.log("***Swager json***")
+        console.log(seo)
+
         createOpenApiPage(
           createPage,
           openapiTemplate,
@@ -284,7 +289,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   })
 }
 
-const createOpenApiPage = (
+const createOpenApiPage = async (
   createPage,
   openapiTemplate,
   object,
@@ -362,6 +367,18 @@ const createOpenApiPage = (
         gitRemote: gitRemote,
       },
     })
+
+    // convert openapi to markdown
+    const md = await converter.convert(object, {})
+    console.log(seo)
+    // add open api spec to search index
+    openApiSearchDocs.push({
+      id: slug,
+      title: seo,
+      body: md,
+      path: slug,
+      type: "apis",
+    })
   }
 }
 
@@ -399,6 +416,7 @@ const createIndex = async (nodes, pages) => {
   index.addField(`title`)
   index.addField(`body`)
   index.addField(`path`)
+  index.addField(`type`)
 
   for (node of nodes) {
     const { slug } = node.fields
@@ -409,9 +427,15 @@ const createIndex = async (nodes, pages) => {
         title: title,
         body: node.internal.content,
         path: slug,
+        type: "docs",
       }
       index.addDoc(doc)
     }
+  }
+
+  // Open API specs are not in graphql db, hence this hack
+  for (spec of openApiSearchDocs) {
+    index.addDoc(spec)
   }
 
   return index.toJSON()

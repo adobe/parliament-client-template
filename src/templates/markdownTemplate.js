@@ -57,21 +57,15 @@ const MarkdownTemplate = props => {
                 z-index: 100;
               `}
             >
-              <div
-                css={css`
-                  padding-bottom: 20px;
-                `}
-              >
-                {gitRemote !== null ? (
-                  <ActionButtons
-                    gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                    filePath={"relativePath"}
-                    branch={gitRemote.ref}
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
+              {gitRemote !== null ? (
+                <ActionButtons
+                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                  filePath={"relativePath"}
+                  branch={gitRemote.ref}
+                />
+              ) : (
+                ""
+              )}
             </div>
             {/* {renderAst(body)} */}
             <MDXProvider components={componentsMapping}>

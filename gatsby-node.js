@@ -212,8 +212,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           jsonData.parliamentNavigation.pages,
           `${node.name}${node.ext}`
         )
-        console.log("***Swager json***")
-        console.log(seo)
 
         createOpenApiPage(
           createPage,
@@ -393,7 +391,17 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   })
 }
 
-exports.createResolvers = ({ cache, createResolvers }) => {
+/**
+ * Add custom field resolvers to the GraphQL schema. Allows adding new fields to types by providing field configs,
+ * or adding resolver functions to existing fields.
+ *
+ * We are using this to save the search index as a JSON object as we create here during build time.
+ *
+ * [Gatsby Node API - createResolvers]{@link https://www.gatsbyjs.org/docs/node-apis/#createResolvers}
+ *
+ * @param {function} createResolvers
+ */
+exports.createResolvers = ({ createResolvers }) => {
   createResolvers({
     Query: {
       ParliamentSearchIndex: {
@@ -412,6 +420,14 @@ exports.createResolvers = ({ cache, createResolvers }) => {
   })
 }
 
+/**
+ * Creates an elasticlunr index of all the markdown and open api documents.
+ *
+ * [Gatsby Node API - createResolvers]{@link https://www.gatsbyjs.org/docs/node-apis/#createResolvers}
+ *
+ * @param {Array} nodes An array containing all the markdown documents
+ * @param {Object} pages The contents of ParliamentNavigation
+ */
 const createIndex = async (nodes, pages) => {
   const index = elasticlunr()
   index.setRef(`id`)

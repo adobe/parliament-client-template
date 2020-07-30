@@ -64,6 +64,7 @@
     "rimraf": "^3.0.2",
     "styled-components": "^4.3.2",
     "typescript": "^3.6.2",
+    "widdershins": "^4.0.1",
     "yaml": "^1.7.2"
   },
   "devDependencies": {

@@ -38,13 +38,13 @@ const MarkdownTemplate = props => {
 
   return (
     <DocLayout>
-      <SEO title={props.pageContext.seo} />
+      <SEO title={pageContext.seo} />
       <Grid>
         <GridNav>
           <SiteNav
-            currentPage={props.location.pathname}
+            currentPage={location.pathname}
             gitRemote={gitRemote}
-            pages={pages}
+            pages={pageContext.pages}
           />
         </GridNav>
         <GridContent>
@@ -72,6 +72,9 @@ export const query = graphql`
       childMdx {
         body
       }
+    }
+    parliamentNavigation {
+      pages
     }
   }
 `

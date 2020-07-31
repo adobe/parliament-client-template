@@ -40,13 +40,13 @@ const MarkdownTemplate = props => {
 
   return (
     <DocLayout>
-      <SEO title={props.pageContext.seo} />
+      <SEO title={pageContext.seo} />
       <Grid>
         <GridNav>
           <SiteNav
-            currentPage={props.location.pathname}
+            currentPage={location.pathname}
             gitRemote={gitRemote}
-            pages={pages}
+            pages={parliamentNavigation.pages}
           />
         </GridNav>
         <GridContent id="contentMain">
@@ -122,6 +122,9 @@ export const query = graphql`
         tableOfContents(maxDepth: 4)
         timeToRead
       }
+    }
+    parliamentNavigation {
+      pages
     }
   }
 `

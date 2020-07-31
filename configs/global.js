@@ -161,7 +161,7 @@ module.exports = {
       },
     },
     {
-      resolve: `navigation-files-transformer`,
+      resolve: `@adobe/parliament-transformer-navigation`,
       options: {},
     },
   ],

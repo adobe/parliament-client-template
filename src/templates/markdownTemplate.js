@@ -31,12 +31,11 @@ import {
   ActionButtons,
 } from "@adobe/parliament-ui-components"
 
-const MarkdownTemplate = props => {
-  const { file } = props.data
+const MarkdownTemplate = ({ data, location, pageContext }) => {
+  const { file, parliamentNavigation } = data
   const { modifiedTime, relativePath, childMdx } = file
   const { body, tableOfContents, timeToRead } = childMdx
-
-  const { gitRemote, pages } = props.pageContext
+  const { gitRemote } = pageContext
 
   return (
     <DocLayout>
@@ -57,17 +56,22 @@ const MarkdownTemplate = props => {
                 z-index: 100;
               `}
             >
-              {gitRemote !== null ? (
-                <ActionButtons
-                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                  filePath={"relativePath"}
-                  branch={gitRemote.ref}
-                />
-              ) : (
-                ""
-              )}
+              <div
+                css={css`
+                  padding-bottom: 20px;
+                `}
+              >
+                {gitRemote !== null ? (
+                  <ActionButtons
+                    gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                    filePath={relativePath}
+                    branch={gitRemote.ref}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
-            {/* {renderAst(body)} */}
             <MDXProvider components={componentsMapping}>
               <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>
@@ -112,14 +116,14 @@ export default MarkdownTemplate
 
 export const query = graphql`
   query MarkdownTemplateQuery($id: String!) {
-    file(id: {eq: $id}) {
+    file(id: { eq: $id }) {
       id
       modifiedTime(formatString: "YYYY-MM-DD")
       name
       relativePath
       childMdx {
         body
-        tableOfContents(maxDepth: 4)
+        tableOfContents(maxDepth:3)
         timeToRead
       }
     }

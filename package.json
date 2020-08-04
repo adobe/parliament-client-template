@@ -7,7 +7,7 @@
   "dependencies": {
     "@adobe/gatsby-remark-afm": "^0.6.0",
     "@adobe/parliament-transformer-navigation": "^1.0.1",
-    "@adobe/parliament-ui-components": "^1.5.2",
+    "@adobe/parliament-ui-components": "^1.6.1",
     "@adobe/prism-adobe": "^1.0.0",
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
@@ -23,6 +23,7 @@
     "@spectrum-css/vars": "^2.3.0",
     "@spectrum-icons/workflow": "^3.0.2",
     "core-js": "^3.2.1",
+    "elasticlunr": "^0.9.5",
     "eslint-plugin-flowtype": "^4.2.0",
     "fast-glob": "^3.2.4",
     "gatsby": "^2.15.19",
@@ -48,6 +49,7 @@
     "gatsby-transformer-yaml": "^2.2.15",
     "gatsby-transformer-yaml-full": "^0.2.0",
     "git-url-parse": "^11.1.2",
+    "graphql-type-json": "^0.3.2",
     "mobx": "^4.13.0",
     "openapi-snippet": "^0.7.0",
     "prismjs": "^1.17.1",
@@ -62,6 +64,7 @@
     "rimraf": "^3.0.2",
     "styled-components": "^4.3.2",
     "typescript": "^3.6.2",
+    "widdershins": "^4.0.1",
     "yaml": "^1.7.2"
   },
   "devDependencies": {

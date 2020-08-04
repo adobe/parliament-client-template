@@ -14,8 +14,9 @@
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import { Nav, SearchField } from "@adobe/parliament-ui-components"
+import { Nav } from "@adobe/parliament-ui-components"
 
+import Search from "./Search"
 import Title from "./Title"
 
 import "./sitenav.css"
@@ -52,11 +53,7 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
             margin-top: 24px;
           `}
         >
-          <SearchField
-            onSubmit={searchTerm => {
-              document.location.href = `${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/search?q=${searchTerm}`
-            }}
-          />
+          <Search gitRemote={gitRemote} pages={pages} />
         </div>
       </div>
       <div

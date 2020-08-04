@@ -25,8 +25,12 @@ const fs = require(`fs`)
 const YAML = require("yaml")
 const openApiSnippet = require(`openapi-snippet`)
 const GitUrlParse = require(`git-url-parse`)
+const elasticlunr = require(`elasticlunr`)
+const { GraphQLJSONObject } = require("graphql-type-json")
+const converter = require("widdershins")
 
 const environment = process.env.NODE_ENV || "development"
+const openApiSearchDocs = []
 
 const searchTree = (theObject, matchingFilename) => {
   var result = null
@@ -245,6 +249,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           jsonData.parliamentNavigation.pages,
           `${node.name}${node.ext}`
         )
+
         createOpenApiPage(
           createPage,
           openapiTemplate,
@@ -323,7 +328,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   })
 }
 
-const createOpenApiPage = (
+const createOpenApiPage = async (
   createPage,
   openapiTemplate,
   object,
@@ -404,6 +409,20 @@ const createOpenApiPage = (
         gitRemote: gitRemote,
       },
     })
+
+    // if we have the spec is in the side nav add it to search index
+    if (seo) {
+      // convert openapi to markdown
+      const md = await converter.convert(object, {})
+      // add open api spec to search index
+      openApiSearchDocs.push({
+        id: slug,
+        title: seo,
+        body: md,
+        path: slug,
+        type: "apis",
+      })
+    }
   }
 }
 
@@ -414,4 +433,72 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       mainFields: ["browser", "main", "module"],
     },
   })
+}
+
+/**
+ * Add custom field resolvers to the GraphQL schema. Allows adding new fields to types by providing field configs,
+ * or adding resolver functions to existing fields.
+ *
+ * We are using this to save the search index as a JSON object as we create here during build time.
+ *
+ * [Gatsby Node API - createResolvers]{@link https://www.gatsbyjs.org/docs/node-apis/#createResolvers}
+ *
+ * @param {function} createResolvers
+ */
+exports.createResolvers = ({ createResolvers }) => {
+  createResolvers({
+    Query: {
+      ParliamentSearchIndex: {
+        type: GraphQLJSONObject,
+        resolve(source, args, context) {
+          const siteNodes = context.nodeModel.getAllNodes({
+            type: `MarkdownRemark`,
+          })
+          const pages = context.nodeModel.getAllNodes({
+            type: `ParliamentNavigation`,
+          })
+          return createIndex(siteNodes, pages)
+        },
+      },
+    },
+  })
+}
+
+/**
+ * Creates an elasticlunr index of all the markdown and open api documents.
+ *
+ * [Gatsby Node API - createResolvers]{@link https://www.gatsbyjs.org/docs/node-apis/#createResolvers}
+ *
+ * @param {Array} nodes An array containing all the markdown documents
+ * @param {Object} pages The contents of ParliamentNavigation
+ */
+const createIndex = async (nodes, pages) => {
+  const index = elasticlunr()
+  index.setRef(`id`)
+  index.addField(`title`)
+  index.addField(`body`)
+  index.addField(`path`)
+  index.addField(`type`)
+
+  for (node of nodes) {
+    const { slug } = node.fields
+    let title = searchTree(pages, slug)
+    if (title) {
+      const doc = {
+        id: slug,
+        title: title,
+        body: node.internal.content,
+        path: slug,
+        type: "docs",
+      }
+      index.addDoc(doc)
+    }
+  }
+
+  // Open API specs are not in graphql db, hence this hack
+  for (spec of openApiSearchDocs) {
+    index.addDoc(spec)
+  }
+
+  return index.toJSON()
 }

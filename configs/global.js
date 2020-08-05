@@ -72,7 +72,6 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
-        remarkPlugins: [require('remark-slug')],
         gatsbyRemarkPlugins: [
           `@adobe/gatsby-remark-afm`,
           `gatsby-remark-autolink-headers`,

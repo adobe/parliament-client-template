@@ -38,11 +38,9 @@ const IncludeMarkdown = ({ file }) => {
 
   if (markdownRemark) {
     return (
-      <React.Fragment>
-        <MDXProvider components={componentsMapping}>
-          <MDXRenderer>{markdownRemark.node.body}</MDXRenderer>
-        </MDXProvider>
-      </React.Fragment>
+      <MDXProvider components={componentsMapping}>
+        <MDXRenderer>{markdownRemark.node.body}</MDXRenderer>
+      </MDXProvider>
     )
   } else {
     return <React.Fragment>Could not find {file}</React.Fragment>

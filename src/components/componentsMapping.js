@@ -7,7 +7,6 @@ import {
   Heading5,
   Heading6,
   List,
-  Paragraph,
   Table,
   TBody,
   Th,
@@ -15,6 +14,8 @@ import {
   THead,
   Tr,
 } from "@adobe/parliament-ui-components"
+
+import Paragraph from './IncludeParagraph'
 
 import IncludeMarkdown from "../components/IncludeMarkdown"
 

@@ -56,21 +56,15 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
                 z-index: 100;
               `}
             >
-              <div
-                css={css`
-                  padding-bottom: 20px;
-                `}
-              >
-                {gitRemote !== null ? (
-                  <ActionButtons
-                    gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                    filePath={relativePath}
-                    branch={gitRemote.ref}
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
+              {gitRemote !== null ? (
+                <ActionButtons
+                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                  filePath={relativePath}
+                  branch={gitRemote.ref}
+                />
+              ) : (
+                ""
+              )}
             </div>
             <MDXProvider components={componentsMapping}>
               <MDXRenderer>{body}</MDXRenderer>
@@ -80,7 +74,6 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
         <div
           id="rightRail"
           css={css`
-            padding-top: 30px;
             padding-left: 16px;
             padding-right: 16px;
 

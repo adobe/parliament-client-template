@@ -74,7 +74,12 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           `@adobe/gatsby-remark-afm`,
-          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              removeAccents: true,
+            }
+          },
           `gatsby-plugin-catch-links`,
           {
             resolve: "gatsby-remark-external-links",

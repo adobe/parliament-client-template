@@ -17,7 +17,9 @@ import DocLayout from "../components/doclayout"
 import { Footer } from "@adobe/parliament-ui-components"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
-import renderAst from "../utils/AFMRehype"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
+import { componentsMapping } from "../components/componentsMapping"
 
 import "../components/recipe.css"
 
@@ -28,12 +30,11 @@ import {
   GridFooter,
 } from "@adobe/parliament-ui-components"
 
-const MarkdownTemplate = ({ data, location, pageContext }) => {
-  const { file } = data
-  const { childMarkdownRemark } = file
-  const { htmlAst } = childMarkdownRemark
-
-  const { gitRemote } = pageContext
+const MarkdownTemplate = props => {
+  const { file } = props.data
+  const { childMdx } = file
+  const { body } = childMdx
+  const { gitRemote, pages } = props.pageContext
 
   return (
     <DocLayout>
@@ -50,7 +51,11 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
           />
         </GridNav>
         <GridContent>
-          <div class="recipeContent">{renderAst(htmlAst)}</div>
+          <div class="recipeContent">
+            <MDXProvider components={componentsMapping}>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MDXProvider>
+          </div>
         </GridContent>
         <GridFooter>
           <Footer />
@@ -67,8 +72,8 @@ export const query = graphql`
     file(id: { eq: $id }) {
       id
       name
-      childMarkdownRemark {
-        htmlAst
+      childMdx {
+        body
       }
     }
     parliamentNavigation {

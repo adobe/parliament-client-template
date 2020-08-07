@@ -69,10 +69,17 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
-          `gatsby-remark-autolink-headers`,
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          `@adobe/gatsby-remark-afm`,
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              removeAccents: true,
+            }
+          },
           `gatsby-plugin-catch-links`,
           {
             resolve: "gatsby-remark-external-links",
@@ -154,11 +161,9 @@ module.exports = {
               },
             },
           },
-          `@adobe/gatsby-remark-afm`,
         ],
       },
     },
-    `gatsby-plugin-mdx`,
     {
       resolve: `@adobe/parliament-transformer-navigation`,
       options: {},

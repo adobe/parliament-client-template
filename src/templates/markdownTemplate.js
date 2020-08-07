@@ -18,7 +18,9 @@ import { Footer } from "@adobe/parliament-ui-components"
 import PageActions from "../components/PageActions"
 import SiteNav from "../components/SiteNav"
 import SEO from "../components/seo"
-import renderAst from "../utils/AFMRehype"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
+import { componentsMapping } from "../components/componentsMapping"
 
 import {
   Grid,
@@ -31,8 +33,8 @@ import {
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation } = data
-  const { modifiedTime, relativePath, childMarkdownRemark } = file
-  const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
+  const { modifiedTime, relativePath, childMdx } = file
+  const { body, tableOfContents, timeToRead } = childMdx
   const { gitRemote } = pageContext
 
   return (
@@ -54,29 +56,24 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
                 z-index: 100;
               `}
             >
-              <div
-                css={css`
-                  padding-bottom: 20px;
-                `}
-              >
-                {gitRemote !== null ? (
-                  <ActionButtons
-                    gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                    filePath={relativePath}
-                    branch={gitRemote.ref}
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
+              {gitRemote !== null ? (
+                <ActionButtons
+                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                  filePath={relativePath}
+                  branch={gitRemote.ref}
+                />
+              ) : (
+                ""
+              )}
             </div>
-            {renderAst(htmlAst)}
+            <MDXProvider components={componentsMapping}>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MDXProvider>
           </GridContentInner>
         </GridContent>
         <div
           id="rightRail"
           css={css`
-            padding-top: 30px;
             padding-left: 16px;
             padding-right: 16px;
 
@@ -117,9 +114,9 @@ export const query = graphql`
       modifiedTime(formatString: "YYYY-MM-DD")
       name
       relativePath
-      childMarkdownRemark {
-        htmlAst
-        tableOfContents
+      childMdx {
+        body
+        tableOfContents(maxDepth:3)
         timeToRead
       }
     }

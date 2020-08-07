@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import React from "react"
 import { css, jsx } from "@emotion/core"
-import { TableOfContents } from "@adobe/parliament-ui-components"
+import TableOfContents from "./TableOfContents"
 
 const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
   return (
@@ -29,9 +29,10 @@ const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
         `}
       >
         {tableOfContents ? (
+          // JSON.stringify(tableOfContents)
           <TableOfContents tableOfContents={tableOfContents} />
         ) : (
-          ""
+          null
         )}
         {modifiedTime && timeToRead ? (
           <p>

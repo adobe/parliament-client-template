@@ -29,7 +29,6 @@ const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
         `}
       >
         {tableOfContents ? (
-          // JSON.stringify(tableOfContents)
           <TableOfContents tableOfContents={tableOfContents} />
         ) : null}
         {modifiedTime && timeToRead ? (
@@ -49,9 +48,7 @@ const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
               {timeToRead} min read
             </span>
           </p>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </React.Fragment>
   )

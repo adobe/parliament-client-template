@@ -78,7 +78,8 @@ module.exports = {
             resolve: `gatsby-remark-autolink-headers`,
             options: {
               removeAccents: true,
-            }
+              icon: false,
+            },
           },
           `gatsby-plugin-catch-links`,
           {

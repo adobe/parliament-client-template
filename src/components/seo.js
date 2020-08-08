@@ -80,7 +80,9 @@ function SEO({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    ></Helmet>
+    >
+      <link rel="stylesheet" href="https://use.typekit.net/uma8ayv.css" />
+    </Helmet>
   )
 }
 

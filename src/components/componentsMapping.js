@@ -17,8 +17,6 @@ import {
 
 import Paragraph from './IncludeParagraph'
 
-import IncludeMarkdown from "../components/IncludeMarkdown"
-
 export const componentsMapping = {
   alert: Alert,
   h1: Heading1,
@@ -27,7 +25,6 @@ export const componentsMapping = {
   h4: Heading4,
   h5: Heading5,
   h6: Heading6,
-  includemarkdown: IncludeMarkdown,
   // tab: Tab,
   // tabview: TabView,
   table: Table,

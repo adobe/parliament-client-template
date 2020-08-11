@@ -7,6 +7,7 @@ import {
   Heading5,
   Heading6,
   List,
+  Paragraph,
   Table,
   TBody,
   Th,
@@ -15,7 +16,7 @@ import {
   Tr,
 } from "@adobe/parliament-ui-components"
 
-import Paragraph from './IncludeParagraph'
+// import Paragraph from './IncludeParagraph'
 
 export const componentsMapping = {
   alert: Alert,

@@ -73,7 +73,12 @@ module.exports = {
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
-          require.resolve(`../../gatsby-remark-afm`),
+          {
+            resolve: `@adobe/gatsby-remark-afm`,
+            options: {
+              directory: `${projectRootDir}/src/content/`,
+            },
+          },
           {
             resolve: `gatsby-remark-autolink-headers`,
             options: {

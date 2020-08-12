@@ -141,6 +141,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 id
                 slug
               }
+              fileAbsolutePath
             }
           }
         }

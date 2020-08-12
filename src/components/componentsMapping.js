@@ -16,8 +16,6 @@ import {
   Tr,
 } from "@adobe/parliament-ui-components"
 
-// import Paragraph from './IncludeParagraph'
-
 export const componentsMapping = {
   alert: Alert,
   h1: Heading1,

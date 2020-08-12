@@ -73,7 +73,7 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
-            resolve: `${path.join(projectRootDir, "../")}gatsby-remark-afm`,
+            resolve: `@adobe/gatsby-remark-afm`,
             options: {
               directory: `${
                 process.env.NODE_ENV === `development`

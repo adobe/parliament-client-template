@@ -7,6 +7,7 @@ import {
   Heading5,
   Heading6,
   List,
+  Paragraph,
   Table,
   TBody,
   Th,
@@ -14,10 +15,6 @@ import {
   THead,
   Tr,
 } from "@adobe/parliament-ui-components"
-
-import Paragraph from './IncludeParagraph'
-
-import IncludeMarkdown from "../components/IncludeMarkdown"
 
 export const componentsMapping = {
   alert: Alert,
@@ -27,7 +24,6 @@ export const componentsMapping = {
   h4: Heading4,
   h5: Heading5,
   h6: Heading6,
-  includemarkdown: IncludeMarkdown,
   // tab: Tab,
   // tabview: TabView,
   table: Table,

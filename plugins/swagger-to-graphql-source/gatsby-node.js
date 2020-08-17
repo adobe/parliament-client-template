@@ -1,5 +1,6 @@
 const path = require('path')
 const glob = require("fast-glob")
+const SwaggerParser = require("@apidevtools/swagger-parser");
 
 exports.sourceNodes = async ({
     actions,
@@ -25,10 +26,20 @@ exports.sourceNodes = async ({
 
     fileResults.forEach(file => {
         const fileInfo = path.parse(file)
-        console.log(fileInfo);
-    });
-    //const api = await SwaggerParser.parse(path.resolve('./src/data/magento-admin.json'))
 
-    //console.log(api.paths);
+        console.log(fileInfo);
+
+        const { dir, base } = fileInfo
+        const filePath = path.resolve(contentRoot, dir, base);
+
+        console.log(filePath);
+
+        SwaggerParser.parse(filePath)
+            .then(api => {
+                console.log(api);
+
+            })
+
+    });
 
 }

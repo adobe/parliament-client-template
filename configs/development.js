@@ -27,7 +27,7 @@ module.exports = {
       resolve: `swagger-to-graphql-source`,
       options: {
         contentRoot: path.resolve(path.dirname(__dirname),'src/content'),
-        sourcePatterns: '**/data/petstore.json'
+        sourcePatterns: process.env.SWAGGER_SOURCE_PATTERNS
       },
     }
   ],

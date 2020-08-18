@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
+        name: `external`,
         path: `${projectRootDir}/src/content`,
       },
     },
@@ -23,5 +23,12 @@ module.exports = {
         patterns: process.env.GATSBY_SOURCE_PATTERNS,
       },
     },
+    {
+      resolve: `swagger-to-graphql-source`,
+      options: {
+        contentRoot: path.resolve(path.dirname(__dirname),'src/content'),
+        sourcePatterns: '**/data/petstore.json'
+      },
+    }
   ],
 }

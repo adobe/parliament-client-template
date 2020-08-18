@@ -9,7 +9,9 @@ exports.sourceNodes = async ({
     getNodesByType,
 }, pluginOptions) => {
 
-    const { createNode } = actions
+    const { createNode, createParentChildLink } = actions
+
+    const fileNodes = getNodesByType('File');
 
     console.log(pluginOptions);
 
@@ -27,17 +29,31 @@ exports.sourceNodes = async ({
     fileResults.forEach(file => {
         const fileInfo = path.parse(file)
 
-        console.log(fileInfo);
+        const { dir, base, name } = fileInfo
 
-        const { dir, base } = fileInfo
         const filePath = path.resolve(contentRoot, dir, base);
 
-        console.log(filePath);
+        const fileNode = fileNodes.find(fileNode => fileNode.absolutePath === filePath);
 
         SwaggerParser.parse(filePath)
             .then(api => {
-                console.log(api);
+                const { info } = api;
 
+                const infoNode = {
+                    ...info,
+                    id: createNodeId(`${name} ${info.title} ${info.version}`),
+                    name: name,
+                    children: [],
+                    internal: {
+                        content: "",
+                        contentDigest: createContentDigest(info),
+                        type: "SwaggerOpenApiInfo",
+                    },
+                    parent: fileNode.id
+                }
+
+                createNode(infoNode)
+                createParentChildLink({ parent: fileNode, child: infoNode })
             })
 
     });

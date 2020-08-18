@@ -145,12 +145,5 @@ module.exports = {
       resolve: `@adobe/parliament-transformer-navigation`,
       options: {},
     },
-    {
-      resolve: `swagger-to-graphql-source`,
-      options: {
-        contentRoot: path.resolve(path.dirname(__dirname),'src/content'),
-        sourcePatterns: '**/data/petstore.json'
-      },
-    }
   ],
 }

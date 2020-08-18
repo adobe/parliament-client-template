@@ -59,3 +59,15 @@ exports.sourceNodes = async ({
     });
 
 }
+
+// PoC that you can roll up data into a single JSON object
+// See: https://www.gatsbyjs.com/docs/schema-customization/
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type SwaggerOpenApiInfo implements Node {
+      license: JSON
+    }
+  `
+  createTypes(typeDefs)
+}

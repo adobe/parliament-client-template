@@ -55,3 +55,98 @@ Object {
   "version": "1.0.5",
 }
 `;
+
+exports[`create path nodes 1`] = `
+Array [
+  Object {
+    "name": "/pet/{petId}/uploadImage",
+    "operations": Array [
+      "post",
+    ],
+  },
+  Object {
+    "name": "/pet",
+    "operations": Array [
+      "post",
+      "put",
+    ],
+  },
+  Object {
+    "name": "/pet/findByStatus",
+    "operations": Array [
+      "get",
+    ],
+  },
+  Object {
+    "name": "/pet/findByTags",
+    "operations": Array [
+      "get",
+    ],
+  },
+  Object {
+    "name": "/pet/{petId}",
+    "operations": Array [
+      "get",
+      "post",
+      "delete",
+    ],
+  },
+  Object {
+    "name": "/store/order",
+    "operations": Array [
+      "post",
+    ],
+  },
+  Object {
+    "name": "/store/order/{orderId}",
+    "operations": Array [
+      "get",
+      "delete",
+    ],
+  },
+  Object {
+    "name": "/store/inventory",
+    "operations": Array [
+      "get",
+    ],
+  },
+  Object {
+    "name": "/user/createWithArray",
+    "operations": Array [
+      "post",
+    ],
+  },
+  Object {
+    "name": "/user/createWithList",
+    "operations": Array [
+      "post",
+    ],
+  },
+  Object {
+    "name": "/user/{username}",
+    "operations": Array [
+      "get",
+      "put",
+      "delete",
+    ],
+  },
+  Object {
+    "name": "/user/login",
+    "operations": Array [
+      "get",
+    ],
+  },
+  Object {
+    "name": "/user/logout",
+    "operations": Array [
+      "get",
+    ],
+  },
+  Object {
+    "name": "/user",
+    "operations": Array [
+      "post",
+    ],
+  },
+]
+`;

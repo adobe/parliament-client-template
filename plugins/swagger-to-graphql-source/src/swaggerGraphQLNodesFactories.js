@@ -1,18 +1,25 @@
 const INFO_NODE_TYPE = "SwaggerOpenApiInfo";
 
-export const createInfoNode = props => {
+exports.createInfoNode = props => {
   const {
     api,
     parentFile,
     gatsbyNodeApi: { createNodeId, createContentDigest },
   } = props
 
-  const { info } = api;
+  const { info, swagger, host, basePath, schemes, consumes, produces, tags } = api;
 
   const { name, id: parentId } = parentFile;
 
   return {
     ...info,
+    swagger,
+    host,
+    basePath,
+    schemes,
+    consumes,
+    produces,
+    tags,
     id: createNodeId(`${name} ${info.title} ${info.version}`),
     name: name,
     children: [],
@@ -25,8 +32,8 @@ export const createInfoNode = props => {
   }
 }
 
-export const createPathNodes = props => {}
+exports.createPathNodes = props => {}
 
-export const createDefinitionNodes = props => {}
+exports.createDefinitionNodes = props => {}
 
-export const createTagNodes = props => {}
+exports.createTagNodes = props => {}

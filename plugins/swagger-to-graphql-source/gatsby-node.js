@@ -2,6 +2,8 @@ const path = require('path')
 const glob = require("fast-glob")
 const SwaggerParser = require("@apidevtools/swagger-parser");
 
+const { createInfoNode } = require('./src/swaggerGraphQLNodesFactories');
+
 exports.sourceNodes = async ({
     actions,
     createContentDigest,
@@ -12,8 +14,6 @@ exports.sourceNodes = async ({
     const { createNode, createParentChildLink } = actions
 
     const fileNodes = getNodesByType('File');
-
-    console.log(pluginOptions);
 
     const { contentRoot, sourcePatterns } = pluginOptions;
 
@@ -35,22 +35,16 @@ exports.sourceNodes = async ({
 
         const fileNode = fileNodes.find(fileNode => fileNode.absolutePath === filePath);
 
+        const gatsbyNodeApi = {
+            createNodeId,
+            createContentDigest,
+        }
+
         SwaggerParser.parse(filePath)
             .then(api => {
-                const { info } = api;
+                console.log(filePath);
 
-                const infoNode = {
-                    ...info,
-                    id: createNodeId(`${name} ${info.title} ${info.version}`),
-                    name: name,
-                    children: [],
-                    internal: {
-                        content: "",
-                        contentDigest: createContentDigest(info),
-                        type: "SwaggerOpenApiInfo",
-                    },
-                    parent: fileNode.id
-                }
+                const infoNode = createInfoNode({ api, parentFile: fileNode, gatsbyNodeApi })
 
                 createNode(infoNode)
                 createParentChildLink({ parent: fileNode, child: infoNode })
@@ -63,11 +57,11 @@ exports.sourceNodes = async ({
 // PoC that you can roll up data into a single JSON object
 // See: https://www.gatsbyjs.com/docs/schema-customization/
 exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-  const typeDefs = `
+    const { createTypes } = actions
+    const typeDefs = `
     type SwaggerOpenApiInfo implements Node {
       license: JSON
     }
   `
-  createTypes(typeDefs)
+    createTypes(typeDefs)
 }

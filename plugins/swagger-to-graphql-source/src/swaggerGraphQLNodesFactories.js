@@ -40,41 +40,42 @@ exports.createPathNodes = props => {
     gatsbyNodeApi: { createNodeId, createContentDigest }
   } = props;
 
-  const { name, id: parentId } = parentFile;
+  const { name: parentName, id: parentId } = parentFile;
 
   const { paths, info } = api;
 
   const pathNames = Object.keys(paths);
 
   const pathNodes = pathNames.map(pathName => {
-    console.log(paths[pathName]); 
+    const pathObject = paths[pathName];
 
-    const operations = Object.keys(paths[pathName])
+    const operationVerbs = Object.keys(pathObject)
 
-    console.log(operations);
+    const operations = operationVerbs.map(verb => {
+      const operationObject = pathObject[verb]
+      return {
+        verb,
+        ...operationObject,
+      }
+    })
 
     return {
       name: pathName,
-      operations: operations
+      operations: operations,
+      id: createNodeId(`${parentName} ${pathName}`),
+      children: [],
+      parent: parentId,
+      internal: {
+        content: "",
+        contentDigest: createContentDigest(pathObject),
+        type: PATH_NODE_TYPE,
+      },
     }
   })
-/*
-  return {
-    ...paths,
-    id: createNodeId(`${name} ${info.title} ${info.version}`),
-    name: name,
-    children: [],
-    internal: {
-      content: "",
-      contentDigest: createContentDigest(info),
-      type: INFO_NODE_TYPE,
-    },
-    parent: parentId,
-  }
-*/
+
   return pathNodes;
 }
 
-exports.createDefinitionNodes = props => {}
+exports.createDefinitionNodes = props => { }
 
-exports.createTagNodes = props => {}
+exports.createTagNodes = props => { }

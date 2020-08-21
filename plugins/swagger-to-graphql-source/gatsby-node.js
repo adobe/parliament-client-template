@@ -2,7 +2,7 @@ const path = require('path')
 const glob = require("fast-glob")
 const SwaggerParser = require("@apidevtools/swagger-parser");
 
-const { createInfoNode, createPathNodes } = require('./src/swaggerGraphQLNodesFactories');
+const { createInfoNode, createPathNodes, createDefinitionNodes } = require('./src/swaggerGraphQLNodesFactories');
 
 exports.sourceNodes = async ({
     actions,
@@ -45,13 +45,16 @@ exports.sourceNodes = async ({
                 console.log(filePath);
 
                 const infoNode = createInfoNode({ api, parentFile: fileNode, gatsbyNodeApi })
-
-                createNode(infoNode)
-                createParentChildLink({ parent: fileNode, child: infoNode })
-
                 const pathNodes = createPathNodes({api, parentFile: fileNode, gatsbyNodeApi })
+                const definitionNodes = createDefinitionNodes({api, parentFile: fileNode, gatsbyNodeApi });
 
-                pathNodes.forEach(pathNode => {
+                const newNodes = [
+                    infoNode,
+                    ...pathNodes,
+                    ...definitionNodes 
+                ]
+
+                newNodes.forEach(pathNode => {
                     createNode(pathNode);
                     createParentChildLink({ parent: fileNode, child: pathNode})
                 })
@@ -73,6 +76,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     type SwaggerOpenApiPathOperations {
         parameters: JSON
         responses: JSON
+    }
+
+    type SwaggerOpenApiDefinition implements Node {
+        schema: JSON
     }
   `
     createTypes(typeDefs)

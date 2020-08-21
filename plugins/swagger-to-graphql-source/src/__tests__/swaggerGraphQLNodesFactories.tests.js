@@ -1,4 +1,4 @@
-const { createInfoNode, createPathNodes } = require("../swaggerGraphQLNodesFactories")
+const { createInfoNode, createPathNodes, createDefinitionNodes } = require("../swaggerGraphQLNodesFactories")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 
 const path = require("path")
@@ -34,6 +34,15 @@ test("create path nodes", async () => {
 
   const nodes = createPathNodes(props)
 
-
   expect(nodes).toMatchSnapshot()
+})
+
+test("create definition nodes", async () => {
+  const api = await SwaggerParser.parse(DATA_PATH)
+
+  const props = { api, parentFile, gatsbyNodeApi }
+
+  const nodes = createDefinitionNodes(props)
+
+  expect(nodes).toMatchSnapshot();
 })

@@ -1,5 +1,6 @@
 const INFO_NODE_TYPE = "SwaggerOpenApiInfo";
 const PATH_NODE_TYPE = "SwaggerOpenApiPath";
+const DEFINITION_NODE_TYPE = "SwaggerOpenApiDefinition";
 
 exports.createInfoNode = props => {
   const {
@@ -42,7 +43,7 @@ exports.createPathNodes = props => {
 
   const { name: parentName, id: parentId } = parentFile;
 
-  const { paths, info } = api;
+  const { paths } = api;
 
   const pathNames = Object.keys(paths);
 
@@ -76,6 +77,34 @@ exports.createPathNodes = props => {
   return pathNodes;
 }
 
-exports.createDefinitionNodes = props => { }
+exports.createDefinitionNodes = props => { 
+  const {
+    api,
+    parentFile,
+    gatsbyNodeApi: { createNodeId, createContentDigest },
+  } = props
 
-exports.createTagNodes = props => { }
+  const { name: parentName, id: parentId } = parentFile;
+
+  const { definitions } = api;
+
+  const definitionNames = Object.keys(definitions);
+
+  const definitionNodes = definitionNames.map(name => {
+    const schemaObject = definitions[name];
+    return {
+      name,
+      schema: schemaObject,
+      id: createNodeId(`${parentName} ${name}`),
+      children: [],
+      parent: parentId,
+      internal: {
+        content: "",
+        contentDigest: createContentDigest(schemaObject),
+        type: DEFINITION_NODE_TYPE,
+      },
+    }
+  }) 
+
+  return definitionNodes;
+}

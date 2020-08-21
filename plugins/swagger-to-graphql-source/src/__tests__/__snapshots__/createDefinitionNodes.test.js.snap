@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create definition nodes 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "id": "parentFile.name ApiResponse",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiDefinition",
+    },
+    "name": "ApiResponse",
+    "parent": "parentFile.id",
+    "schema": Object {
+      "properties": Object {
+        "code": Object {
+          "format": "int32",
+          "type": "integer",
+        },
+        "message": Object {
+          "type": "string",
+        },
+        "type": Object {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.name Category",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiDefinition",
+    },
+    "name": "Category",
+    "parent": "parentFile.id",
+    "schema": Object {
+      "properties": Object {
+        "id": Object {
+          "format": "int64",
+          "type": "integer",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "type": "object",
+      "xml": Object {
+        "name": "Category",
+      },
+    },
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.name Pet",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiDefinition",
+    },
+    "name": "Pet",
+    "parent": "parentFile.id",
+    "schema": Object {
+      "properties": Object {
+        "category": Object {
+          "$ref": "#/definitions/Category",
+        },
+        "id": Object {
+          "format": "int64",
+          "type": "integer",
+        },
+        "name": Object {
+          "example": "doggie",
+          "type": "string",
+        },
+        "photoUrls": Object {
+          "items": Object {
+            "type": "string",
+            "xml": Object {
+              "name": "photoUrl",
+            },
+          },
+          "type": "array",
+          "xml": Object {
+            "wrapped": true,
+          },
+        },
+        "status": Object {
+          "description": "pet status in the store",
+          "enum": Array [
+            "available",
+            "pending",
+            "sold",
+          ],
+          "type": "string",
+        },
+        "tags": Object {
+          "items": Object {
+            "$ref": "#/definitions/Tag",
+            "xml": Object {
+              "name": "tag",
+            },
+          },
+          "type": "array",
+          "xml": Object {
+            "wrapped": true,
+          },
+        },
+      },
+      "required": Array [
+        "name",
+        "photoUrls",
+      ],
+      "type": "object",
+      "xml": Object {
+        "name": "Pet",
+      },
+    },
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.name Tag",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiDefinition",
+    },
+    "name": "Tag",
+    "parent": "parentFile.id",
+    "schema": Object {
+      "properties": Object {
+        "id": Object {
+          "format": "int64",
+          "type": "integer",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "type": "object",
+      "xml": Object {
+        "name": "Tag",
+      },
+    },
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.name Order",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiDefinition",
+    },
+    "name": "Order",
+    "parent": "parentFile.id",
+    "schema": Object {
+      "properties": Object {
+        "complete": Object {
+          "type": "boolean",
+        },
+        "id": Object {
+          "format": "int64",
+          "type": "integer",
+        },
+        "petId": Object {
+          "format": "int64",
+          "type": "integer",
+        },
+        "quantity": Object {
+          "format": "int32",
+          "type": "integer",
+        },
+        "shipDate": Object {
+          "format": "date-time",
+          "type": "string",
+        },
+        "status": Object {
+          "description": "Order Status",
+          "enum": Array [
+            "placed",
+            "approved",
+            "delivered",
+          ],
+          "type": "string",
+        },
+      },
+      "type": "object",
+      "xml": Object {
+        "name": "Order",
+      },
+    },
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.name User",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiDefinition",
+    },
+    "name": "User",
+    "parent": "parentFile.id",
+    "schema": Object {
+      "properties": Object {
+        "email": Object {
+          "type": "string",
+        },
+        "firstName": Object {
+          "type": "string",
+        },
+        "id": Object {
+          "format": "int64",
+          "type": "integer",
+        },
+        "lastName": Object {
+          "type": "string",
+        },
+        "password": Object {
+          "type": "string",
+        },
+        "phone": Object {
+          "type": "string",
+        },
+        "userStatus": Object {
+          "description": "User Status",
+          "format": "int32",
+          "type": "integer",
+        },
+        "username": Object {
+          "type": "string",
+        },
+      },
+      "type": "object",
+      "xml": Object {
+        "name": "User",
+      },
+    },
+  },
+]
+`;

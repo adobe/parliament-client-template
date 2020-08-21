@@ -95,6 +95,8 @@ module.exports = createPathNodes
  * In this node object, the operation objects are stored as an array to make it
  * friendlier to query in GraphQL.
  * 
+ * This node also contains metadata properties required to add the node into GraphQL
+ * 
  * @typedef {Object} PathNode
  *
  * @property {String} name The name of the path

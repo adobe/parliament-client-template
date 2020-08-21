@@ -1,4 +1,4 @@
-const PATH_NODE_TYPE = "SwaggerOpenApiPath";
+const PATH_NODE_TYPE = "SwaggerOpenApiPath"
 const DEFINITION_NODE_TYPE = "SwaggerOpenApiDefinition";
 
 exports.createPathNodes = props => {

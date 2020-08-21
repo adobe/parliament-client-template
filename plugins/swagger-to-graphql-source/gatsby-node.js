@@ -2,7 +2,8 @@ const path = require('path')
 const glob = require("fast-glob")
 const SwaggerParser = require("@apidevtools/swagger-parser");
 
-const { createInfoNode, createPathNodes, createDefinitionNodes } = require('./src/swaggerGraphQLNodesFactories');
+const { createPathNodes, createDefinitionNodes } = require('./src/swaggerGraphQLNodesFactories');
+const createInfoNode = require('./src/createInfoNode');
 
 exports.sourceNodes = async ({
     actions,

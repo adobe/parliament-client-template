@@ -17,16 +17,6 @@ const gatsbyNodeApi = {
   createContentDigest,
 }
 
-test("create info node", async () => {
-  const api = await SwaggerParser.parse(DATA_PATH)
-
-  const props = { api, parentFile, gatsbyNodeApi }
-
-  const nodeData = createInfoNode(props)
-
-  expect(nodeData).toMatchSnapshot()
-})
-
 test("create path nodes", async () => {
   const api = await SwaggerParser.parse(DATA_PATH)
 

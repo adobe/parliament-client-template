@@ -7,7 +7,7 @@ const path = require("path")
 const DATA_PATH = path.resolve(__dirname, "data/swagger.json")
 
 const parentFile = {
-  name: "parentFile.name",
+  relativePath: "parentFile.relativePath",
   id: "parentFile.id",
 }
 const createNodeId = jest.fn(data => data)

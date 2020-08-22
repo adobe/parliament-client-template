@@ -30,7 +30,7 @@ const createInfoNode = props => {
     tags,
   } = swaggerObject
 
-  const { name, id: parentId } = parentFile
+  const { id: parentId, relativePath } = parentFile
 
   return {
     ...info,
@@ -41,8 +41,8 @@ const createInfoNode = props => {
     consumes,
     produces,
     tags,
-    id: createNodeId(`${name} ${info.title} ${info.version}`),
-    name: name,
+    id: createNodeId(`${relativePath} ${info.title} ${info.version}`),
+    name: `${relativePath}`,
     children: [],
     internal: {
       content: "",

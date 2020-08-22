@@ -4,7 +4,7 @@ exports[`create path nodes 1`] = `
 Array [
   Object {
     "children": Array [],
-    "id": "parentFile.name /pet/{petId}/uploadImage",
+    "id": "parentFile.relativePath /pet/{petId}/uploadImage",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -72,7 +72,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /pet",
+    "id": "parentFile.relativePath /pet",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -173,7 +173,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /pet/findByStatus",
+    "id": "parentFile.relativePath /pet/findByStatus",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -240,7 +240,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /pet/findByTags",
+    "id": "parentFile.relativePath /pet/findByTags",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -302,7 +302,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /pet/{petId}",
+    "id": "parentFile.relativePath /pet/{petId}",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -455,7 +455,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /store/order",
+    "id": "parentFile.relativePath /store/order",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -506,7 +506,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /store/order/{orderId}",
+    "id": "parentFile.relativePath /store/order/{orderId}",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -590,7 +590,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /store/inventory",
+    "id": "parentFile.relativePath /store/inventory",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -633,7 +633,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /user/createWithArray",
+    "id": "parentFile.relativePath /user/createWithArray",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -681,7 +681,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /user/createWithList",
+    "id": "parentFile.relativePath /user/createWithList",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -729,7 +729,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /user/{username}",
+    "id": "parentFile.relativePath /user/{username}",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -850,7 +850,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /user/login",
+    "id": "parentFile.relativePath /user/login",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -915,7 +915,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /user/logout",
+    "id": "parentFile.relativePath /user/logout",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -947,7 +947,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name /user",
+    "id": "parentFile.relativePath /user",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",

@@ -22,7 +22,7 @@ const createDefinitionNodes = props => {
     gatsbyApi: { createNodeId, createContentDigest },
   } = props
 
-  const { name: parentName, id: parentId } = parentFile;
+  const { id: parentId, relativePath } = parentFile
 
   const { definitions } = swaggerObject;
 
@@ -33,7 +33,7 @@ const createDefinitionNodes = props => {
     return {
       name,
       schema: schemaObject,
-      id: createNodeId(`${parentName} ${name}`),
+      id: createNodeId(`${relativePath} ${name}`),
       children: [],
       parent: parentId,
       internal: {

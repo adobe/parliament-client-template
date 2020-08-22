@@ -4,7 +4,7 @@ exports[`create definition nodes 1`] = `
 Array [
   Object {
     "children": Array [],
-    "id": "parentFile.name ApiResponse",
+    "id": "parentFile.relativePath ApiResponse",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -30,7 +30,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name Category",
+    "id": "parentFile.relativePath Category",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -56,7 +56,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name Pet",
+    "id": "parentFile.relativePath Pet",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -123,7 +123,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name Tag",
+    "id": "parentFile.relativePath Tag",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -149,7 +149,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name Order",
+    "id": "parentFile.relativePath Order",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",
@@ -196,7 +196,7 @@ Array [
   },
   Object {
     "children": Array [],
-    "id": "parentFile.name User",
+    "id": "parentFile.relativePath User",
     "internal": Object {
       "content": "",
       "contentDigest": "HashString",

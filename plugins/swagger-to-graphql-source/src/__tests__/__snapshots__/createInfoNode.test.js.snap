@@ -10,7 +10,7 @@ Object {
   },
   "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key \`special-key\` to test the authorization filters.",
   "host": "petstore.swagger.io",
-  "id": "parentFile.name Swagger Petstore 1.0.5",
+  "id": "parentFile.relativePath Swagger Petstore 1.0.5",
   "internal": Object {
     "content": "",
     "contentDigest": "HashString",
@@ -20,7 +20,7 @@ Object {
     "name": "Apache 2.0",
     "url": "http://www.apache.org/licenses/LICENSE-2.0.html",
   },
-  "name": "parentFile.name",
+  "name": "parentFile.relativePath",
   "parent": "parentFile.id",
   "produces": undefined,
   "schemes": Array [

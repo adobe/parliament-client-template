@@ -29,7 +29,7 @@ const createPathNodes = props => {
     gatsbyApi: { createNodeId, createContentDigest },
   } = props
 
-  const { name: parentName, id: parentId } = parentFile
+  const { id: parentId, relativePath } = parentFile
 
   const { paths } = swaggerObject
 
@@ -58,7 +58,7 @@ const createPathNodes = props => {
     return {
       name: pathName,
       operations: operations,
-      id: createNodeId(`${parentName} ${pathName}`),
+      id: createNodeId(`${relativePath} ${pathName}`),
       children: [],
       parent: parentId,
       internal: {

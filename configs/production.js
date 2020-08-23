@@ -6,6 +6,8 @@ require("dotenv").config({
 
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",")
 
+const contentSourcePath = path.resolve(path.dirname(__dirname), '.cache/gatsby-source-git');
+
 module.exports = {
   plugins: [
     {
@@ -17,20 +19,12 @@ module.exports = {
         branch: `${process.env.GATSBY_SOURCE_BRANCH}`,
         // Tailor which files get imported eg. import the docs folder from a codebase.
         patterns: patterns,
-        local: path.resolve(path.dirname(__dirname), 'src/content')
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `external`,
-        path: `${path.resolve(path.dirname(__dirname))}/src/content`,
       },
     },
     {
       resolve: `swagger-to-graphql-source`,
       options: {
-        contentRoot: path.resolve(path.dirname(__dirname),'src/content'),
+        contentRoot: contentSourcePath,
         sourcePatterns: process.env.SWAGGER_SOURCE_PATTERNS
       },
     }

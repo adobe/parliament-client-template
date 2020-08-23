@@ -21,69 +21,76 @@ const createDefinitionNodes = require("./src/createDefinitionNodes")
  * @see {@link https://www.gatsbyjs.com/docs/node-apis/#sourceNodes}
  */
 exports.sourceNodes = async (nodeApiHelpers, pluginOptions) => {
-  const {
-    actions,
-    createContentDigest,
-    createNodeId,
-    getNodesByType,
-  } = nodeApiHelpers
+    const {
+        actions,
+        createContentDigest,
+        createNodeId,
+        getNodesByType,
+    } = nodeApiHelpers
 
-  const fileNodes = getNodesByType("File")
+    const fileNodes = getNodesByType("File")
 
-  const { createNode, createParentChildLink } = actions
+    const { createNode, createParentChildLink } = actions
 
-  const gatsbyApi = {
-    createNodeId,
-    createContentDigest,
-  }
+    const gatsbyApi = {
+        createNodeId,
+        createContentDigest,
+    }
 
-  const { contentRoot, sourcePatterns } = pluginOptions
+    const { contentRoot, sourcePatterns } = pluginOptions
 
-  const globOptions = {
-    cwd: contentRoot,
-    nodir: true,
-  }
+    const globOptions = {
+        cwd: contentRoot,
+        nodir: true,
+    }
 
-  const patternsArray = sourcePatterns.split(",")
+    const patternsArray = sourcePatterns.split(",")
 
-  const swaggerFiles = glob.sync(patternsArray, globOptions)
+    const swaggerFiles = glob.sync(patternsArray, globOptions)
 
-  swaggerFiles.forEach(parentFile => {
-    const parentFileInfo = path.parse(parentFile)
+    // We need to wait for the async tasks to finish inside this loop
+    // otherwise Gatsby will try to use some node types before
+    // they are ready and report that a Type name does not exist.
+    // This error occurs during static site builds.
+    for await (const parentFile of swaggerFiles) {
+        const parentFileInfo = path.parse(parentFile)
 
-    const { dir, base } = parentFileInfo
+        const { dir, base } = parentFileInfo
 
-    const parentFilePath = path.resolve(contentRoot, dir, base)
+        const parentFilePath = path.resolve(contentRoot, dir, base)
 
-    const parentFileNode = fileNodes.find(
-      fileNode => fileNode.absolutePath === parentFilePath
-    )
+        const parentFileNode = fileNodes.find(
+            fileNode => fileNode.absolutePath === parentFilePath
+        )
 
-    SwaggerParser.parse(parentFilePath).then(swaggerObject => {
-      const infoNode = createInfoNode({
-        swaggerObject,
-        parentFile: parentFileNode,
-        gatsbyApi,
-      })
-      const pathNodes = createPathNodes({
-        swaggerObject,
-        parentFile: parentFileNode,
-        gatsbyApi,
-      })
-      const definitionNodes = createDefinitionNodes({
-        swaggerObject,
-        parentFile: parentFileNode,
-        gatsbyApi,
-      })
+        const swaggerObject = await SwaggerParser.parse(parentFilePath)
 
-      const newNodes = [infoNode, ...pathNodes, ...definitionNodes]
+        const infoNode = createInfoNode({
+            swaggerObject,
+            parentFile: parentFileNode,
+            gatsbyApi,
+        })
+        const pathNodes = createPathNodes({
+            swaggerObject,
+            parentFile: parentFileNode,
+            gatsbyApi,
+        })
+        const definitionNodes = createDefinitionNodes({
+            swaggerObject,
+            parentFile: parentFileNode,
+            gatsbyApi,
+        })
 
-      newNodes.forEach(newNode => {
-        createNode(newNode)
-        createParentChildLink({ parent: parentFileNode, child: newNode })
-      })
-    })
-  })
+        const newNodes = [infoNode, ...pathNodes, ...definitionNodes]
+
+        newNodes.forEach(newNode => {
+            createNode(newNode).then(() => {
+                createParentChildLink({ parent: parentFileNode, child: newNode })
+
+            })
+        })
+
+    }
 }
 
 /**
@@ -101,11 +108,11 @@ exports.sourceNodes = async (nodeApiHelpers, pluginOptions) => {
  * @see {@link https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject}
  */
 exports.createSchemaCustomization = nodeApiHelpers => {
-  const { actions } = nodeApiHelpers
+    const { actions } = nodeApiHelpers
 
-  const { createTypes } = actions
+    const { createTypes } = actions
 
-  const typeDefs = `
+    const typeDefs = `
     type SwaggerOpenApiPathOperations {
         parameters: JSON
         responses: JSON
@@ -115,5 +122,7 @@ exports.createSchemaCustomization = nodeApiHelpers => {
         schema: JSON
     }
   `
-  createTypes(typeDefs)
+    createTypes(typeDefs)
 }
+
+exports.create

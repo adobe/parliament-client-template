@@ -75,7 +75,11 @@ module.exports = {
           {
             resolve: `@adobe/gatsby-remark-afm`,
             options: {
-              directory: `${projectRootDir}/src/content`,
+              directory: `${
+                process.env.NODE_ENV === `development`
+                  ? `${projectRootDir}/src/content`
+                  : `${projectRootDir}/.cache/gatsby-source-git/`
+              }`,
             },
           },
           {

@@ -77,32 +77,18 @@ const gitRepoInfo = () => {
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `Mdx`) {
-    let slug = ""
-    switch (environment) {
-      case "production":
-        if (node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") > -1) {
-          slug = node.fileAbsolutePath.substring(
-            node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") + 18
-          )
-        } else if (node.frontmatter.path) {
-          slug = node.frontmatter.path
-        }
-        break
-      case "development":
-        const localFilePath = path.relative(__dirname, node.fileAbsolutePath)
-        const directories = localFilePath.split(path.sep)
+    const localFilePath = path.relative(__dirname, node.fileAbsolutePath)
+    const directories = localFilePath.split(path.sep)
 
-        // Remove src/content prefix from slug
-        if (localFilePath.startsWith("src/content")) {
-          // Remove src
-          directories.shift()
-          // Remove content
-          directories.shift()
-        }
-
-        slug = path.join("/", ...directories)
-        break
+    // Remove src/content prefix from slug
+    if (localFilePath.startsWith("src/content")) {
+      // Remove src
+      directories.shift()
+      // Remove content
+      directories.shift()
     }
+
+    const slug = path.join("/", ...directories)
 
     createNodeField({
       node,
@@ -298,29 +284,19 @@ const createOpenApiPage = async (
   if (object.swagger || object.openapi) {
     let slug = filepath
 
-    switch (environment) {
-      case "production":
-        if (filepath.lastIndexOf("gatsby-source-git/") > -1) {
-          slug = filepath.substring(
-            filepath.lastIndexOf("gatsby-source-git/") + 18
-          )
-        }
-        break
-      case "development":
-        const localFilePath = path.relative(__dirname, filepath)
-        const directories = localFilePath.split(path.sep)
+    const localFilePath = path.relative(__dirname, filepath)
+    const directories = localFilePath.split(path.sep)
 
-        // Remove src/content prefix from slug
-        if (localFilePath.startsWith("src/content")) {
-          // Remove src
-          directories.shift()
-          // Remove content
-          directories.shift()
-        }
-
-        slug = path.join("/", ...directories)
-        break
+    // Remove src/content prefix from slug
+    if (localFilePath.startsWith("src/content")) {
+      // Remove src
+      directories.shift()
+      // Remove content
+      directories.shift()
     }
+
+    slug = path.join("/", ...directories)
+
     try {
       const targets = [
         "shell_curl",
@@ -335,16 +311,16 @@ const createOpenApiPage = async (
       const result = openApiSnippet.getSnippets(object, targets)
       const keys = Object.keys(object.paths)
       keys.forEach(key => {
-        let res = result.filter(function(res) {
+        let res = result.filter(function (res) {
           return res.url.endsWith(key)
         })
         let methodKeys = Object.keys(object.paths[key])
         methodKeys.forEach(methodKey => {
-          let methodRes = res.find(function(methodRes) {
+          let methodRes = res.find(function (methodRes) {
             return methodRes.method.toLowerCase() == methodKey.toLowerCase()
           })
           object.paths[key][methodKey]["x-code-samples"] = []
-          methodRes.snippets.forEach(function(snippet) {
+          methodRes.snippets.forEach(function (snippet) {
             object.paths[key][methodKey]["x-code-samples"].push({
               lang: snippet.id.split("_")[0],
               source: snippet.content,

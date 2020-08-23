@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: "add-launch-script",
+      resolve: "@adobe/gatsby-add-launch-script",
       options: {
         scriptUrl: `${process.env.GATSBY_LAUNCH_SRC}`,
         includeInDevelopment: false,

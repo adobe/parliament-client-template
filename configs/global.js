@@ -75,7 +75,7 @@ module.exports = {
           {
             resolve: `@adobe/gatsby-remark-afm`,
             options: {
-              directory: ` ${projectRootDir}/src/content`,
+              directory: `${projectRootDir}/src/content`,
             },
           },
           {

@@ -12,7 +12,6 @@
 
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
-import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
 import DocLayout from "../components/doclayout"

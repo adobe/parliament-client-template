@@ -15,7 +15,7 @@
     react "^16.13.1"
     react-dom "^16.13.1"
 
-"@adobe/gatsby-remark-afm@^0.8.0":
+"@adobe/gatsby-remark-afm@^0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@adobe/gatsby-remark-afm/-/gatsby-remark-afm-0.8.1.tgz#f784c019da6849872ede34e33c09debb56eb9b76"
   integrity sha512-ULfT/daarAasLSFn5K7eaWAhpAPdv1ccvp9FMi4nKPK4ltElfWWODuStyq2ZaG1OF1ZmCILnve4o9Xsqxp4PhQ==

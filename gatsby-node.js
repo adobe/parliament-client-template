@@ -384,7 +384,7 @@ exports.createResolvers = ({ createResolvers }) => {
         type: GraphQLJSONObject,
         resolve(source, args, context) {
           const siteNodes = context.nodeModel.getAllNodes({
-            type: `MarkdownRemark`,
+            type: `Mdx`,
           })
           const pages = context.nodeModel.getAllNodes({
             type: `ParliamentNavigation`,

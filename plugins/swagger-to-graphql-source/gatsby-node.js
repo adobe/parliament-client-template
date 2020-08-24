@@ -21,6 +21,14 @@ const createDefinitionNodes = require("./src/createDefinitionNodes")
  * @see {@link https://www.gatsbyjs.com/docs/node-apis/#sourceNodes}
  */
 exports.sourceNodes = async (nodeApiHelpers, pluginOptions) => {
+
+    const { contentRoot, sourcePatterns } = pluginOptions
+
+    if(!sourcePatterns){
+        console.log("SWAGGER_SOURCE_PATTERNS environment variable not set. Skipping swagger nodes generation.");
+        return;
+    }
+
     const {
         actions,
         createContentDigest,
@@ -37,7 +45,6 @@ exports.sourceNodes = async (nodeApiHelpers, pluginOptions) => {
         createContentDigest,
     }
 
-    const { contentRoot, sourcePatterns } = pluginOptions
 
     const globOptions = {
         cwd: contentRoot,

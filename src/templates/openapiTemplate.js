@@ -12,12 +12,11 @@
 
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
-import { RedocStandalone } from "redoc"
 
 import SiteNav from "../components/SiteNav"
 import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
-import { Footer } from "@adobe/parliament-ui-components"
+import { Footer, OpenAPIBlock } from "@adobe/parliament-ui-components"
 
 import {
   OpenApiGrid,
@@ -41,13 +40,7 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
           />
         </OpenApiGridNav>
         <OpenApiGridContent>
-          <RedocStandalone
-            spec={pageContext.spec}
-            options={{
-              hideLoading: true,
-              menuToggle: true,
-            }}
-          />
+          <OpenAPIBlock spec={pageContext.spec} />
         </OpenApiGridContent>
         <OpenApiGridFooter>
           <Footer />

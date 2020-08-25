@@ -1,0 +1,994 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create path nodes 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /pet/{petId}/uploadImage",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/pet/{petId}/uploadImage",
+    "operations": Array [
+      Object {
+        "consumes": Array [
+          "multipart/form-data",
+        ],
+        "description": "",
+        "operationId": "uploadFile",
+        "parameters": Array [
+          Object {
+            "description": "ID of pet to update",
+            "format": "int64",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "type": "integer",
+          },
+          Object {
+            "description": "Additional data to pass to server",
+            "in": "formData",
+            "name": "additionalMetadata",
+            "required": false,
+            "type": "string",
+          },
+          Object {
+            "description": "file to upload",
+            "in": "formData",
+            "name": "file",
+            "required": false,
+            "type": "file",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "$ref": "#/definitions/ApiResponse",
+            },
+          },
+        },
+        "security": Array [
+          Object {
+            "petstore_auth": Array [
+              "write:pets",
+              "read:pets",
+            ],
+          },
+        ],
+        "summary": "uploads an image",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "post",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /pet",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/pet",
+    "operations": Array [
+      Object {
+        "consumes": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "description": "",
+        "operationId": "addPet",
+        "parameters": Array [
+          Object {
+            "description": "Pet object that needs to be added to the store",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": Object {
+              "$ref": "#/definitions/Pet",
+            },
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "405": Object {
+            "description": "Invalid input",
+          },
+        },
+        "security": Array [
+          Object {
+            "petstore_auth": Array [
+              "write:pets",
+              "read:pets",
+            ],
+          },
+        ],
+        "summary": "Add a new pet to the store",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "post",
+      },
+      Object {
+        "consumes": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "description": "",
+        "operationId": "updatePet",
+        "parameters": Array [
+          Object {
+            "description": "Pet object that needs to be added to the store",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": Object {
+              "$ref": "#/definitions/Pet",
+            },
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "400": Object {
+            "description": "Invalid ID supplied",
+          },
+          "404": Object {
+            "description": "Pet not found",
+          },
+          "405": Object {
+            "description": "Validation exception",
+          },
+        },
+        "security": Array [
+          Object {
+            "petstore_auth": Array [
+              "write:pets",
+              "read:pets",
+            ],
+          },
+        ],
+        "summary": "Update an existing pet",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "put",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /pet/findByStatus",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/pet/findByStatus",
+    "operations": Array [
+      Object {
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findPetsByStatus",
+        "parameters": Array [
+          Object {
+            "collectionFormat": "multi",
+            "description": "Status values that need to be considered for filter",
+            "in": "query",
+            "items": Object {
+              "default": "available",
+              "enum": Array [
+                "available",
+                "pending",
+                "sold",
+              ],
+              "type": "string",
+            },
+            "name": "status",
+            "required": true,
+            "type": "array",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "items": Object {
+                "$ref": "#/definitions/Pet",
+              },
+              "type": "array",
+            },
+          },
+          "400": Object {
+            "description": "Invalid status value",
+          },
+        },
+        "security": Array [
+          Object {
+            "petstore_auth": Array [
+              "write:pets",
+              "read:pets",
+            ],
+          },
+        ],
+        "summary": "Finds Pets by status",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "get",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /pet/findByTags",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/pet/findByTags",
+    "operations": Array [
+      Object {
+        "deprecated": true,
+        "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "operationId": "findPetsByTags",
+        "parameters": Array [
+          Object {
+            "collectionFormat": "multi",
+            "description": "Tags to filter by",
+            "in": "query",
+            "items": Object {
+              "type": "string",
+            },
+            "name": "tags",
+            "required": true,
+            "type": "array",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "items": Object {
+                "$ref": "#/definitions/Pet",
+              },
+              "type": "array",
+            },
+          },
+          "400": Object {
+            "description": "Invalid tag value",
+          },
+        },
+        "security": Array [
+          Object {
+            "petstore_auth": Array [
+              "write:pets",
+              "read:pets",
+            ],
+          },
+        ],
+        "summary": "Finds Pets by tags",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "get",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /pet/{petId}",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/pet/{petId}",
+    "operations": Array [
+      Object {
+        "description": "Returns a single pet",
+        "operationId": "getPetById",
+        "parameters": Array [
+          Object {
+            "description": "ID of pet to return",
+            "format": "int64",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "type": "integer",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "$ref": "#/definitions/Pet",
+            },
+          },
+          "400": Object {
+            "description": "Invalid ID supplied",
+          },
+          "404": Object {
+            "description": "Pet not found",
+          },
+        },
+        "security": Array [
+          Object {
+            "api_key": Array [],
+          },
+        ],
+        "summary": "Find pet by ID",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "get",
+      },
+      Object {
+        "consumes": Array [
+          "application/x-www-form-urlencoded",
+        ],
+        "description": "",
+        "operationId": "updatePetWithForm",
+        "parameters": Array [
+          Object {
+            "description": "ID of pet that needs to be updated",
+            "format": "int64",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "type": "integer",
+          },
+          Object {
+            "description": "Updated name of the pet",
+            "in": "formData",
+            "name": "name",
+            "required": false,
+            "type": "string",
+          },
+          Object {
+            "description": "Updated status of the pet",
+            "in": "formData",
+            "name": "status",
+            "required": false,
+            "type": "string",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "405": Object {
+            "description": "Invalid input",
+          },
+        },
+        "security": Array [
+          Object {
+            "petstore_auth": Array [
+              "write:pets",
+              "read:pets",
+            ],
+          },
+        ],
+        "summary": "Updates a pet in the store with form data",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "post",
+      },
+      Object {
+        "description": "",
+        "operationId": "deletePet",
+        "parameters": Array [
+          Object {
+            "in": "header",
+            "name": "api_key",
+            "required": false,
+            "type": "string",
+          },
+          Object {
+            "description": "Pet id to delete",
+            "format": "int64",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "type": "integer",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "400": Object {
+            "description": "Invalid ID supplied",
+          },
+          "404": Object {
+            "description": "Pet not found",
+          },
+        },
+        "security": Array [
+          Object {
+            "petstore_auth": Array [
+              "write:pets",
+              "read:pets",
+            ],
+          },
+        ],
+        "summary": "Deletes a pet",
+        "tags": Array [
+          "pet",
+        ],
+        "verb": "delete",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /store/order",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/store/order",
+    "operations": Array [
+      Object {
+        "consumes": Array [
+          "application/json",
+        ],
+        "description": "",
+        "operationId": "placeOrder",
+        "parameters": Array [
+          Object {
+            "description": "order placed for purchasing the pet",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": Object {
+              "$ref": "#/definitions/Order",
+            },
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "$ref": "#/definitions/Order",
+            },
+          },
+          "400": Object {
+            "description": "Invalid Order",
+          },
+        },
+        "summary": "Place an order for a pet",
+        "tags": Array [
+          "store",
+        ],
+        "verb": "post",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /store/order/{orderId}",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/store/order/{orderId}",
+    "operations": Array [
+      Object {
+        "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+        "operationId": "getOrderById",
+        "parameters": Array [
+          Object {
+            "description": "ID of pet that needs to be fetched",
+            "format": "int64",
+            "in": "path",
+            "maximum": 10,
+            "minimum": 1,
+            "name": "orderId",
+            "required": true,
+            "type": "integer",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "$ref": "#/definitions/Order",
+            },
+          },
+          "400": Object {
+            "description": "Invalid ID supplied",
+          },
+          "404": Object {
+            "description": "Order not found",
+          },
+        },
+        "summary": "Find purchase order by ID",
+        "tags": Array [
+          "store",
+        ],
+        "verb": "get",
+      },
+      Object {
+        "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
+        "operationId": "deleteOrder",
+        "parameters": Array [
+          Object {
+            "description": "ID of the order that needs to be deleted",
+            "format": "int64",
+            "in": "path",
+            "minimum": 1,
+            "name": "orderId",
+            "required": true,
+            "type": "integer",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "400": Object {
+            "description": "Invalid ID supplied",
+          },
+          "404": Object {
+            "description": "Order not found",
+          },
+        },
+        "summary": "Delete purchase order by ID",
+        "tags": Array [
+          "store",
+        ],
+        "verb": "delete",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /store/inventory",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/store/inventory",
+    "operations": Array [
+      Object {
+        "description": "Returns a map of status codes to quantities",
+        "operationId": "getInventory",
+        "parameters": Array [],
+        "produces": Array [
+          "application/json",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "additionalProperties": Object {
+                "format": "int32",
+                "type": "integer",
+              },
+              "type": "object",
+            },
+          },
+        },
+        "security": Array [
+          Object {
+            "api_key": Array [],
+          },
+        ],
+        "summary": "Returns pet inventories by status",
+        "tags": Array [
+          "store",
+        ],
+        "verb": "get",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /user/createWithArray",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/user/createWithArray",
+    "operations": Array [
+      Object {
+        "consumes": Array [
+          "application/json",
+        ],
+        "description": "",
+        "operationId": "createUsersWithArrayInput",
+        "parameters": Array [
+          Object {
+            "description": "List of user object",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": Object {
+              "items": Object {
+                "$ref": "#/definitions/User",
+              },
+              "type": "array",
+            },
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "default": Object {
+            "description": "successful operation",
+          },
+        },
+        "summary": "Creates list of users with given input array",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "post",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /user/createWithList",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/user/createWithList",
+    "operations": Array [
+      Object {
+        "consumes": Array [
+          "application/json",
+        ],
+        "description": "",
+        "operationId": "createUsersWithListInput",
+        "parameters": Array [
+          Object {
+            "description": "List of user object",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": Object {
+              "items": Object {
+                "$ref": "#/definitions/User",
+              },
+              "type": "array",
+            },
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "default": Object {
+            "description": "successful operation",
+          },
+        },
+        "summary": "Creates list of users with given input array",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "post",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /user/{username}",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/user/{username}",
+    "operations": Array [
+      Object {
+        "description": "",
+        "operationId": "getUserByName",
+        "parameters": Array [
+          Object {
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "type": "string",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "schema": Object {
+              "$ref": "#/definitions/User",
+            },
+          },
+          "400": Object {
+            "description": "Invalid username supplied",
+          },
+          "404": Object {
+            "description": "User not found",
+          },
+        },
+        "summary": "Get user by user name",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "get",
+      },
+      Object {
+        "consumes": Array [
+          "application/json",
+        ],
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "parameters": Array [
+          Object {
+            "description": "name that need to be updated",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "type": "string",
+          },
+          Object {
+            "description": "Updated user object",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": Object {
+              "$ref": "#/definitions/User",
+            },
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "400": Object {
+            "description": "Invalid user supplied",
+          },
+          "404": Object {
+            "description": "User not found",
+          },
+        },
+        "summary": "Updated user",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "put",
+      },
+      Object {
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "parameters": Array [
+          Object {
+            "description": "The name that needs to be deleted",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "type": "string",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "400": Object {
+            "description": "Invalid username supplied",
+          },
+          "404": Object {
+            "description": "User not found",
+          },
+        },
+        "summary": "Delete user",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "delete",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /user/login",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/user/login",
+    "operations": Array [
+      Object {
+        "description": "",
+        "operationId": "loginUser",
+        "parameters": Array [
+          Object {
+            "description": "The user name for login",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "type": "string",
+          },
+          Object {
+            "description": "The password for login in clear text",
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "type": "string",
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "200": Object {
+            "description": "successful operation",
+            "headers": Object {
+              "X-Expires-After": Object {
+                "description": "date in UTC when token expires",
+                "format": "date-time",
+                "type": "string",
+              },
+              "X-Rate-Limit": Object {
+                "description": "calls per hour allowed by the user",
+                "format": "int32",
+                "type": "integer",
+              },
+            },
+            "schema": Object {
+              "type": "string",
+            },
+          },
+          "400": Object {
+            "description": "Invalid username/password supplied",
+          },
+        },
+        "summary": "Logs user into the system",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "get",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /user/logout",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/user/logout",
+    "operations": Array [
+      Object {
+        "description": "",
+        "operationId": "logoutUser",
+        "parameters": Array [],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "default": Object {
+            "description": "successful operation",
+          },
+        },
+        "summary": "Logs out current logged in user session",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "get",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+  Object {
+    "children": Array [],
+    "id": "parentFile.relativePath /user",
+    "internal": Object {
+      "content": "",
+      "contentDigest": "HashString",
+      "type": "SwaggerOpenApiPath",
+    },
+    "name": "/user",
+    "operations": Array [
+      Object {
+        "consumes": Array [
+          "application/json",
+        ],
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "parameters": Array [
+          Object {
+            "description": "Created user object",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": Object {
+              "$ref": "#/definitions/User",
+            },
+          },
+        ],
+        "produces": Array [
+          "application/json",
+          "application/xml",
+        ],
+        "responses": Object {
+          "default": Object {
+            "description": "successful operation",
+          },
+        },
+        "summary": "Create user",
+        "tags": Array [
+          "user",
+        ],
+        "verb": "post",
+      },
+    ],
+    "parent": "parentFile.id",
+  },
+]
+`;

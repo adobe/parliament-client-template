@@ -30,6 +30,7 @@
    GATSBY_SOURCE_TITLE=My Docs Site
    GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js  // url for your analytics script
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
+   SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
    ```
 
    For Jenkins:
@@ -43,6 +44,7 @@
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
    GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js  // url for your analytics script
+   SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
    ```
 
 1. **Clean environment**

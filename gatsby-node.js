@@ -364,6 +364,7 @@ const createOpenApiPage = async (
         slug = path.join("/", ...directories)
         break
     }
+
     try {
       const targets = [
         "shell_curl",

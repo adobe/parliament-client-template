@@ -15,6 +15,10 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `parliament-site-search-index`,
+      options: {},
+    },
+    {
       resolve: "@adobe/gatsby-add-launch-script",
       options: {
         scriptUrl: `${process.env.GATSBY_LAUNCH_SRC}`,

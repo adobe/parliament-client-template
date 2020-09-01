@@ -13,15 +13,22 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
-import { Nav } from "@adobe/parliament-ui-components"
+import { graphql, Link, useStaticQuery } from "gatsby"
+import { Nav, Search } from "@adobe/parliament-ui-components"
 
-import Search from "./Search"
 import Title from "./Title"
 
 import "./sitenav.css"
 
 const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
+  const { ParliamentSearchIndex } = useStaticQuery(
+    graphql`
+      query {
+        ParliamentSearchIndex
+      }
+    `
+  )
+
   const gitInfo = {
     org: gitRemote.organization,
     name: gitRemote.name,
@@ -53,7 +60,7 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
             margin-top: 24px;
           `}
         >
-          <Search gitRemote={gitRemote} pages={pages} />
+          <Search searchIndex={ParliamentSearchIndex} />
         </div>
       </div>
       <div

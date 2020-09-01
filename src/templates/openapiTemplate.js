@@ -12,7 +12,7 @@
 
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
-
+import { graphql } from "gatsby"
 import SiteNav from "../components/SiteNav"
 import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"

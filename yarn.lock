@@ -34,10 +34,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-2.2.0.tgz#2f29c97a29fb31d4645539cf11dc65a337766a7c"
-  integrity sha512-7mlA7P9t1x3XjI6Z84U/GgwnGTFOUBDttB8mvL/RPHy5hF4Ukom30WA9fpaaxSVRf0bjw/uJYyzEGXrU7Fv7Gw==
+"@adobe/parliament-ui-components@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-2.3.1.tgz#2ecdcbb4e603862a8c7e216b793d3eb8702d9a0a"
+  integrity sha512-/JoWdnu+PBgffJiWOpIco/JUbQ77WNxmLOZtFJFJOrw6E6mBssPBJUiLNtdup+DJQa1EuBthUiKhv2in1Wra+g==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@emotion/babel-preset-css-prop" "^10.0.27"
@@ -69,6 +69,7 @@
     "@spectrum-css/vars" "^2.3.0"
     "@spectrum-icons/workflow" "^3.1.0"
     classnames "^2.2.6"
+    elasticlunr "^0.9.5"
     gatsby "^2.19.19"
     mobx "^5.15.6"
     node-html-parser "^1.2.20"

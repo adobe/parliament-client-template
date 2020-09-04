@@ -20,14 +20,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { Provider } from "@react-spectrum/provider"
-import { theme } from "@react-spectrum/theme-default"
+import { defaultTheme, Provider } from "@adobe/react-spectrum"
 
 import "./layout.css"
 
 const DocLayout = ({ children }) => {
   return (
-    <Provider theme={theme} colorScheme="light" scale="medium">
+    <Provider theme={defaultTheme} colorScheme="light" scale="medium">
       <main>{children}</main>
     </Provider>
   )

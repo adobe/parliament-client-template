@@ -14,7 +14,7 @@
 import { css, jsx } from "@emotion/core"
 import { useEffect, useRef, useState, Fragment } from "react"
 import PropTypes from "prop-types"
-import { ActionButton } from "@adobe/parliament-ui-components"
+import { ActionButton } from "@adobe/react-spectrum"
 
 import Menu from "@spectrum-icons/workflow/ShowMenu"
 
@@ -70,7 +70,7 @@ const SiteNav = props => {
                 setPopoverOpen(!isPopoverOpen)
               }}
             >
-              <Menu size="S" />
+              <Menu UNSAFE_style={{ paddingRight: 0, paddingLeft: 0 }} />
             </ActionButton>
             <Title isMobile={isMobile} forceMobile={forceMobile} />
           </div>

@@ -41,7 +41,6 @@
     "gatsby-remark-embedder": "^1.11.2",
     "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-images": "^3.1.22",
-    "gatsby-remark-prismjs": "^3.5.9",
     "gatsby-source-filesystem": "^2.1.18",
     "gatsby-source-git": "^1.0.1",
     "gatsby-transformer-remark": "^2.6.19",

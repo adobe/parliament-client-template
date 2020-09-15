@@ -29,7 +29,7 @@ import {
 const OpenApiTemplate = ({ pageContext, location }) => {
   return (
     <DocLayout>
-      <SEO title={pageContext.seo} />
+      <SEO title={pageContext.seo} description={pageContext.description} />
       <OpenApiGrid>
         <OpenApiGridNav>
           <SiteNav

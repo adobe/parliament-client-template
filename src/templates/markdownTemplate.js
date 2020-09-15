@@ -39,10 +39,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
 
   return (
     <DocLayout>
-      <SEO
-        title={props.pageContext.seo}
-        description={props.pageContext.description}
-      />
+      <SEO title={pageContext.seo} description={pageContext.description} />
       <Grid>
         <GridNav>
           <SiteNav
@@ -119,7 +116,7 @@ export const query = graphql`
       relativePath
       childMdx {
         body
-        tableOfContents(maxDepth:3)
+        tableOfContents(maxDepth: 3)
         timeToRead
       }
     }

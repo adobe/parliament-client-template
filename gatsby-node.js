@@ -89,6 +89,7 @@ const searchTree = (theObject, matchingFilename) => {
 
 const readManifest = async graphql => {
   let pages = []
+  let description = ""
   try {
     let { data } = await graphql(`
       query {
@@ -108,6 +109,7 @@ const readManifest = async graphql => {
         const object = JSON.parse(fs.readFileSync(path, "utf8"))
         if (object.view_type === "mdbook") {
           pages = object.pages
+          description = object.description
         }
       })
     }
@@ -116,7 +118,7 @@ const readManifest = async graphql => {
     console.log("Could not read the manifest")
   }
 
-  return pages
+  return { pages, description }
 }
 
 const gitRepoInfo = () => {
@@ -197,7 +199,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
-  const pages = await readManifest(graphql)
+  const { pages, description } = await readManifest(graphql)
   const gitRemote = gitRepoInfo(graphql)
 
   try {
@@ -230,6 +232,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 slug: node.fields.slug,
                 id: node.fields.id,
                 seo: seo,
+                description: description,
                 gitRemote: gitRemote,
                 pages: pages,
               },
@@ -242,6 +245,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 slug: node.fields.slug,
                 id: node.fields.id,
                 seo: seo,
+                description: description,
                 gitRemote: gitRemote,
                 pages: pages,
               },
@@ -280,6 +284,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           object,
           filepath,
           seo,
+          description,
           gitRemote,
           pages
         )
@@ -316,6 +321,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             object,
             filepath,
             seo,
+            description,
             gitRemote,
             pages
           )
@@ -367,6 +373,7 @@ const createOpenApiPage = (
   object,
   filepath,
   seo,
+  description,
   gitRemote,
   pages
 ) => {
@@ -376,7 +383,9 @@ const createOpenApiPage = (
     switch (environment) {
       case "production":
         if (filepath.lastIndexOf("gatsby-source-git/") > -1) {
-          slug = filepath.substring(filepath.lastIndexOf("gatsby-source-git/") + 18)
+          slug = filepath.substring(
+            filepath.lastIndexOf("gatsby-source-git/") + 18
+          )
         }
         break
       case "development":
@@ -435,6 +444,7 @@ const createOpenApiPage = (
       context: {
         spec: object,
         seo: seo,
+        description: description,
         gitRemote: gitRemote,
         pages: pages,
       },

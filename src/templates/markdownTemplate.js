@@ -38,7 +38,10 @@ const MarkdownTemplate = props => {
 
   return (
     <DocLayout>
-      <SEO title={props.pageContext.seo} />
+      <SEO
+        title={props.pageContext.seo}
+        description={props.pageContext.description}
+      />
       <Grid>
         <GridNav>
           <SiteNav

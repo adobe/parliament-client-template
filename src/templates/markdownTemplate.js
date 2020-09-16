@@ -87,7 +87,10 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
             timeToRead={timeToRead}
           />
           Powered by{" "}
-          <a href="https://developers.corp.adobe.com/parliament-docs/README.md">
+          <a
+            href="https://developers.corp.adobe.com/parliament-docs/README.md"
+            class="spectrum-Link spectrum-Link--quiet"
+          >
             Parliament
           </a>
         </GridRightRail>

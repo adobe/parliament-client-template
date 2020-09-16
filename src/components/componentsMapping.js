@@ -1,5 +1,7 @@
 import {
   Alert,
+  InlineCode,
+  Code as Pre,
   Heading1,
   Heading2,
   Heading3,
@@ -34,4 +36,7 @@ export const componentsMapping = {
   tr: Tr,
   p: Paragraph,
   ul: List,
+  pre: Pre,
+  inlineCode: InlineCode,
+  code: InlineCode,
 }

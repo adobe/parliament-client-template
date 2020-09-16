@@ -26,7 +26,12 @@ import "./layout.css"
 
 const DocLayout = ({ children }) => {
   return (
-    <Provider theme={defaultTheme} colorScheme="light" scale="medium">
+    <Provider
+      theme={defaultTheme}
+      colorScheme="light"
+      scale="medium"
+      UNSAFE_className="spectrum spectrum--light spectrum--medium"
+    >
       <main>{children}</main>
     </Provider>
   )

@@ -8,6 +8,7 @@ import {
   Heading4,
   Heading5,
   Heading6,
+  Link,
   List,
   Paragraph,
   Table,
@@ -39,4 +40,5 @@ export const componentsMapping = {
   pre: Pre,
   inlineCode: InlineCode,
   code: InlineCode,
+  a: Link,
 }

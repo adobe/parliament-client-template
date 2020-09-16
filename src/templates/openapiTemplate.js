@@ -13,7 +13,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
 import { graphql } from "gatsby"
-import SiteNav from "../components/SiteNav"
 import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
 import { Footer, OpenAPIBlock } from "@adobe/parliament-ui-components"
@@ -21,9 +20,10 @@ import { Footer, OpenAPIBlock } from "@adobe/parliament-ui-components"
 import {
   OpenApiGrid,
   OpenApiGridContent,
-  OpenApiGridNav,
+  OpenApiGridHeader,
   OpenApiGridFooter,
-} from "@adobe/parliament-ui-components"
+} from "../components/OpenApiGrid"
+import HeaderBar from "../components/HeaderBar"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {
   const { parliamentNavigation } = data
@@ -31,14 +31,14 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
     <DocLayout>
       <SEO title={pageContext.seo} />
       <OpenApiGrid>
-        <OpenApiGridNav>
-          <SiteNav
+        <OpenApiGridHeader>
+          <HeaderBar
             currentPage={location.pathname}
             gitRemote={pageContext.gitRemote}
-            forceMobile={true}
             pages={parliamentNavigation.pages}
+            forceMobile={true}
           />
-        </OpenApiGridNav>
+        </OpenApiGridHeader>
         <OpenApiGridContent>
           <OpenAPIBlock spec={pageContext.spec} />
         </OpenApiGridContent>

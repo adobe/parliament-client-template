@@ -15,7 +15,7 @@ import { jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import { Footer } from "@adobe/parliament-ui-components"
-import SiteNav from "../components/SiteNav"
+import SiteMenu from "../components/SiteMenu"
 import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
@@ -25,26 +25,36 @@ import "../components/recipe.css"
 
 import {
   Grid,
+  GridHeader,
   GridNav,
   GridContent,
   GridFooter,
-} from "@adobe/parliament-ui-components"
+} from "../components/Grid"
+import HeaderBar from "../components/HeaderBar"
 
 const MarkdownTemplate = props => {
-  const { file } = props.data
+  const { location } = props
+  const { file, parliamentNavigation } = props.data
   const { childMdx } = file
   const { body } = childMdx
-  const { gitRemote, pages } = props.pageContext
+  const { gitRemote } = props.pageContext
 
   return (
     <DocLayout>
       <SEO title={pageContext.seo} />
       <Grid>
-        <GridNav>
-          <SiteNav
+        <GridHeader>
+          <HeaderBar
             currentPage={location.pathname}
             gitRemote={gitRemote}
-            pages={pageContext.pages}
+            pages={parliamentNavigation.pages}
+          />
+        </GridHeader>
+        <GridNav>
+          <SiteMenu
+            currentPage={location.pathname}
+            gitRemote={gitRemote}
+            pages={parliamentNavigation.pages}
           />
         </GridNav>
         <GridContent>

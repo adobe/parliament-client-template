@@ -16,7 +16,7 @@ import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import { Footer } from "@adobe/parliament-ui-components"
 import PageActions from "../components/PageActions"
-import SiteNav from "../components/SiteNav"
+import SiteMenu from "../components/SiteMenu"
 import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
@@ -24,12 +24,14 @@ import { componentsMapping } from "../components/componentsMapping"
 
 import {
   Grid,
+  GridHeader,
   GridNav,
   GridContent,
-  GridContentInner,
   GridFooter,
-  ActionButtons,
-} from "@adobe/parliament-ui-components"
+  GridRightRail,
+} from "../components/Grid"
+import HeaderBar from "../components/HeaderBar"
+import { ActionButtons } from "@adobe/parliament-ui-components"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation } = data
@@ -41,50 +43,42 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
     <DocLayout>
       <SEO title={pageContext.seo} />
       <Grid>
+        <GridHeader>
+          <HeaderBar
+            currentPage={location.pathname}
+            gitRemote={gitRemote}
+            pages={parliamentNavigation.pages}
+          />
+        </GridHeader>
         <GridNav>
-          <SiteNav
+          <SiteMenu
             currentPage={location.pathname}
             gitRemote={gitRemote}
             pages={parliamentNavigation.pages}
           />
         </GridNav>
-        <GridContent id="contentMain">
-          <GridContentInner>
-            <div
-              css={css`
-                float: right;
-                z-index: 100;
-              `}
-            >
-              {gitRemote !== null ? (
-                <ActionButtons
-                  gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-                  filePath={relativePath}
-                  branch={gitRemote.ref}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-            <MDXProvider components={componentsMapping}>
-              <MDXRenderer>{body}</MDXRenderer>
-            </MDXProvider>
-          </GridContentInner>
+        <GridContent>
+          <div
+            css={css`
+              float: right;
+              z-index: 100;
+            `}
+          >
+            {gitRemote !== null ? (
+              <ActionButtons
+                gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+                filePath={relativePath}
+                branch={gitRemote.ref}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+          <MDXProvider components={componentsMapping}>
+            <MDXRenderer>{body}</MDXRenderer>
+          </MDXProvider>
         </GridContent>
-        <div
-          id="rightRail"
-          css={css`
-            padding-left: 16px;
-            padding-right: 16px;
-
-            @media screen and (min-width: 1201px) {
-              grid-area: 1 / 11 / 2 / 13;
-            }
-            @media screen and (max-width: 1200px) {
-              display: none;
-            }
-          `}
-        >
+        <GridRightRail>
           <PageActions
             gitRemote={gitRemote}
             modifiedTime={modifiedTime}
@@ -93,10 +87,10 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
             timeToRead={timeToRead}
           />
           Powered by{" "}
-          <a href="https://docs.corp.adobe.com/parliament-docs/README.md">
+          <a href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
           </a>
-        </div>
+        </GridRightRail>
         <GridFooter>
           <Footer />
         </GridFooter>
@@ -116,7 +110,7 @@ export const query = graphql`
       relativePath
       childMdx {
         body
-        tableOfContents(maxDepth:3)
+        tableOfContents(maxDepth: 3)
         timeToRead
       }
     }

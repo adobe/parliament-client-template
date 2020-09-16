@@ -115,15 +115,19 @@ const HeaderBar = ({ siteTitle, forceMobile, ...props }) => {
           </Flex>
         </View>
       </nav>
-      <div
-        className={`spectrum-Site-sideBar ${isPopoverOpen ? " is-open" : ""}`}
-        ref={node}
-        css={css`
-          margin-top: 64px;
-        `}
-      >
-        <SiteMenu isMobile={isMobile} {...props} />
-      </div>
+      {isMobile || forceMobile ? (
+        <div
+          className={`spectrum-Site-sideBar ${isPopoverOpen ? " is-open" : ""}`}
+          ref={node}
+          css={css`
+            margin-top: 64px;
+          `}
+        >
+          <SiteMenu isMobile={isMobile} {...props} />
+        </div>
+      ) : (
+        undefined
+      )}
     </header>
   )
 }

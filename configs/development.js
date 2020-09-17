@@ -20,7 +20,7 @@ module.exports = {
       options: {
         contentDir: `${projectRootDir}/src/content`,
         localProjectDir: process.env.LOCAL_PROJECT_DIRECTORY,
-        patterns: process.env.GATSBY_SOURCE_PATTERNS,
+        patterns: process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g,''),
       },
     },
   ],

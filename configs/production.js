@@ -4,7 +4,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",")
+const patterns = process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g,'').split(",")
 
 const contentSourcePath = path.resolve(path.dirname(__dirname), '.cache/gatsby-source-git');
 

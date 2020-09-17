@@ -25,7 +25,7 @@ const DocLayout = ({ children }) => {
       scale="medium"
       UNSAFE_className="spectrum spectrum--light spectrum--medium"
     >
-      <main>{children}</main>
+      {children}
     </Provider>
   )
 }

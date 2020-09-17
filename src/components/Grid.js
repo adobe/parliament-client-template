@@ -53,7 +53,7 @@ const GridHeader = styled.div`
   }
 `
 
-const GridContent = styled.div`
+const GridContent = styled.main`
   padding-top: var(--spectrum-global-dimension-size-300);
   padding-left: var(--spectrum-global-dimension-size-300);
   padding-right: var(--spectrum-global-dimension-size-300);

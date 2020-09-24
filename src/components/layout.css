@@ -10,7 +10,7 @@
  *  governing permissions and limitations under the License.
  */
 
- html {
+html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -517,21 +517,6 @@ abbr[title] {
   html {
     font-size: 100%;
   }
-}
-
-#contentMain,
-#rightRail {
-  background: white;
-}
-
-#contentMain a,
-#rightRail a {
-  color: rgb(13, 102, 208);
-  text-decoration: none;
-}
-#contentMain a:hover,
-#rightRail a:hover {
-  text-decoration: underline;
 }
 
 .spectrum-Body--M {

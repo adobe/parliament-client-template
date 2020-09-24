@@ -13,14 +13,12 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import PropTypes from "prop-types"
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import { Nav, Search } from "@adobe/parliament-ui-components"
-
-import Title from "./Title"
 
 import "./sitenav.css"
 
-const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
+const SiteMenu = ({ gitRemote, currentPage, pages }) => {
   const { ParliamentSearchIndex } = useStaticQuery(
     graphql`
       query {
@@ -39,33 +37,23 @@ const SiteMenu = ({ gitRemote, forceMobile, currentPage, pages, isMobile }) => {
     <div
       css={css`
         width: 256px;
-        margin: 0;
+        margin: var(--spectrum-global-dimension-size-0);
       `}
     >
       <div
         css={css`
-          padding: 30px 24px 24px 24px;
+          padding: var(--spectrum-global-dimension-size-300)
+            var(--spectrum-global-dimension-size-300)
+            var(--spectrum-global-dimension-size-200)
+            var(--spectrum-global-dimension-size-300);
         `}
       >
-        <Link
-          css={css`
-            text-decoration-line: none;
-          `}
-          to="/"
-        >
-          <Title isMobile={isMobile} forceMobile={forceMobile} />
-        </Link>
-        <div
-          css={css`
-            margin-top: 24px;
-          `}
-        >
-          <Search searchIndex={ParliamentSearchIndex} />
-        </div>
+        <Search searchIndex={ParliamentSearchIndex} />
       </div>
       <div
         css={css`
-          padding: 0px 24px 24px 24px;
+          padding: var(--spectrum-global-dimension-size-0)
+            var(--spectrum-global-dimension-size-300);
           height: 80vh;
           overflow-y: auto;
           overflow-x: hidden;

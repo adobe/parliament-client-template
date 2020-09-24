@@ -13,12 +13,14 @@
 import React from "react"
 import { render } from "@testing-library/react"
 
-import Title from "../Title"
+import HeaderBar from "../HeaderBar"
 
-describe(`Title`, () => {
-  it(`renders title`, () => {
+describe(`HeaderBar`, () => {
+  it(`renders header`, () => {
     const testTitle = `Test Title`
-    const { getByText } = render(<Title siteTitle={testTitle} />)
+    const { getByText } = render(
+      <HeaderBar siteTitle={testTitle} forceMobile={false} />
+    )
 
     const text = getByText(testTitle)
 

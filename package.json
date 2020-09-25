@@ -56,7 +56,7 @@
     "react-helmet": "^5.2.1",
     "react-responsive": "^8.0.3",
     "rebass": "^4.0.5",
-    "redoc": "2.0.0-rc.12",
+    "redoc": "^2.0.0-rc.40",
     "rehype-react": "^4.0.1",
     "rimraf": "^3.0.2",
     "styled-components": "^4.3.2",

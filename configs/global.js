@@ -46,10 +46,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-react-svg`,
+      resolve: "gatsby-plugin-svgr-loader",
       options: {
         rule: {
-          include: `${projectRootDir}/src/images`,
+          include: /images/,
         },
       },
     },

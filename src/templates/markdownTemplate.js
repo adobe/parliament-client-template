@@ -23,15 +23,15 @@ import { MDXProvider } from "@mdx-js/react"
 import { componentsMapping } from "../components/componentsMapping"
 
 import {
+  ActionButtons,
   Grid,
   GridHeader,
   GridNav,
   GridContent,
   GridFooter,
   GridRightRail,
-} from "../components/Grid"
+} from "@adobe/parliament-ui-components"
 import HeaderBar from "../components/HeaderBar"
-import { ActionButtons } from "@adobe/parliament-ui-components"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation } = data

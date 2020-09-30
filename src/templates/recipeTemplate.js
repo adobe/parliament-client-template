@@ -14,7 +14,6 @@
 import { jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
-import { Footer } from "@adobe/parliament-ui-components"
 import SiteMenu from "../components/SiteMenu"
 import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -24,12 +23,13 @@ import { componentsMapping } from "../components/componentsMapping"
 import "../components/recipe.css"
 
 import {
+  Footer,
   Grid,
   GridHeader,
   GridNav,
   GridContent,
   GridFooter,
-} from "../components/Grid"
+} from "@adobe/parliament-ui-components"
 import HeaderBar from "../components/HeaderBar"
 
 const MarkdownTemplate = props => {

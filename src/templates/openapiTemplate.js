@@ -15,14 +15,15 @@ import { jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
-import { Footer, OpenAPIBlock } from "@adobe/parliament-ui-components"
-
 import {
+  Footer,
+  OpenAPIBlock,
   OpenApiGrid,
   OpenApiGridContent,
   OpenApiGridHeader,
   OpenApiGridFooter,
-} from "../components/OpenApiGrid"
+} from "@adobe/parliament-ui-components"
+
 import HeaderBar from "../components/HeaderBar"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {

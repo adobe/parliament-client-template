@@ -8,7 +8,7 @@
     "@adobe/gatsby-add-launch-script": "^0.0.4",
     "@adobe/gatsby-remark-afm": "^0.8.1",
     "@adobe/parliament-transformer-navigation": "^1.0.1",
-    "@adobe/parliament-ui-components": "^2.6.0",
+    "@adobe/parliament-ui-components": "^2.6.3",
     "@adobe/prism-adobe": "^1.0.3",
     "@adobe/react-spectrum": "^3.3.0",
     "@apidevtools/swagger-parser": "^10.0.1",

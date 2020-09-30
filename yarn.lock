@@ -34,10 +34,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-2.5.0.tgz#0287c49d6fa9c4e13f284c379d27d20ef5689f81"
-  integrity sha512-D9b1RmUiKeGrtrGszewV7ffn4mKFw0JM2Ro60FVxZIFERkJXxotYks9r1Dd8DRvjUhOTwTnJP6iPAuEnjVzqOA==
+"@adobe/parliament-ui-components@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-2.6.0.tgz#533b9d2c1040005a8b84ca5826a1a1c241403c49"
+  integrity sha512-5GPqODaiiniDcoDNIOdwP0RVv9KTICEk/PS1KEoTB6D+LfVW29v887FtW1cAdwnlDV6irTVK4gZxiQZQ0caQWw==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
@@ -74,6 +74,7 @@
     react "^16.13.1"
     react-dom "^16.13.1"
     react-id-generator "^3.0.1"
+    react-responsive "^8.1.0"
     redoc "^2.0.0-rc.38"
     styled-components "^5.1.1"
 
@@ -15791,7 +15792,7 @@ react-remove-scroll@^2.3.0:
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
 
-react-responsive@^8.0.3:
+react-responsive@^8.0.3, react-responsive@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/react-responsive/-/react-responsive-8.1.0.tgz#afcc2293c46a37b1e7926ff7fef66bcb147e7cba"
   integrity sha512-U8Nv2/ZWACIw/fAE9XNPbc2Xo33X5q1bcCASc2SufvJ9ifB+o/rokfogfznSVcvS22hN1rafGi0uZD6GiVFEHw==

@@ -44,7 +44,7 @@ const searchTree = (theObject, matchingFilename) => {
   } else {
     for (var prop in theObject) {
       if (prop === "path") {
-        if (theObject[prop].endsWith(matchingFilename)) {
+        if (theObject[prop] && theObject[prop].endsWith(matchingFilename)) {
           return theObject.title
         }
       }
@@ -207,6 +207,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (jsonData.allFile.edges.length > 0) {
       jsonData.allFile.edges.forEach(({ node }) => {
         let filepath = node.absolutePath
+        console.log(filepath)
         const object = JSON.parse(fs.readFileSync(filepath, "utf8"))
         let seo = searchTree(
           jsonData.parliamentNavigation.pages,

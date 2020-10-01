@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{fyeW:function(t,e,n){"use strict";n.r(e),n.d(e,"query",(function(){return o}));var a=n("q1tI"),i=n("Wbzz"),c=n("Upi2"),o="1134098310";e.default=function(t){var e=Object(c.stripManifestPath)(t.data.parliamentNavigation.homePage,t.pageContext.gitRemote);return Object(a.useEffect)((function(){Object(i.navigate)(e,{replace:!0})})),null}}}]);
-//# sourceMappingURL=component---src-templates-index-template-js-60077d17153adbf706b0.js.map

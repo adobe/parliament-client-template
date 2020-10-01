@@ -544,7 +544,7 @@ h1 + div.spectrum-Body--M {
 /* Temporary Overrides */
 
 /* Aligns magnifying glass in search field */
-div input[aria-label="Search"] ~ svg {
+div input[aria-label="Search"] svg {
   top: var(--spectrum-global-dimension-size-85) !important;
 }
 

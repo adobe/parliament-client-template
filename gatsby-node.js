@@ -345,9 +345,9 @@ const createOpenApiPage = async (
           let methodRes = res.find(function(methodRes) {
             return methodRes.method.toLowerCase() == methodKey.toLowerCase()
           })
-          object.paths[key][methodKey]["x-code-samples"] = []
+          object.paths[key][methodKey]["x-codeSamples"] = []
           methodRes.snippets.forEach(function(snippet) {
-            object.paths[key][methodKey]["x-code-samples"].push({
+            object.paths[key][methodKey]["x-codeSamples"].push({
               lang: snippet.id.split("_")[0],
               source: snippet.content,
             })

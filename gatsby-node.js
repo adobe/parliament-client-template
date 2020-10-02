@@ -296,7 +296,7 @@ const createOpenApiPage = async (
   seo,
   gitRemote
 ) => {
-  if (object.swagger || object.openapi) {
+  if (object && (object.swagger || object.openapi)) {
     let slug = filepath
 
     switch (environment) {

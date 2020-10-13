@@ -1,9 +1,11 @@
 const path = require("path")
+const GitUrlParse = require(`git-url-parse`)
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g, "").split(",")
 
 const contentSourcePath = path.resolve(
@@ -42,9 +44,9 @@ module.exports = {
         },
         repo: {
           token: process.env.GATSBY_GIT_CORP_TOKEN,
-          owner: "devrel",
-          name: "analytics-2.0-apis",
-          branch: "master",
+          owner: gitInfo.owner,
+          name: gitInfo.name,
+          branch: process.env.GATSBY_SOURCE_BRANCH,
           api: "https://git.corp.adobe.com/api/graphql",
         },
       },

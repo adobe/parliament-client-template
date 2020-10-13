@@ -134,6 +134,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         allMdx {
           edges {
             node {
+              fileAbsolutePath
               frontmatter {
                 template
               }
@@ -144,6 +145,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
+        allGithubContributors {
+          edges {
+            node {
+              id
+              contributors {
+                date
+                login
+                name
+                avatarUrl
+              }
+              path
+            }
+          }
+        }
         parliamentNavigation {
           pages
         }
@@ -151,6 +166,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     `)
     if (data) {
       data.allMdx.edges.forEach(({ node }) => {
+        const contributorsObj = data.allGithubContributors.edges.find(
+          obj => obj.node.path === node.fileAbsolutePath
+        )
+        const contributors = contributorsObj?.node?.contributors ?? []
+
         if (node.fields.slug !== "") {
           let seo = searchTree(
             data.parliamentNavigation.pages,
@@ -165,6 +185,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 id: node.fields.id,
                 seo: seo,
                 gitRemote: gitRemote,
+                contributors: contributors,
               },
             })
           } else {
@@ -176,6 +197,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 id: node.fields.id,
                 seo: seo,
                 gitRemote: gitRemote,
+                contributors: contributors,
               },
             })
           }

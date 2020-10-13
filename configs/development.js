@@ -20,15 +20,33 @@ module.exports = {
       options: {
         contentDir: `${projectRootDir}/src/content`,
         localProjectDir: process.env.LOCAL_PROJECT_DIRECTORY,
-        patterns: process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g,''),
+        patterns: process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g, ""),
       },
     },
     {
       resolve: `swagger-to-graphql-source`,
       options: {
-        contentRoot: path.resolve(path.dirname(__dirname),'src/content'),
-        sourcePatterns: process.env.SWAGGER_SOURCE_PATTERNS
+        contentRoot: path.resolve(path.dirname(__dirname), "src/content"),
+        sourcePatterns: process.env.SWAGGER_SOURCE_PATTERNS,
       },
-    }
+    },
+    {
+      resolve: `@adobe/gatsby-source-github-file-contributors`,
+      options: {
+        pages: {
+          root: "", // root of the page paths (below) in the Github repo
+          paths: ["src/content"], // relative path of the pages from the config
+          extensions: ["md", "mdx"], // page extensions to filter for
+          prefix: "src/content",
+        },
+        repo: {
+          token: process.env.GATSBY_GIT_CORP_TOKEN,
+          owner: "devrel",
+          name: "analytics-2.0-apis",
+          branch: "master",
+          api: "https://git.corp.adobe.com/api/graphql",
+        },
+      },
+    },
   ],
 }

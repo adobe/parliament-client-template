@@ -14,7 +14,6 @@
 import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
-import { Footer } from "@adobe/parliament-ui-components"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
 import SEO from "../components/seo"
@@ -22,8 +21,11 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 import { componentsMapping } from "../components/componentsMapping"
 
+import { Flex, View } from "@adobe/react-spectrum"
 import {
   ActionButtons,
+  Contributors,
+  Footer,
   Grid,
   GridHeader,
   GridNav,
@@ -35,9 +37,12 @@ import HeaderBar from "../components/HeaderBar"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation } = data
-  const { modifiedTime, relativePath, childMdx } = file
+  const { relativePath, childMdx } = file
   const { body, tableOfContents, timeToRead } = childMdx
-  const { gitRemote } = pageContext
+  const { contributors, gitRemote } = pageContext
+
+  console.log(contributors)
+  console.log(gitRemote)
 
   return (
     <DocLayout>
@@ -77,11 +82,29 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
           <MDXProvider components={componentsMapping}>
             <MDXRenderer>{body}</MDXRenderer>
           </MDXProvider>
+
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            marginTop="size-800"
+            marginBottom="size-400"
+          >
+            <View>
+              <Contributors
+                href={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/blob/${gitRemote.ref}/${relativePath}`}
+                contributors={contributors}
+                date={
+                  contributors[0]
+                    ? new Date(contributors[0].date).toLocaleDateString()
+                    : new Date().toLocaleDateString()
+                }
+              />
+            </View>
+          </Flex>
         </GridContent>
         <GridRightRail>
           <PageActions
             gitRemote={gitRemote}
-            modifiedTime={modifiedTime}
             relativePath={relativePath}
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
@@ -108,7 +131,6 @@ export const query = graphql`
   query MarkdownTemplateQuery($id: String!) {
     file(id: { eq: $id }) {
       id
-      modifiedTime(formatString: "YYYY-MM-DD")
       name
       relativePath
       childMdx {

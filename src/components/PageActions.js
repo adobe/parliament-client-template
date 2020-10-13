@@ -15,7 +15,7 @@ import React from "react"
 import { css, jsx } from "@emotion/core"
 import { TableOfContents } from "@adobe/parliament-ui-components"
 
-const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
+const PageActions = ({ tableOfContents, timeToRead }) => {
   return (
     <React.Fragment>
       <div
@@ -31,15 +31,8 @@ const PageActions = ({ tableOfContents, modifiedTime, timeToRead }) => {
         {tableOfContents ? (
           <TableOfContents tableOfContents={tableOfContents} />
         ) : null}
-        {modifiedTime && timeToRead ? (
+        {timeToRead ? (
           <p>
-            <span
-              css={css`
-                display: block;
-              `}
-            >
-              Last update: {modifiedTime}
-            </span>
             <span
               css={css`
                 display: block;

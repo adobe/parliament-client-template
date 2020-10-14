@@ -11,6 +11,15 @@ const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
 module.exports = {
   plugins: [
     {
+      resolve: `markdown-cleaner`,
+      options: {
+        contentDir: `${projectRootDir}/src/content`,
+        localProjectDir: process.env.LOCAL_PROJECT_DIRECTORY,
+        patterns: process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g, ""),
+        additionalTags: ["<em>", "<strong>", "<i>"],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `external`,

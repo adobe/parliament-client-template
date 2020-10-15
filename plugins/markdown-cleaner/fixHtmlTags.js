@@ -39,6 +39,8 @@ function fixHtml(pluginOptionTags) {
   function cleanNode(node) {
     cleanBreakingNode(node)
     cleanOptionalNode(node)
+    console.log("node:", node)
+    return node
 
     /**
      * Defines and fixes the HTML tags that are known to break the build during MDX processing.
@@ -46,27 +48,27 @@ function fixHtml(pluginOptionTags) {
      * @param {string} node  The node value from the MDAST tree being processed.
      */
     function cleanBreakingNode(node) {
-        switch (node) {
-          case "<hr>":
-            replaceTag(node.match(/<hr>/g), "<hr/>")
-            break
-          case "<br>":
-            replaceTag(node.match(/<br>/g), "<br/>")
-            break
-          case "<b>":
-            replaceTag(node.match(/(<b>)/g), "**")
-            break
-          case "</b>":
-            replaceTag(node.match(/(<\/b>)/g), "**")
-            break
-          default:
-            // Closes open image tags, which break MDX processing.
-            const openImgTag = node.match(/<img\s*(.*?)[^/]>/g)
-            if (openImgTag) {
-              replaceTag(openImgTag, openImgTag[0].split(">").join("/>"))
-            }
-            break
-        }
+      switch (node) {
+        case "<hr>":
+          replaceTag(node.match(/<hr>/g), "<hr/>")
+          break
+        case "<br>":
+          replaceTag(node.match(/<br>/g), "<br/>")
+          break
+        case "<b>":
+          replaceTag(node.match(/(<b>)/g), "**")
+          break
+        case "</b>":
+          replaceTag(node.match(/(<\/b>)/g), "**")
+          break
+        default:
+          // Closes open image tags, which break MDX processing.
+          const openImgTag = node.match(/<img\s*(.*?)[^/]>/g)
+          if (openImgTag) {
+            replaceTag(openImgTag, openImgTag[0].split(">").join("/>"))
+          }
+          break
+      }
     }
 
     /**
@@ -75,20 +77,23 @@ function fixHtml(pluginOptionTags) {
      * @param {string} node  The node value from the MDAST tree being processed.
      */
     function cleanOptionalNode(node) {
+      const optionNodes = {
+        "<em>": function() {
+          replaceTag(node.match(/(<em>+|<\/em>)/g), "_")
+        },
+        "<strong>": function() {
+          replaceTag(node.match(/(<strong>+|<\/strong>)/g), "**")
+        },
+        "<i>": function() {
+          replaceTag(node.match(/(<i>+|<\/i>)/g), "_")
+        },
+        default: function() {
+          console.log(`The ${tag} tag is not yet supported.`)
+        },
+      }
+
       for (const tag of pluginOptionTags) {
-        switch (tag) {
-          case "<em>":
-            replaceTag(node.match(/(<em>+|<\/em>)/g), "_")
-            break
-          case "<strong>":
-            replaceTag(node.match(/(<strong>+|<\/strong>)/g), "**")
-            break
-          case "<i>":
-            replaceTag(node.match(/(<i>+|<\/i>)/g), "_")
-            break
-          default:
-            console.log(`The ${tag} tag is not yet supported.`)
-        }
+        ;(optionNodes[tag] || optionNodes["default"])()
       }
     }
 
@@ -104,7 +109,5 @@ function fixHtml(pluginOptionTags) {
         node = node.split(invalidTag[0]).join(fixedTag)
       }
     }
-
-    return node
   }
 }

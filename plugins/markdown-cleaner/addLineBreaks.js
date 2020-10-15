@@ -8,9 +8,9 @@ function addLineBreaks() {
   function fixNode(node) {
     const type = node && node.type
     if (type === `html`) {
-      const cleanedTag = addLineBreak(node.value)
+      const cleanedNode = addLineBreak(node.value)
       try {
-        node.value = cleanedTag
+        node.value = cleanedNode
       } catch (e) {
         throw Error(`${e.message}`)
       }
@@ -55,10 +55,6 @@ function addLineBreaks() {
       }
     }
 
-    try {
-      return node
-    } catch (e) {
-      throw Error(`${e.message}`)
-    }
+    return node
   }
 }

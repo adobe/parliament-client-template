@@ -4,7 +4,7 @@ var stringify = require("remark-stringify")
 var vfile = require("to-vfile")
 var report = require("vfile-reporter")
 var shell = require("shelljs")
-var addLines = require("./addLineBreaks")
+var addLineBreaks = require("./addLineBreaks")
 var fixHtml = require("./fixHtmlTags")
 
 require("dotenv").config({
@@ -18,16 +18,16 @@ require("dotenv").config({
  * @param {object} _ Gatsby api object(this is not used in this plugin)
  * @param {object} pluginOptions Plugin options
  * @param {string} pluginOptions.localProjectDir The absolute path to a local doc project
- * @param {string} pluginOptions.additionalTags Additional tags to clean/replace with markdown
+ * @param {string} pluginOptions.optionalTags Additional tags to clean/replace with markdown
  */
 exports.onPreInit = (_, pluginOptions) => {
-  const { localProjectDir, additionalTags } = pluginOptions
+  const { localProjectDir, optionalTags } = pluginOptions
   const files = shell.ls("-Rl", `${localProjectDir}/**/*.md`)
 
   for (const file of files) {
     if (file.isFile()) {
-      addLineBreaks(file)
-      fixHtmlTags(file, additionalTags)
+      formatMarkdown(file)
+      fixHtmlTags(file, optionalTags)
     }
   }
 }
@@ -38,10 +38,10 @@ exports.onPreInit = (_, pluginOptions) => {
  *
  * @param {object} file  Markdown file from the local GitHub repo for your docs.
  */
-function addLineBreaks(file) {
+function formatMarkdown(file) {
   unified()
     .use(parse)
-    .use(addLines)
+    .use(addLineBreaks)
     .use(stringify)
     .process(vfile.readSync(`${file.name}`), function(err, file) {
       console.error(report(err || file))
@@ -56,10 +56,10 @@ function addLineBreaks(file) {
  *
  * @param {object} file  Markdown file from the local GitHub repo for your docs.
  */
-function fixHtmlTags(file, additionalTags) {
+function fixHtmlTags(file, optionalTags) {
   unified()
     .use(parse)
-    .use(fixHtml, additionalTags)
+    .use(fixHtml, optionalTags)
     .use(stringify)
     .process(vfile.readSync(`${file.name}`), function(err, file) {
       console.error(report(err || file))

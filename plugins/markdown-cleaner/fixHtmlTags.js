@@ -3,14 +3,14 @@
 module.exports = fixHtml
 
 function fixHtml(pluginOptionTags) {
-  return replaceHtml
+  return fixNode
 
-  function replaceHtml(node) {
+  function fixNode(node) {
     const type = node && node.type
     if (type === `html`) {
-      const tag = cleanTags(node.value)
+      const cleanedNodeValue = cleanNode(node.value)
       try {
-        node.value = tag
+        node.value = cleanedNodeValue
       } catch (e) {
         throw Error(`${e.message}`)
       }
@@ -25,43 +25,48 @@ function fixHtml(pluginOptionTags) {
   /**
    * Recurses through the children of a node to clean the tags.
    *
-   * @param {string} node  The node value from the MDAST tree being processed.
+   * @param {string} nodeChildren  The node children from the MDAST tree being processed.
    */
-  function cleanChildren(nodes) {
-    let index = -1
-    const length = nodes.length
-    let result = []
-    let value
-
-    while (++index < length) {
-      value = replaceHtml(nodes[index])
-      if (value && typeof value.length === "number") {
-        result = result.concat(value.map(replaceHtml))
-      } else {
-        result.push(value)
-      }
+  function cleanChildren(nodeChildren) {
+    let nodes = []
+    for (const node of nodeChildren) {
+      let cleanedNode = fixNode(node)
+      nodes.push(cleanedNode)
     }
-    return result
+    return nodes
   }
 
-  function cleanTags(node) {
-    cleanDefaultTags(node)
-    cleanOptionTags(node)
+  function cleanNode(node) {
+    cleanBreakingNode(node)
+    cleanOptionalNode(node)
 
     /**
      * Defines and fixes the HTML tags that are known to break the build during MDX processing.
      *
      * @param {string} node  The node value from the MDAST tree being processed.
      */
-    function cleanDefaultTags(node) {
-      replaceTag(node.match(/<hr>/g), "<hr/>")
-      replaceTag(node.match(/<br>/g), "<br/>")
-      replaceTag(node.match(/(<b>+|<\/b>)/g), "**")
-
-      const invalidImgTag = node.match(/<img\s*(.*?)[^/]>/g)
-      if (invalidImgTag) {
-        replaceTag(invalidImgTag, invalidImgTag[0].split(">").join("/>"))
-      }
+    function cleanBreakingNode(node) {
+        switch (node) {
+          case "<hr>":
+            replaceTag(node.match(/<hr>/g), "<hr/>")
+            break
+          case "<br>":
+            replaceTag(node.match(/<br>/g), "<br/>")
+            break
+          case "<b>":
+            replaceTag(node.match(/(<b>)/g), "**")
+            break
+          case "</b>":
+            replaceTag(node.match(/(<\/b>)/g), "**")
+            break
+          default:
+            // Closes open image tags, which break MDX processing.
+            const openImgTag = node.match(/<img\s*(.*?)[^/]>/g)
+            if (openImgTag) {
+              replaceTag(openImgTag, openImgTag[0].split(">").join("/>"))
+            }
+            break
+        }
     }
 
     /**
@@ -69,34 +74,33 @@ function fixHtml(pluginOptionTags) {
      *
      * @param {string} node  The node value from the MDAST tree being processed.
      */
-    function cleanOptionTags(node) {
-      const optionalTags = {
-        "<em>": function() {
-          replaceTag(node.match(/(<em>+|<\/em>)/g), "_")
-        },
-        "<strong>": function() {
-          replaceTag(node.match(/(<strong>+|<\/strong>)/g), "**")
-        },
-        "<i>": function() {
-          replaceTag(node.match(/(<i>+|<\/i>)/g), "_")
-        },
-        //TODO: Add more HTML tags to support more plugin tag options.
-      }
-
+    function cleanOptionalNode(node) {
       for (const tag of pluginOptionTags) {
-        optionalTags[tag]()
+        switch (tag) {
+          case "<em>":
+            replaceTag(node.match(/(<em>+|<\/em>)/g), "_")
+            break
+          case "<strong>":
+            replaceTag(node.match(/(<strong>+|<\/strong>)/g), "**")
+            break
+          case "<i>":
+            replaceTag(node.match(/(<i>+|<\/i>)/g), "_")
+            break
+          default:
+            console.log(`The ${tag} tag is not yet supported.`)
+        }
       }
     }
 
     /**
      * Sets the node value to a fixed tag or a markdown element.
      *
-     * @param {string} invalidTag  Open tag that breaks the MDX/JSX processing.
-     * @param {string} validTag  Closed tag or markdown element that replaces invalidTag.
+     * @param {RegExpMatchArray} invalidTag  Open tag that breaks the MDX/JSX processing.
+     * @param {string} replacement  Closed tag or markdown element that replaces invalidTag.
      */
-    function replaceTag(invalidTag, validTag) {
+    function replaceTag(invalidTag, replacement) {
       if (invalidTag) {
-        let fixedTag = invalidTag[0].split(invalidTag[0]).join(validTag)
+        let fixedTag = invalidTag[0].split(invalidTag[0]).join(replacement)
         node = node.split(invalidTag[0]).join(fixedTag)
       }
     }

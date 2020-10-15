@@ -1,14 +1,14 @@
 "use strict"
 
-module.exports = addLines
+module.exports = addLineBreaks
 
-function addLines() {
-  return formatHtml
+function addLineBreaks() {
+  return fixNode
 
-  function formatHtml(node) {
-    var type = node && node.type
+  function fixNode(node) {
+    const type = node && node.type
     if (type === `html`) {
-      var cleanedTag = addLine(node.value)
+      const cleanedTag = addLineBreak(node.value)
       try {
         node.value = cleanedTag
       } catch (e) {
@@ -23,35 +23,28 @@ function addLines() {
   }
 
   /**
-   * Recurses through the children of a node to add empty lines.
+   * Recurses through the children of a node to add empty line breaks.
    *
-   * @param {string} node  The node value from the MDAST tree being processed.
+   * @param {string} nodeChildren  The node value from the MDAST tree being processed.
    */
-  function cleanChildren(nodes) {
-    var index = -1
-    var length = nodes.length
-    var result = []
-    var value
-
-    while (++index < length) {
-      value = formatHtml(nodes[index])
-      if (value && typeof value.length === "number") {
-        result = result.concat(value.map(formatHtml))
-      } else {
-        result.push(value)
-      }
+  function cleanChildren(nodeChildren) {
+    let nodes = []
+    for (const node of nodeChildren) {
+      let cleanedNode = fixNode(node)
+      nodes.push(cleanedNode)
     }
-    return result
+    return nodes
   }
 
   /**
    * Adds an empty line below the tags in markdown file.
    * This ensures the tag is processed correctly as JSX.
    * Otherwise the subsequent content will be processed as plain text.
+   * See https://github.com/adobe/gatsby-theme-parliament/issues/19#issuecomment-699075713.
    *
-   * @param {string} node  The node value from the MDAST tree being processed.
+   * @param {string} node  The node value from the MDAST tree (file) being processed.
    */
-  function addLine(node) {
+  function addLineBreak(node) {
     const tagNoLine = node.match(/(?<=(>))\s*\n/g)
     replaceTag(tagNoLine, "\n\r")
 

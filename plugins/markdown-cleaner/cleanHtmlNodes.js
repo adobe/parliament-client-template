@@ -13,8 +13,6 @@
 module.exports = cleanHtmlNodes
 
 function cleanHtmlNodes(nodeValue, tags) {
-  console.log("cleanHtmlNodes -> nodeValue", nodeValue)
-
   const htmlTags = {
     "<hr>": replaceTag(nodeValue.match(/<hr>/g), "<hr/>"),
     "<br>": replaceTag(nodeValue.match(/<br>/g), "<br/>"),

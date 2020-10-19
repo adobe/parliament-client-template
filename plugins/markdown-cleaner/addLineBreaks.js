@@ -1,60 +1,59 @@
-"use strict"
+/**
+ *  Copyright 2020 Adobe. All rights reserved.
+ *  This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License. You may obtain a copy
+ *  of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software distributed under
+ *  the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ *  OF ANY KIND, either express or implied. See the License for the specific language
+ *  governing permissions and limitations under the License.
+ */
 
 module.exports = addLineBreaks
 
-function addLineBreaks() {
-  return fixNode
+/**
+ * Adds an empty line (carriage return) to most HTML/JSX tags/components in the markdown file.
+ * This ensures the tag or component is processed correctly as JSX. Otherwise content that
+ * immediately follows the tag/component will be concatenated and processed as plain text.
+ * See https://github.com/adobe/gatsby-theme-parliament/issues/19#issuecomment-699075713.
+ *
+ * @param {string} nodeValue  The node value from the MDAST tree (file) being processed.
+ */
+function addLineBreaks(nodeValue) {
+  const hasPreTags = nodeValue.includes("<pre>") || nodeValue.includes("</pre>")
+  const hasTableTags =
+    nodeValue.includes("<table>") || nodeValue.includes("</table>")
 
-  function fixNode(node) {
-    const type = node && node.type
-    if (type === `html`) {
-      const cleanedNode = addLineBreak(node.value)
-      try {
-        node.value = cleanedNode
-      } catch (e) {
-        throw Error(`${e.message}`)
-      }
-    }
-
-    if (node.children) {
-      node.children = cleanChildren(node.children)
-    }
-    return node
+  // If there are HTML tables in the markdown, don't add line breaks,
+  // but replace any <br> tags within those tables. This could be expanded.
+  //
+  if (hasTableTags) {
+    replaceTag(nodeValue.match(/\<br\>/g), "<br/>")
+    return nodeValue
   }
 
-  /**
-   * Recurses through the children of a node to add empty line breaks.
-   *
-   * @param {string} nodeChildren  The node value from the MDAST tree being processed.
-   */
-  function cleanChildren(nodeChildren) {
-    let nodes = []
-    for (const node of nodeChildren) {
-      let cleanedNode = fixNode(node)
-      nodes.push(cleanedNode)
-    }
-    return nodes
+  // If there are HTML <pre> tags demarcating code in the markdown,
+  // don't add line breaks. Just replace the <pre> tags with markdown
+  // code blocks and a language that can be updated by the content
+  // maintainer. A placeholder for the code block's language must be added.
+  // Otherwise, the parser will replace the backticks with a four-space
+  // indention to define the code block.
+  //
+  if (hasPreTags) {
+    replaceTag(nodeValue.match(/\<pre\>/g), "```add_language")
+    replaceTag(nodeValue.match(/\<\/pre\>/g), "```")
+    return nodeValue
   }
 
-  /**
-   * Adds an empty line below the tags in markdown file.
-   * This ensures the tag is processed correctly as JSX.
-   * Otherwise the subsequent content will be processed as plain text.
-   * See https://github.com/adobe/gatsby-theme-parliament/issues/19#issuecomment-699075713.
-   *
-   * @param {string} node  The node value from the MDAST tree (file) being processed.
-   */
-  function addLineBreak(node) {
-    const tagNoLine = node.match(/(?<=(>))\s*\n/g)
-    replaceTag(tagNoLine, "\n\r")
+  const tagNoLine = nodeValue.match(/(?<=(>))\s*\n/g)
+  replaceTag(tagNoLine, "\n\r") // adds critical carriage return here
+  return nodeValue
 
-    function replaceTag(invalidTag, tagReplacement) {
-      if (invalidTag) {
-        let validTag = invalidTag[0].split(invalidTag[0]).join(tagReplacement)
-        node = node.split(invalidTag[0]).join(validTag)
-      }
+  function replaceTag(invalidTag, replacement) {
+    if (invalidTag) {
+      let fixedTag = invalidTag[0].split(invalidTag[0]).join(replacement)
+      nodeValue = nodeValue.split(invalidTag[0]).join(fixedTag)
     }
-
-    return node
   }
 }

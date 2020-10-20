@@ -38,7 +38,15 @@ const cleaningOptions = {
  * @param {object} pluginOptions Plugin options
  */
 exports.onPreInit = (_, pluginOptions) => {
-  const { localProjectDir, optionalTags } = pluginOptions
+  let { localProjectDir, optionalTags } = pluginOptions
+  if (!optionalTags) {
+    console.error(
+      "The markdown-cleaner plugin is missing the optionalTags option.\n" +
+        "Please add it to the plugin's options. Example, optionalTags: ['<em>', '<i>']"
+    )
+    optionalTags = []
+  }
+
   const files = shell.ls("-Rl", `${localProjectDir}/**/*.{md,mdx}`)
 
   for (const file of files) {

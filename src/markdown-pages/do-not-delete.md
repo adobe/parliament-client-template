@@ -3,6 +3,9 @@ path: "/do-not-delete"
 date: "2019-05-04"
 title: "Do Not Delete"
 template: "markdown"
+author: ""
+tags: ""
+description: ""
 ---
 
 # Don't Delete:

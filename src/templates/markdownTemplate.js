@@ -53,6 +53,10 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
             currentPage={location.pathname}
             gitRemote={gitRemote}
             pages={parliamentNavigation.pages}
+            tabs={[
+              { title: "Docs", path: "/" },
+              { title: "Blog", path: "/reporting-tricks.md" },
+            ]}
           />
         </GridHeader>
         <GridNav>

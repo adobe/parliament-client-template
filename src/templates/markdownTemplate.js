@@ -50,7 +50,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
       <Grid>
         <GridHeader>
           <HeaderBar
-            currentPage={location.pathname}
+            location={location}
             gitRemote={gitRemote}
             pages={parliamentNavigation.pages}
             tabs={[

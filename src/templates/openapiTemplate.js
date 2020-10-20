@@ -34,7 +34,7 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
       <OpenApiGrid>
         <OpenApiGridHeader>
           <HeaderBar
-            currentPage={location.pathname}
+            location={location}
             gitRemote={pageContext.gitRemote}
             pages={parliamentNavigation.pages}
             forceMobile={true}

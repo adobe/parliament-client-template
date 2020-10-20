@@ -45,7 +45,7 @@ const MarkdownTemplate = props => {
       <Grid>
         <GridHeader>
           <HeaderBar
-            currentPage={location.pathname}
+            location={location}
             gitRemote={gitRemote}
             pages={parliamentNavigation.pages}
           />

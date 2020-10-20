@@ -55,11 +55,7 @@ const Authors = props => {
       <SEO title="All posts" />
       <Grid>
         <GridHeader>
-          <HeaderBar
-            siteTitle={siteTitle}
-            currentPage={props.location.pathname}
-            pages={pages}
-          />
+          <HeaderBar location={location} siteTitle={siteTitle} pages={pages} />
         </GridHeader>
         <GridNav className="spectrum--light">
           <SiteMenu currentPage={props.location.pathname} pages={pages} />

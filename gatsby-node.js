@@ -104,6 +104,17 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         break
     }
 
+    if (
+      node.frontmatter &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, "author")
+    ) {
+      createNodeField({
+        node,
+        name: "authorId",
+        value: node.frontmatter.author,
+      })
+    }
+
     createNodeField({
       node,
       name: `slug`,
@@ -137,10 +148,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               fileAbsolutePath
               frontmatter {
                 template
+                title
+                tags
+                author
               }
               fields {
                 id
                 slug
+                authorId
               }
             }
           }

@@ -24,6 +24,17 @@ function addLineBreaks(nodeValue) {
   const hasPreTags = nodeValue.includes("<pre>") || nodeValue.includes("</pre>")
   const hasTableTags =
     nodeValue.includes("<table>") || nodeValue.includes("</table>")
+  const hasParagraphTags =
+    nodeValue.includes("<p>") || nodeValue.includes("</p>")
+
+  // If paragraph tags (`<p></p>`) are not removed first, they can hide,
+  // the 'bad tags' that will break the build during MDX/JSX processing.
+  //
+  if (hasParagraphTags) {
+    replaceTag(nodeValue.match(/\<p\s*(.*?)\>/g), "")
+    replaceTag(nodeValue.match(/\<\/p\>/g), "\n\r") // give it a line break for good measure
+    return nodeValue
+  }
 
   // If there are HTML tables in the markdown, don't add line breaks,
   // but replace any <br> tags within those tables. This could be expanded.
@@ -42,12 +53,12 @@ function addLineBreaks(nodeValue) {
   //
   if (hasPreTags) {
     replaceTag(nodeValue.match(/\<pre\>/g), "```add_language")
-    replaceTag(nodeValue.match(/\<\/pre\>/g), "```")
+    replaceTag(nodeValue.match(/\<\/pre\>/g), "```\n\r") // give it a line break just in case
     return nodeValue
   }
 
   const tagNoLine = nodeValue.match(/(?<=(>))\s*\n/g)
-  replaceTag(tagNoLine, "\n\r") // adds critical carriage return here
+  replaceTag(tagNoLine, "\n\r") // adds critical line break to all other tags
   return nodeValue
 
   function replaceTag(invalidTag, replacement) {

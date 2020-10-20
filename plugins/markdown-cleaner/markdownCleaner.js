@@ -16,9 +16,6 @@ const cleanHtmlNodes = require("./cleanHtmlNodes")
 module.exports = markdownCleaner
 
 function markdownCleaner(pluginOptionTags, cleaningOption) {
-  let breakingTags = ["<hr>", "<br>", "<b>", "</b>", "<pre/>"]
-  let allTags = [...breakingTags, ...pluginOptionTags]
-
   return cleanMarkdown
   function cleanMarkdown(node) {
     const type = node && node.type
@@ -27,7 +24,7 @@ function markdownCleaner(pluginOptionTags, cleaningOption) {
       if (cleaningOption === "addLineBreaks") {
         nodeValue = addLineBreaks(node.value)
       } else {
-        nodeValue = cleanHtmlNodes(node.value, allTags)
+        nodeValue = cleanHtmlNodes(node.value, pluginOptionTags, node)
       }
       try {
         node.value = nodeValue

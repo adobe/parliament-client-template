@@ -16,7 +16,7 @@ module.exports = {
         contentDir: `${projectRootDir}/src/content`,
         localProjectDir: process.env.LOCAL_PROJECT_DIRECTORY,
         patterns: process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g, ""),
-        optionalTags: ["<em>", "<strong>", "<i>", "<code>"],
+        optionalTags: ["<em>", "<strong>", "<i>", "<code>", "<s>"],
       },
     },
     {

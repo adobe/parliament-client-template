@@ -12,62 +12,33 @@
 
 module.exports = cleanHtmlNodes
 
-function cleanHtmlNodes(nodeValue, pluginOptionTags, node) {
+function cleanHtmlNodes(nodeValue, pluginOptionTags) {
   const optionalHtmlTags = {
-    "<em>": function() {
-      replaceTag(nodeValue.match(/(<em>+|<\/em>)/g), "_")
-    },
-    "<strong>": function() {
-      replaceTag(nodeValue.match(/(<strong>+|<\/strong>)/g), "**")
-    },
-    "<i>": function() {
-      replaceTag(nodeValue.match(/(<i>+|<\/i>)/g), "_")
-    },
-    "<s>": function() {
-      replaceTag(nodeValue.match(/(<s>+|<\/s>)/g), "~~")
-    },
-    "<code>": function() {
-      replaceTag(nodeValue.match(/(<code>+|<\/code>)/g), "```")
-    },
-    default: function() {
-      console.log(`The ${tag} tag is not yet supported.`)
-    },
+    "<em>": () => { replaceTag(nodeValue.match(/(<em>+|<\/em>)/g), "_") },
+    "<strong>": () => { replaceTag(nodeValue.match(/(<strong>+|<\/strong>)/g), "**") },
+    "<i>": () => { replaceTag(nodeValue.match(/(<i>+|<\/i>)/g), "_") },
+    "<s>": () => { replaceTag(nodeValue.match(/(<s>+|<\/s>)/g), "~~") },
+    "<code>": () => { replaceTag(nodeValue.match(/(<code>+|<\/code>)/g), "```") },
+    default: () => { console.log(`The ${tag} tag is not yet supported.`) }
   }
 
   const breakingHtmlTags = {
-    "<hr>": function() {
-      replaceTag(nodeValue.match(/<hr>/g), "<hr/>")
-    },
-    "<br>": function() {
-      replaceTag(nodeValue.match(/<br>/g), "<br/>")
-    },
-    "<b>": function() {
-      replaceTag(nodeValue.match(/(<b>+|<\/b>)/g), "**")
-    },
-    "</b>": function() {
-      replaceTag(nodeValue.match(/(<\/b>)/g), "**")
-    },
-    "<pre/>": function() {
-      replaceTag(nodeValue.match(/(<pre\/>)/g), "")
-    },
-    "<wbr>": function() {
-      replaceTag(nodeValue.match(/<wbr>/g), "")
-    },
-    default: function() {
+    "<hr>": () => { replaceTag(nodeValue.match(/<hr>/g), "<hr/>") },
+    "<br>": () => { replaceTag(nodeValue.match(/<br>/g), "<br/>") },
+    "<b>": () => { replaceTag(nodeValue.match(/(<b>)/g), "**") },
+    "</b>": () => { replaceTag(nodeValue.match(/(<\/b>)/g), "**") },
+    "<pre/>": () => { replaceTag(nodeValue.match(/(<pre\/>)/g), "") },
+    "<wbr>": () => { replaceTag(nodeValue.match(/<wbr>/g), "") },
+    default: () => {
       const openImgTag = nodeValue.match(/<img\s*(.*?)[^/]>/g)
       if (openImgTag) {
         replaceTag(openImgTag, openImgTag[0].split(">").join("/>"))
         return
       }
-      replaceOptionalTags()
-      console.log("nodeValue", nodeValue, node.type)
+      for (tag of pluginOptionTags) {
+        ;(optionalHtmlTags[tag] || optionalHtmlTags["default"])()
+      }
     },
-  }
-
-  function replaceOptionalTags() {
-    for (tag of pluginOptionTags) {
-      ;(optionalHtmlTags[tag] || optionalHtmlTags["default"])()
-    }
   }
 
   ;(breakingHtmlTags[nodeValue] || breakingHtmlTags["default"])()

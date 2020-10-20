@@ -24,7 +24,7 @@ function markdownCleaner(pluginOptionTags, cleaningOption) {
       if (cleaningOption === "addLineBreaks") {
         nodeValue = addLineBreaks(node.value)
       } else {
-        nodeValue = cleanHtmlNodes(node.value, pluginOptionTags, node)
+        nodeValue = cleanHtmlNodes(node.value, pluginOptionTags)
       }
       try {
         node.value = nodeValue

@@ -25,7 +25,7 @@ import {
   Heading1,
 } from "@adobe/parliament-ui-components"
 
-import Layout from "../components/layout"
+import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
 import SiteMenu from "../components/SiteMenu"
 import HeaderBar from "../components/HeaderBar"
@@ -51,7 +51,7 @@ const Authors = props => {
   const { authors, pages } = pageContext
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <DocLayout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Grid>
         <GridHeader>
@@ -93,7 +93,7 @@ const Authors = props => {
           <Footer />
         </GridFooter>
       </Grid>
-    </Layout>
+    </DocLayout>
   )
 }
 

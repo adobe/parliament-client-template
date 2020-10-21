@@ -14,7 +14,6 @@
 import { jsx } from "@emotion/core"
 import { Link } from "gatsby"
 
-import { rhythm } from "../utils/typography"
 import BioImage from "./BioImage"
 
 const Bio = ({ author }) => {
@@ -22,14 +21,13 @@ const Bio = ({ author }) => {
     <div
       style={{
         display: `flex`,
-        marginBottom: rhythm(2.5),
       }}
     >
       <BioImage author={author} />
       <p>
         Written by{" "}
         <strong>
-          <Link to={`author/${author.login}`}>
+          <Link to={`/blog/author/${author.login}`}>
             {author.name || author.login}
           </Link>
         </strong>

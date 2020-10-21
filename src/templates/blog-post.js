@@ -14,6 +14,9 @@
 import { css, jsx } from "@emotion/core"
 import { Fragment } from "react"
 import { graphql, Link } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
+import { componentsMapping } from "../components/componentsMapping"
 
 import {
   Footer,
@@ -29,11 +32,10 @@ import { Heading } from "@adobe/react-spectrum"
 import "@spectrum-css/label"
 
 import Bio from "../components/bio"
-import Layout from "../components/layout"
+import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
 import SiteMenu from "../components/SiteMenu"
 import HeaderBar from "../components/HeaderBar"
-import { rhythm, scale } from "../utils/typography"
 
 import "../components/layout.css"
 
@@ -48,12 +50,14 @@ const generateTags = tagString => {
 
 const BlogPostTemplate = props => {
   const { data, pageContext, location } = props
-  const post = data.markdownRemark
+  const post = data.mdx
   const siteTitle = data.site.siteMetadata.title
-  const { author, previous, next, pages } = pageContext
+  const { author, previous, next, pages, gitRemote } = pageContext
+
+  console.log(post)
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <DocLayout location={location} title={siteTitle}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
@@ -63,7 +67,11 @@ const BlogPostTemplate = props => {
           <HeaderBar location={location} siteTitle={siteTitle} pages={pages} />
         </GridHeader>
         <GridNav className="spectrum--light">
-          <SiteMenu currentPage={location.pathname} pages={pages} />
+          <SiteMenu
+            gitRemote={gitRemote}
+            currentPage={location.pathname}
+            pages={pages}
+          />
         </GridNav>
         <GridContent
           css={css`
@@ -75,27 +83,23 @@ const BlogPostTemplate = props => {
               <Heading variant="pageTitle">{post.frontmatter.title}</Heading>
               <p
                 style={{
-                  ...scale(-1 / 5),
                   display: `block`,
-                  marginBottom: rhythm(1),
                 }}
               >
                 {post.frontmatter.date}
                 <br />
                 by{" "}
-                <Link to={`/author/${author.login}`}>
+                <Link to={`/blog/author/${author.login}`}>
                   {author.name || author.login}
                 </Link>
                 <br />
                 {generateTags(post.frontmatter.tags)}
               </p>
             </header>
-            <section dangerouslySetInnerHTML={{ __html: post.html }} />
-            <hr
-              style={{
-                marginBottom: rhythm(1),
-              }}
-            />
+            <MDXProvider components={componentsMapping}>
+              <MDXRenderer>{post.body}</MDXRenderer>
+            </MDXProvider>
+            <hr />
             <footer>
               <Bio author={author} />
             </footer>
@@ -131,7 +135,7 @@ const BlogPostTemplate = props => {
           <Footer />
         </GridFooter>
       </Grid>
-    </Layout>
+    </DocLayout>
   )
 }
 
@@ -147,7 +151,7 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

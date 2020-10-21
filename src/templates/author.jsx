@@ -15,7 +15,7 @@ import { graphql, Link } from "gatsby"
 
 export default ({
   data: {
-    allMarkdownRemark: { edges: postNodes },
+    allMdx: { edges: postNodes },
   },
   pageContext: { author },
 }) => (

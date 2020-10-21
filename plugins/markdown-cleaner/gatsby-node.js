@@ -38,7 +38,7 @@ const cleaningOptions = {
  * @param {object} pluginOptions Plugin options
  */
 exports.onPreInit = (_, pluginOptions) => {
-  let { localProjectDir, optionalTags } = pluginOptions
+  let { contentDir, optionalTags } = pluginOptions
   if (!optionalTags) {
     console.error(
       "The markdown-cleaner plugin is missing the optionalTags option.\n" +
@@ -47,16 +47,19 @@ exports.onPreInit = (_, pluginOptions) => {
     optionalTags = []
   }
 
-  const files = shell.ls("-Rl", `${localProjectDir}/**/*.{md,mdx}`)
+  const files = shell.ls("-RLl", `${contentDir}/**/*.md`)
 
   for (const file of files) {
     if (file.isFile()) {
       // Adds proper line breaks below HTML/JSX tags so they can be processed correctly
       unified()
         .use(parse)
-        .use(markdownCleaner, optionalTags, cleaningOptions.addLineBreaks)
+        .use(markdownCleaner, cleaningOptions.addLineBreaks)
         .use(stringify)
         .process(vfile.readSync(`${file.name}`), function(err, file) {
+          if (err) {
+            console.error(err)
+          }
           if (file) {
             vfile.writeSync(file)
           }
@@ -65,9 +68,12 @@ exports.onPreInit = (_, pluginOptions) => {
       // Fixes HTML/JSX tags by transforming HTML into markdown or adding closing tags as needed.
       unified()
         .use(parse)
-        .use(markdownCleaner, optionalTags, cleaningOptions.cleanHtmlNodes)
+        .use(markdownCleaner, cleaningOptions.cleanHtmlNodes, optionalTags)
         .use(stringify)
         .process(vfile.readSync(`${file.name}`), function(err, file) {
+          if (err) {
+            console.error(err)
+          }
           if (file) {
             vfile.writeSync(file)
           }

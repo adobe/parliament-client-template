@@ -15,7 +15,7 @@ const cleanHtmlNodes = require("./cleanHtmlNodes")
 
 module.exports = markdownCleaner
 
-function markdownCleaner(pluginOptionTags, cleaningOption) {
+function markdownCleaner(cleaningOption, pluginOptionTags = []) {
   return cleanMarkdown
   function cleanMarkdown(node) {
     const type = node && node.type

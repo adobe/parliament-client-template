@@ -6,16 +6,11 @@ require("dotenv").config({
 })
 
 const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
-const apiUrl =
-  gitInfo.source === `github.com`
-    ? `https://api.github.com/graphql`
-    : `https://git.corp.adobe.com/api/graphql`
+const apiUrl = gitInfo.source === `github.com` ? `https://api.github.com/graphql` : `https://git.corp.adobe.com/api/graphql`
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g, "").split(",")
 
-const contentSourcePath = path.resolve(
-  path.dirname(__dirname),
-  ".cache/gatsby-source-git"
-)
+const contentSourcePath = path.resolve(path.dirname(__dirname), ".cache/gatsby-source-git")
+console.log("contentSourcePath", contentSourcePath)
 
 module.exports = {
   plugins: [

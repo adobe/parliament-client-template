@@ -22,18 +22,22 @@ module.exports = addLineBreaks
  */
 function addLineBreaks(nodeValue) {
   const hasPreTags = nodeValue.includes("<pre>") || nodeValue.includes("</pre>")
-  const hasTableTags =
-    nodeValue.includes("<table>") || nodeValue.includes("</table>")
-  const hasParagraphTags =
-    nodeValue.includes("<p>") || nodeValue.includes("</p>")
+  const hasTableTags = nodeValue.includes("<table>") || nodeValue.includes("</table>")
+  const hasParagraphTags = nodeValue.includes("<p>") || nodeValue.includes("</p>")
+  const isOpenImage = nodeValue.match(/<img\s*(.*?)[^/]>/g)
 
   // If paragraph tags (`<p></p>`) are not removed first, they can hide,
   // the 'bad tags' that will break the build during MDX/JSX processing.
   //
   if (hasParagraphTags) {
     replaceTag(nodeValue.match(/\<p\s*(.*?)\>/g), "")
-    replaceTag(nodeValue.match(/\<\/p\>/g), "\n\r") // give it a line break for good measure
+    replaceTag(nodeValue.match(/\<\/p\>/g), "\n\r")
     return nodeValue
+  }
+
+  // Close open img tags
+  if (isOpenImage) {
+    replaceTag(isOpenImage, isOpenImage[0].split(">").join("/>"))
   }
 
   // If there are HTML tables in the markdown, don't add line breaks,
@@ -46,19 +50,18 @@ function addLineBreaks(nodeValue) {
 
   // If there are HTML <pre> tags demarcating code in the markdown,
   // don't add line breaks. Just replace the <pre> tags with markdown
-  // code blocks and a language that can be updated by the content
-  // maintainer. A placeholder for the code block's language must be added.
-  // Otherwise, the parser will replace the backticks with a four-space
-  // indention to define the code block.
+  // code blocks and a dummy value for the language that can be searched
+  // for and replaced by the content maintainer.
   //
   if (hasPreTags) {
     replaceTag(nodeValue.match(/\<pre\>/g), "```add_language")
-    replaceTag(nodeValue.match(/\<\/pre\>/g), "```\n\r") // give it a line break just in case
+    replaceTag(nodeValue.match(/\<\/pre\>/g), "```\n\r")
     return nodeValue
   }
 
+  // adds critical line break (carriage return) to all other tags
   const tagNoLine = nodeValue.match(/(?<=(>))\s*\n/g)
-  replaceTag(tagNoLine, "\n\r") // adds critical line break to all other tags
+  replaceTag(tagNoLine, "\n\r")
   return nodeValue
 
   function replaceTag(invalidTag, replacement) {

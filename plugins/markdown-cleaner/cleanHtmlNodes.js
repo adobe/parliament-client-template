@@ -14,27 +14,40 @@ module.exports = cleanHtmlNodes
 
 function cleanHtmlNodes(nodeValue, pluginOptionTags) {
   const optionalHtmlTags = {
-    "<em>": () => { replaceTag(nodeValue.match(/(<em>+|<\/em>)/g), "_") },
-    "<strong>": () => { replaceTag(nodeValue.match(/(<strong>+|<\/strong>)/g), "**") },
-    "<i>": () => { replaceTag(nodeValue.match(/(<i>+|<\/i>)/g), "_") },
-    "<s>": () => { replaceTag(nodeValue.match(/(<s>+|<\/s>)/g), "~~") },
-    "<code>": () => { replaceTag(nodeValue.match(/(<code>+|<\/code>)/g), "```") },
-    default: () => { console.log(`The ${tag} tag is not yet supported.`) }
+    "<em>": () => {
+      replaceTag(nodeValue.match(/(<em>+|<\/em>)/g), "_")
+    },
+    "<strong>": () => {
+      replaceTag(nodeValue.match(/(<strong>+|<\/strong>)/g), "**")
+    },
+    "<i>": () => {
+      replaceTag(nodeValue.match(/(<i>+|<\/i>)/g), "_")
+    },
+    "<s>": () => {
+      replaceTag(nodeValue.match(/(<s>+|<\/s>)/g), "~~")
+    },
+    default: () => {
+      console.log(`The ${tag} tag is not yet supported.`)
+    },
   }
 
   const breakingHtmlTags = {
-    "<hr>": () => { replaceTag(nodeValue.match(/<hr>/g), "<hr/>") },
-    "<br>": () => { replaceTag(nodeValue.match(/<br>/g), "<br/>") },
-    "<b>": () => { replaceTag(nodeValue.match(/(<b>)/g), "**") },
-    "</b>": () => { replaceTag(nodeValue.match(/(<\/b>)/g), "**") },
-    "<pre/>": () => { replaceTag(nodeValue.match(/(<pre\/>)/g), "") },
-    "<wbr>": () => { replaceTag(nodeValue.match(/<wbr>/g), "") },
+    "<hr>": () => {
+      replaceTag(nodeValue.match(/<hr>/g), "<hr/>")
+    },
+    "<br>": () => {
+      replaceTag(nodeValue.match(/<br>/g), "<br/>")
+    },
+    "<b>": () => {
+      replaceTag(nodeValue.match(/(<b>)/g), "**")
+    },
+    "</b>": () => {
+      replaceTag(nodeValue.match(/(<\/b>)/g), "**")
+    },
+    "<wbr>": () => {
+      replaceTag(nodeValue.match(/<wbr>/g), "")
+    },
     default: () => {
-      const openImgTag = nodeValue.match(/<img\s*(.*?)[^/]>/g)
-      if (openImgTag) {
-        replaceTag(openImgTag, openImgTag[0].split(">").join("/>"))
-        return
-      }
       for (tag of pluginOptionTags) {
         ;(optionalHtmlTags[tag] || optionalHtmlTags["default"])()
       }

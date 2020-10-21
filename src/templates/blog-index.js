@@ -95,24 +95,34 @@ const BlogIndex = props => {
             return (
               <article key={node.fields.slug}>
                 <header>
-                  <Heading variant="subtitle1">
-                    <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                  <Heading level={2}>
+                    <Link
+                      style={{ boxShadow: `none` }}
+                      to={node.fields.slug}
+                      className="spectrum-Link spectrum-Link--quiet"
+                    >
                       {title}
                     </Link>
                   </Heading>
-                  <small>{node.frontmatter.date}</small>
-                  <br />
-                  <small>
-                    by{" "}
-                    <Link to={`author/${author.login}`}>
-                      {author.name || author.login}
-                    </Link>
-                  </small>
-                  <br />
-                  <small>{generateTags(node.frontmatter.tags)}</small>
+                  <p className="spectrum-Body--M">
+                    <small>{node.frontmatter.date}</small>
+                    <br />
+                    <small>
+                      by{" "}
+                      <Link
+                        to={`author/${author.login}`}
+                        className="spectrum-Link spectrum-Link--quiet"
+                      >
+                        {author.name || author.login}
+                      </Link>
+                    </small>
+                    <br />
+                    <small>{generateTags(node.frontmatter.tags)}</small>
+                  </p>
                 </header>
                 <section>
                   <p
+                    className="spectrum-Body--M"
                     dangerouslySetInnerHTML={{
                       __html: node.frontmatter.description || node.excerpt,
                     }}

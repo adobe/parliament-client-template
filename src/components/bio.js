@@ -27,7 +27,10 @@ const Bio = ({ author }) => {
       <p>
         Written by{" "}
         <strong>
-          <Link to={`/blog/author/${author.login}`}>
+          <Link
+            to={`/blog/author/${author.login}`}
+            className="spectrum-Link spectrum-Link--quiet"
+          >
             {author.name || author.login}
           </Link>
         </strong>

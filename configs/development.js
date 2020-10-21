@@ -7,6 +7,10 @@ require("dotenv").config({
 
 const projectRootDir = path.dirname(__dirname)
 const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
+const apiUrl =
+  gitInfo.source === `github.com`
+    ? `https://api.github.com/graphql`
+    : `https://git.corp.adobe.com/api/graphql`
 
 module.exports = {
   plugins: [
@@ -55,7 +59,7 @@ module.exports = {
           owner: gitInfo.owner,
           name: gitInfo.name,
           branch: process.env.GATSBY_SOURCE_BRANCH,
-          api: "https://git.corp.adobe.com/api/graphql",
+          api: apiUrl,
         },
       },
     },

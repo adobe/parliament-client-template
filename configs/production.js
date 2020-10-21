@@ -6,6 +6,10 @@ require("dotenv").config({
 })
 
 const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
+const apiUrl =
+  gitInfo.source === `github.com`
+    ? `https://api.github.com/graphql`
+    : `https://git.corp.adobe.com/api/graphql`
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g, "").split(",")
 
 const contentSourcePath = path.resolve(
@@ -47,7 +51,7 @@ module.exports = {
           owner: gitInfo.owner,
           name: gitInfo.name,
           branch: process.env.GATSBY_SOURCE_BRANCH,
-          api: "https://git.corp.adobe.com/api/graphql",
+          api: apiUrl,
         },
       },
     },

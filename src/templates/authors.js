@@ -48,7 +48,7 @@ const compare = (a, b) => {
 const Authors = props => {
   const { data, location, pageContext } = props
   const siteTitle = data.site.siteMetadata.title
-  const { authors, pages } = pageContext
+  const { authors, pages, gitRemote } = pageContext
 
   return (
     <DocLayout location={location} title={siteTitle}>
@@ -58,7 +58,11 @@ const Authors = props => {
           <HeaderBar location={location} siteTitle={siteTitle} pages={pages} />
         </GridHeader>
         <GridNav className="spectrum--light">
-          <SiteMenu currentPage={props.location.pathname} pages={pages} />
+          <SiteMenu
+            currentPage={props.location.pathname}
+            pages={pages}
+            gitRemote={gitRemote}
+          />
         </GridNav>
         <GridContent
           css={css`

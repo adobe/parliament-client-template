@@ -147,6 +147,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const tagPage = path.resolve("src/templates/tag.jsx")
 
   const gitRemote = gitRepoInfo(graphql)
+  const gitPathPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
 
   let tabs = []
 
@@ -209,7 +210,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const postsNav = {
       importedFileName: "posts",
       pages: [],
-      path: "/blog",
+      path: `${gitPathPrefix}/blog`,
       title: "Posts",
     }
 
@@ -253,9 +254,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       postsNav.pages.push({
         importedFileName: "posts",
         pages: [],
-        path: post.node.fields.slug,
+        path: `${gitPathPrefix}${post.node.fields.slug}`,
         title: post.node.frontmatter.title,
       })
+
+      console.log(`${gitPathPrefix}${post.node.fields.slug}`)
 
       const tags = post.node.frontmatter.tags.split(",")
       return tags.map(tag => {
@@ -271,7 +274,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const authors = {
       importedFileName: "authors",
       pages: [],
-      path: "/blog/authors/",
+      path: `${gitPathPrefix}/blog/authors/`,
       title: "Authors",
     }
 
@@ -280,7 +283,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       authors.pages.push({
         importedFileName: `${author.login}`,
         pages: [],
-        path: `/blog/author/${author.login}/`,
+        path: `${gitPathPrefix}/blog/author/${author.login}/`,
         title: `${author.name || author.login}`,
       })
     })
@@ -302,7 +305,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       tags.pages.push({
         importedFileName: `${key}`,
         pages: [],
-        path: `/blog/tags/${key}/`,
+        path: `${gitPathPrefix}/blog/tags/${key}/`,
         title: `${value} #${key}`,
       })
 

@@ -40,12 +40,14 @@ import HeaderBar from "../components/HeaderBar"
 import "../components/layout.css"
 
 const generateTags = tagString => {
-  const tags = tagString.split(",")
-  return tags.map(tag => (
-    <Fragment>
-      <span class="spectrum-Label spectrum-Label--red">#{tag}</span>{" "}
-    </Fragment>
-  ))
+  if (tagString) {
+    const tags = tagString.split(",")
+    return tags.map(tag => (
+      <Fragment>
+        <span class="spectrum-Label spectrum-Label--red">#{tag}</span>{" "}
+      </Fragment>
+    ))
+  }
 }
 
 const BlogPostTemplate = props => {

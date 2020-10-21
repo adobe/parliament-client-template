@@ -148,6 +148,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const gitRemote = gitRepoInfo(graphql)
 
+  let tabs = []
+
   const result = await graphql(
     `
       query {
@@ -195,155 +197,168 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // Create side nav
   const posts = result.data.allMdx.edges
-  const contributors = result.data.allGithubContributors.edges
 
-  const postsNav = {
-    importedFileName: "posts",
-    pages: [],
-    path: "/blog",
-    title: "Posts",
-  }
+  if (posts.length > 0) {
+    tabs = [
+      { title: "Docs", path: "/" },
+      { title: "Blog", path: "/blog" },
+    ]
 
-  // Create a map of all the authors
-  const authorMap = new Map()
+    const contributors = result.data.allGithubContributors.edges
 
-  // Create blog posts pages.
-  posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node
-    const next = index === 0 ? null : posts[index - 1].node
-
-    const contributorsObj = contributors.find(
-      obj => obj.node.path === post.node.fileAbsolutePath
-    )
-    const author =
-      contributorsObj?.node?.contributors.find(
-        contributor => contributor.login === post.node.frontmatter.author
-      ) ?? {}
-
-    authorMap.set(post.node.frontmatter.author, author)
-
-    createPage({
-      path: post.node.fields.slug,
-      component: blogPost,
-      context: {
-        slug: post.node.fields.slug,
-        previous,
-        next,
-        pages: pages,
-        author: author,
-        gitRemote: gitRemote,
-      },
-    })
-  })
-
-  // Create the map of all the tabs
-  const tagMap = new Map()
-
-  posts.forEach((post, index) => {
-    postsNav.pages.push({
+    const postsNav = {
       importedFileName: "posts",
       pages: [],
-      path: post.node.fields.slug,
-      title: post.node.frontmatter.title,
+      path: "/blog",
+      title: "Posts",
+    }
+
+    // Create a map of all the authors
+    const authorMap = new Map()
+
+    // Create blog posts pages.
+    posts.forEach((post, index) => {
+      const previous = index === posts.length - 1 ? null : posts[index + 1].node
+      const next = index === 0 ? null : posts[index - 1].node
+
+      const contributorsObj = contributors.find(
+        obj => obj.node.path === post.node.fileAbsolutePath
+      )
+      const author =
+        contributorsObj?.node?.contributors.find(
+          contributor => contributor.login === post.node.frontmatter.author
+        ) ?? {}
+
+      authorMap.set(post.node.frontmatter.author, author)
+
+      createPage({
+        path: post.node.fields.slug,
+        component: blogPost,
+        context: {
+          slug: post.node.fields.slug,
+          previous,
+          next,
+          pages: pages,
+          author: author,
+          gitRemote: gitRemote,
+          tabs: tabs,
+        },
+      })
     })
 
-    const tags = post.node.frontmatter.tags.split(",")
-    return tags.map(tag => {
-      const trimmedTag = tag.trim()
-      if (tagMap.has(trimmedTag)) {
-        tagMap.set(trimmedTag, tagMap.get(trimmedTag) + 1)
-      } else {
-        tagMap.set(trimmedTag, 1)
-      }
+    // Create the map of all the tabs
+    const tagMap = new Map()
+
+    posts.forEach((post, index) => {
+      postsNav.pages.push({
+        importedFileName: "posts",
+        pages: [],
+        path: post.node.fields.slug,
+        title: post.node.frontmatter.title,
+      })
+
+      const tags = post.node.frontmatter.tags.split(",")
+      return tags.map(tag => {
+        const trimmedTag = tag.trim()
+        if (tagMap.has(trimmedTag)) {
+          tagMap.set(trimmedTag, tagMap.get(trimmedTag) + 1)
+        } else {
+          tagMap.set(trimmedTag, 1)
+        }
+      })
     })
-  })
 
-  const authors = {
-    importedFileName: "authors",
-    pages: [],
-    path: "/blog/authors/",
-    title: "Authors",
-  }
-
-  // Add each other to the side nav
-  authorMap.forEach(author => {
-    authors.pages.push({
-      importedFileName: `${author.login}`,
+    const authors = {
+      importedFileName: "authors",
       pages: [],
-      path: `/blog/author/${author.login}/`,
-      title: `${author.name || author.login}`,
+      path: "/blog/authors/",
+      title: "Authors",
+    }
+
+    // Add each other to the side nav
+    authorMap.forEach(author => {
+      authors.pages.push({
+        importedFileName: `${author.login}`,
+        pages: [],
+        path: `/blog/author/${author.login}/`,
+        title: `${author.name || author.login}`,
+      })
     })
-  })
 
-  const tags = {
-    importedFileName: "tags",
-    pages: [],
-    path: "/blog/tags/",
-    title: "Tags",
-  }
-
-  // Descending sort of our map to get most popular tags
-  const sortedTagMap = new Map(
-    [...tagMap.entries()].sort((a, b) => b[1] - a[1])
-  )
-
-  // Add each tag to the side nav
-  for (let [key, value] of sortedTagMap) {
-    tags.pages.push({
-      importedFileName: `${key}`,
+    const tags = {
+      importedFileName: "tags",
       pages: [],
-      path: `/blog/tags/${key}/`,
-      title: `${value} #${key}`,
+      path: "/blog/tags/",
+      title: "Tags",
+    }
+
+    // Descending sort of our map to get most popular tags
+    const sortedTagMap = new Map(
+      [...tagMap.entries()].sort((a, b) => b[1] - a[1])
+    )
+
+    // Add each tag to the side nav
+    for (let [key, value] of sortedTagMap) {
+      tags.pages.push({
+        importedFileName: `${key}`,
+        pages: [],
+        path: `/blog/tags/${key}/`,
+        title: `${value} #${key}`,
+      })
+
+      createPage({
+        path: `/blog/tags/${key}/`,
+        component: tagPage,
+        context: {
+          tagName: `/${key}/`,
+          gitRemote: gitRemote,
+          tabs: tabs,
+        },
+      })
+    }
+
+    pages.push(postsNav)
+    pages.push(authors)
+    pages.push(tags)
+
+    const authorList = []
+    authorMap.forEach(author => authorList.push(author))
+
+    createPage({
+      path: `/blog/authors/`,
+      component: authorsPage,
+      context: {
+        slug: `/blog/authors/`,
+        pages: pages,
+        authors: authorList,
+        gitRemote: gitRemote,
+        tabs: tabs,
+      },
+    })
+    authorMap.forEach(author => {
+      createPage({
+        path: `/blog/author/${author.login}/`,
+        component: authorPage,
+        context: {
+          authorId: author.login,
+          author: author,
+          gitRemote: gitRemote,
+          tabs: tabs,
+        },
+      })
     })
 
     createPage({
-      path: `/blog/tags/${key}/`,
-      component: tagPage,
+      path: `/blog`,
+      component: blogIndex,
       context: {
-        tagName: `/${key}/`,
+        pages: pages,
+        contributors: contributors,
         gitRemote: gitRemote,
+        tabs: tabs,
       },
     })
   }
-
-  pages.push(postsNav)
-  pages.push(authors)
-  pages.push(tags)
-
-  const authorList = []
-  authorMap.forEach(author => authorList.push(author))
-
-  createPage({
-    path: `/blog/authors/`,
-    component: authorsPage,
-    context: {
-      slug: `/blog/authors/`,
-      pages: pages,
-      authors: authorList,
-      gitRemote: gitRemote,
-    },
-  })
-  authorMap.forEach(author => {
-    createPage({
-      path: `/blog/author/${author.login}/`,
-      component: authorPage,
-      context: {
-        authorId: author.login,
-        author: author,
-        gitRemote: gitRemote,
-      },
-    })
-  })
-
-  createPage({
-    path: `/blog`,
-    component: blogIndex,
-    context: {
-      pages: pages,
-      contributors: contributors,
-      gitRemote: gitRemote,
-    },
-  })
 
   try {
     let { data } = await graphql(`
@@ -407,6 +422,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 seo: seo,
                 gitRemote: gitRemote,
                 contributors: contributors,
+                tabs: tabs,
               },
             })
           } else {
@@ -419,6 +435,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 seo: seo,
                 gitRemote: gitRemote,
                 contributors: contributors,
+                tabs: tabs,
               },
             })
           }
@@ -463,7 +480,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           object,
           filepath,
           seo,
-          gitRemote
+          gitRemote,
+          tabs
         )
       })
     }
@@ -504,7 +522,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             object,
             filepath,
             seo,
-            gitRemote
+            gitRemote,
+            tabs
           )
         } catch (e) {
           console.log(`Skipping file: ${filepath}`)
@@ -527,6 +546,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         name: gitRemote.name,
         branch: gitRemote.ref,
       },
+      tabs: tabs,
     },
   })
 }
@@ -537,7 +557,8 @@ const createOpenApiPage = async (
   object,
   filepath,
   seo,
-  gitRemote
+  gitRemote,
+  tabs
 ) => {
   if (object && (object.swagger || object.openapi)) {
     let slug = filepath
@@ -608,6 +629,7 @@ const createOpenApiPage = async (
         spec: object,
         seo: seo,
         gitRemote: gitRemote,
+        tabs: tabs,
       },
     })
 

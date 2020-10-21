@@ -36,7 +36,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation } = data
   const { childMdx } = file
   const { body } = childMdx
-  const { gitRemote } = pageContext
+  const { gitRemote, tabs } = pageContext
 
   return (
     <DocLayout>
@@ -47,6 +47,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
             location={location}
             gitRemote={gitRemote}
             pages={parliamentNavigation.pages}
+            tabs={tabs}
           />
         </GridHeader>
         <GridNav>

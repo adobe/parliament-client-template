@@ -45,14 +45,19 @@ const BlogIndex = props => {
   const { data, location, pageContext } = props
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMdx.edges
-  const { pages, contributors, gitRemote } = pageContext
+  const { pages, contributors, gitRemote, tabs } = pageContext
 
   return (
     <DocLayout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Grid>
         <GridHeader>
-          <HeaderBar location={location} siteTitle={siteTitle} pages={pages} />
+          <HeaderBar
+            location={location}
+            siteTitle={siteTitle}
+            pages={pages}
+            tabs={tabs}
+          />
         </GridHeader>
         <GridNav className="spectrum--light">
           <SiteMenu

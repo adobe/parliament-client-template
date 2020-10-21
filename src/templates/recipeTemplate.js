@@ -32,12 +32,11 @@ import {
 } from "@adobe/parliament-ui-components"
 import HeaderBar from "../components/HeaderBar"
 
-const MarkdownTemplate = props => {
-  const { location } = props
-  const { file, parliamentNavigation } = props.data
+const MarkdownTemplate = ({ data, location, pageContext }) => {
+  const { file, parliamentNavigation } = data
   const { childMdx } = file
   const { body } = childMdx
-  const { gitRemote } = props.pageContext
+  const { gitRemote } = pageContext
 
   return (
     <DocLayout>

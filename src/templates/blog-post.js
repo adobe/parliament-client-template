@@ -27,8 +27,8 @@ import {
   GridContent,
   GridFooter,
   GridHeader,
+  Heading1,
 } from "@adobe/parliament-ui-components"
-import { Heading } from "@adobe/react-spectrum"
 import "@spectrum-css/label"
 
 import Bio from "../components/bio"
@@ -53,8 +53,6 @@ const BlogPostTemplate = props => {
   const post = data.mdx
   const siteTitle = data.site.siteMetadata.title
   const { author, previous, next, pages, gitRemote, tabs } = pageContext
-
-  console.log(post)
 
   return (
     <DocLayout location={location} title={siteTitle}>
@@ -85,7 +83,7 @@ const BlogPostTemplate = props => {
         >
           <article>
             <header>
-              <Heading variant="pageTitle">{post.frontmatter.title}</Heading>
+              <Heading1>{post.frontmatter.title}</Heading1>
               <p
                 style={{
                   display: `block`,
@@ -94,7 +92,10 @@ const BlogPostTemplate = props => {
                 {post.frontmatter.date}
                 <br />
                 by{" "}
-                <Link to={`/blog/author/${author.login}`}>
+                <Link
+                  to={`/blog/author/${author.login}`}
+                  className="spectrum-Link spectrum-Link--quiet"
+                >
                   {author.name || author.login}
                 </Link>
                 <br />

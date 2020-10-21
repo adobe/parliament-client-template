@@ -258,8 +258,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         title: post.node.frontmatter.title,
       })
 
-      console.log(`${gitPathPrefix}${post.node.fields.slug}`)
-
       const tags = post.node.frontmatter.tags.split(",")
       return tags.map(tag => {
         const trimmedTag = tag.trim()

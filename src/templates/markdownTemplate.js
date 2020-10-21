@@ -41,9 +41,6 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { body, tableOfContents, timeToRead } = childMdx
   const { contributors, gitRemote, tabs } = pageContext
 
-  console.log(contributors)
-  console.log(gitRemote)
-
   return (
     <DocLayout>
       <SEO title={pageContext.seo} />

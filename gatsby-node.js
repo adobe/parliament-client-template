@@ -708,14 +708,15 @@ const createIndex = async (nodes, pages) => {
 
   for (node of nodes) {
     const { slug } = node.fields
-    let title = searchTree(pages, slug)
+    let title = searchTree(pages, slug) || node.frontmatter?.title
+    const type = slug.startsWith("/blog") ? "blog" : "docs"
     if (title) {
       const doc = {
         id: slug,
         title: title,
         body: node.internal.content,
         path: slug,
-        type: "docs",
+        type: type,
       }
       index.addDoc(doc)
     }

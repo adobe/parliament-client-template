@@ -154,15 +154,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(
     `
       query {
-        allMdx(
-          filter: { fields: { slug: { regex: "/^(/blog)/" } } }
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
-        ) {
+        allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
             node {
               fileAbsolutePath
               fields {
+                id
                 slug
                 authorId
               }
@@ -188,6 +185,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
+        parliamentNavigation {
+          pages
+        }
       }
     `
   )
@@ -196,16 +196,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     throw result.errors
   }
 
-  // Create side nav
-  const posts = result.data.allMdx.edges
+  const posts = result.data.allMdx.edges.filter(post =>
+    post.node.fields.slug.includes("blog/")
+  )
+  const docs = result.data.allMdx.edges.filter(
+    post => !post.node.fields.slug.includes("blog/")
+  )
+  const contributors = result.data.allGithubContributors.edges
+  const parliamentNavigation = result.data.parliamentNavigation
 
   if (posts.length > 0) {
     tabs = [
       { title: "Docs", path: "/" },
       { title: "Blog", path: "/blog" },
     ]
-
-    const contributors = result.data.allGithubContributors.edges
 
     const postsNav = {
       importedFileName: "posts",
@@ -362,84 +366,30 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   try {
-    let { data } = await graphql(`
-      query {
-        allMdx(filter: { fields: { slug: { regex: "/^(?!/blog)/" } } }) {
-          edges {
-            node {
-              fileAbsolutePath
-              frontmatter {
-                template
-                title
-                tags
-                author
-              }
-              fields {
-                id
-                slug
-                authorId
-              }
-            }
-          }
-        }
-        allGithubContributors {
-          edges {
-            node {
-              id
-              contributors {
-                date
-                login
-                name
-                avatarUrl
-              }
-              path
-            }
-          }
-        }
-        parliamentNavigation {
-          pages
-        }
-      }
-    `)
-    if (data) {
-      data.allMdx.edges.forEach(({ node }) => {
-        const contributorsObj = data.allGithubContributors.edges.find(
+    if (docs) {
+      docs.forEach(({ node }) => {
+        const contributorsObj = contributors.find(
           obj => obj.node.path === node.fileAbsolutePath
         )
-        const contributors = contributorsObj?.node?.contributors ?? []
+        const fileContributors = contributorsObj?.node?.contributors ?? []
 
         if (node.fields.slug !== "") {
-          let seo = searchTree(
-            data.parliamentNavigation.pages,
-            node.fields.slug
-          )
-          if (node.frontmatter.template === "recipe") {
-            createPage({
-              path: node.fields.slug,
-              component: recipeTemplate,
-              context: {
-                slug: node.fields.slug,
-                id: node.fields.id,
-                seo: seo,
-                gitRemote: gitRemote,
-                contributors: contributors,
-                tabs: tabs,
-              },
-            })
-          } else {
-            createPage({
-              path: node.fields.slug,
-              component: docTemplate,
-              context: {
-                slug: node.fields.slug,
-                id: node.fields.id,
-                seo: seo,
-                gitRemote: gitRemote,
-                contributors: contributors,
-                tabs: tabs,
-              },
-            })
-          }
+          let seo = searchTree(parliamentNavigation.pages, node.fields.slug)
+          createPage({
+            path: node.fields.slug,
+            component:
+              node.frontmatter.template === "recipe"
+                ? recipeTemplate
+                : docTemplate,
+            context: {
+              slug: node.fields.slug,
+              id: node.fields.id,
+              seo: seo,
+              gitRemote: gitRemote,
+              contributors: fileContributors,
+              tabs: tabs,
+            },
+          })
         }
       })
     }
@@ -460,9 +410,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
-        parliamentNavigation {
-          pages
-        }
       }
     `)
     if (jsonData.allFile.edges.length > 0) {
@@ -471,7 +418,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         console.log(filepath)
         const object = JSON.parse(fs.readFileSync(filepath, "utf8"))
         let seo = searchTree(
-          jsonData.parliamentNavigation.pages,
+          parliamentNavigation.pages,
           `${node.name}${node.ext}`
         )
 
@@ -503,9 +450,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
-        parliamentNavigation {
-          pages
-        }
       }
     `)
     if (yamlData.allFile.edges.length > 0) {
@@ -514,7 +458,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         try {
           let object = YAML.parse(fs.readFileSync(filepath, "utf8"))
           let seo = searchTree(
-            yamlData.parliamentNavigation.pages,
+            parliamentNavigation.pages,
             `${node.name}${node.ext}`
           )
           createOpenApiPage(
@@ -707,7 +651,7 @@ const createIndex = async (nodes, pages) => {
   for (node of nodes) {
     const { slug } = node.fields
     let title = searchTree(pages, slug) || node.frontmatter?.title
-    const type = slug.startsWith("/blog") ? "blog" : "docs"
+    const type = slug.includes("blog/") ? "blog" : "docs"
     if (title) {
       const doc = {
         id: slug,

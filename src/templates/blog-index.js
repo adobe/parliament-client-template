@@ -25,7 +25,7 @@ import {
 } from "@adobe/parliament-ui-components"
 import { Heading } from "@adobe/react-spectrum"
 
-import Layout from "../components/layout"
+import DocLayout from "../components/doclayout"
 import SEO from "../components/seo"
 import SiteMenu from "../components/SiteMenu"
 import HeaderBar from "../components/HeaderBar"
@@ -33,25 +33,33 @@ import HeaderBar from "../components/HeaderBar"
 import "../components/layout.css"
 
 const generateTags = tagString => {
-  const tags = tagString.split(",")
-  return tags.map(tag => <Fragment>#{tag} </Fragment>)
+  if (tagString) {
+    const tags = tagString.split(",")
+    return tags.map(tag => <Fragment>#{tag} </Fragment>)
+  } else {
+    return null
+  }
 }
 
 const BlogIndex = props => {
   const { data, location, pageContext } = props
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
-  const { pages, contributors } = pageContext
+  const posts = data.allMdx.edges
+  const { pages, contributors, gitRemote } = pageContext
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <DocLayout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Grid>
         <GridHeader>
           <HeaderBar location={location} siteTitle={siteTitle} pages={pages} />
         </GridHeader>
         <GridNav className="spectrum--light">
-          <SiteMenu currentPage={location.pathname} pages={pages} />
+          <SiteMenu
+            gitRemote={gitRemote}
+            currentPage={location.pathname}
+            pages={pages}
+          />
         </GridNav>
         <GridContent
           css={css`
@@ -113,7 +121,7 @@ const BlogIndex = props => {
           <Footer />
         </GridFooter>
       </Grid>
-    </Layout>
+    </DocLayout>
   )
 }
 
@@ -126,7 +134,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      filter: { fields: { slug: { regex: "/^(/blog)/" } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       edges {
         node {
           fileAbsolutePath

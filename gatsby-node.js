@@ -32,6 +32,8 @@ const converter = require("widdershins")
 const environment = process.env.NODE_ENV || "development"
 const openApiSearchDocs = []
 
+const pages = []
+
 const searchTree = (theObject, matchingFilename) => {
   var result = null
   if (theObject instanceof Array) {
@@ -137,12 +139,216 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
+  // Blog Templates
+  const blogIndex = path.resolve(`./src/templates/blog-index.js`)
+  const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const authorsPage = path.resolve("src/templates/authors.js")
+  const authorPage = path.resolve("src/templates/author.jsx")
+  const tagPage = path.resolve("src/templates/tag.jsx")
+
   const gitRemote = gitRepoInfo(graphql)
+
+  const result = await graphql(
+    `
+      query {
+        allMdx(
+          filter: { fields: { slug: { regex: "/^(/blog)/" } } }
+          sort: { fields: [frontmatter___date], order: DESC }
+          limit: 1000
+        ) {
+          edges {
+            node {
+              fileAbsolutePath
+              fields {
+                slug
+                authorId
+              }
+              frontmatter {
+                title
+                tags
+                author
+              }
+            }
+          }
+        }
+        allGithubContributors {
+          edges {
+            node {
+              id
+              contributors {
+                date
+                login
+                name
+                avatarUrl
+              }
+              path
+            }
+          }
+        }
+      }
+    `
+  )
+
+  if (result.errors) {
+    throw result.errors
+  }
+
+  // Create side nav
+  const posts = result.data.allMdx.edges
+  const contributors = result.data.allGithubContributors.edges
+
+  const postsNav = {
+    importedFileName: "posts",
+    pages: [],
+    path: "/blog",
+    title: "Posts",
+  }
+
+  // Create a map of all the authors
+  const authorMap = new Map()
+
+  // Create blog posts pages.
+  posts.forEach((post, index) => {
+    const previous = index === posts.length - 1 ? null : posts[index + 1].node
+    const next = index === 0 ? null : posts[index - 1].node
+
+    const contributorsObj = contributors.find(
+      obj => obj.node.path === post.node.fileAbsolutePath
+    )
+    const author =
+      contributorsObj?.node?.contributors.find(
+        contributor => contributor.login === post.node.frontmatter.author
+      ) ?? {}
+
+    authorMap.set(post.node.frontmatter.author, author)
+
+    createPage({
+      path: post.node.fields.slug,
+      component: blogPost,
+      context: {
+        slug: post.node.fields.slug,
+        previous,
+        next,
+        pages: pages,
+        author: author,
+        gitRemote: gitRemote,
+      },
+    })
+  })
+
+  // Create the map of all the tabs
+  const tagMap = new Map()
+
+  posts.forEach((post, index) => {
+    postsNav.pages.push({
+      importedFileName: "posts",
+      pages: [],
+      path: post.node.fields.slug,
+      title: post.node.frontmatter.title,
+    })
+
+    const tags = post.node.frontmatter.tags.split(",")
+    return tags.map(tag => {
+      const trimmedTag = tag.trim()
+      if (tagMap.has(trimmedTag)) {
+        tagMap.set(trimmedTag, tagMap.get(trimmedTag) + 1)
+      } else {
+        tagMap.set(trimmedTag, 1)
+      }
+    })
+  })
+
+  const authors = {
+    importedFileName: "authors",
+    pages: [],
+    path: "/blog/authors/",
+    title: "Authors",
+  }
+
+  // Add each other to the side nav
+  authorMap.forEach(author => {
+    authors.pages.push({
+      importedFileName: `${author.login}`,
+      pages: [],
+      path: `/blog/author/${author.login}/`,
+      title: `${author.name || author.login}`,
+    })
+  })
+
+  const tags = {
+    importedFileName: "tags",
+    pages: [],
+    path: "/blog/tags/",
+    title: "Tags",
+  }
+
+  // Descending sort of our map to get most popular tags
+  const sortedTagMap = new Map(
+    [...tagMap.entries()].sort((a, b) => b[1] - a[1])
+  )
+
+  // Add each tag to the side nav
+  for (let [key, value] of sortedTagMap) {
+    tags.pages.push({
+      importedFileName: `${key}`,
+      pages: [],
+      path: `/blog/tags/${key}/`,
+      title: `${value} #${key}`,
+    })
+
+    createPage({
+      path: `/blog/tags/${key}/`,
+      component: tagPage,
+      context: {
+        tagName: `/${key}/`,
+        gitRemote: gitRemote,
+      },
+    })
+  }
+
+  pages.push(postsNav)
+  pages.push(authors)
+  pages.push(tags)
+
+  const authorList = []
+  authorMap.forEach(author => authorList.push(author))
+
+  createPage({
+    path: `/blog/authors/`,
+    component: authorsPage,
+    context: {
+      slug: `/blog/authors/`,
+      pages: pages,
+      authors: authorList,
+      gitRemote: gitRemote,
+    },
+  })
+  authorMap.forEach(author => {
+    createPage({
+      path: `/blog/author/${author.login}/`,
+      component: authorPage,
+      context: {
+        authorId: author.login,
+        author: author,
+        gitRemote: gitRemote,
+      },
+    })
+  })
+
+  createPage({
+    path: `/blog`,
+    component: blogIndex,
+    context: {
+      pages: pages,
+      contributors: contributors,
+      gitRemote: gitRemote,
+    },
+  })
 
   try {
     let { data } = await graphql(`
       query {
-        allMdx {
+        allMdx(filter: { fields: { slug: { regex: "/^(?!/blog)/" } } }) {
           edges {
             node {
               fileAbsolutePath

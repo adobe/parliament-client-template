@@ -30,13 +30,6 @@ module.exports = {
       },
     },
     {
-      resolve: `markdown-cleaner`,
-      options: {
-        contentDir: `${projectRootDir}/src/content`,
-        optionalTags: ["<em>"],
-      },
-    },
-    {
       resolve: `swagger-to-graphql-source`,
       options: {
         contentRoot: path.resolve(path.dirname(__dirname), "src/content"),
@@ -59,6 +52,13 @@ module.exports = {
           branch: process.env.GATSBY_SOURCE_BRANCH,
           api: apiUrl,
         },
+      },
+    },
+    {
+      resolve: `markdown-cleaner`,
+      options: {
+        contentDir: `${projectRootDir}/src/content`,
+        optionalTags: ["<em>"],
       },
     },
   ],

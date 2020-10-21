@@ -22,9 +22,11 @@ module.exports = addLineBreaks
  */
 function addLineBreaks(nodeValue) {
   const hasPreTags = nodeValue.includes("<pre>") || nodeValue.includes("</pre>")
-  const hasTableTags = nodeValue.includes("<table>") || nodeValue.includes("</table>")
-  const hasParagraphTags = nodeValue.includes("<p>") || nodeValue.includes("</p>")
-  const isOpenImage = nodeValue.match(/<img\s*(.*?)[^/]>/g)
+  const hasTableTags =
+    nodeValue.includes("<table>") || nodeValue.includes("</table>")
+  const hasParagraphTags =
+    nodeValue.includes("<p>") || nodeValue.includes("</p>")
+  const openImage = nodeValue.match(/<img\s*(.*?)([^\/])[^](?<=\"|\"\s+)>/g)
 
   // If paragraph tags (`<p></p>`) are not removed first, they can hide,
   // the 'bad tags' that will break the build during MDX/JSX processing.
@@ -36,8 +38,8 @@ function addLineBreaks(nodeValue) {
   }
 
   // Close open img tags
-  if (isOpenImage) {
-    replaceTag(isOpenImage, isOpenImage[0].split(">").join("/>"))
+  if (openImage) {
+    replaceTag(openImage, openImage[0].split(">").join("/>"))
   }
 
   // If there are HTML tables in the markdown, don't add line breaks,

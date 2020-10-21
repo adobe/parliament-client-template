@@ -39,7 +39,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation } = data
   const { relativePath, childMdx } = file
   const { body, tableOfContents, timeToRead } = childMdx
-  const { contributors, gitRemote } = pageContext
+  const { contributors, gitRemote, tabs } = pageContext
 
   console.log(contributors)
   console.log(gitRemote)
@@ -53,10 +53,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
             location={location}
             gitRemote={gitRemote}
             pages={parliamentNavigation.pages}
-            tabs={[
-              { title: "Docs", path: "/" },
-              { title: "Blog", path: "/reporting-tricks.md" },
-            ]}
+            tabs={tabs}
           />
         </GridHeader>
         <GridNav>

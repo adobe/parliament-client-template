@@ -52,7 +52,7 @@ const BlogPostTemplate = props => {
   const { data, pageContext, location } = props
   const post = data.mdx
   const siteTitle = data.site.siteMetadata.title
-  const { author, previous, next, pages, gitRemote } = pageContext
+  const { author, previous, next, pages, gitRemote, tabs } = pageContext
 
   console.log(post)
 
@@ -64,7 +64,12 @@ const BlogPostTemplate = props => {
       />
       <Grid>
         <GridHeader>
-          <HeaderBar location={location} siteTitle={siteTitle} pages={pages} />
+          <HeaderBar
+            location={location}
+            siteTitle={siteTitle}
+            pages={pages}
+            tabs={tabs}
+          />
         </GridHeader>
         <GridNav className="spectrum--light">
           <SiteMenu

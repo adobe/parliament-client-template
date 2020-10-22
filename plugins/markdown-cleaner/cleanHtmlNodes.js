@@ -47,6 +47,9 @@ function cleanHtmlNodes(nodeValue, pluginOptionTags) {
     "<wbr>": () => {
       replaceTag(nodeValue.match(/<wbr>/g), "")
     },
+    "<pre/>": () => {
+      replaceTag(nodeValue.match(/<pre\/>/g), "")
+    },
     default: () => {
       for (tag of pluginOptionTags) {
         ;(optionalHtmlTags[tag] || optionalHtmlTags["default"])()

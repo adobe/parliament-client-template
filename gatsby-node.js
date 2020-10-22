@@ -136,7 +136,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
   const recipeTemplate = path.resolve(`src/templates/recipeTemplate.js`)
-  const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
   // Blog Templates
@@ -146,7 +145,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const authorPage = path.resolve("src/templates/author.jsx")
   const tagPage = path.resolve("src/templates/tag.jsx")
 
-  const gitRemote = gitRepoInfo(graphql)
+  const gitRemote = gitRepoInfo()
   const gitPathPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
 
   let tabs = []
@@ -196,12 +195,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     throw result.errors
   }
 
-  const posts = result.data.allMdx.edges.filter(post =>
-    post.node.fields.slug.includes("blog/")
-  )
-  const docs = result.data.allMdx.edges.filter(
-    post => !post.node.fields.slug.includes("blog/")
-  )
+  const posts = [],
+    docs = []
+  result.data.allMdx.edges.map(post => {
+    post.node.fields.slug.includes("blog/") ? posts.push(post) : docs.push(post)
+  })
   const contributors = result.data.allGithubContributors.edges
   const parliamentNavigation = result.data.parliamentNavigation
 
@@ -398,10 +396,53 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.log(e)
   }
 
+  await processOpenApiFiles(
+    "json",
+    graphql,
+    createPage,
+    gitRemote,
+    tabs,
+    parliamentNavigation
+  )
+  await processOpenApiFiles(
+    "yaml",
+    graphql,
+    createPage,
+    gitRemote,
+    tabs,
+    parliamentNavigation
+  )
+
+  // redirect home page to main page
+  createPage({
+    path: `/`,
+    component: indexTemplate,
+    context: {
+      slug: `/`,
+      gitRemote: {
+        org: gitRemote.organization,
+        name: gitRemote.name,
+        branch: gitRemote.ref,
+      },
+      tabs: tabs,
+    },
+  })
+}
+
+const processOpenApiFiles = async (
+  extension,
+  graphql,
+  createPage,
+  gitRemote,
+  tabs,
+  parliamentNavigation
+) => {
+  const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
+  const type = extension === "json" ? `"json"` : `"yaml", "yml"`
   try {
-    let { data: jsonData } = await graphql(`
+    let { data } = await graphql(`
       query {
-        allFile(filter: { extension: { eq: "json" } }) {
+        allFile(filter: { extension: { in: [${type}] } }) {
           edges {
             node {
               absolutePath
@@ -412,11 +453,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
     `)
-    if (jsonData.allFile.edges.length > 0) {
-      jsonData.allFile.edges.forEach(({ node }) => {
+    if (data.allFile.edges.length > 0) {
+      data.allFile.edges.forEach(({ node }) => {
         let filepath = node.absolutePath
-        console.log(filepath)
-        const object = JSON.parse(fs.readFileSync(filepath, "utf8"))
+        const object =
+          extension === "json"
+            ? JSON.parse(fs.readFileSync(filepath, "utf8"))
+            : YAML.parse(fs.readFileSync(filepath, "utf8"))
         let seo = searchTree(
           parliamentNavigation.pages,
           `${node.name}${node.ext}`
@@ -434,66 +477,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       })
     }
   } catch (e) {
-    console.log("Skipping JSON files")
+    console.log(`Skipping ${type} files`)
     console.log(e)
   }
-
-  try {
-    let { data: yamlData } = await graphql(`
-      query {
-        allFile(filter: { extension: { in: ["yaml", "yml"] } }) {
-          edges {
-            node {
-              absolutePath
-              name
-              ext
-            }
-          }
-        }
-      }
-    `)
-    if (yamlData.allFile.edges.length > 0) {
-      yamlData.allFile.edges.forEach(({ node }) => {
-        let filepath = node.absolutePath
-        try {
-          let object = YAML.parse(fs.readFileSync(filepath, "utf8"))
-          let seo = searchTree(
-            parliamentNavigation.pages,
-            `${node.name}${node.ext}`
-          )
-          createOpenApiPage(
-            createPage,
-            openapiTemplate,
-            object,
-            filepath,
-            seo,
-            gitRemote,
-            tabs
-          )
-        } catch (e) {
-          console.log(`Skipping file: ${filepath}`)
-        }
-      })
-    }
-  } catch (e) {
-    console.log("Skipping yaml files")
-    console.log(e)
-  }
-
-  // redirect home page to main page
-  createPage({
-    path: `/`,
-    component: indexTemplate,
-    context: {
-      slug: `/`,
-      gitRemote: {
-        org: gitRemote.organization,
-        name: gitRemote.name,
-        branch: gitRemote.ref,
-      },
-      tabs: tabs,
-    },
-  })
 }
 
 const createOpenApiPage = async (

@@ -110,11 +110,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node.frontmatter &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, "author")
     ) {
-      createNodeField({
-        node,
-        name: "authorId",
-        value: node.frontmatter.author,
-      })
+      if (node.frontmatter.author) {
+        createNodeField({
+          node,
+          name: "authorId",
+          value: node.frontmatter.author,
+        })
+      }
     }
 
     createNodeField({
@@ -227,10 +229,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const contributorsObj = contributors.find(
         obj => obj.node.path === post.node.fileAbsolutePath
       )
-      const author =
-        contributorsObj?.node?.contributors.find(
-          contributor => contributor.login === post.node.frontmatter.author
-        ) ?? {}
+      const author = contributorsObj?.node?.contributors.find(
+        contributor => contributor.login === post.node.frontmatter.author
+      ) ?? {
+        login: post.node.frontmatter.author,
+        name: post.node.frontmatter.author,
+      }
 
       authorMap.set(post.node.frontmatter.author, author)
 

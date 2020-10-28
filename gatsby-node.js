@@ -260,7 +260,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         title: post.node.frontmatter.title,
       })
 
-      const tags = post.node.frontmatter.tags.split(",")
+      const tags = post.node?.frontmatter?.tags?.split(",")
       return tags.map(tag => {
         const trimmedTag = tag.trim()
         if (tagMap.has(trimmedTag)) {

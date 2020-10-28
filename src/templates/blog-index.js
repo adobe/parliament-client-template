@@ -34,8 +34,8 @@ import "../components/layout.css"
 
 const generateTags = tagString => {
   if (tagString) {
-    const tags = tagString.split(",")
-    return tags.map(tag => <Fragment>#{tag} </Fragment>)
+    const tags = tagString?.split(",")
+    return tags && tags.map(tag => <Fragment>#{tag} </Fragment>)
   } else {
     return null
   }

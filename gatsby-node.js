@@ -261,14 +261,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       })
 
       const tags = post.node?.frontmatter?.tags?.split(",")
-      return tags.map(tag => {
-        const trimmedTag = tag.trim()
-        if (tagMap.has(trimmedTag)) {
-          tagMap.set(trimmedTag, tagMap.get(trimmedTag) + 1)
-        } else {
-          tagMap.set(trimmedTag, 1)
-        }
-      })
+      return (
+        tags &&
+        tags.map(tag => {
+          const trimmedTag = tag.trim()
+          if (tagMap.has(trimmedTag)) {
+            tagMap.set(trimmedTag, tagMap.get(trimmedTag) + 1)
+          } else {
+            tagMap.set(trimmedTag, 1)
+          }
+        })
+      )
     })
 
     const authors = {

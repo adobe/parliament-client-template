@@ -260,7 +260,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       postsNav.pages.push({
         importedFileName: "posts",
         pages: [],
-        path: `${gitPathPrefix}${post.node.fields.slug}`,
+        path: `${gitPathPrefix}/${post.node.fields.slug}`,
         title: post.node.frontmatter.title,
       })
 
@@ -298,7 +298,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const tags = {
       importedFileName: "tags",
       pages: [],
-      path: "/blog/tags/",
+      path: `${gitPathPrefix}/blog/tags/`,
       title: "Tags",
     }
 

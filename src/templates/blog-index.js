@@ -47,6 +47,11 @@ const BlogIndex = props => {
   const posts = data.allMdx.edges
   const { pages, contributors, gitRemote, tabs } = pageContext
 
+  console.log("*********")
+  console.log("Posts")
+  console.log(posts)
+  console.log("*********")
+
   return (
     <DocLayout location={location} title={siteTitle}>
       <SEO title="All posts" />
@@ -82,54 +87,56 @@ const BlogIndex = props => {
             `}
           ></div>
           {posts.map(({ node }) => {
-            const title = node.frontmatter.title || node.fields.slug
+            if (node.fields.slug.includes("blog/")) {
+              const title = node.frontmatter.title || node.fields.slug
 
-            const contributorsObj = contributors.find(
-              obj => obj.node.path === node.fileAbsolutePath
-            )
-            const author =
-              contributorsObj?.node?.contributors.find(
-                contributor => contributor.login === node.frontmatter.author
-              ) ?? {}
+              const contributorsObj = contributors.find(
+                obj => obj.node.path === node.fileAbsolutePath
+              )
+              const author =
+                contributorsObj?.node?.contributors.find(
+                  contributor => contributor.login === node.frontmatter.author
+                ) ?? {}
 
-            return (
-              <article key={node.fields.slug}>
-                <header>
-                  <Heading level={2}>
-                    <Link
-                      style={{ boxShadow: `none` }}
-                      to={node.fields.slug}
-                      className="spectrum-Link spectrum-Link--quiet"
-                    >
-                      {title}
-                    </Link>
-                  </Heading>
-                  <p className="spectrum-Body--M">
-                    <small>{node.frontmatter.date}</small>
-                    <br />
-                    <small>
-                      by{" "}
+              return (
+                <article key={node.fields.slug}>
+                  <header>
+                    <Heading level={2}>
                       <Link
-                        to={`author/${author.login}`}
+                        style={{ boxShadow: `none` }}
+                        to={`/${node.fields.slug}`}
                         className="spectrum-Link spectrum-Link--quiet"
                       >
-                        {author.name || author.login}
+                        {title}
                       </Link>
-                    </small>
-                    <br />
-                    <small>{generateTags(node.frontmatter.tags)}</small>
-                  </p>
-                </header>
-                <section>
-                  <p
-                    className="spectrum-Body--M"
-                    dangerouslySetInnerHTML={{
-                      __html: node.frontmatter.description || node.excerpt,
-                    }}
-                  />
-                </section>
-              </article>
-            )
+                    </Heading>
+                    <p className="spectrum-Body--M">
+                      <small>{node.frontmatter.date}</small>
+                      <br />
+                      <small>
+                        by{" "}
+                        <Link
+                          to={`author/${author.login}`}
+                          className="spectrum-Link spectrum-Link--quiet"
+                        >
+                          {author.name || author.login}
+                        </Link>
+                      </small>
+                      <br />
+                      <small>{generateTags(node.frontmatter.tags)}</small>
+                    </p>
+                  </header>
+                  <section>
+                    <p
+                      className="spectrum-Body--M"
+                      dangerouslySetInnerHTML={{
+                        __html: node.frontmatter.description || node.excerpt,
+                      }}
+                    />
+                  </section>
+                </article>
+              )
+            }
           })}
         </GridContent>
         <GridFooter>
@@ -149,10 +156,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(
-      filter: { fields: { slug: { regex: "/^(/blog)/" } } }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           fileAbsolutePath

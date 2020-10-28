@@ -110,13 +110,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node.frontmatter &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, "author")
     ) {
-      if (node.frontmatter.author) {
-        createNodeField({
-          node,
-          name: "authorId",
-          value: node.frontmatter.author,
-        })
-      }
+      const author = node.frontmatter.author || "unknown"
+      createNodeField({
+        node,
+        name: "authorId",
+        value: author,
+      })
     }
 
     createNodeField({

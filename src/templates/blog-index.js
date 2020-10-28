@@ -47,11 +47,6 @@ const BlogIndex = props => {
   const posts = data.allMdx.edges
   const { pages, contributors, gitRemote, tabs } = pageContext
 
-  console.log("*********")
-  console.log("Posts")
-  console.log(posts)
-  console.log("*********")
-
   return (
     <DocLayout location={location} title={siteTitle}>
       <SEO title="All posts" />

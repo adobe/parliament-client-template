@@ -32,6 +32,12 @@ import HeaderBar from "../components/HeaderBar"
 
 import "../components/layout.css"
 
+const cleanString = (str = "") =>
+  str
+    .replace(/"/g, "")
+    .replace(/“/g, "")
+    .replace(/”/g, "")
+
 const generateTags = tagString => {
   if (tagString) {
     const tags = tagString?.split(",")
@@ -84,13 +90,14 @@ const BlogIndex = props => {
           {posts.map(({ node }) => {
             if (node.fields.slug.includes("blog/")) {
               const title = node.frontmatter.title || node.fields.slug
+              const postAuthor = cleanString(node.frontmatter.author)
 
               const contributorsObj = contributors.find(
                 obj => obj.node.path === node.fileAbsolutePath
               )
               const author =
                 contributorsObj?.node?.contributors.find(
-                  contributor => contributor.login === node.frontmatter.author
+                  contributor => contributor.login === postAuthor
                 ) ?? {}
 
               return (

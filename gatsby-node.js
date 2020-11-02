@@ -34,6 +34,12 @@ const openApiSearchDocs = []
 
 const pages = []
 
+const cleanString = (str = "") =>
+  str
+    .replace(/"/g, "")
+    .replace(/“/g, "")
+    .replace(/”/g, "")
+
 const searchTree = (theObject, matchingFilename) => {
   var result = null
   if (theObject instanceof Array) {
@@ -114,7 +120,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       createNodeField({
         node,
         name: "authorId",
-        value: author,
+        value: cleanString(author),
       })
     }
 
@@ -224,18 +230,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     posts.forEach((post, index) => {
       const previous = index === posts.length - 1 ? null : posts[index + 1].node
       const next = index === 0 ? null : posts[index - 1].node
+      const postAuthor = cleanString(post.node.frontmatter.author)
 
       const contributorsObj = contributors.find(
         obj => obj.node.path === post.node.fileAbsolutePath
       )
       const author = contributorsObj?.node?.contributors.find(
-        contributor => contributor.login === post.node.frontmatter.author
+        contributor => contributor.login === postAuthor
       ) ?? {
-        login: post.node.frontmatter.author,
-        name: post.node.frontmatter.author,
+        login: postAuthor,
+        name: postAuthor,
       }
 
-      authorMap.set(post.node.frontmatter.author, author)
+      authorMap.set(postAuthor, author)
 
       createPage({
         path: post.node.fields.slug,

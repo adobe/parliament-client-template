@@ -9,8 +9,8 @@ module.exports = {
   pathPrefix: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
   siteMetadata: {
     title: `${process.env.GATSBY_SOURCE_TITLE}`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: ``,
+    author: `@adobedevs`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

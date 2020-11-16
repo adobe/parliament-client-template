@@ -51,6 +51,7 @@
     "git-url-parse": "^11.1.2",
     "graphql-type-json": "^0.3.2",
     "mobx": "^4.2.0",
+    "node-fetch": "^2.6.1",
     "openapi-snippet": "^0.7.0",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
@@ -99,7 +100,9 @@
     "test": "npm run test:integration",
     "test:integration": "jest",
     "test:e2e": "CYPRESS_SUPPORT=y start-server-and-test develop http://localhost:8000 cy:open",
-    "test:e2e:ci": "NODE_ENV=production start-server-and-test serve:prod http://localhost:8000$GATSBY_SITE_PATH_PREFIX/do-not-delete/index.html cy:run"
+    "test:e2e:ci": "NODE_ENV=production start-server-and-test serve:prod http://localhost:8000$GATSBY_SITE_PATH_PREFIX/do-not-delete/index.html cy:run",
+    "updatesearch": "NODE_ENV=development node ./scripts/updateSearch.js",
+    "updatesearch:prod": "NODE_ENV=production node ./scripts/updateSearch.js"
   },
   "repository": {
     "type": "git",

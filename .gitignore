@@ -80,3 +80,6 @@ src/content/
 # Visual Studio Code
 .vscode/*
 !.vscode/launch.json
+
+# Search Index
+searchIndex.json

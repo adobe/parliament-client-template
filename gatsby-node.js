@@ -647,6 +647,8 @@ const createIndex = async (nodes, pages) => {
   index.addField(`path`)
   index.addField(`type`)
 
+  const project = []
+
   for (node of nodes) {
     const { slug } = node.fields
     let title = searchTree(pages, slug) || node.frontmatter?.title
@@ -660,13 +662,19 @@ const createIndex = async (nodes, pages) => {
         type: type,
       }
       index.addDoc(doc)
+      project.push(doc)
     }
   }
 
   // Open API specs are not in graphql db, hence this hack
   for (spec of openApiSearchDocs) {
     index.addDoc(spec)
+    project.push(spec)
   }
+
+  fs.writeFileSync("searchIndex.json", JSON.stringify(project), {
+    encoding: "utf8",
+  })
 
   return index.toJSON()
 }

@@ -6,11 +6,14 @@ require("dotenv").config({
 ;(async () => {
   const data = JSON.parse(fs.readFileSync("./searchIndex.json"))
 
-  const response = await fetch(`${process.env.SEARCH_URL}/projects`, {
-    method: "post",
-    body: JSON.stringify({ id: `${process.env.JOB_NAME}`, data }),
-    headers: { "Content-Type": "application/json" },
-  })
+  const response = await fetch(
+    `${process.env.SEARCH_URL}/projects/${process.env.JOB_NAME}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ id: `${process.env.JOB_NAME}`, data }),
+      headers: { "Content-Type": "application/json" },
+    }
+  )
   const json = await response.json()
 
   console.log(json)

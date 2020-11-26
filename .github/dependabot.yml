@@ -11,5 +11,3 @@ updates:
     open-pull-requests-limit: 25
     labels:
       - "dependencies"
-    ignore:
-      # Ignore updates to package

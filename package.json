@@ -11,7 +11,7 @@
     "@adobe/parliament-transformer-navigation": "^1.0.1",
     "@adobe/parliament-ui-components": "^2.6.14",
     "@adobe/prism-adobe": "^1.0.3",
-    "@adobe/react-spectrum": "^3.3.0",
+    "@adobe/react-spectrum": "^3.5.0",
     "@apidevtools/swagger-parser": "^10.0.1",
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",

@@ -1,3 +1,5 @@
+# CLA bot test
+
 # parliament-client-template
 
 ## 🚀 Quick start

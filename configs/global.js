@@ -11,6 +11,7 @@ module.exports = {
     title: `${process.env.GATSBY_SOURCE_TITLE}`,
     description: ``,
     author: `@adobedevs`,
+    newton: `${process.env.NEWTON_URL}`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

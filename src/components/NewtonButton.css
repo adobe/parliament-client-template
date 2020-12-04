@@ -10,47 +10,9 @@
  *  governing permissions and limitations under the License.
  */
 
-import {
-  Alert,
-  InlineCode,
-  Code as Pre,
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
-  Link,
-  List,
-  Paragraph,
-  Table,
-  TBody,
-  Th,
-  Td,
-  THead,
-  Tr,
-} from "@adobe/parliament-ui-components"
-import NewtonButton from "./NewtonButton"
-
-export const componentsMapping = {
-  alert: Alert,
-  h1: Heading1,
-  h2: Heading2,
-  h3: Heading3,
-  h4: Heading4,
-  h5: Heading5,
-  h6: Heading6,
-  table: Table,
-  tbody: TBody,
-  th: Th,
-  td: Td,
-  thead: THead,
-  tr: Tr,
-  p: Paragraph,
-  ul: List,
-  pre: Pre,
-  inlineCode: InlineCode,
-  code: InlineCode,
-  a: Link,
-  newtonbutton: NewtonButton,
+button.spectrum-ActionButton--emphasized svg path {
+  fill: var(
+    --spectrum-actionbutton-emphasized-text-color-selected,
+    var(--spectrum-global-color-static-white)
+  );
 }

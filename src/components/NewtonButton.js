@@ -32,7 +32,7 @@ const NewtonButton = ({ recipe }) => {
       : null
   return recipe && newtonUrl ? (
     <a
-      href={`${newtonUrl}&recipe=${recipe}`}
+      href={`${newtonUrl}?recipe=${recipe}`}
       css={css`
         text-decoration: none;
       `}

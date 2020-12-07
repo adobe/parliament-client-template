@@ -20,7 +20,7 @@
     "@spectrum-css/icon": "^2.1.1",
     "@spectrum-css/label": "^2.0.8-beta.1",
     "@spectrum-css/search": "^3.0.0-beta.4",
-    "@spectrum-css/tabs": "^3.0.0-beta.3",
+    "@spectrum-css/tabs": "^3.0.0-beta.6",
     "@spectrum-css/textfield": "^3.0.0-beta.3",
     "@spectrum-css/vars": "^2.3.0",
     "@spectrum-icons/workflow": "^3.0.2",

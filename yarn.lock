@@ -3716,10 +3716,10 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/table/-/table-3.0.0-beta.4.tgz#43078dc62b80aa2d99902a54922f6e98df2c8f86"
   integrity sha512-moDjwBN63CL+P/Q+OKhrID+ceY8G51EosQ1SMJQgC2a5ueAz8GIH6f/QpKqbNFX+FUa6PUUkpvPQamvEmuC/ug==
 
-"@spectrum-css/tabs@^3.0.0-beta.3":
-  version "3.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@spectrum-css/tabs/-/tabs-3.0.0-beta.4.tgz#99c37cb1664d6dc3bf8c0698cf8695f9e605a111"
-  integrity sha512-nOm8/sNNLbxAweS1/EJlPvjTFbreyJV3Dr996F9uj7xB8A4k/IHNCsghdnIsevlU7X98xEMtqkAv87IoCYbrWg==
+"@spectrum-css/tabs@^3.0.0-beta.3", "@spectrum-css/tabs@^3.0.0-beta.6":
+  version "3.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/tabs/-/tabs-3.0.0-beta.6.tgz#adc473e98a7fd8988a50eae9b6c5ea2132b992d6"
+  integrity sha512-1BNaGP7SMoB16Qer7J6UrVY4op1rBzWWPWjyJXIkKOsJfsyRRtJlKAZRWHwKG+ZQXKjSyyZIr++8KPwvQprEjQ==
 
 "@spectrum-css/textfield@^3.0.0-beta.3":
   version "3.0.0-beta.4"

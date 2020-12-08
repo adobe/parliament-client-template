@@ -653,7 +653,7 @@ const createIndex = async (nodes, pages) => {
     const { slug } = node.fields
     let title = searchTree(pages, slug) || node.frontmatter?.title
     const type = slug.includes("blog/") ? "blog" : "docs"
-    if (title) {
+    if (title && slug !== "/do-not-delete") {
       const doc = {
         id: slug,
         title: title,

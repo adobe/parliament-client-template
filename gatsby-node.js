@@ -662,6 +662,9 @@ const createIndex = async (nodes, pages) => {
         type: type,
       }
       index.addDoc(doc)
+      const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`
+      doc.id = fullSitePath
+      doc.path = fullSitePath
       project.push(doc)
     }
   }
@@ -669,6 +672,9 @@ const createIndex = async (nodes, pages) => {
   // Open API specs are not in graphql db, hence this hack
   for (spec of openApiSearchDocs) {
     index.addDoc(spec)
+    const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${spec.path}`
+    spec.id = fullSitePath
+    spec.path = fullSitePath
     project.push(spec)
   }
 

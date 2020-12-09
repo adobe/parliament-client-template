@@ -651,8 +651,9 @@ const createIndex = async (nodes, pages) => {
 
   for (node of nodes) {
     const { slug } = node.fields
-    let title = searchTree(pages, slug) || node.frontmatter?.title
+    let title = getTitle(pages, slug, node)
     const type = slug.includes("blog/") ? "blog" : "docs"
+
     if (title && slug !== "/do-not-delete") {
       const doc = {
         id: slug,
@@ -683,4 +684,13 @@ const createIndex = async (nodes, pages) => {
   })
 
   return index.toJSON()
+}
+
+const getTitle = (pages, slug, node) => {
+  let title = searchTree(pages, slug) || node.frontmatter?.title
+  if (!title) {
+    const firstLine = node.rawBody.split("\n", 1)[0]
+    title = firstLine.replace(/#/g, "")
+  }
+  return title
 }

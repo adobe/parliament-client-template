@@ -12,7 +12,7 @@
 
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import Play from "@spectrum-icons/workflow/Play"
 import "./NewtonButton.css"
 

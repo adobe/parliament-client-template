@@ -47,14 +47,14 @@ module.exports = {
         sourcePatterns: process.env.SWAGGER_SOURCE_PATTERNS,
       },
     },
-    /*
     {
       resolve: `@adobe/gatsby-source-github-file-contributors`,
       options: {
         pages: {
           root: `${process.env.LOCAL_PROJECT_DIRECTORY}`, // root of the page paths (below) in the Github repo
-          paths: ["./"], // relative path of the pages from the config
+          paths: [`${process.env.LOCAL_PROJECT_DIRECTORY}`], // relative path of the pages from the config
           extensions: ["md", "mdx"], // page extensions to filter for
+          prefix: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
         },
         repo: {
           token: process.env.GATSBY_GIT_CORP_TOKEN,
@@ -65,7 +65,6 @@ module.exports = {
         },
       },
     },
-    */
     `gatsby-plugin-react-helmet`,
     {
       resolve: "@adobe/gatsby-add-launch-script",

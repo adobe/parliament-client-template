@@ -160,6 +160,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           }
         }
+        allGithubContributors {
+          edges {
+            node {
+              id
+              contributors {
+                date
+                login
+                name
+                avatarUrl
+              }
+              path
+            }
+          }
+        }
         parliamentNavigation {
           pages
         }
@@ -176,8 +190,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   result.data.allMdx.edges.map(post => {
     post.node.fields.slug.includes("blog/") ? posts.push(post) : docs.push(post)
   })
-  // const contributors = result.data.allGithubContributors.edges
-  const contributors = []
+  const contributors = result.data.allGithubContributors.edges
   const parliamentNavigation = result.data.parliamentNavigation
 
   if (posts.length > 0) {

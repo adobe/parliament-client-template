@@ -43,6 +43,13 @@
     globby "^11.0.1"
     graphql-fetch "^1.0.1"
 
+"@adobe/gatsby-source-github-file-contributors@https://github.com/macdonst/gatsby-source-github-file-contributors.git":
+  version "0.2.0"
+  resolved "https://github.com/macdonst/gatsby-source-github-file-contributors.git#84e313fb1a2f96acf4c260eb4df821aced3ac4a9"
+  dependencies:
+    globby "^11.0.1"
+    graphql-fetch "^1.0.1"
+
 "@adobe/parliament-transformer-navigation@^1.0.1":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.0.2.tgz#a6a683b402e8a93e40008c920fd947a4b2168d71"
@@ -50,7 +57,7 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@3.0.0":
+"@adobe/parliament-ui-components@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-3.0.0.tgz#fcd45dfaeaab74cf4192a90e4604034e515d0f14"
   integrity sha512-rqFlWFuuB0aMNK0Zf4LBGq14gGpppkhLjGY2PPm1rGs1VPhQHLaV0YFB++9+g+wlPYyj2eLjHtEehYVuwcuE9A==

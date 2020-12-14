@@ -2,6 +2,12 @@
 
 ## 🚀 Quick start
 
+1. **Clone your docs repo**
+
+   ```sh
+   git clone git@github.com:org/repo
+   ```
+
 1. **Clone this repo**
 
    ```sh
@@ -12,7 +18,7 @@
 1. **Install dependencies**
 
    ```sh
-   npm install
+   yarn install
    ```
 
 1. **Create an environment File**
@@ -44,6 +50,7 @@
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
    GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js  // url for your analytics script
+   LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
    ```
 
@@ -52,7 +59,7 @@
    If you have previously built a production site or switching to a new local project, run this command to remove the `.cache` directory.
 
    ```sh
-   npm run clean
+   yarn run clean
    ```
 
 1. **Start developing/authoring**
@@ -60,7 +67,7 @@
    Start a local instance of this project using the following command:
 
    ```sh
-   npm run develop
+   yarn run develop
    ```
 
 1. **Open the source code and start editing!**
@@ -78,14 +85,14 @@
 1. **Run unit tests**
 
    ```sh
-   npm run test:integration
+   yarn run test:integration
    ```
 
 2. ** Run end to end tests**
 
    ```sh
    gatsby clean
-   npm run test:e2e
+   yarn run test:e2e
    ```
 
 ### Production
@@ -95,15 +102,15 @@ To simulate production tests first set the environment variable `GATSBY_SITE_PAT
 1. **Run unit tests**
 
 ```sh
-npm run test:integration
+yarn run test:integration
 ```
 
 2. ** Run end to end tests**
 
    ```sh
    gatsby clean
-   npm run build:prod
-   npm run test:e2e:ci
+   yarn run build:prod
+   yarn run test:e2e:ci
    ```
 
 ## Contributing

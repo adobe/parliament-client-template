@@ -88,7 +88,7 @@
   "scripts": {
     "build": "gatsby build",
     "build:prod": "gatsby build --prefix-paths",
-    "clean": "gatsby clean && rimraf src/content",
+    "clean": "gatsby clean",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public -r git@github.com:adobe/parliament-client-template.git",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",

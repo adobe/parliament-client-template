@@ -10,12 +10,160 @@
  *  governing permissions and limitations under the License.
  */
 
-const configs = require("./configs")
+const path = require("path")
+const GitUrlParse = require(`git-url-parse`)
 
 require("dotenv").config({
-  path: `.env`,
+  path: `.env.${process.env.NODE_ENV}`,
 })
 
-const environment = process.env.NODE_ENV || "development"
+const projectRootDir = __dirname
+const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
+const apiUrl =
+  gitInfo.source === `github.com`
+    ? `https://api.github.com/graphql`
+    : `https://git.corp.adobe.com/api/graphql`
 
-module.exports = configs[environment]
+module.exports = {
+  pathPrefix: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
+  siteMetadata: {
+    title: `${process.env.GATSBY_SOURCE_TITLE}`,
+    description: ``,
+    author: `@adobedevs`,
+    newton: `${process.env.NEWTON_URL}`,
+  },
+  plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `external`,
+        path: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+      },
+    },
+    {
+      resolve: `swagger-to-graphql-source`,
+      options: {
+        contentRoot: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+        sourcePatterns: process.env.SWAGGER_SOURCE_PATTERNS,
+      },
+    },
+    /*
+    {
+      resolve: `@adobe/gatsby-source-github-file-contributors`,
+      options: {
+        pages: {
+          root: `${process.env.LOCAL_PROJECT_DIRECTORY}`, // root of the page paths (below) in the Github repo
+          paths: ["./"], // relative path of the pages from the config
+          extensions: ["md", "mdx"], // page extensions to filter for
+        },
+        repo: {
+          token: process.env.GATSBY_GIT_CORP_TOKEN,
+          owner: gitInfo.owner,
+          name: gitInfo.name,
+          branch: process.env.GATSBY_SOURCE_BRANCH,
+          api: apiUrl,
+        },
+      },
+    },
+    */
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: "@adobe/gatsby-add-launch-script",
+      options: {
+        scriptUrl: `${process.env.GATSBY_LAUNCH_SRC}`,
+        includeInDevelopment: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-emotion`,
+      options: {},
+    },
+    {
+      resolve: `gatsby-transformer-yaml-full`,
+      options: {
+        typeName: `YamlFile`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${projectRootDir}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages`,
+        path: `${projectRootDir}/src/markdown-pages`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-svgr-loader",
+      options: {
+        rule: {
+          include: /images/,
+        },
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `gatsby-starter-default`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `${projectRootDir}/src/images/favicon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `@adobe/gatsby-remark-afm`,
+            options: {
+              directory: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+            },
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              removeAccents: true,
+              icon: false,
+            },
+          },
+          `gatsby-plugin-catch-links`,
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+            },
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+            options: {
+              ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`, `md`],
+            },
+          },
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 970,
+            },
+          },
+          `gatsby-remark-embedder`,
+        ],
+      },
+    },
+    {
+      resolve: `@adobe/parliament-transformer-navigation`,
+      options: {},
+    },
+  ],
+}

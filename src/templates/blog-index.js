@@ -106,7 +106,7 @@ const BlogIndex = props => {
                     <Heading level={2}>
                       <Link
                         style={{ boxShadow: `none` }}
-                        to={`/${node.fields.slug}`}
+                        to={`${node.fields.slug}`}
                         className="spectrum-Link spectrum-Link--quiet"
                       >
                         {title}

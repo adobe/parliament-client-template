@@ -10,7 +10,7 @@
  *  governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
+ /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"

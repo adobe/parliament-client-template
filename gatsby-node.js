@@ -29,7 +29,6 @@ const elasticlunr = require(`elasticlunr`)
 const { GraphQLJSONObject } = require("graphql-type-json")
 const converter = require("widdershins")
 
-const environment = process.env.NODE_ENV || "development"
 const openApiSearchDocs = []
 
 const pages = []
@@ -86,30 +85,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `Mdx`) {
     let slug = ""
-    switch (environment) {
-      case "production":
-        if (node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") > -1) {
-          slug = node.fileAbsolutePath.substring(
-            node.fileAbsolutePath.lastIndexOf("gatsby-source-git/") + 18
-          )
-        } else if (node.frontmatter.path) {
-          slug = node.frontmatter.path
-        }
-        break
-      case "development":
-        const localFilePath = path.relative(__dirname, node.fileAbsolutePath)
-        const directories = localFilePath.split(path.sep)
-
-        // Remove src/content prefix from slug
-        if (localFilePath.startsWith("src/content")) {
-          // Remove src
-          directories.shift()
-          // Remove content
-          directories.shift()
-        }
-
-        slug = path.join("/", ...directories)
-        break
+    if (node.frontmatter.path) {
+      slug = node.frontmatter.path
+    } else {
+      const localFilePath = path.relative(
+        `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+        node.fileAbsolutePath
+      )
+      slug = path.join("/", ...localFilePath.split(path.sep))
     }
 
     if (
@@ -266,7 +249,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       postsNav.pages.push({
         importedFileName: "posts",
         pages: [],
-        path: `${gitPathPrefix}/${post.node.fields.slug}`,
+        path: `${gitPathPrefix}/${post.node.fields.slug}`.replace(/\/\//g, "/"),
         title: post.node.frontmatter.title,
       })
 
@@ -507,29 +490,12 @@ const createOpenApiPage = async (
   if (object && (object.swagger || object.openapi)) {
     let slug = filepath
 
-    switch (environment) {
-      case "production":
-        if (filepath.lastIndexOf("gatsby-source-git/") > -1) {
-          slug = filepath.substring(
-            filepath.lastIndexOf("gatsby-source-git/") + 18
-          )
-        }
-        break
-      case "development":
-        const localFilePath = path.relative(__dirname, filepath)
-        const directories = localFilePath.split(path.sep)
-
-        // Remove src/content prefix from slug
-        if (localFilePath.startsWith("src/content")) {
-          // Remove src
-          directories.shift()
-          // Remove content
-          directories.shift()
-        }
-
-        slug = path.join("/", ...directories)
-        break
-    }
+    const localFilePath = path.relative(
+      `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+      filepath
+    )
+    const directories = localFilePath.split(path.sep)
+    slug = path.join("/", ...directories)
 
     try {
       const targets = [
@@ -651,9 +617,10 @@ const createIndex = async (nodes, pages) => {
 
   for (node of nodes) {
     const { slug } = node.fields
-    let title = searchTree(pages, slug) || node.frontmatter?.title
+    let title = getTitle(pages, slug, node)
     const type = slug.includes("blog/") ? "blog" : "docs"
-    if (title) {
+
+    if (title && slug !== "/do-not-delete") {
       const doc = {
         id: slug,
         title: title,
@@ -662,6 +629,9 @@ const createIndex = async (nodes, pages) => {
         type: type,
       }
       index.addDoc(doc)
+      const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`
+      doc.id = fullSitePath
+      doc.path = fullSitePath
       project.push(doc)
     }
   }
@@ -669,6 +639,9 @@ const createIndex = async (nodes, pages) => {
   // Open API specs are not in graphql db, hence this hack
   for (spec of openApiSearchDocs) {
     index.addDoc(spec)
+    const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${spec.path}`
+    spec.id = fullSitePath
+    spec.path = fullSitePath
     project.push(spec)
   }
 
@@ -677,4 +650,13 @@ const createIndex = async (nodes, pages) => {
   })
 
   return index.toJSON()
+}
+
+const getTitle = (pages, slug, node) => {
+  let title = searchTree(pages, slug) || node.frontmatter?.title
+  if (!title) {
+    const firstLine = node.rawBody.split("\n", 1)[0]
+    title = firstLine.replace(/#/g, "")
+  }
+  return title
 }

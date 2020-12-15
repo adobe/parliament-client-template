@@ -12,6 +12,8 @@
 
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
+import { useState } from "react"
+import { Index } from "elasticlunr"
 import PropTypes from "prop-types"
 import { graphql, useStaticQuery } from "gatsby"
 import { Nav, Search } from "@adobe/parliament-ui-components"
@@ -26,6 +28,7 @@ const SiteMenu = ({ gitRemote, currentPage, pages }) => {
       }
     `
   )
+  const [index] = useState(Index.load(ParliamentSearchIndex))
 
   const gitInfo = {
     org: gitRemote.organization,
@@ -48,7 +51,22 @@ const SiteMenu = ({ gitRemote, currentPage, pages }) => {
             var(--spectrum-global-dimension-size-300);
         `}
       >
-        <Search searchIndex={ParliamentSearchIndex} />
+        <Search
+          width="size-2400"
+          sections={[
+            { key: "docs", name: "Docs" },
+            { key: "apis", name: "API References" },
+            { key: "blog", name: "Blog Posts" },
+          ]}
+          searchCallback={searchTerm => {
+            const searchResults = index
+              .search(searchTerm, { expand: true })
+              .map(({ ref }) => {
+                return index.documentStore.getDoc(ref)
+              })
+            return searchResults
+          }}
+        />
       </div>
       <div
         css={css`

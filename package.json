@@ -44,7 +44,7 @@
     "gatsby-remark-images": "^3.1.22",
     "gatsby-source-filesystem": "^2.1.18",
     "gatsby-source-git": "^1.0.1",
-    "gatsby-transformer-remark": "^2.6.19",
+    "gatsby-transformer-remark": "^2.13.0",
     "gatsby-transformer-sharp": "^2.8.0",
     "gatsby-transformer-yaml": "^2.7.0",
     "gatsby-transformer-yaml-full": "^0.2.0",

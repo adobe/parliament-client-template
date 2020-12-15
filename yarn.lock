@@ -9823,12 +9823,12 @@ gatsby-transformer-yaml-full@^0.2.0:
     js-yaml "^3.13.1"
     lodash "^4.17.15"
 
-gatsby-transformer-yaml@^2.2.15:
-  version "2.4.13"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml/-/gatsby-transformer-yaml-2.4.13.tgz#791e8bed84b91161af5ac2b1368855fd68830158"
-  integrity sha512-j8VErPNSdNyEuH9XUOwZ4m+bAEA1U6eULUZ6IrHfrusmbBi62etfYncJozL0F5XqrxkTWjsS3vw9ZwoOvH3wJg==
+gatsby-transformer-yaml@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml/-/gatsby-transformer-yaml-2.7.0.tgz#330c31d176a71730a800775afbb8530e9d876f7d"
+  integrity sha512-t1MY6CCCzEboSVwS9rNrUpe630TOoptnb7wWHnoa4Xe6zDYSBFTteK+jH4xdnwVaFaAYDVX/cgXojlxZehY/hA==
   dependencies:
-    "@babel/runtime" "^7.11.2"
+    "@babel/runtime" "^7.12.5"
     js-yaml "^3.14.0"
     lodash "^4.17.20"
     unist-util-select "^1.5.0"

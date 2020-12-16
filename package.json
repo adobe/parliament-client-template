@@ -15,7 +15,7 @@
     "@apidevtools/swagger-parser": "^10.0.1",
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
-    "@mdx-js/mdx": "^1.4.0",
+    "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.4.0",
     "@spectrum-css/icon": "^2.1.1",
     "@spectrum-css/label": "^2.0.8-beta.1",

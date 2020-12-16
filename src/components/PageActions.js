@@ -12,7 +12,7 @@
 
 /** @jsx jsx */
 import React from "react"
-import { css, jsx } from "@emotion/core"
+import { css, jsx } from "@emotion/react"
 import { TableOfContents } from "@adobe/parliament-ui-components"
 
 const PageActions = ({ tableOfContents, timeToRead }) => {

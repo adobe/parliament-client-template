@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { jsx } from "@emotion/core"
+import { jsx } from "@emotion/react"
 import { Link } from "gatsby"
 
 import BioImage from "./BioImage"

@@ -11,7 +11,7 @@
  */
 
  /** @jsx jsx */
-import { css, jsx } from "@emotion/core"
+import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import PageActions from "../components/PageActions"

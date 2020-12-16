@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core"
+import { css, jsx } from "@emotion/react"
 import { graphql, useStaticQuery } from "gatsby"
 import Play from "@spectrum-icons/workflow/Play"
 import "./NewtonButton.css"

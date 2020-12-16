@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core"
+import { css, jsx } from "@emotion/react"
 import { Img } from "react-image"
 
 const BioImage = ({ author }) => {

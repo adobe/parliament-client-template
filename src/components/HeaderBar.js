@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { jsx } from "@emotion/core"
+import { jsx } from "@emotion/react"
 import { Header } from "@adobe/parliament-ui-components"
 import SiteMenu from "./SiteMenu"
 

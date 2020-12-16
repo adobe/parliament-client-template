@@ -30,11 +30,13 @@
    ```
    GATSBY_SITE_PATH_PREFIX =
    GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
-   GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git //Repo URL in given format which you want to use to generate a microsite
+   # Repo URL in given format which you want to use to generate a microsite
+   GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
-   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js  // url for your analytics script
+   # Url for your analytics script
+   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
    ```
@@ -43,13 +45,16 @@
 
    ```
    GATSBY_GIT_CORP_TOKEN = credentials('TOKEN')
-   GATSBY_SOURCE = 'github.com/<source_org>/<source_repo>.git' //Repo URL in given format which you want to use to generate a microsite
-   GATSBY_TARGET = 'github.com/<target_org>/<target_repo>.git' // Repo URL in given format where you want to host the static html build output from Gatsby for Gihub Pages
+   # Repo URL in given format which you want to use to generate a microsite
+   GATSBY_SOURCE = 'github.com/<source_org>/<source_repo>.git'
+   # Repo URL in given format where you want to host the static html build output from Gatsby for Gihub Pages
+   GATSBY_TARGET = 'github.com/<target_org>/<target_repo>.git'
    GATSBY_SITE_PATH_PREFIX = '/pages/<target_org>/<target_repo>' // Path Prefix for link relationship to work
    GATSBY_SOURCE_BRANCH=master
    GATSBY_SOURCE_PATTERNS=**/*
    GATSBY_SOURCE_TITLE=My Docs Site
-   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js  // url for your analytics script
+   # Url for your analytics script
+   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
    ```

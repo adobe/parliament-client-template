@@ -3599,6 +3599,11 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/accordion/-/accordion-3.0.0-beta.5.tgz#8a927c53f954ddf3b40b9af665c2b1e4b3cc1e95"
   integrity sha512-lE136EoYH0BzrawgwB4bae+4ITffpCp/I/C1aJIQhWlZm4+pMBeOjOfSo+6r4N9wgiph8genUTQHP5Kdgblmjg==
 
+"@spectrum-css/actionbutton@^1.0.0-beta.1":
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/actionbutton/-/actionbutton-1.0.0-beta.1.tgz#a6684cac108d4a9daefe0be6df8201d3c369a0d6"
+  integrity sha512-QbrPMTkbkmh+dEBP66TFXmF5z3qSde+BnLR5hnlo2XMvKvnblX2VJStEbQ+hTKuSZXCRFADXyXD5o0NOYDTByQ==
+
 "@spectrum-css/alert@^3.0.0-beta.3":
   version "3.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@spectrum-css/alert/-/alert-3.0.0-beta.3.tgz#8cb1aba75a1ed55a6ebc81b432c2657d2ba42ecc"

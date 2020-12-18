@@ -14,6 +14,7 @@
 import { css, jsx } from "@emotion/react"
 import { graphql, useStaticQuery } from "gatsby"
 import Play from "@spectrum-icons/workflow/Play"
+import "@spectrum-css/actionbutton"
 import "./NewtonButton.css"
 
 const NewtonButton = ({ recipe }) => {

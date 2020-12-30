@@ -48,7 +48,7 @@
     "gatsby-transformer-remark": "^2.13.0",
     "gatsby-transformer-sharp": "^2.8.0",
     "gatsby-transformer-yaml": "^2.7.0",
-    "gatsby-transformer-yaml-full": "^0.3.4",
+    "gatsby-transformer-yaml-full": "^0.3.5",
     "git-url-parse": "^11.1.2",
     "graphql-type-json": "^0.3.2",
     "mobx": "^4.2.0",

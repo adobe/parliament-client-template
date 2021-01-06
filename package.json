@@ -38,7 +38,7 @@
     "gatsby-plugin-react-helmet": "^3.1.4",
     "gatsby-plugin-sharp": "^2.10.1",
     "gatsby-plugin-svgr-loader": "^0.1.0",
-    "gatsby-remark-autolink-headers": "^2.7.0",
+    "gatsby-remark-autolink-headers": "^2.9.0",
     "gatsby-remark-copy-linked-files": "^2.1.28",
     "gatsby-remark-embedder": "^1.11.2",
     "gatsby-remark-external-links": "0.0.4",

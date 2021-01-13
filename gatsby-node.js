@@ -28,16 +28,14 @@ const GitUrlParse = require(`git-url-parse`)
 const elasticlunr = require(`elasticlunr`)
 const { GraphQLJSONObject } = require("graphql-type-json")
 const converter = require("widdershins")
+const SwaggerParser = require("@apidevtools/swagger-parser")
 
 const openApiSearchDocs = []
 
 const pages = []
 
 const cleanString = (str = "") =>
-  str
-    .replace(/"/g, "")
-    .replace(/“/g, "")
-    .replace(/”/g, "")
+  str.replace(/"/g, "").replace(/“/g, "").replace(/”/g, "")
 
 const searchTree = (theObject, matchingFilename) => {
   var result = null
@@ -187,7 +185,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const posts = [],
     docs = []
-  result.data.allMdx.edges.map(post => {
+  result.data.allMdx.edges.map((post) => {
     post.node.fields.slug.includes("blog/") ? posts.push(post) : docs.push(post)
   })
   const contributors = result.data.allGithubContributors.edges
@@ -216,10 +214,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const postAuthor = cleanString(post.node.frontmatter.author)
 
       const contributorsObj = contributors.find(
-        obj => obj.node.path === post.node.fileAbsolutePath
+        (obj) => obj.node.path === post.node.fileAbsolutePath
       )
       const author = contributorsObj?.node?.contributors.find(
-        contributor => contributor.login === postAuthor
+        (contributor) => contributor.login === postAuthor
       ) ?? {
         login: postAuthor,
         name: postAuthor,
@@ -256,7 +254,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const tags = post.node?.frontmatter?.tags?.split(",")
       return (
         tags &&
-        tags.map(tag => {
+        tags.map((tag) => {
           const trimmedTag = tag.trim()
           if (tagMap.has(trimmedTag)) {
             tagMap.set(trimmedTag, tagMap.get(trimmedTag) + 1)
@@ -275,7 +273,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
 
     // Add each other to the side nav
-    authorMap.forEach(author => {
+    authorMap.forEach((author) => {
       authors.pages.push({
         importedFileName: `${author.login}`,
         pages: [],
@@ -321,7 +319,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     pages.push(tags)
 
     const authorList = []
-    authorMap.forEach(author => authorList.push(author))
+    authorMap.forEach((author) => authorList.push(author))
 
     createPage({
       path: `/blog/authors/`,
@@ -334,7 +332,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         tabs: tabs,
       },
     })
-    authorMap.forEach(author => {
+    authorMap.forEach((author) => {
       createPage({
         path: `/blog/author/${author.login}/`,
         component: authorPage,
@@ -363,7 +361,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     if (docs) {
       docs.forEach(({ node }) => {
         const contributorsObj = contributors.find(
-          obj => obj.node.path === node.fileAbsolutePath
+          (obj) => obj.node.path === node.fileAbsolutePath
         )
         const fileContributors = contributorsObj?.node?.contributors ?? []
 
@@ -450,26 +448,27 @@ const processOpenApiFiles = async (
       }
     `)
     if (data.allFile.edges.length > 0) {
-      data.allFile.edges.forEach(({ node }) => {
+      data.allFile.edges.forEach(async ({ node }) => {
         let filepath = node.absolutePath
-        const object =
-          extension === "json"
-            ? JSON.parse(fs.readFileSync(filepath, "utf8"))
-            : YAML.parse(fs.readFileSync(filepath, "utf8"))
         let seo = searchTree(
           parliamentNavigation.pages,
           `${node.name}${node.ext}`
         )
 
-        createOpenApiPage(
-          createPage,
-          openapiTemplate,
-          object,
-          filepath,
-          seo,
-          gitRemote,
-          tabs
-        )
+        try {
+          const swaggerObject = await SwaggerParser.bundle(filepath)
+          await createOpenApiPage(
+            createPage,
+            openapiTemplate,
+            swaggerObject,
+            filepath,
+            seo,
+            gitRemote,
+            tabs
+          )
+        } catch (e) {
+          console.log("Failure: ", filepath, e)
+        }
       })
     }
   } catch (e) {
@@ -510,17 +509,17 @@ const createOpenApiPage = async (
       ]
       const result = openApiSnippet.getSnippets(object, targets)
       const keys = Object.keys(object.paths)
-      keys.forEach(key => {
-        let res = result.filter(function(res) {
+      keys.forEach((key) => {
+        let res = result.filter(function (res) {
           return res.url.endsWith(key)
         })
         let methodKeys = Object.keys(object.paths[key])
-        methodKeys.forEach(methodKey => {
-          let methodRes = res.find(function(methodRes) {
+        methodKeys.forEach((methodKey) => {
+          let methodRes = res.find(function (methodRes) {
             return methodRes.method.toLowerCase() == methodKey.toLowerCase()
           })
           object.paths[key][methodKey]["x-codeSamples"] = []
-          methodRes.snippets.forEach(function(snippet) {
+          methodRes.snippets.forEach(function (snippet) {
             object.paths[key][methodKey]["x-codeSamples"].push({
               lang: snippet.id.split("_")[0],
               source: snippet.content,
@@ -629,7 +628,10 @@ const createIndex = async (nodes, pages) => {
         type: type,
       }
       index.addDoc(doc)
-      const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`.replace(/\/\//g, "/")
+      const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`.replace(
+        /\/\//g,
+        "/"
+      )
       doc.id = fullSitePath
       doc.path = fullSitePath
       project.push(doc)
@@ -639,7 +641,10 @@ const createIndex = async (nodes, pages) => {
   // Open API specs are not in graphql db, hence this hack
   for (spec of openApiSearchDocs) {
     index.addDoc(spec)
-    const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${spec.path}`.replace(/\/\//g, "/")
+    const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${spec.path}`.replace(
+      /\/\//g,
+      "/"
+    )
     spec.id = fullSitePath
     spec.path = fullSitePath
     project.push(spec)

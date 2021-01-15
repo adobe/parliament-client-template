@@ -9,7 +9,7 @@
     "@adobe/gatsby-remark-afm": "^0.8.3",
     "@adobe/gatsby-source-github-file-contributors": "https://github.com/macdonst/gatsby-source-github-file-contributors.git",
     "@adobe/parliament-transformer-navigation": "^1.0.1",
-    "@adobe/parliament-ui-components": "^3.1.1",
+    "@adobe/parliament-ui-components": "^3.1.2",
     "@adobe/prism-adobe": "^1.0.3",
     "@adobe/react-spectrum": "^3.6.0",
     "@apidevtools/swagger-parser": "^10.0.1",

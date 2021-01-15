@@ -9,6 +9,8 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
+const htmlTags = require("html-tags")
+const parliamentTags = ["newtonbutton", ...htmlTags]
 
 module.exports = cleanHtmlNodes
 
@@ -64,6 +66,16 @@ function cleanHtmlNodes(nodeValue, pluginOptionTags) {
       let fixedTag = invalidTag[0].split(invalidTag[0]).join(replacement)
       nodeValue = nodeValue.split(invalidTag[0]).join(fixedTag)
     }
+  }
+
+  function isValidHtmlTag(tag) {
+    const pattern = /<\/?(\w+)[^>]*>/
+    const data = tag.match(pattern)[1]
+    return parliamentTags.includes(data)
+  }
+
+  if (!isValidHtmlTag(nodeValue)) {
+    nodeValue = nodeValue.replace(/</g, "&lt;").replace(/>/g, "&gt;")
   }
 
   return nodeValue

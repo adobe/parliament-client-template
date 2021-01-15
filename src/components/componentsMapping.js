@@ -32,6 +32,7 @@ import {
 } from "@adobe/parliament-ui-components"
 import NewtonButton from "./NewtonButton"
 
+// If you add a new custom tag here be sure to add it to scripts/markdown-cleaner/cleanHtmlNodes.js as well
 export const componentsMapping = {
   alert: Alert,
   h1: Heading1,

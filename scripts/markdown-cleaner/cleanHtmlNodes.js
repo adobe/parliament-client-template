@@ -70,8 +70,8 @@ function cleanHtmlNodes(nodeValue, pluginOptionTags) {
 
   function isValidHtmlTag(tag) {
     const pattern = /<\/?(\w+)[^>]*>/
-    const data = tag.match(pattern)[1]
-    return parliamentTags.includes(data)
+    const matches = tag.match(pattern)
+    return matches ? parliamentTags.includes(matches[1]) : false
   }
 
   if (!isValidHtmlTag(nodeValue)) {

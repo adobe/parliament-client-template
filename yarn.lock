@@ -4775,6 +4775,11 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
+argparse@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
+  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
+
 aria-query@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-3.0.0.tgz#65b3fcc1ca1155a8c9ae64d6eee297f15d5133cc"
@@ -9701,13 +9706,13 @@ gatsby-transformer-sharp@^2.8.0:
     semver "^7.3.2"
     sharp "^0.26.3"
 
-gatsby-transformer-yaml-full@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml-full/-/gatsby-transformer-yaml-full-0.3.4.tgz#c332807dfb47f0d12521faf9c6c573c33e0b9fe3"
-  integrity sha512-7nLRg1+EMCw1irOpg/XN4REN81qQNgezmqJc0o4hYV46Knly+qWkrT84bl9gQ+a2h6XT8Zlm1Eky2nzk4caTaA==
+gatsby-transformer-yaml-full@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml-full/-/gatsby-transformer-yaml-full-0.4.0.tgz#29fbf1486be09380796bdd2f72d48539b5a9e4b5"
+  integrity sha512-sx1hw9hBfgl19ea6NsfHOCy1uFHz5aE5CUNLOLyTkzNg9voN9ayUVvGBF9xPIKHIOM2ZBN5Hx1kjXFgct048DQ==
   dependencies:
-    is-plain-object "^3.0.1"
-    js-yaml "^3.14.0"
+    is-plain-object "^5.0.0"
+    js-yaml "^4.0.0"
 
 gatsby-transformer-yaml@^2.7.0:
   version "2.8.0"
@@ -11639,10 +11644,10 @@ is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   dependencies:
     isobject "^3.0.1"
 
-is-plain-object@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-3.0.1.tgz#662d92d24c0aa4302407b0d45d21f2251c85f85b"
-  integrity sha512-Xnpx182SBMrr/aBik8y+GuR4U1L9FqMSojwDQwPMmxyC6bvEqly9UBCxhauBF5vNh2gwWJNX6oDV7O+OM4z34g==
+is-plain-object@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-5.0.0.tgz#4427f50ab3429e9025ea7d52e9043a9ef4159344"
+  integrity sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==
 
 is-png@^2.0.0:
   version "2.0.0"
@@ -12417,6 +12422,13 @@ js-yaml@^3.11.0, js-yaml@^3.12.1, js-yaml@^3.13.1, js-yaml@^3.14.0, js-yaml@^3.9
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
+
+js-yaml@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.0.0.tgz#f426bc0ff4b4051926cd588c71113183409a121f"
+  integrity sha512-pqon0s+4ScYUvX30wxQi3PogGFAlUyH0awepWvwkj4jD4v+ova3RiYw8bmA6x2rDrEaj8i/oWKoRxpVNW+Re8Q==
+  dependencies:
+    argparse "^2.0.1"
 
 jsbn@~0.1.0:
   version "0.1.1"

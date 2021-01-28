@@ -52,7 +52,7 @@
     "gatsby-transformer-yaml-full": "^0.3.4",
     "git-url-parse": "^11.1.2",
     "graphql-type-json": "^0.3.2",
-    "mobx": "^4.2.0",
+    "mobx": "^6.1.0",
     "node-fetch": "^2.6.1",
     "openapi-snippet": "^0.7.0",
     "prismjs": "^1.22.0",

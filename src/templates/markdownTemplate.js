@@ -10,7 +10,7 @@
  *  governing permissions and limitations under the License.
  */
 
- /** @jsx jsx */
+/** @jsx jsx */
 import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
@@ -101,19 +101,27 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
           </Flex>
         </GridContent>
         <GridRightRail>
-          <PageActions
-            gitRemote={gitRemote}
-            relativePath={relativePath}
-            tableOfContents={tableOfContents}
-            timeToRead={timeToRead}
-          />
-          Powered by{" "}
-          <a
-            href="https://developers.corp.adobe.com/parliament-docs/README.md"
-            class="spectrum-Link spectrum-Link--quiet"
+          <aside
+            css={css`
+              position: fixed;
+              top: var(--spectrum-global-dimension-size-800);
+              height: 100%;
+            `}
           >
-            Parliament
-          </a>
+            <PageActions
+              gitRemote={gitRemote}
+              relativePath={relativePath}
+              tableOfContents={tableOfContents}
+              timeToRead={timeToRead}
+            />
+            Powered by{" "}
+            <a
+              href="https://developers.corp.adobe.com/parliament-docs/README.md"
+              class="spectrum-Link spectrum-Link--quiet"
+            >
+              Parliament
+            </a>
+          </aside>
         </GridRightRail>
         <GridFooter>
           <Footer />

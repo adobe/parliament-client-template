@@ -4,6 +4,9 @@
   "description": "A template for client projects of the developer documentation site",
   "version": "0.1.0",
   "author": "Adobe",
+  "engines": {
+    "node": ">=14"
+  },
   "dependencies": {
     "@adobe/gatsby-add-launch-script": "^0.0.4",
     "@adobe/gatsby-remark-afm": "^0.8.3",

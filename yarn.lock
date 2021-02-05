@@ -56,10 +56,10 @@
     to-vfile "^6.1.0"
     unified "^9.2.0"
 
-"@adobe/parliament-transformer-navigation@^1.0.1":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.0.2.tgz#a6a683b402e8a93e40008c920fd947a4b2168d71"
-  integrity sha512-pRmsb0yM4RbNboCEHfLax7w+IidO3Cvdb7pNtvkYEpAK1DJD+T553RvtdaPWW/74qQQhZ46ijwU6DZfwht1gQg==
+"@adobe/parliament-transformer-navigation@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.0.3.tgz#5d4b41bbfa8df3e50c4a1d0111b71a1c61a9b2db"
+  integrity sha512-xU0WonCzByRHFo8p+fg2NCftKUOe/47Y61hzuHnT9xFCWhg6ho0OCOf67FHHSq2A2u8J61duybNG9lWghYhgOA==
   dependencies:
     yaml "^1.10.0"
 

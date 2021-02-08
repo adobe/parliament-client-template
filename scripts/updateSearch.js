@@ -13,7 +13,7 @@ require("dotenv").config({
       body: JSON.stringify({ id: `${process.env.JOB_NAME}`, data }),
       headers: { 
         "Content-Type": "application/json",
-        "x-api-key": `${process.env.X-API-KEY}`
+        "x-api-key": `${process.env.X_API_KEY}`
       },
     }
   )

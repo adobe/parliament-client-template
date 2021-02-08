@@ -39,11 +39,11 @@ import HeaderBar from "../components/HeaderBar"
 
 import "../components/layout.css"
 
-const generateTags = tagString => {
+const generateTags = (tagString) => {
   const tags = tagString?.split(",")
   return (
     tags &&
-    tags.map(tag => (
+    tags.map((tag) => (
       <Fragment>
         <span class="spectrum-Label spectrum-Label--red">#{tag}</span>{" "}
       </Fragment>
@@ -51,11 +51,13 @@ const generateTags = tagString => {
   )
 }
 
-const BlogPostTemplate = props => {
-  const { data, pageContext, location } = props
+const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.mdx
+  const { allHeaderTabs } = data
   const siteTitle = data.site.siteMetadata.title
-  const { author, previous, next, pages, gitRemote, tabs } = pageContext
+  const { author, previous, next, pages, gitRemote } = pageContext
+
+  const tabs = allHeaderTabs.edges.map(({ node }) => node)
 
   return (
     <DocLayout location={location} title={siteTitle}>
@@ -167,6 +169,15 @@ export const pageQuery = graphql`
         description
         tags
         author
+      }
+    }
+    allHeaderTabs {
+      edges {
+        node {
+          path
+          id
+          title
+        }
       }
     }
   }

@@ -32,10 +32,12 @@ import {
 import HeaderBar from "../components/HeaderBar"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
-  const { file, parliamentNavigation } = data
+  const { file, parliamentNavigation, allHeaderTabs } = data
   const { childMdx } = file
   const { body } = childMdx
-  const { gitRemote, tabs } = pageContext
+  const { gitRemote } = pageContext
+
+  const tabs = allHeaderTabs.edges.map(({ node }) => node)
 
   return (
     <DocLayout>
@@ -78,12 +80,24 @@ export const query = graphql`
     file(id: { eq: $id }) {
       id
       name
+      relativePath
       childMdx {
         body
+        tableOfContents(maxDepth: 3)
+        timeToRead
       }
     }
     parliamentNavigation {
       pages
+    }
+    allHeaderTabs {
+      edges {
+        node {
+          path
+          id
+          title
+        }
+      }
     }
   }
 `

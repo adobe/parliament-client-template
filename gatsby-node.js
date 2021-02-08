@@ -22,13 +22,15 @@ require("dotenv").config({
 })
 const path = require(`path`)
 const fs = require(`fs`)
-const YAML = require("yaml")
 const openApiSnippet = require(`openapi-snippet`)
 const GitUrlParse = require(`git-url-parse`)
 const elasticlunr = require(`elasticlunr`)
 const { GraphQLJSONObject } = require("graphql-type-json")
 const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
+const glob = require("fast-glob")
+
+const HEADER_TAB_TYPE = `HeaderTabs`
 
 const openApiSearchDocs = []
 
@@ -136,8 +138,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const gitRemote = gitRepoInfo()
   const gitPathPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
 
-  let tabs = []
-
   const result = await graphql(
     `
       query {
@@ -192,11 +192,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const parliamentNavigation = result.data.parliamentNavigation
 
   if (posts.length > 0) {
-    tabs = [
-      { title: "Docs", path: "/" },
-      { title: "Blog", path: "/blog" },
-    ]
-
     const postsNav = {
       importedFileName: "posts",
       pages: [],
@@ -235,12 +230,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           pages: pages,
           author: author,
           gitRemote: gitRemote,
-          tabs: tabs,
         },
       })
     })
 
-    // Create the map of all the tabs
+    // Create the map of all the tags
     const tagMap = new Map()
 
     posts.forEach((post, index) => {
@@ -309,7 +303,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         context: {
           tagName: `/${key}/`,
           gitRemote: gitRemote,
-          tabs: tabs,
         },
       })
     }
@@ -329,7 +322,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         pages: pages,
         authors: authorList,
         gitRemote: gitRemote,
-        tabs: tabs,
       },
     })
     authorMap.forEach((author) => {
@@ -340,7 +332,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           authorId: author.login,
           author: author,
           gitRemote: gitRemote,
-          tabs: tabs,
         },
       })
     })
@@ -352,7 +343,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         pages: pages,
         contributors: contributors,
         gitRemote: gitRemote,
-        tabs: tabs,
       },
     })
   }
@@ -379,7 +369,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               seo: seo,
               gitRemote: gitRemote,
               contributors: fileContributors,
-              tabs: tabs,
             },
           })
         }
@@ -395,7 +384,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     graphql,
     createPage,
     gitRemote,
-    tabs,
     parliamentNavigation
   )
   await processOpenApiFiles(
@@ -403,7 +391,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     graphql,
     createPage,
     gitRemote,
-    tabs,
     parliamentNavigation
   )
 
@@ -418,7 +405,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         name: gitRemote.name,
         branch: gitRemote.ref,
       },
-      tabs: tabs,
     },
   })
 }
@@ -428,7 +414,6 @@ const processOpenApiFiles = async (
   graphql,
   createPage,
   gitRemote,
-  tabs,
   parliamentNavigation
 ) => {
   const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
@@ -463,8 +448,7 @@ const processOpenApiFiles = async (
             swaggerObject,
             filepath,
             seo,
-            gitRemote,
-            tabs
+            gitRemote
           )
         } catch (e) {
           console.log("Failure: ", filepath, e)
@@ -483,8 +467,7 @@ const createOpenApiPage = async (
   object,
   filepath,
   seo,
-  gitRemote,
-  tabs
+  gitRemote
 ) => {
   if (object && (object.swagger || object.openapi)) {
     let slug = filepath
@@ -538,7 +521,6 @@ const createOpenApiPage = async (
         spec: object,
         seo: seo,
         gitRemote: gitRemote,
-        tabs: tabs,
       },
     })
 
@@ -664,4 +646,46 @@ const getTitle = (pages, slug, node) => {
     title = firstLine.replace(/#/g, "")
   }
   return title
+}
+
+exports.sourceNodes = async ({
+  actions,
+  createContentDigest,
+  createNodeId,
+  getNodesByType,
+}) => {
+  const { createNode } = actions
+
+  const data = [{ title: "Docs", path: "/" }]
+  if (glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/blog/**`).length > 0) {
+    data.push({ title: "Blog", path: "/blog" })
+  }
+
+  data.map((tab) =>
+    createNode({
+      ...tab,
+      id: createNodeId(`${HEADER_TAB_TYPE}-${tab.title}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: HEADER_TAB_TYPE,
+        content: JSON.stringify(tab),
+        contentDigest: createContentDigest(tab),
+      },
+    })
+  )
+
+  return
+}
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+      type HeaderTabs implements Node @dontInfer {
+        id: ID!
+        title: String!
+        path: String!
+      }
+    `
+  createTypes(typeDefs)
 }

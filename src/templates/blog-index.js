@@ -33,25 +33,24 @@ import HeaderBar from "../components/HeaderBar"
 import "../components/layout.css"
 
 const cleanString = (str = "") =>
-  str
-    .replace(/"/g, "")
-    .replace(/“/g, "")
-    .replace(/”/g, "")
+  str.replace(/"/g, "").replace(/“/g, "").replace(/”/g, "")
 
-const generateTags = tagString => {
+const generateTags = (tagString) => {
   if (tagString) {
     const tags = tagString?.split(",")
-    return tags && tags.map(tag => <Fragment>#{tag} </Fragment>)
+    return tags && tags.map((tag) => <Fragment>#{tag} </Fragment>)
   } else {
     return null
   }
 }
 
-const BlogIndex = props => {
-  const { data, location, pageContext } = props
+const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMdx.edges
-  const { pages, contributors, gitRemote, tabs } = pageContext
+  const { allHeaderTabs } = data
+  const { pages, contributors, gitRemote } = pageContext
+
+  const tabs = allHeaderTabs.edges.map(({ node }) => node)
 
   return (
     <DocLayout location={location} title={siteTitle}>
@@ -93,11 +92,11 @@ const BlogIndex = props => {
               const postAuthor = cleanString(node.frontmatter.author)
 
               const contributorsObj = contributors.find(
-                obj => obj.node.path === node.fileAbsolutePath
+                (obj) => obj.node.path === node.fileAbsolutePath
               )
               const author =
                 contributorsObj?.node?.contributors.find(
-                  contributor => contributor.login === postAuthor
+                  (contributor) => contributor.login === postAuthor
                 ) ?? {}
 
               return (
@@ -173,6 +172,15 @@ export const pageQuery = graphql`
             tags
             author
           }
+        }
+      }
+    }
+    allHeaderTabs {
+      edges {
+        node {
+          path
+          id
+          title
         }
       }
     }

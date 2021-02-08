@@ -26,7 +26,9 @@ import {
 import HeaderBar from "../components/HeaderBar"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {
-  const { parliamentNavigation } = data
+  const { parliamentNavigation, allHeaderTabs } = data
+  const tabs = allHeaderTabs.edges.map(({ node }) => node)
+
   return (
     <DocLayout>
       <SEO title={pageContext.seo} />
@@ -37,7 +39,7 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
             gitRemote={pageContext.gitRemote}
             pages={parliamentNavigation.pages}
             forceMobile={true}
-            tabs={pageContext.tabs}
+            tabs={tabs}
           />
         </OpenApiGridHeader>
         <OpenApiGridContent>
@@ -55,6 +57,15 @@ export const query = graphql`
   query OpenApiTemplateQuery {
     parliamentNavigation {
       pages
+    }
+    allHeaderTabs {
+      edges {
+        node {
+          path
+          id
+          title
+        }
+      }
     }
   }
 `

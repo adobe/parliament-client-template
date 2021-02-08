@@ -11,7 +11,10 @@ require("dotenv").config({
     {
       method: "PATCH",
       body: JSON.stringify({ id: `${process.env.JOB_NAME}`, data }),
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "x-api-key": `${process.env.X-API-KEY}`
+      },
     }
   )
   const json = await response.json()

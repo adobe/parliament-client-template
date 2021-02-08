@@ -17,7 +17,7 @@
     "@adobe/prism-adobe": "^1.0.3",
     "@adobe/react-spectrum": "^3.6.0",
     "@apidevtools/swagger-parser": "^10.0.1",
-    "@emotion/react": "^11.1.2",
+    "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.0.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",

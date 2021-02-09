@@ -15,12 +15,7 @@ import PropTypes from "prop-types"
 
 import { graphql, useStaticQuery } from "gatsby"
 
-import {
-  defaultTheme,
-  Provider,
-  SSRProvider,
-  View,
-} from "@adobe/react-spectrum"
+import { defaultTheme, Provider, SSRProvider } from "@adobe/react-spectrum"
 import {
   Footer,
   Grid,

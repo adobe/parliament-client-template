@@ -10,12 +10,13 @@
  *  governing permissions and limitations under the License.
  */
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
-import { View } from "@adobe/react-spectrum"
+import { Flex, View } from "@adobe/react-spectrum"
 import { Heading1 } from "@adobe/parliament-ui-components"
 
 import DocLayout from "../components/doclayout"
+import Link from "../components/Link"
 import SiteMenu from "../components/SiteMenu"
 
 import "../components/layout.css"
@@ -50,15 +51,15 @@ const Authors = ({ location, pageContext }) => {
       }
     >
       <Heading1>Authors</Heading1>
-      <View marginTop="size-300">
+      <Flex direction="column" marginTop="size-300" gap="size-100">
         {authors.sort(compare).map((author, index) => (
-          <p>
+          <View elementType="p">
             <Link to={`/author/${author.login}`} key={`author-${author.login}`}>
               {author.name}
             </Link>
-          </p>
+          </View>
         ))}
-      </View>
+      </Flex>
     </DocLayout>
   )
 }

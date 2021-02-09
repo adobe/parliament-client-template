@@ -11,11 +11,12 @@
  */
 
 import React, { Fragment } from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import { Heading } from "@adobe/react-spectrum"
 
 import DocLayout from "../components/doclayout"
+import Link from "../components/Link"
 import SiteMenu from "../components/SiteMenu"
 
 import "../components/layout.css"
@@ -67,23 +68,14 @@ const BlogIndex = ({ data, location, pageContext }) => {
             <article key={node.fields.slug}>
               <header>
                 <Heading level={2}>
-                  <Link
-                    style={{ boxShadow: `none` }}
-                    to={`${node.fields.slug}`}
-                    className="spectrum-Link spectrum-Link--quiet"
-                  >
-                    {title}
-                  </Link>
+                  <Link to={`${node.fields.slug}`}>{title}</Link>
                 </Heading>
                 <p className="spectrum-Body--M">
                   <small>{node.frontmatter.date}</small>
                   <br />
                   <small>
                     by{" "}
-                    <Link
-                      to={`author/${author.login}`}
-                      className="spectrum-Link spectrum-Link--quiet"
-                    >
+                    <Link to={`author/${author.login}`}>
                       {author.name || author.login}
                     </Link>
                   </small>

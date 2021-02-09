@@ -13,45 +13,20 @@
 import React from "react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
-import SEO from "../components/seo"
-import {
-  Footer,
-  OpenAPIBlock,
-  OpenApiGrid,
-  OpenApiGridContent,
-  OpenApiGridHeader,
-  OpenApiGridFooter,
-} from "@adobe/parliament-ui-components"
-
-import HeaderBar from "../components/HeaderBar"
+import { OpenAPIBlock } from "@adobe/parliament-ui-components"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {
-  const { parliamentNavigation, allSiteTabs, allHeaderTabs } = data
-  const tabs = [
-    ...allSiteTabs.edges.map(({ node }) => node),
-    ...allHeaderTabs.edges.map(({ node }) => node),
-  ]
+  const { parliamentNavigation } = data
 
   return (
-    <DocLayout>
-      <SEO title={pageContext.seo} />
-      <OpenApiGrid>
-        <OpenApiGridHeader>
-          <HeaderBar
-            location={location}
-            gitRemote={pageContext.gitRemote}
-            pages={parliamentNavigation.pages}
-            forceMobile={true}
-            tabs={tabs}
-          />
-        </OpenApiGridHeader>
-        <OpenApiGridContent>
-          <OpenAPIBlock spec={pageContext.spec} />
-        </OpenApiGridContent>
-        <OpenApiGridFooter>
-          <Footer />
-        </OpenApiGridFooter>
-      </OpenApiGrid>
+    <DocLayout
+      title={pageContext.seo}
+      location={location}
+      forceMobile={true}
+      gitRemote={pageContext.gitRemote}
+      pages={parliamentNavigation.pages}
+    >
+      <OpenAPIBlock spec={pageContext.spec} />
     </DocLayout>
   )
 }
@@ -60,24 +35,6 @@ export const query = graphql`
   query OpenApiTemplateQuery {
     parliamentNavigation {
       pages
-    }
-    allHeaderTabs {
-      edges {
-        node {
-          path
-          id
-          title
-        }
-      }
-    }
-    allSiteTabs {
-      edges {
-        node {
-          path
-          id
-          title
-        }
-      }
     }
   }
 `

@@ -9,33 +9,16 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
+import React from "react"
 
-.recipeContent > div {
-  display: flex;
-  flex-wrap: wrap;
-}
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
+import { componentsMapping } from "../components/componentsMapping"
 
-.recipeContent h1,
-.recipeContent h2,
-.recipeContent h3,
-.recipeContent h4,
-.recipeContent h5 {
-  flex-basis: 100%;
-}
+const RenderMdx = ({ children }) => (
+  <MDXProvider components={componentsMapping}>
+    <MDXRenderer>{children}</MDXRenderer>
+  </MDXProvider>
+)
 
-.recipeContent p {
-  flex-grow: 1;
-  flex-basis: 50%;
-}
-
-@media screen and (max-width: 1200px) {
-  .recipeContent p {
-    flex-grow: 1;
-    flex-basis: 100%;
-  }
-}
-
-.recipeContent .gatsby-highlight {
-  flex-grow: 1;
-  flex-basis: 50%;
-}
+export default RenderMdx

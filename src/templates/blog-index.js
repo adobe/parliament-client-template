@@ -10,25 +10,13 @@
  *  governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { css, jsx } from "@emotion/react"
-import { Fragment } from "react"
+import React, { Fragment } from "react"
 import { Link, graphql } from "gatsby"
 
-import {
-  Footer,
-  Grid,
-  GridNav,
-  GridContent,
-  GridFooter,
-  GridHeader,
-} from "@adobe/parliament-ui-components"
 import { Heading } from "@adobe/react-spectrum"
 
 import DocLayout from "../components/doclayout"
-import SEO from "../components/seo"
 import SiteMenu from "../components/SiteMenu"
-import HeaderBar from "../components/HeaderBar"
 
 import "../components/layout.css"
 
@@ -45,105 +33,76 @@ const generateTags = (tagString) => {
 }
 
 const BlogIndex = ({ data, location, pageContext }) => {
-  const siteTitle = data.site.siteMetadata.title
   const posts = data.allMdx.edges
-  const { allHeaderTabs } = data
   const { pages, contributors, gitRemote } = pageContext
 
-  const tabs = allHeaderTabs.edges.map(({ node }) => node)
-
   return (
-    <DocLayout location={location} title={siteTitle}>
-      <SEO title="All posts" />
-      <Grid>
-        <GridHeader>
-          <HeaderBar
-            location={location}
-            siteTitle={siteTitle}
-            pages={pages}
-            tabs={tabs}
-          />
-        </GridHeader>
-        <GridNav className="spectrum--light">
-          <SiteMenu
-            gitRemote={gitRemote}
-            currentPage={location.pathname}
-            pages={pages}
-          />
-        </GridNav>
-        <GridContent
-          css={css`
-            background-color: white;
-          `}
-        >
-          <div
-            css={css`
-              @media screen and (min-width: 1201px) {
-                display: none;
-              }
-              @media screen and (max-width: 1200px) {
-                float: right;
-              }
-            `}
-          ></div>
-          {posts.map(({ node }) => {
-            if (node.fields.slug.includes("blog/")) {
-              const title = node.frontmatter.title || node.fields.slug
-              const postAuthor = cleanString(node.frontmatter.author)
+    <DocLayout
+      location={location}
+      title={data.site.siteMetadata.title}
+      gitRemote={gitRemote}
+      pages={pages}
+      sideNav={
+        <SiteMenu
+          gitRemote={gitRemote}
+          currentPage={location.pathname}
+          pages={pages}
+        />
+      }
+    >
+      {posts.map(({ node }) => {
+        if (node.fields.slug.includes("blog/")) {
+          const title = node.frontmatter.title || node.fields.slug
+          const postAuthor = cleanString(node.frontmatter.author)
 
-              const contributorsObj = contributors.find(
-                (obj) => obj.node.path === node.fileAbsolutePath
-              )
-              const author =
-                contributorsObj?.node?.contributors.find(
-                  (contributor) => contributor.login === postAuthor
-                ) ?? {}
+          const contributorsObj = contributors.find(
+            (obj) => obj.node.path === node.fileAbsolutePath
+          )
+          const author =
+            contributorsObj?.node?.contributors.find(
+              (contributor) => contributor.login === postAuthor
+            ) ?? {}
 
-              return (
-                <article key={node.fields.slug}>
-                  <header>
-                    <Heading level={2}>
-                      <Link
-                        style={{ boxShadow: `none` }}
-                        to={`${node.fields.slug}`}
-                        className="spectrum-Link spectrum-Link--quiet"
-                      >
-                        {title}
-                      </Link>
-                    </Heading>
-                    <p className="spectrum-Body--M">
-                      <small>{node.frontmatter.date}</small>
-                      <br />
-                      <small>
-                        by{" "}
-                        <Link
-                          to={`author/${author.login}`}
-                          className="spectrum-Link spectrum-Link--quiet"
-                        >
-                          {author.name || author.login}
-                        </Link>
-                      </small>
-                      <br />
-                      <small>{generateTags(node.frontmatter.tags)}</small>
-                    </p>
-                  </header>
-                  <section>
-                    <p
-                      className="spectrum-Body--M"
-                      dangerouslySetInnerHTML={{
-                        __html: node.frontmatter.description || node.excerpt,
-                      }}
-                    />
-                  </section>
-                </article>
-              )
-            }
-          })}
-        </GridContent>
-        <GridFooter>
-          <Footer />
-        </GridFooter>
-      </Grid>
+          return (
+            <article key={node.fields.slug}>
+              <header>
+                <Heading level={2}>
+                  <Link
+                    style={{ boxShadow: `none` }}
+                    to={`${node.fields.slug}`}
+                    className="spectrum-Link spectrum-Link--quiet"
+                  >
+                    {title}
+                  </Link>
+                </Heading>
+                <p className="spectrum-Body--M">
+                  <small>{node.frontmatter.date}</small>
+                  <br />
+                  <small>
+                    by{" "}
+                    <Link
+                      to={`author/${author.login}`}
+                      className="spectrum-Link spectrum-Link--quiet"
+                    >
+                      {author.name || author.login}
+                    </Link>
+                  </small>
+                  <br />
+                  <small>{generateTags(node.frontmatter.tags)}</small>
+                </p>
+              </header>
+              <section>
+                <p
+                  className="spectrum-Body--M"
+                  dangerouslySetInnerHTML={{
+                    __html: node.frontmatter.description || node.excerpt,
+                  }}
+                />
+              </section>
+            </article>
+          )
+        }
+      })}
     </DocLayout>
   )
 }
@@ -172,15 +131,6 @@ export const pageQuery = graphql`
             tags
             author
           }
-        }
-      }
-    }
-    allHeaderTabs {
-      edges {
-        node {
-          path
-          id
-          title
         }
       }
     }

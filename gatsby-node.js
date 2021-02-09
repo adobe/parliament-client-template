@@ -125,7 +125,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
-  const recipeTemplate = path.resolve(`src/templates/recipeTemplate.js`)
   const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
 
   // Blog Templates
@@ -359,10 +358,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           let seo = searchTree(parliamentNavigation.pages, node.fields.slug)
           createPage({
             path: node.fields.slug,
-            component:
-              node.frontmatter.template === "recipe"
-                ? recipeTemplate
-                : docTemplate,
+            component: docTemplate,
             context: {
               slug: node.fields.slug,
               id: node.fields.id,

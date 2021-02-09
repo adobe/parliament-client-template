@@ -13,20 +13,99 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { defaultTheme, Provider, SSRProvider } from "@adobe/react-spectrum"
+import { graphql, useStaticQuery } from "gatsby"
+
+import {
+  defaultTheme,
+  Provider,
+  SSRProvider,
+  View,
+} from "@adobe/react-spectrum"
+import {
+  Footer,
+  Grid,
+  GridHeader,
+  GridNav,
+  GridContent,
+  GridFooter,
+  GridRightRail,
+} from "@adobe/parliament-ui-components"
+
+import HeaderBar from "./HeaderBar"
+import SEO from "./seo"
 
 import "./layout.css"
 
-const DocLayout = ({ children }) => {
+const DocLayout = ({
+  children,
+  title,
+  location,
+  gitRemote,
+  pages,
+  forceMobile = false,
+  sideNav,
+  rightRail,
+}) => {
+  const { allSiteTabs, allHeaderTabs } = useStaticQuery(
+    graphql`
+      query {
+        allHeaderTabs {
+          edges {
+            node {
+              path
+              id
+              title
+            }
+          }
+        }
+        allSiteTabs {
+          edges {
+            node {
+              path
+              id
+              title
+            }
+          }
+        }
+      }
+    `
+  )
+
+  const tabs = [
+    ...allSiteTabs.edges.map(({ node }) => node),
+    ...allHeaderTabs.edges.map(({ node }) => node),
+  ]
+
   return (
     <SSRProvider>
+      <SEO title={title} />
       <Provider
         theme={defaultTheme}
         colorScheme="light"
         scale="medium"
         UNSAFE_className="spectrum spectrum--light spectrum--medium"
       >
-        {children}
+        <Grid>
+          <GridHeader>
+            <HeaderBar
+              location={location}
+              gitRemote={gitRemote}
+              pages={pages}
+              forceMobile={forceMobile}
+              tabs={tabs}
+            />
+          </GridHeader>
+          {sideNav && <GridNav>{sideNav}</GridNav>}
+          {sideNav ? (
+            <GridContent>{children}</GridContent>
+          ) : (
+            <div style={{ gridArea: "2 / 1 / 3 / 14" }}>{children}</div>
+          )}
+          {rightRail && <GridRightRail>{rightRail}</GridRightRail>}
+          <GridFooter>
+            <Footer />
+          </GridFooter>
+        </Grid>
       </Provider>
     </SSRProvider>
   )

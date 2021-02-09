@@ -10,32 +10,16 @@
  *  governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { css, jsx } from "@emotion/react"
-import { Fragment } from "react"
+import React, { Fragment } from "react"
 import { graphql, Link } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import { MDXProvider } from "@mdx-js/react"
-import { componentsMapping } from "../components/componentsMapping"
 
-import {
-  Footer,
-  Next,
-  Prev,
-  Grid,
-  GridNav,
-  GridContent,
-  GridFooter,
-  GridHeader,
-  Heading1,
-} from "@adobe/parliament-ui-components"
+import { Next, Prev, Heading1 } from "@adobe/parliament-ui-components"
 import "@spectrum-css/label"
 
 import Bio from "../components/bio"
 import DocLayout from "../components/doclayout"
-import SEO from "../components/seo"
 import SiteMenu from "../components/SiteMenu"
-import HeaderBar from "../components/HeaderBar"
+import RenderMdx from "../components/RenderMdx"
 
 import "../components/layout.css"
 
@@ -53,99 +37,75 @@ const generateTags = (tagString) => {
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.mdx
-  const { allHeaderTabs } = data
-  const siteTitle = data.site.siteMetadata.title
   const { author, previous, next, pages, gitRemote } = pageContext
 
-  const tabs = allHeaderTabs.edges.map(({ node }) => node)
-
   return (
-    <DocLayout location={location} title={siteTitle}>
-      <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-      />
-      <Grid>
-        <GridHeader>
-          <HeaderBar
-            location={location}
-            siteTitle={siteTitle}
-            pages={pages}
-            tabs={tabs}
-          />
-        </GridHeader>
-        <GridNav className="spectrum--light">
-          <SiteMenu
-            gitRemote={gitRemote}
-            currentPage={location.pathname}
-            pages={pages}
-          />
-        </GridNav>
-        <GridContent
-          css={css`
-            background-color: white;
-          `}
-        >
-          <article>
-            <header>
-              <Heading1>{post.frontmatter.title}</Heading1>
-              <p
-                style={{
-                  display: `block`,
-                }}
-              >
-                {post.frontmatter.date}
-                <br />
-                by{" "}
-                <Link
-                  to={`/blog/author/${author.login}`}
-                  className="spectrum-Link spectrum-Link--quiet"
-                >
-                  {author.name || author.login}
-                </Link>
-                <br />
-                {generateTags(post.frontmatter.tags)}
-              </p>
-            </header>
-            <MDXProvider components={componentsMapping}>
-              <MDXRenderer>{post.body}</MDXRenderer>
-            </MDXProvider>
-            <hr />
-            <footer>
-              <Bio author={author} />
-            </footer>
-          </article>
-
-          <nav>
-            <ul
-              style={{
-                display: `flex`,
-                flexWrap: `wrap`,
-                justifyContent: `space-between`,
-                listStyle: `none`,
-                padding: 0,
-              }}
+    <DocLayout
+      location={location}
+      title={post.frontmatter.title}
+      gitRemote={gitRemote}
+      pages={pages}
+      sideNav={
+        <SiteMenu
+          gitRemote={gitRemote}
+          currentPage={location.pathname}
+          pages={pages}
+        />
+      }
+    >
+      <article>
+        <header>
+          <Heading1>{post.frontmatter.title}</Heading1>
+          <p
+            style={{
+              display: `block`,
+            }}
+          >
+            {post.frontmatter.date}
+            <br />
+            by{" "}
+            <Link
+              to={`/blog/author/${author.login}`}
+              className="spectrum-Link spectrum-Link--quiet"
             >
-              <li>
-                {previous && (
-                  <Prev
-                    url={previous.fields.slug}
-                    title={previous.frontmatter.title}
-                  />
-                )}
-              </li>
-              <li>
-                {next && (
-                  <Next url={next.fields.slug} title={next.frontmatter.title} />
-                )}
-              </li>
-            </ul>
-          </nav>
-        </GridContent>
-        <GridFooter>
-          <Footer />
-        </GridFooter>
-      </Grid>
+              {author.name || author.login}
+            </Link>
+            <br />
+            {generateTags(post.frontmatter.tags)}
+          </p>
+        </header>
+        <RenderMdx>{post.body}</RenderMdx>
+        <hr />
+        <footer>
+          <Bio author={author} />
+        </footer>
+      </article>
+
+      <nav>
+        <ul
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+            justifyContent: `space-between`,
+            listStyle: `none`,
+            padding: 0,
+          }}
+        >
+          <li>
+            {previous && (
+              <Prev
+                url={previous.fields.slug}
+                title={previous.frontmatter.title}
+              />
+            )}
+          </li>
+          <li>
+            {next && (
+              <Next url={next.fields.slug} title={next.frontmatter.title} />
+            )}
+          </li>
+        </ul>
+      </nav>
     </DocLayout>
   )
 }
@@ -161,7 +121,6 @@ export const pageQuery = graphql`
     }
     mdx(fields: { slug: { eq: $slug } }) {
       id
-      excerpt(pruneLength: 160)
       body
       frontmatter {
         title
@@ -169,15 +128,6 @@ export const pageQuery = graphql`
         description
         tags
         author
-      }
-    }
-    allHeaderTabs {
-      edges {
-        node {
-          path
-          id
-          title
-        }
       }
     }
   }

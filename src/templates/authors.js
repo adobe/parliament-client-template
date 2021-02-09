@@ -9,26 +9,14 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
-
-/** @jsx jsx */
-import { css, jsx } from "@emotion/react"
+import React from "react"
 import { Link, graphql } from "gatsby"
 
 import { View } from "@adobe/react-spectrum"
-import {
-  Footer,
-  Grid,
-  GridNav,
-  GridContent,
-  GridFooter,
-  GridHeader,
-  Heading1,
-} from "@adobe/parliament-ui-components"
+import { Heading1 } from "@adobe/parliament-ui-components"
 
 import DocLayout from "../components/doclayout"
-import SEO from "../components/seo"
 import SiteMenu from "../components/SiteMenu"
-import HeaderBar from "../components/HeaderBar"
 
 import "../components/layout.css"
 
@@ -45,58 +33,32 @@ const compare = (a, b) => {
   return comparison
 }
 
-const Authors = props => {
-  const { data, location, pageContext } = props
-  const siteTitle = data.site.siteMetadata.title
+const Authors = ({ location, pageContext }) => {
   const { authors, pages, gitRemote } = pageContext
 
   return (
-    <DocLayout location={location} title={siteTitle}>
-      <SEO title="All posts" />
-      <Grid>
-        <GridHeader>
-          <HeaderBar location={location} siteTitle={siteTitle} pages={pages} />
-        </GridHeader>
-        <GridNav className="spectrum--light">
-          <SiteMenu
-            currentPage={props.location.pathname}
-            pages={pages}
-            gitRemote={gitRemote}
-          />
-        </GridNav>
-        <GridContent
-          css={css`
-            background-color: white;
-          `}
-        >
-          <div
-            css={css`
-              @media screen and (min-width: 1201px) {
-                display: none;
-              }
-              @media screen and (max-width: 1200px) {
-                float: right;
-              }
-            `}
-          ></div>
-          <Heading1>Authors</Heading1>
-          <View marginTop="size-300">
-            {authors.sort(compare).map((author, index) => (
-              <p>
-                <Link
-                  to={`/author/${author.login}`}
-                  key={`author-${author.login}`}
-                >
-                  {author.name}
-                </Link>
-              </p>
-            ))}
-          </View>
-        </GridContent>
-        <GridFooter>
-          <Footer />
-        </GridFooter>
-      </Grid>
+    <DocLayout
+      location={location}
+      title="All Posts"
+      pages={pages}
+      sideNav={
+        <SiteMenu
+          currentPage={location.pathname}
+          pages={pages}
+          gitRemote={gitRemote}
+        />
+      }
+    >
+      <Heading1>Authors</Heading1>
+      <View marginTop="size-300">
+        {authors.sort(compare).map((author, index) => (
+          <p>
+            <Link to={`/author/${author.login}`} key={`author-${author.login}`}>
+              {author.name}
+            </Link>
+          </p>
+        ))}
+      </View>
     </DocLayout>
   )
 }

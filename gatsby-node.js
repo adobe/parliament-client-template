@@ -30,7 +30,7 @@ const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 const glob = require("fast-glob")
 
-const HEADER_TAB_TYPE = `HeaderTabs`
+const SITE_TAB_TYPE = `SiteTabs`
 
 const openApiSearchDocs = []
 
@@ -664,11 +664,11 @@ exports.sourceNodes = async ({
   data.map((tab) =>
     createNode({
       ...tab,
-      id: createNodeId(`${HEADER_TAB_TYPE}-${tab.title}`),
+      id: createNodeId(`${SITE_TAB_TYPE}-${tab.title}`),
       parent: null,
       children: [],
       internal: {
-        type: HEADER_TAB_TYPE,
+        type: SITE_TAB_TYPE,
         content: JSON.stringify(tab),
         contentDigest: createContentDigest(tab),
       },
@@ -681,7 +681,7 @@ exports.sourceNodes = async ({
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
-      type HeaderTabs implements Node @dontInfer {
+      type SiteTabs implements Node @dontInfer {
         id: ID!
         title: String!
         path: String!

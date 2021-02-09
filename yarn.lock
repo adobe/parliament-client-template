@@ -56,6 +56,13 @@
     to-vfile "^6.1.0"
     unified "^9.2.0"
 
+"@adobe/parliament-source-changelog@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-source-changelog/-/parliament-source-changelog-0.0.4.tgz#f56a15e03b0683fd40c1e0c7f78e163a234440e9"
+  integrity sha512-YaVVCO/G+mW41/UuTP6LtqGxE9TJcGzgcnTQlru+TJFl/zvtbLgr20O3uMeSfo6F9ZI0XJrhWArMFXCl9Emnuw==
+  dependencies:
+    glob "^7.1.6"
+
 "@adobe/parliament-transformer-navigation@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.0.3.tgz#5d4b41bbfa8df3e50c4a1d0111b71a1c61a9b2db"

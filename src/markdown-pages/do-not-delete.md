@@ -6,6 +6,7 @@ template: "markdown"
 author: ""
 tags: ""
 description: ""
+slug: ""
 ---
 
 # Don't Delete:

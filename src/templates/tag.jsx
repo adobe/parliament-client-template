@@ -11,9 +11,10 @@
  */
 
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
+import Link from "../components/Link"
 
-export default props => {
+export default (props) => {
   const postNodes = props.data.allMdx.edges
   const tagName = props.pageContext.tagName.slice(1, -1)
   return (

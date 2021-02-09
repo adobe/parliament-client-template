@@ -11,13 +11,14 @@
  */
 
 import React, { Fragment } from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import { Next, Prev, Heading1 } from "@adobe/parliament-ui-components"
 import "@spectrum-css/label"
 
 import Bio from "../components/bio"
 import DocLayout from "../components/doclayout"
+import Link from "../components/Link"
 import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
 
@@ -64,10 +65,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             {post.frontmatter.date}
             <br />
             by{" "}
-            <Link
-              to={`/blog/author/${author.login}`}
-              className="spectrum-Link spectrum-Link--quiet"
-            >
+            <Link to={`/blog/author/${author.login}`}>
               {author.name || author.login}
             </Link>
             <br />

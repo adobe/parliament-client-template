@@ -9,30 +9,14 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
-
 import React from "react"
-import { Link } from "gatsby"
-import { Flex, Text } from "@adobe/react-spectrum"
 
-import BioImage from "./BioImage"
+import { Link as GatsbyLink } from "gatsby"
 
-const Bio = ({ author }) => {
-  return (
-    <Flex>
-      <BioImage author={author} />
-      <Text>
-        Written by{" "}
-        <strong>
-          <Link
-            to={`/blog/author/${author.login}`}
-            className="spectrum-Link spectrum-Link--quiet"
-          >
-            {author.name || author.login}
-          </Link>
-        </strong>
-      </Text>
-    </Flex>
-  )
-}
+const Link = ({ to, children, ...props }) => (
+  <GatsbyLink to={to} className="spectrum-Link spectrum-Link--quiet" {...props}>
+    {children}
+  </GatsbyLink>
+)
 
-export default Bio
+export default Link

@@ -26,8 +26,11 @@ import {
 import HeaderBar from "../components/HeaderBar"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {
-  const { parliamentNavigation, allHeaderTabs } = data
-  const tabs = allHeaderTabs.edges.map(({ node }) => node)
+  const { parliamentNavigation, allSiteTabs, allHeaderTabs } = data
+  const tabs = [
+    ...allSiteTabs.edges.map(({ node }) => node),
+    ...allHeaderTabs.edges.map(({ node }) => node),
+  ]
 
   return (
     <DocLayout>
@@ -59,6 +62,15 @@ export const query = graphql`
       pages
     }
     allHeaderTabs {
+      edges {
+        node {
+          path
+          id
+          title
+        }
+      }
+    }
+    allSiteTabs {
       edges {
         node {
           path

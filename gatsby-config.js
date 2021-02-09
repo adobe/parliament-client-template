@@ -12,6 +12,7 @@
 
 const path = require("path")
 const GitUrlParse = require(`git-url-parse`)
+const changelogTemplate = path.resolve(`src/templates/changelogTemplate.js`)
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -163,6 +164,13 @@ module.exports = {
     {
       resolve: `@adobe/parliament-transformer-navigation`,
       options: {},
+    },
+    {
+      resolve: `@adobe/parliament-source-changelog`,
+      options: {
+        template: changelogTemplate,
+        path: `${process.env.LOCAL_PROJECT_DIRECTORY}/changelog`,
+      },
     },
   ],
 }

@@ -589,6 +589,7 @@ const createIndex = async (nodes, pages) => {
   index.addField(`body`)
   index.addField(`path`)
   index.addField(`type`)
+  index.addField(`group`)
 
   const project = []
 
@@ -604,6 +605,7 @@ const createIndex = async (nodes, pages) => {
         body: node.internal.content,
         path: slug,
         type: type,
+        group: `${process.env.BUSINESS_GROUP}`,
       }
       index.addDoc(doc)
       const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`.replace(

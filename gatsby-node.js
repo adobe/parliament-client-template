@@ -606,6 +606,8 @@ const createIndex = async (nodes, pages) => {
         path: slug,
         type: type,
         group: `${process.env.BUSINESS_GROUP}`,
+        product: `${process.env.PRODUCT_KEY || ``}`,
+        project: `${process.env.JOB_NAME}`,
       }
       index.addDoc(doc)
       const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`.replace(
@@ -627,6 +629,10 @@ const createIndex = async (nodes, pages) => {
     )
     spec.id = fullSitePath
     spec.path = fullSitePath
+    spec.group = `${process.env.BUSINESS_GROUP}`
+    spec.product = `${process.env.PRODUCT_KEY || ``}`
+    spec.project = `${process.env.JOB_NAME}`
+
     project.push(spec)
   }
 

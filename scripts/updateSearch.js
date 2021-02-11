@@ -4,7 +4,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 ;(async () => {
-  if (process.env.VISIBLE && process.env.VISIBLE !== "false") {
+  if (!process.env.VISIBLE || process.env.VISIBLE !== "false") {
     const data = JSON.parse(fs.readFileSync("./searchIndex.json"))
 
     const response = await fetch(

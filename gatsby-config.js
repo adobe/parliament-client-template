@@ -20,6 +20,11 @@ require("dotenv").config({
 
 const projectRootDir = __dirname
 const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
+const gitRepoInfo = {
+  org: gitInfo.owner,
+  name: gitInfo.name,
+  branch: process.env.GATSBY_SOURCE_BRANCH,
+}
 const apiUrl =
   gitInfo.source === `github.com`
     ? `https://api.github.com/graphql`
@@ -163,7 +168,9 @@ module.exports = {
     },
     {
       resolve: `@adobe/parliament-transformer-navigation`,
-      options: {},
+      options: {
+        gitRepoInfo: gitRepoInfo
+      },
     },
     {
       resolve: `@adobe/parliament-source-changelog`,

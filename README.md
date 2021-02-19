@@ -33,7 +33,8 @@
    # Repo URL in given format which you want to use to generate a microsite
    GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git
    GATSBY_SOURCE_BRANCH=master
-   GATSBY_SOURCE_PATTERNS=**/*
+   # Strings starting with a "!" are considered ignore patterns. For example !CONTRIBUTING.md will tell the system to skip CONTRIBUTING.md
+   GATSBY_SOURCE_PATTERNS=**/*,!CONTRIBUTING.md
    GATSBY_SOURCE_TITLE=My Docs Site
    # Url for your analytics script
    GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js
@@ -51,7 +52,8 @@
    GATSBY_TARGET = 'github.com/<target_org>/<target_repo>.git'
    GATSBY_SITE_PATH_PREFIX = '/pages/<target_org>/<target_repo>' // Path Prefix for link relationship to work
    GATSBY_SOURCE_BRANCH=master
-   GATSBY_SOURCE_PATTERNS=**/*
+   # Strings starting with a "!" are considered ignore patterns. For example !CONTRIBUTING.md will tell the system to skip CONTRIBUTING.md
+   GATSBY_SOURCE_PATTERNS=**/*,!CONTRIBUTING.md
    GATSBY_SOURCE_TITLE=My Docs Site
    # Url for your analytics script
    GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js

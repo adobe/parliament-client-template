@@ -25,6 +25,14 @@ const apiUrl =
     ? `https://api.github.com/graphql`
     : `https://git.corp.adobe.com/api/graphql`
 
+const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",")
+const ignorePatterns = patterns
+  .filter((pattern) => pattern.startsWith("!"))
+  .map(
+    (pattern) =>
+      `${process.env.LOCAL_PROJECT_DIRECTORY}/${pattern.substring(1)}`
+  )
+
 module.exports = {
   pathPrefix: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
   siteMetadata: {
@@ -39,6 +47,7 @@ module.exports = {
       options: {
         name: `external`,
         path: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+        ignore: ignorePatterns,
       },
     },
     {

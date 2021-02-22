@@ -43,10 +43,10 @@
     globby "^11.0.1"
     graphql-fetch "^1.0.1"
 
-"@adobe/parliament-markdown-cleaner@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-markdown-cleaner/-/parliament-markdown-cleaner-1.0.3.tgz#ba4f0ab7285bd1ef576b21884cbbb1204cda1f9c"
-  integrity sha512-ytZ07qAAhvy67oxumyD820ZchCGF0qWhI5Y1zMJgw91+npDGLOPjlhUhhDtJUtjqwA5FDGDpzaPP2QgUDk7s+w==
+"@adobe/parliament-markdown-cleaner@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-markdown-cleaner/-/parliament-markdown-cleaner-1.0.4.tgz#bdecb8c9dc33cff0782140db7d8d30071db65485"
+  integrity sha512-b0gSt5a2fT7ZYVbEeTHUOGSp8OGWQCf+NqJwlr4GPXwuQg9VhmwD1Bx/RO6s2+SSljKbmh9sKqIIFQJGfV7MvQ==
   dependencies:
     html-tags "^3.1.0"
     remark-frontmatter "^3.0.0"

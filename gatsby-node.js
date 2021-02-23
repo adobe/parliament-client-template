@@ -36,6 +36,12 @@ const openApiSearchDocs = []
 
 const pages = []
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array)
+  }
+}
+
 const cleanString = (str = "") =>
   str.replace(/"/g, "").replace(/“/g, "").replace(/”/g, "")
 
@@ -429,7 +435,7 @@ const processOpenApiFiles = async (
       }
     `)
     if (data.allFile.edges.length > 0) {
-      data.allFile.edges.forEach(async ({ node }) => {
+      await asyncForEach(data.allFile.edges, async ({ node }) => {
         let filepath = node.absolutePath
         let seo = searchTree(
           parliamentNavigation.pages,
@@ -447,7 +453,7 @@ const processOpenApiFiles = async (
             gitRemote
           )
         } catch (e) {
-          console.log("Failure: ", filepath, e)
+          console.log(`Skipping ${filepath} as it is not an OpenAPI spec`)
         }
       })
     }

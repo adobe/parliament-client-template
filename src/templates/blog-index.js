@@ -45,7 +45,6 @@ const BlogIndex = ({ data, location, pageContext }) => {
       pages={pages}
       sideNav={
         <SiteMenu
-          gitRemote={gitRemote}
           currentPage={location.pathname}
           pages={pages}
         />

@@ -39,7 +39,6 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
       sideNav={
         <SiteMenu
           currentPage={location.pathname}
-          gitRemote={gitRemote}
           pages={parliamentNavigation.pages}
         />
       }

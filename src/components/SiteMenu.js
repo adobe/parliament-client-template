@@ -16,11 +16,11 @@ import { useState } from "react"
 import { Index } from "elasticlunr"
 import PropTypes from "prop-types"
 import { graphql, useStaticQuery } from "gatsby"
-import { Nav, Search } from "@adobe/parliament-ui-components"
+import { SideNav, Search } from "@adobe/parliament-ui-components"
 
 import "./sitenav.css"
 
-const SiteMenu = ({ gitRemote, currentPage, pages }) => {
+const SiteMenu = ({ currentPage, pages }) => {
   const { ParliamentSearchIndex } = useStaticQuery(
     graphql`
       query {
@@ -29,12 +29,6 @@ const SiteMenu = ({ gitRemote, currentPage, pages }) => {
     `
   )
   const [index] = useState(Index.load(ParliamentSearchIndex))
-
-  const gitInfo = {
-    org: gitRemote.organization,
-    name: gitRemote.name,
-    branch: gitRemote.ref,
-  }
 
   return (
     <div
@@ -77,7 +71,7 @@ const SiteMenu = ({ gitRemote, currentPage, pages }) => {
           overflow-x: hidden;
         `}
       >
-        <Nav data={pages} selected={currentPage} gitInfo={gitInfo} />
+        <SideNav items={pages} selectedKeys={currentPage} />
       </div>
     </div>
   )

@@ -46,7 +46,6 @@ const Authors = ({ location, pageContext }) => {
         <SiteMenu
           currentPage={location.pathname}
           pages={pages}
-          gitRemote={gitRemote}
         />
       }
     >

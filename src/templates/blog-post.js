@@ -48,7 +48,6 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       pages={pages}
       sideNav={
         <SiteMenu
-          gitRemote={gitRemote}
           currentPage={location.pathname}
           pages={pages}
         />

@@ -25,7 +25,7 @@ const apiUrl =
     ? `https://api.github.com/graphql`
     : `https://git.corp.adobe.com/api/graphql`
 
-const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",")
+const patterns = process.env.GATSBY_SOURCE_PATTERNS.replace(/ /g,'').split(",")
 const ignorePatterns = patterns
   .filter((pattern) => pattern.startsWith("!"))
   .map(

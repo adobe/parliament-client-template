@@ -484,7 +484,7 @@ const createOpenApiPage = async (
     try {
       const targets = [
         "shell_curl",
-        "node_request",
+        "node_fetch",
         "php_http1",
         "java_unirest",
         "go_native",

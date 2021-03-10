@@ -15,7 +15,7 @@ import PropTypes from "prop-types"
 
 import { graphql, useStaticQuery } from "gatsby"
 
-import { defaultTheme, Provider, SSRProvider } from "@adobe/react-spectrum"
+import { SSRProvider } from "@adobe/react-spectrum"
 import {
   Footer,
   Grid,
@@ -24,6 +24,7 @@ import {
   GridContent,
   GridFooter,
   GridRightRail,
+  Provider,
 } from "@adobe/parliament-ui-components"
 
 import HeaderBar from "./HeaderBar"
@@ -75,12 +76,7 @@ const DocLayout = ({
   return (
     <SSRProvider>
       <SEO title={title} />
-      <Provider
-        theme={defaultTheme}
-        colorScheme="light"
-        scale="medium"
-        UNSAFE_className="spectrum spectrum--light spectrum--medium"
-      >
+      <Provider>
         <Grid>
           <GridHeader>
             <HeaderBar

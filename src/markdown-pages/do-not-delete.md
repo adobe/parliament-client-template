@@ -17,6 +17,14 @@ slug: ""
 
 This is some `inline code block` to see if the css works
 
+<requestmaker method="GET" url="https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker">
+  <headerparameters name="one">header one</headerparameters>
+  <headerparameters name="two">header two</headerparameters>
+  <queryparameters name="one">query one</queryparameters>
+  <queryparameters name="two">query two</queryparameters>
+  <requestbody type="raw">This is my body</requestbody>
+</requestmaker>
+
 ```html
 <code class="spectrum-Code spectrum-Code--XL"
   >CodeXL Text <strong>Strong</strong> <em>Emphasis</em>

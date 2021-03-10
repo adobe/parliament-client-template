@@ -11,11 +11,17 @@ slug: ""
 
 # Sample REST API
 
+<<<<<<< HEAD
+=======
+## Resources
+
+>>>>>>> 9fe0eba (📝  Sample file)
 This is a mock API that echoes whatever request you send it. The endpoint is `https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker`.
 
 ### Request Maker
 
  <requestmaker method="GET" url="https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker">
+<<<<<<< HEAD
    <headers>
      <parameters name="Authorization">Bearer your_token</parameters>
      <parameters name="X-Api-Key">your_api_key</parameters>
@@ -25,6 +31,13 @@ This is a mock API that echoes whatever request you send it. The endpoint is `ht
      <parameters name="size">2</parameters>
    </query>
    <requestbody type="none"></requestbody>
+=======
+   <headerparameters name="one">header one</headerparameters>
+   <headerparameters name="two">header two</headerparameters>
+   <queryparameters name="one">query one</queryparameters>
+   <queryparameters name="two">query two</queryparameters>
+   <requestbody type="raw">This is my body</requestbody>
+>>>>>>> 9fe0eba (📝  Sample file)
  </requestmaker>
 
 ### Endpoints

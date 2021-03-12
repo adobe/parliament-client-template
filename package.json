@@ -73,7 +73,7 @@
     "yaml": "^1.7.2"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^8.0.6",
     "axe-core": "^4.1.1",
     "babel-jest": "^26.6.3",

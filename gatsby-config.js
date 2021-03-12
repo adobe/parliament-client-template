@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-source-parliament`,
+      resolve: `@adobe/gatsby-source-parliament`,
       options: {
         name: `external`,
         path: `${process.env.LOCAL_PROJECT_DIRECTORY}`,

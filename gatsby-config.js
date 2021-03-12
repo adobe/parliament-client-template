@@ -28,12 +28,6 @@ const apiUrl =
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",").map((item) =>
   item.trim()
 )
-const ignorePatterns = patterns
-  .filter((pattern) => pattern.startsWith("!"))
-  .map(
-    (pattern) =>
-      `${process.env.LOCAL_PROJECT_DIRECTORY}/${pattern.substring(1)}`
-  )
 
 module.exports = {
   pathPrefix: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
@@ -45,11 +39,11 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-source-parliament`,
       options: {
         name: `external`,
         path: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
-        ignore: ignorePatterns,
+        patterns: patterns,
       },
     },
     {

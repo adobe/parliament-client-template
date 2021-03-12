@@ -4943,6 +4943,11 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
+argparse@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
+  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
+
 aria-query@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-3.0.0.tgz#65b3fcc1ca1155a8c9ae64d6eee297f15d5133cc"
@@ -9933,13 +9938,13 @@ gatsby-transformer-sharp@^2.8.0:
     semver "^7.3.4"
     sharp "^0.27.0"
 
-gatsby-transformer-yaml-full@^0.3.4:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml-full/-/gatsby-transformer-yaml-full-0.3.6.tgz#45751cb5fdef45fcdf9beb6f495553638620fcdf"
-  integrity sha512-HCPTgGfJjn4bXKHCdU8RWgB/BUnlDcZwxU1C9F2AYpIkWiFa12VzPxCc9/S9QwAw9xSXvEtESuzaxbFB96PjaQ==
+gatsby-transformer-yaml-full@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml-full/-/gatsby-transformer-yaml-full-0.4.1.tgz#551eaa90e1bda21cbef85909b97ce10a3e8055bc"
+  integrity sha512-kds/md3b7Dpxsc3W0pmzr9vXCd4RLtqstSyJeY8AiTIHqVy3+pFfwzrgMilCR45lSGoNdBiMreI/SeJ8n4xaxQ==
   dependencies:
     is-plain-object "^5.0.0"
-    js-yaml "^3.14.1"
+    js-yaml "^4.0.0"
 
 gatsby-transformer-yaml@^2.7.0:
   version "2.11.0"
@@ -12657,6 +12662,13 @@ js-yaml@^3.11.0, js-yaml@^3.12.1, js-yaml@^3.13.1, js-yaml@^3.14.1, js-yaml@^3.9
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
+
+js-yaml@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.0.0.tgz#f426bc0ff4b4051926cd588c71113183409a121f"
+  integrity sha512-pqon0s+4ScYUvX30wxQi3PogGFAlUyH0awepWvwkj4jD4v+ova3RiYw8bmA6x2rDrEaj8i/oWKoRxpVNW+Re8Q==
+  dependencies:
+    argparse "^2.0.1"
 
 jsbn@~0.1.0:
   version "0.1.1"

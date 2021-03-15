@@ -21,13 +21,14 @@ slug: ""
 >>>>>>> 528bbc9 (💡request maker changes)
 This is a mock API that echoes whatever request you send it. The endpoint is `https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker`.
 
-
 ### Request Maker
-
 
  <requestmaker method="GET" url="https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 404bf74 (🔨 Refactor RequestMaker JSX)
    <headers>
      <parameters name="Authorization">Bearer your_token</parameters>
      <parameters name="X-Api-Key">your_api_key</parameters>
@@ -36,6 +37,7 @@ This is a mock API that echoes whatever request you send it. The endpoint is `ht
      <parameters name="limit">10</parameters>
      <parameters name="size">2</parameters>
    </query>
+<<<<<<< HEAD
    <requestbody type="none"></requestbody>
 =======
    <headerparameters name="one">header one</headerparameters>
@@ -49,12 +51,11 @@ This is a mock API that echoes whatever request you send it. The endpoint is `ht
    <headerparameters name="X-Api-Key">your_api_key</headerparameters>
    <queryparameters name="limit">10</queryparameters>
    <queryparameters name="size">2</queryparameters>
+=======
+>>>>>>> 404bf74 (🔨 Refactor RequestMaker JSX)
    <requestbody type="none"></requestbody>
 >>>>>>> 528bbc9 (💡request maker changes)
  </requestmaker>
-
- 
-
 
 ### Endpoints
 
@@ -89,8 +90,7 @@ This is a mock API that echoes whatever request you send it. The endpoint is `ht
 | `form-data`             | A series of data blocks delimited by boundary strings                       |
 | `x-www-form-urlencoded` | Key-value tuples separated by `&`, with a `=` between the key and the value |
 | `raw`                   | Text, JSON, etc.                                                            |
-| `binary`                | Images, videos, etc.    
-
+| `binary`                | Images, videos, etc.                                                        |
 
 ### Response Headers
 

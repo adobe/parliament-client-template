@@ -36,6 +36,11 @@ const openApiSearchDocs = []
 
 const pages = []
 
+const renameProp = (oldProp, newProp, { [oldProp]: old, ...others }) => ({
+  [newProp]: old,
+  ...others,
+})
+
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
@@ -444,6 +449,9 @@ const processOpenApiFiles = async (
 
         try {
           const swaggerObject = await SwaggerParser.bundle(filepath)
+          if (Object.keys(swaggerObject.paths).includes("")) {
+            swaggerObject.paths = renameProp("", "/", swaggerObject.paths)
+          }
           await createOpenApiPage(
             createPage,
             openapiTemplate,

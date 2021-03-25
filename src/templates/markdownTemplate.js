@@ -27,9 +27,13 @@ import {
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation } = data
-  const { relativePath, childMdx } = file
+  const { absolutePath, childMdx } = file
   const { body, tableOfContents, timeToRead } = childMdx
   const { contributors, gitRemote } = pageContext
+  const relativePath = absolutePath.replace(
+    `${process.env.LOCAL_PROJECT_DIRECTORY}/`,
+    ""
+  )
 
   return (
     <DocLayout
@@ -111,7 +115,7 @@ export const query = graphql`
     file(id: { eq: $id }) {
       id
       name
-      relativePath
+      absolutePath
       childMdx {
         body
         tableOfContents(maxDepth: 3)

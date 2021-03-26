@@ -24,6 +24,7 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
       location={location}
       forceMobile={true}
       gitRemote={pageContext.gitRemote}
+      currentPage={location.pathname}
       pages={parliamentNavigation.pages}
     >
       <OpenAPIBlock spec={pageContext.spec} />

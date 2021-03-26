@@ -36,6 +36,7 @@ const DocLayout = ({
   title,
   location,
   gitRemote,
+  currentPage,
   pages,
   forceMobile = false,
   sideNav,

@@ -31,6 +31,7 @@
     "@spectrum-css/textfield": "^3.0.0-beta.3",
     "@spectrum-css/vars": "^2.3.0",
     "@spectrum-icons/workflow": "^3.2.0",
+    "@svgr/core": "^5.5.0",
     "core-js": "^3.2.1",
     "elasticlunr": "^0.9.5",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -68,6 +69,7 @@
     "rebass": "^4.0.5",
     "rehype-react": "^6.1.0",
     "remark-slug": "^6.0.0",
+    "shelljs": "^0.8.4",
     "styled-components": "^5.2.0",
     "widdershins": "^4.0.1",
     "yaml": "^1.7.2"

@@ -31,6 +31,7 @@ import {
   Tr,
 } from "@adobe/parliament-ui-components"
 import NewtonButton from "./NewtonButton"
+import { inlineImages } from "../components/inlineImages"
 
 // If you add a new custom tag here be sure to add it to scripts/markdown-cleaner/cleanHtmlNodes.js as well
 export const componentsMapping = {
@@ -54,4 +55,5 @@ export const componentsMapping = {
   code: InlineCode,
   a: Link,
   newtonbutton: NewtonButton,
+  ...inlineImages,
 }

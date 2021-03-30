@@ -13,24 +13,14 @@
 const fs = require("fs")
 const path = require("path")
 const shell = require("shelljs")
-const { default: svgr } = require("@svgr/core")
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
-const files = [...shell.ls("-RLl", `./inline-images/*.svg`)]
+const files = [...shell.ls("-RLl", `./inline-images/*.js`)]
 const components = []
 
-// Convert SVG to react components
+// Get React Component Names
 for (const file of files) {
   if (file.isFile()) {
-    const filename = `Svg${capitalizeFirstLetter(
-      path.basename(file.name, ".svg")
-    )}`
-    const data = fs.readFileSync(file.name)
-    const jsCode = svgr.sync(data, {}, { componentName: filename })
-    fs.writeFileSync(`./inline-images/${filename}.js`, jsCode)
+    const filename = `${path.basename(file.name, ".js")}`
     components.push(filename)
   }
 }

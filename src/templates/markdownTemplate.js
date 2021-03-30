@@ -26,17 +26,16 @@ import {
 } from "@adobe/parliament-ui-components"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
-  const { file, parliamentNavigation } = data
+  const { file, parliamentNavigation, site } = data
+  const { siteMetadata } = site
+  const { sourceFiles } = siteMetadata
   const { absolutePath, childMdx } = file
   const { body, tableOfContents, timeToRead } = childMdx
   const { contributors, gitRemote } = pageContext
-  const relativePath = absolutePath.replace(
-    `${process.env.LOCAL_PROJECT_DIRECTORY}/`,
-    ""
-  )
-
-  console.log("local dir", process.env.LOCAL_PROJECT_DIRECTORY)
-  console.log("relativePath", relativePath)
+  const pathToFiles = sourceFiles.endsWith("/")
+    ? sourceFiles
+    : `${sourceFiles}/`
+  const relativePath = absolutePath.replace(pathToFiles, "")
 
   return (
     <DocLayout
@@ -129,6 +128,11 @@ export const query = graphql`
     }
     parliamentNavigation {
       pages
+    }
+    site {
+      siteMetadata {
+        sourceFiles
+      }
     }
   }
 `

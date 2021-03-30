@@ -36,6 +36,7 @@ module.exports = {
     description: ``,
     author: `@adobedevs`,
     newton: `${process.env.NEWTON_URL}`,
+    sourceFiles: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
   },
   plugins: [
     {

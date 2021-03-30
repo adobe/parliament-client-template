@@ -35,6 +35,9 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
     ""
   )
 
+  console.log("local dir", process.env.LOCAL_PROJECT_DIRECTORY)
+  console.log("relativePath", relativePath)
+
   return (
     <DocLayout
       title={pageContext.seo}

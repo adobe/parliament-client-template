@@ -31,7 +31,6 @@
     "@spectrum-css/textfield": "^3.0.0-beta.3",
     "@spectrum-css/vars": "^2.3.0",
     "@spectrum-icons/workflow": "^3.2.0",
-    "@svgr/core": "^5.5.0",
     "core-js": "^3.2.1",
     "elasticlunr": "^0.9.5",
     "eslint-plugin-flowtype": "^5.2.0",

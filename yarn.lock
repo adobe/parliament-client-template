@@ -3860,6 +3860,11 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/vars/-/vars-2.3.0.tgz#0ce716fb5ee65f4af9e2d2a7aaae55e8ba4d4c8f"
   integrity sha512-k4YwFbv9+7QzBrc3ezvGuHxI3nDTG/6qJsAmhYS1vEyxpxjKmRfiz59P+fqT12PQNjxeNYHyVz1kRgaLA6gw2w==
 
+"@spectrum-css/vars@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/vars/-/vars-3.0.1.tgz#561fd69098f896a647242dd8d6108af603bfa31e"
+  integrity sha512-l4oRcCOqInChYXZN6OQhpe3isk6l4OE6Ys8cgdlsiKp53suNoQxyyd9p/eGRbCjZgH3xQ8nK0t4DHa7QYC0S6w==
+
 "@spectrum-icons/ui@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@spectrum-icons/ui/-/ui-3.2.0.tgz#c391b03fe3494a41957cdbbdf56d64365162696c"

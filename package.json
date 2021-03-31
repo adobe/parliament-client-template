@@ -29,7 +29,7 @@
     "@spectrum-css/search": "^3.0.0-beta.4",
     "@spectrum-css/tabs": "^3.0.0-beta.6",
     "@spectrum-css/textfield": "^3.0.0-beta.3",
-    "@spectrum-css/vars": "^2.3.0",
+    "@spectrum-css/vars": "^3.0.1",
     "@spectrum-icons/workflow": "^3.2.0",
     "core-js": "^3.2.1",
     "elasticlunr": "^0.9.5",

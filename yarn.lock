@@ -53,19 +53,22 @@
     gatsby-source-filesystem "^2.1.19"
     rimraf "^2.6.2"
 
-"@adobe/parliament-markdown-cleaner@^1.1.0":
-  version "1.1.0"
-  resolved "https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-adobe-release/@adobe/parliament-markdown-cleaner/-/parliament-markdown-cleaner-1.1.0.tgz#4c10992cc86d5766ba938ed2c01119b72663291d"
-  integrity sha1-TBCZLMhtV2a6k47SwBEZtyZjKR0=
+"@adobe/parliament-markdown-cleaner@^1.2.0":
+  version "1.2.0"
+  resolved "https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-adobe-release/@adobe/parliament-markdown-cleaner/-/parliament-markdown-cleaner-1.2.0.tgz#703926ef034ea3a9557446c36244674b29db720d"
+  integrity sha1-cDkm7wNOo6lVdEbDYkRnSynbcg0=
   dependencies:
     "@svgr/core" "^5.5.0"
     html-tags "^3.1.0"
+    mime-types "^2.1.29"
+    parse-data-url "^3.0.0"
     remark-frontmatter "^3.0.0"
     remark-parse "^9.0.0"
     remark-stringify "^9.0.1"
     shelljs "^0.8.4"
     to-vfile "^6.1.0"
     unified "^9.2.0"
+    uuid "^8.3.2"
 
 "@adobe/parliament-source-changelog@^0.0.4":
   version "0.0.4"
@@ -13881,7 +13884,7 @@ mime-db@1.46.0, "mime-db@>= 1.43.0 < 2", mime-db@^1.28.0:
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.46.0.tgz#6267748a7f799594de3cbc8cde91def349661cee"
   integrity sha512-svXaP8UQRZ5K7or+ZmfNhg2xX3yKDMUzqadsSqi4NCH/KomcH75MAMYAGVlvXn4+b/xOPhS3I2uHKRUzvjY7BQ==
 
-mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24:
+mime-types@^2.1.12, mime-types@^2.1.29, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24:
   version "2.1.29"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.29.tgz#1d4ab77da64b91f5f72489df29236563754bb1b2"
   integrity sha512-Y/jMt/S5sR9OaqteJtslsFZKWOIIqMACsJSiHghlCAyhf7jfVYjKBmLiX8OgpWeW+fjJ2b+Az69aPFPkUOY6xQ==
@@ -15091,6 +15094,13 @@ parse-bmfont-xml@^1.1.4:
   dependencies:
     xml-parse-from-string "^1.0.0"
     xml2js "^0.4.5"
+
+parse-data-url@^3.0.0:
+  version "3.0.0"
+  resolved "https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-adobe-release/parse-data-url/-/parse-data-url-3.0.0.tgz#a7eae0a8a035e972b3f05bb23a06a9bc82b8616a"
+  integrity sha1-p+rgqKA16XKz8FuyOgapvIK4YWo=
+  dependencies:
+    valid-data-url "^3.0.1"
 
 parse-english@^4.0.0:
   version "4.2.0"
@@ -19671,7 +19681,7 @@ uuid@3.4.0, uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
-uuid@^8.3.0:
+uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
@@ -19689,6 +19699,11 @@ v8-to-istanbul@^7.0.0:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
+
+valid-data-url@^3.0.1:
+  version "3.0.1"
+  resolved "https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-adobe-release/valid-data-url/-/valid-data-url-3.0.1.tgz#826c1744e71b5632e847dd15dbd45b9fb38aa34f"
+  integrity sha1-gmwXROcbVjLoR90V29Rbn7OKo08=
 
 valid-url@1.0.9, valid-url@^1.0.9:
   version "1.0.9"

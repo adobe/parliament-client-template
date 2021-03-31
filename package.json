@@ -68,7 +68,7 @@
     "rebass": "^4.0.5",
     "rehype-react": "^6.1.0",
     "remark-slug": "^6.0.0",
-    "styled-components": "^5.2.0",
+    "styled-components": "^5.2.2",
     "widdershins": "^4.0.1",
     "yaml": "^1.7.2"
   },

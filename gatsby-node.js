@@ -550,12 +550,18 @@ const createOpenApiPage = async (
   }
 }
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ loaders, actions }) => {
   actions.setWebpackConfig({
     resolve: {
       // Put main before module else it messes up react spectrum css import
       mainFields: ["browser", "main", "module"],
     },
+    module: {
+      rules: [{
+        test: /form-data/,
+        use: [loaders.null()]
+      }]
+    }
   })
 }
 

@@ -69,7 +69,7 @@
     "shelljs": "^0.8.4",
     "styled-components": "^5.2.0",
     "widdershins": "^4.0.1",
-    "yaml": "^1.7.2"
+    "yaml": "^1.10.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.0.0",

@@ -48,13 +48,6 @@ module.exports = {
       },
     },
     {
-      resolve: `swagger-to-graphql-source`,
-      options: {
-        contentRoot: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
-        sourcePatterns: process.env.SWAGGER_SOURCE_PATTERNS,
-      },
-    },
-    {
       resolve: `@adobe/gatsby-source-github-file-contributors`,
       options: {
         pages: {
@@ -83,12 +76,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-emotion`,
       options: {},
-    },
-    {
-      resolve: `gatsby-transformer-yaml-full`,
-      options: {
-        typeName: `YamlFile`,
-      },
     },
     {
       resolve: `gatsby-source-filesystem`,

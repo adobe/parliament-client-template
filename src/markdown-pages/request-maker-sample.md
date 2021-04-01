@@ -92,6 +92,24 @@ This is a mock API that echoes whatever request you send it. The endpoint is `ht
 | `raw`                   | Text, JSON, etc.                                                            |
 | `binary`                | Images, videos, etc.                                                        |
 
+
+### YAML requestMaker
+
+```yaml {requestMaker: true}
+  method: post
+  url: https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker
+  query:
+    res: tes
+    tes: res
+  headers:
+    test: rest
+    rest: test
+    Content-Type: application/x-www-form-urlencoded
+  body:
+    name: hiren
+    email: hireshah@adobe.com
+```
+
 ### Response Headers
 
 | Header           | Description                        |

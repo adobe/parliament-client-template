@@ -556,12 +556,6 @@ exports.onCreateWebpackConfig = ({ loaders, actions }) => {
       // Put main before module else it messes up react spectrum css import
       mainFields: ["browser", "main", "module"],
     },
-    module: {
-      rules: [{
-        test: /form-data/,
-        use: [loaders.null()]
-      }]
-    }
   })
 }
 

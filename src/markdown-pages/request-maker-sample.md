@@ -10,7 +10,6 @@ slug: ""
 ---
 
 # Sample REST API
-=======
 ## Resources
 
 This is a mock API that echoes whatever request you send it. The endpoint is `https://adobeioruntime.net/api/v1/web/io-solutions/default/requestMaker`.

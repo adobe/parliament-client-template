@@ -484,8 +484,3 @@ h1 + div.spectrum-Body--M {
 div input[aria-label="Search"] svg {
   top: var(--spectrum-global-dimension-size-85) !important;
 }
-
-/* Properly sizes Action Buttons */
-button[type="button"] svg {
-  padding-left: 0px !important;
-}

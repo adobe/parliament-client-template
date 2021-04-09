@@ -34,7 +34,8 @@
 
    # Repo URL in given format which you want to use to generate a microsite
    # NOTE: for Enterprise instances, this MUST be the FULL HTTPS URL
-   #       This repository must contain a manifest*.json file for Parliament to read.
+   #       This repository must contain a manifest*.* file for Parliament to read.
+   #       (preferably in a .yaml format)
    GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git
    GATSBY_SOURCE_BRANCH=master
 

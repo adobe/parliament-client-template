@@ -24,10 +24,10 @@
     react "^16.13.1"
     react-dom "^16.13.1"
 
-"@adobe/gatsby-remark-afm@^0.8.3":
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/@adobe/gatsby-remark-afm/-/gatsby-remark-afm-0.8.3.tgz#529d2860d7fd6e7dcb2b81dbd6660a4fb74793c0"
-  integrity sha512-rh0HHKTkSJ1jH2KZ7Gd/ftvu2Owhtu9GCoi57PKWGHxCtgkgo0H7FPdEFmuMY/N37tJBb5+4r7W7K9a/CE3rHA==
+"@adobe/gatsby-remark-afm@^0.8.4":
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/@adobe/gatsby-remark-afm/-/gatsby-remark-afm-0.8.4.tgz#0ee5b6916c8bb5834e38066fa9d5ae1c8756771d"
+  integrity sha512-RPXfgzyARMQZid6ULMPQgw+WeGAwUERb7woc0clMeCiAuWRmmDyt+btBXuG9YTs/uX8PPScM6zOlL9tFad1uWg==
   dependencies:
     mdast-util-to-string "^1.1.0"
     normalize-path "^3.0.0"

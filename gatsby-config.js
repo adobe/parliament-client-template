@@ -12,7 +12,7 @@
 
 const path = require("path")
 const GitUrlParse = require(`git-url-parse`)
-const changelogTemplate = path.resolve(`src/templates/changelogTemplate.js`)
+const changelogTemplate = path.resolve(`src/templates/changelog.js`)
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,

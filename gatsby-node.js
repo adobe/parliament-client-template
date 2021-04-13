@@ -92,6 +92,16 @@ const gitRepoInfo = () => {
   }
 }
 
+const loadTemplates = () => {
+  const templateFiles = glob.sync(`src/templates/**`)
+
+  return templateFiles.reduce(function (result, item, index, array) {
+    const templateName = path.parse(item).name
+    result[templateName] = path.resolve(item)
+    return result
+  }, {})
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `Mdx`) {
@@ -135,15 +145,9 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const docTemplate = path.resolve(`src/templates/markdownTemplate.js`)
-  const indexTemplate = path.resolve(`src/templates/indexTemplate.js`)
-
-  // Blog Templates
-  const blogIndex = path.resolve(`./src/templates/blog-index.js`)
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
-  const authorsPage = path.resolve("src/templates/authors.js")
-  const authorPage = path.resolve("src/templates/author.jsx")
-  const tagPage = path.resolve("src/templates/tag.jsx")
+  const templates = loadTemplates()
+  // Default template
+  const docTemplate = path.resolve(`src/templates/markdown.js`)
 
   const gitRemote = gitRepoInfo()
   const gitPathPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
@@ -164,6 +168,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 title
                 tags
                 author
+                template
               }
             }
           }
@@ -232,7 +237,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
       createPage({
         path: post.node.fields.slug,
-        component: blogPost,
+        component: templates["blog-post"],
         context: {
           slug: post.node.fields.slug,
           previous,
@@ -309,7 +314,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
       createPage({
         path: `/blog/tags/${key}/`,
-        component: tagPage,
+        component: templates[tag],
         context: {
           tagName: `/${key}/`,
           gitRemote: gitRemote,
@@ -326,7 +331,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     createPage({
       path: `/blog/authors/`,
-      component: authorsPage,
+      component: templates["authors"],
       context: {
         slug: `/blog/authors/`,
         pages: pages,
@@ -337,7 +342,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     authorMap.forEach((author) => {
       createPage({
         path: `/blog/author/${author.login}/`,
-        component: authorPage,
+        component: templates["authors"],
         context: {
           authorId: author.login,
           author: author,
@@ -348,7 +353,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     createPage({
       path: `/blog`,
-      component: blogIndex,
+      component: templates["blog-index"],
       context: {
         pages: pages,
         contributors: contributors,
@@ -364,12 +369,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           (obj) => obj.node.path === node.fileAbsolutePath
         )
         const fileContributors = contributorsObj?.node?.contributors ?? []
+        const template =
+          node?.frontmatter?.template && templates[node.frontmatter.template]
+            ? templates[node.frontmatter.template]
+            : docTemplate
 
         if (node.fields.slug !== "") {
           let seo = searchTree(parliamentNavigation.pages, node.fields.slug)
           createPage({
             path: node.fields.slug,
-            component: docTemplate,
+            component: template,
             context: {
               slug: node.fields.slug,
               id: node.fields.id,
@@ -404,7 +413,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // redirect home page to main page
   createPage({
     path: `/`,
-    component: indexTemplate,
+    component: templates["index"],
     context: {
       slug: `/`,
       gitRemote: {
@@ -423,7 +432,7 @@ const processOpenApiFiles = async (
   gitRemote,
   parliamentNavigation
 ) => {
-  const openapiTemplate = path.resolve(`src/templates/openapiTemplate.js`)
+  const openapiTemplate = path.resolve(`src/templates/openapi.js`)
   const type = extension === "json" ? `"json"` : `"yaml", "yml"`
   try {
     let { data } = await graphql(`

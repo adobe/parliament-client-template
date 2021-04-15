@@ -3827,10 +3827,10 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/dropdown/-/dropdown-3.0.0-beta.3.tgz#2195714d6aeaafcc43b3ff2984481116de84f537"
   integrity sha512-KYpcLl/cnxK208hY9tpqoISk3A2piUlqggSu3kS7qNGbIZQgizpT0YxYvN8F2BqnlAI1NL2KYZ8loMiI7sfQgA==
 
-"@spectrum-css/icon@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@spectrum-css/icon/-/icon-3.0.1.tgz#e300a6fc353c85c6b5d6e7a364408a940c31b177"
-  integrity sha512-cGFtIrcQ/7tthdkHK1npuEFiCdYVHLqwmLxghUYQw8Tb8KgJaw3OBO1tpjgsUizexNgu26BjVRIbGxNWuBXIHQ==
+"@spectrum-css/icon@^3.0.1", "@spectrum-css/icon@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/icon/-/icon-3.0.2.tgz#327dcb95ab86368a00eb5a6d898c2c02e4ae04b3"
+  integrity sha512-BdHoO2ttrbsj1+IfHmSCGNS0oEf8i2UW3agfOVtSlYOD+iGykupWwy8ANLB6p4GvjlR7YjPRGzDRGgmDwVqR0Q==
 
 "@spectrum-css/label@^2.0.9":
   version "2.0.9"

@@ -28,7 +28,7 @@
     "@spectrum-css/label": "^2.0.9",
     "@spectrum-css/search": "^3.0.1",
     "@spectrum-css/tabs": "^3.0.1",
-    "@spectrum-css/textfield": "^3.0.1",
+    "@spectrum-css/textfield": "^3.0.2",
     "@spectrum-css/vars": "^3.0.1",
     "@spectrum-icons/workflow": "^3.2.0",
     "core-js": "^3.2.1",

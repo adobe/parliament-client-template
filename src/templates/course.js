@@ -11,6 +11,7 @@
  */
 
 /** @jsx jsx */
+import { useState } from "react"
 import { css, jsx } from "@emotion/react"
 import { graphql, withPrefix } from "gatsby"
 import DocLayout from "../components/doclayout"
@@ -18,6 +19,7 @@ import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
 import NextPrev from "../components/NextPrev"
+import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
 import { Flex, View } from "@adobe/react-spectrum"
 import {
@@ -29,7 +31,6 @@ import {
 const findSelectedPageNextPrev = (pathname, pages) => {
   const flat = flattenPages(pages)
   const selectedPage = flat.find((page) => {
-    console.log(withPrefix(page.path))
     return withPrefix(page.path) === pathname
   })
 
@@ -61,6 +62,20 @@ const flattenPages = (pages) => {
   )
 }
 
+const useLocalStorage = (key, initialValue) => {
+  const [visited, flipVisited] = useState(() => {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+
+  const markVisited = () => {
+    flipVisited(true);
+    // TODO: persist somewhere other than localstore
+    window.localStorage.setItem(key, true);
+  };
+  return [visited, markVisited];
+}
+
 const CoursesTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
   const { siteMetadata } = site
@@ -79,6 +94,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   )
 
   console.log("currentPage ", location.pathname)
+  const [visited, markVisited] = useLocalStorage(location.pathname, false)
 
   return (
     <DocLayout
@@ -131,6 +147,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           ""
         )}
       </div>
+      { visited && <Checkmark /> }
       <RenderMdx>{body}</RenderMdx>
 
       <Flex
@@ -141,7 +158,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
         marginBottom="size-400"
       >
         <View>
-          <NextPrev nextPage={nextPage} previousPage={previousPage} />
+          <NextPrev markProgression={markVisited} nextPage={nextPage} previousPage={previousPage} />
         </View>
         <View>
           <Contributors

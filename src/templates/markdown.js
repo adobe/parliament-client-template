@@ -12,7 +12,7 @@
 
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react"
-import { graphql } from "gatsby"
+import { graphql, withPrefix } from "gatsby"
 import DocLayout from "../components/doclayout"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
@@ -23,6 +23,7 @@ import {
   ActionButtons,
   Contributors,
   Link,
+  stripManifestPath,
 } from "@adobe/parliament-ui-components"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
@@ -36,7 +37,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
-
+  const homePage = stripManifestPath(parliamentNavigation.homePage, gitRemote)
   return (
     <DocLayout
       title={pageContext.seo}
@@ -46,7 +47,9 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
       pages={parliamentNavigation.pages}
       sideNav={
         <SiteMenu
-          currentPage={location.pathname}
+          currentPage={
+            location.pathname != withPrefix("/") ? location.pathname : homePage
+          }
           gitRemote={gitRemote}
           pages={parliamentNavigation.pages}
         />
@@ -128,6 +131,7 @@ export const query = graphql`
     }
     parliamentNavigation {
       pages
+      homePage
     }
     site {
       siteMetadata {

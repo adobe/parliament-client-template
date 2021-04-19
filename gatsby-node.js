@@ -315,7 +315,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
       createPage({
         path: `/blog/tags/${key}/`,
-        component: templates[tag],
+        component: templates["tag"],
         context: {
           tagName: `/${key}/`,
           gitRemote: gitRemote,

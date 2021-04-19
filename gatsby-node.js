@@ -388,19 +388,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               contributors: fileContributors,
             },
           })
-          if (node.fields.slug === parliamentNavigation.homePage) {
-            createPage({
-              path: "/",
-              component: template,
-              context: {
-                slug: node.fields.slug,
-                id: node.fields.id,
-                seo: seo,
-                gitRemote: gitRemote,
-                contributors: fileContributors,
-              },
-            })
-          }
         }
       })
     }
@@ -408,6 +395,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.log("Skipping Markdown files")
     console.log(e)
   }
+
+  // redirect home page to main page
+  createPage({
+    path: `/`,
+    component: templates["index"],
+    context: {
+      slug: `/`,
+      gitRemote: {
+        org: gitRemote.organization,
+        name: gitRemote.name,
+        branch: gitRemote.ref,
+      },
+    },
+  })
 
   await processOpenApiFiles(
     "json",

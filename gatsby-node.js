@@ -343,7 +343,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     authorMap.forEach((author) => {
       createPage({
         path: `/blog/author/${author.login}/`,
-        component: templates["authors"],
+        component: templates["author"],
         context: {
           authorId: author.login,
           author: author,

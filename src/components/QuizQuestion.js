@@ -58,7 +58,7 @@ const shuffle = arr =>
 
 const QuizQuestion = ({ children, ...props }) => {
   let [selected, setSelected] = useState([])
-  const shuffledChoices = shuffle(Children.toArray(children))
+  const [shuffledChoices] = useState(shuffle(Children.toArray(children)))
 
   return (
     <CheckboxGroup aria-label="Question" onChange={setSelected}>

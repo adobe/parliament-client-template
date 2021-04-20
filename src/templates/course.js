@@ -14,6 +14,7 @@
 import { useState } from "react"
 import { css, jsx } from "@emotion/react"
 import { graphql, withPrefix } from "gatsby"
+import CourseNav from "../components/CourseNav"
 import DocLayout from "../components/doclayout"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
@@ -108,6 +109,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           currentPage={location.pathname}
           gitRemote={gitRemote}
           pages={parliamentNavigation.pages}
+          CustomNavComponent={CourseNav}
         />
       }
       rightRail={

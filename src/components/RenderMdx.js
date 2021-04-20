@@ -15,10 +15,15 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 import { componentsMapping } from "./componentsMapping"
 
-const RenderMdx = ({ children, overrides }) => (
-  <MDXProvider components={{...componentsMapping, ...overrides}}>
-    <MDXRenderer>{children}</MDXRenderer>
-  </MDXProvider>
-)
+const RenderMdx = ({ children, overrides }) => {
+  const finalComponentsMapping = overrides
+    ? {...componentsMapping, ...overrides} : componentsMapping
+
+  return (
+    <MDXProvider components={finalComponentsMapping}>
+      <MDXRenderer>{children}</MDXRenderer>
+    </MDXProvider>
+  )
+}
 
 export default RenderMdx

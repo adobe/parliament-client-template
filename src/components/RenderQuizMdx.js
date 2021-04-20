@@ -9,63 +9,70 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
-import { React, Component, Fragment } from "react"
+import { React, useState } from "react"
 
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
-import { componentsMapping } from "../components/componentsMapping"
+import { componentsMapping } from "./componentsMapping"
 
-const markCorrect = (id, correct) => {
-  if (correct) {
-    return `✅`
-  }
-  return `❌`
-}
+import { Checkbox, CheckboxGroup } from "@adobe/react-spectrum"
 
-class QuizQuestion extends Component {
-  constructor(props) {
-    super(props)
+const getCorrectAnswer = (choice) =>
+  choice.props.children.filter((child) => child.props)[0].props.checked
 
-    const { question, choices } = props
-    this.question = question
-    this.choices = choices
-  }
+const getOptionText = (choice) =>
+  choice.props.children
+    .filter((child) => !child.props)
+    .join(" ")
+    .trim()
 
-  render() {
-    const choices = this.choices.map((choice) => {
-      choice.onClick = markCorrect(choice.id, true)
-    })
+const QuizChoice = ({ choice, value, selected }) => {
+  if (choice.props.originalType === "li") {
+    const correctAnswer = getCorrectAnswer(choice)
+    const text = getOptionText(choice)
 
-    return (
-      <Fragment>
-        {this.question}
-        {this.choices}
-      </Fragment>
-    )
-  }
-}
-
-const components = {
-  wrapper: ({children, ...props}) => {
-    const questions = children.reduce((result, value, index, array) => {
-      if (index % 2 === 0) {
-        // TODO: better, React-y way to do this?
-        const [question, choices] = array.slice(index, index + 2)
-        result.push(<QuizQuestion question={question} choices={choices} /> );
-      }
-      return result;
-    }, []);
-
-    return questions
+    // If the user has selected a value then we need to see if they got the correct answer
+    if (selected.includes(value)) {
+      return (
+        <div>
+          {correctAnswer ? `✅` : `❌`}
+          <span
+            style={{ marginLeft: `var(--spectrum-global-dimension-size-125)` }}
+          >
+            {text}
+          </span>
+        </div>
+      )
+    } else {
+      return (
+        <Checkbox isDisabled={selected.length > 0} value={value}>
+          {text}
+        </Checkbox>
+      )
+    }
+  } else {
+    return null
   }
 }
 
-const RenderQuizMdx = ({ children, data }) => (
-  <MDXProvider components={ {...components, ...componentsMapping } }>
-    <MDXRenderer>
-      {children}
-    </MDXRenderer>
-  </MDXProvider>
-)
+const QuizQuestion = ({ children, ...props }) => {
+  let [selected, setSelected] = useState([])
+
+  return (
+    <CheckboxGroup aria-label="Question" onChange={setSelected}>
+      {children.map((choice, index) => (
+        <QuizChoice value={index} choice={choice} selected={selected} />
+      ))}
+    </CheckboxGroup>
+  )
+}
+
+const RenderQuizMdx = ({ children }) => {
+  return (
+    <MDXProvider components={{ ...componentsMapping, ul: QuizQuestion }}>
+      <MDXRenderer>{children}</MDXRenderer>
+    </MDXProvider>
+  )
+}
 
 export default RenderQuizMdx

@@ -71,7 +71,7 @@ const useLocalStorage = (key, initialValue) => {
 
   const markVisited = () => {
     flipVisited(true);
-    // TODO: persist somewhere other than localstore
+    // TODO: persist somewhere other than localstore?
     window.localStorage.setItem(key, true);
   };
   return [visited, markVisited];
@@ -139,17 +139,25 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           z-index: 100;
         `}
       >
-        {gitRemote !== null ? (
-          <ActionButtons
-            gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-            filePath={relativePath}
-            branch={gitRemote.ref}
-          />
-        ) : (
-          ""
-        )}
+        <Flex alignItems="center">
+          { visited &&
+            <Flex alignItems="center">
+              <Checkmark />{" "}You have already read this module!
+            </Flex>
+          }
+
+          {gitRemote !== null ? (
+            <ActionButtons
+              gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
+              filePath={relativePath}
+              branch={gitRemote.ref}
+            />
+          ) : (
+            ""
+          )}
+        </Flex>
       </div>
-      { visited && <Checkmark /> }
+
       <RenderMdx>{body}</RenderMdx>
 
       <Flex

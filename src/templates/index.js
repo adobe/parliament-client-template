@@ -14,7 +14,7 @@ import { useEffect } from "react"
 import { graphql, navigate } from "gatsby"
 import { stripManifestPath } from "@adobe/parliament-ui-components"
 
-const IndexTemplate = props => {
+const IndexTemplate = (props) => {
   const homePage = stripManifestPath(
     props.data.parliamentNavigation.homePage,
     props.pageContext.gitRemote

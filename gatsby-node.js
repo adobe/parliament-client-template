@@ -189,6 +189,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
         parliamentNavigation {
           pages
+          homePage
         }
       }
     `
@@ -314,7 +315,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
       createPage({
         path: `/blog/tags/${key}/`,
-        component: templates[tag],
+        component: templates["tag"],
         context: {
           tagName: `/${key}/`,
           gitRemote: gitRemote,
@@ -342,7 +343,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     authorMap.forEach((author) => {
       createPage({
         path: `/blog/author/${author.login}/`,
-        component: templates["authors"],
+        component: templates["author"],
         context: {
           authorId: author.login,
           author: author,
@@ -395,6 +396,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.log(e)
   }
 
+  // redirect home page to main page
+  createPage({
+    path: `/`,
+    component: templates["index"],
+    context: {
+      slug: `/`,
+      gitRemote: {
+        org: gitRemote.organization,
+        name: gitRemote.name,
+        branch: gitRemote.ref,
+      },
+    },
+  })
+
   await processOpenApiFiles(
     "json",
     graphql,
@@ -409,20 +424,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     gitRemote,
     parliamentNavigation
   )
-
-  // redirect home page to main page
-  createPage({
-    path: `/`,
-    component: templates["index"],
-    context: {
-      slug: `/`,
-      gitRemote: {
-        org: gitRemote.organization,
-        name: gitRemote.name,
-        branch: gitRemote.ref,
-      },
-    },
-  })
 }
 
 const processOpenApiFiles = async (

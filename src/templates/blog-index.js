@@ -93,6 +93,8 @@ const BlogIndex = ({ data, location, pageContext }) => {
               </section>
             </article>
           )
+        } else {
+          return ""
         }
       })}
     </DocLayout>

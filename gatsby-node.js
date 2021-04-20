@@ -381,6 +381,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             path: node.fields.slug,
             component: template,
             context: {
+              dirname: path.parse(node.fields.slug).dir,
               slug: node.fields.slug,
               id: node.fields.id,
               seo: seo,

@@ -63,16 +63,19 @@ const flattenPages = (pages) => {
   )
 }
 
-const useLocalStorage = (key, initialValue) => {
+const useLocalStorage = (dir, key, initialValue) => {
   const [visited, flipVisited] = useState(() => {
-    const item = window.localStorage.getItem(key);
-    return item ? JSON.parse(item) : initialValue;
+    let item = window.localStorage.getItem(dir)
+    item = item ? JSON.parse(item) : {}
+    return item[key] ? item[key] : initialValue
   });
 
   const markVisited = () => {
     flipVisited(true);
-    // TODO: persist somewhere other than localstore?
-    window.localStorage.setItem(key, true);
+    let storedState = window.localStorage.getItem(dir)
+    storedState = storedState ? JSON.parse(storedState) : {}
+    storedState[key] = true
+    window.localStorage.setItem(dir, JSON.stringify(storedState));
   };
   return [visited, markVisited];
 }
@@ -82,8 +85,8 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
   const { absolutePath, childMdx } = file
-  const { body, tableOfContents, timeToRead } = childMdx
-  const { contributors, gitRemote } = pageContext
+  const { body, tableOfContents, timeToRead, frontmatter } = childMdx
+  const { contributors, gitRemote, dirname } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
     : `${sourceFiles}/`
@@ -93,9 +96,13 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     location.pathname,
     parliamentNavigation.pages
   )
-
-  console.log("currentPage ", location.pathname)
-  const [visited, markVisited] = useLocalStorage(location.pathname, false)
+  // dirname should be in the form /path/to/course/dir
+  // which is just the dir of the slug for the path passed in
+  const { courseVersion } = frontmatter
+  let courseModuleVersion = courseVersion ? courseVersion : `latest`
+  const [visited, markVisited] = useLocalStorage(
+    dirname, `${courseModuleVersion}${location.pathname}`, false
+  )
 
   return (
     <DocLayout
@@ -198,6 +205,9 @@ export const query = graphql`
         body
         tableOfContents(maxDepth: 3)
         timeToRead
+        frontmatter {
+          courseVersion
+        }
       }
     }
     parliamentNavigation {

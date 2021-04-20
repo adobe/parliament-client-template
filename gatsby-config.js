@@ -156,7 +156,13 @@ module.exports = {
     },
     {
       resolve: `@adobe/parliament-transformer-navigation`,
-      options: {},
+      options: {
+        gitRepoInfo: {
+          org: gitInfo.owner,
+          name: gitInfo.name,
+          branch: process.env.GATSBY_SOURCE_BRANCH,
+        },
+      },
     },
     {
       resolve: `@adobe/parliament-source-changelog`,

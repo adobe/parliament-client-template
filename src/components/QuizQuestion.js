@@ -9,7 +9,7 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
-import { React, useState } from "react"
+import { React, useState, Children } from "react"
 import { Checkbox, CheckboxGroup } from "@adobe/react-spectrum"
 
 const getCorrectAnswer = (choice) =>
@@ -50,12 +50,19 @@ const QuizChoice = ({ choice, value, selected }) => {
   }
 }
 
+// https://stackoverflow.com/a/56749849/158584
+// TODO: move into utils or something?
+const shuffle = arr =>
+  [...arr].reduceRight((res,_,__,s) =>
+    (res.push(s.splice(0|Math.random()*s.length,1)[0]), res),[]);
+
 const QuizQuestion = ({ children, ...props }) => {
   let [selected, setSelected] = useState([])
+  const shuffledChoices = shuffle(Children.toArray(children))
 
   return (
     <CheckboxGroup aria-label="Question" onChange={setSelected}>
-      {children.map((choice, index) => (
+      {shuffledChoices.map((choice, index) => (
         <QuizChoice value={index} choice={choice} selected={selected} />
       ))}
     </CheckboxGroup>

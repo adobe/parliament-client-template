@@ -14,9 +14,9 @@
 import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
-import PageActions from "../components/PageActions"
+import QuizQuestion from "../components/QuizQuestion"
+import RenderMdx from "../components/RenderMdx"
 import SiteMenu from "../components/SiteMenu"
-import RenderQuizMdx from "../components/RenderQuizMdx"
 
 import { Flex, View } from "@adobe/react-spectrum"
 import {
@@ -30,7 +30,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
   const { absolutePath, childMdx } = file
-  const { body, frontmatter, tableOfContents, timeToRead } = childMdx
+  const { body } = childMdx
   const { contributors, gitRemote } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
@@ -59,12 +59,6 @@ const QuizTemplate = ({ data, location, pageContext }) => {
             height: 100%;
           `}
         >
-          <PageActions
-            gitRemote={gitRemote}
-            relativePath={relativePath}
-            tableOfContents={tableOfContents}
-            timeToRead={timeToRead}
-          />
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
@@ -88,8 +82,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           ""
         )}
       </div>
-
-      <RenderQuizMdx children={body} />
+      <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
 
       <Flex
         direction="column"
@@ -124,14 +117,6 @@ export const query = graphql`
       absolutePath
       childMdx {
         body
-        tableOfContents(maxDepth: 3)
-        timeToRead
-        frontmatter {
-          answers {
-            value
-            correct
-          }
-        }
       }
     }
     parliamentNavigation {

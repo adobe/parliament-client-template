@@ -10,11 +10,6 @@
  *  governing permissions and limitations under the License.
  */
 import { React, useState } from "react"
-
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import { MDXProvider } from "@mdx-js/react"
-import { componentsMapping } from "./componentsMapping"
-
 import { Checkbox, CheckboxGroup } from "@adobe/react-spectrum"
 
 const getCorrectAnswer = (choice) =>
@@ -67,12 +62,4 @@ const QuizQuestion = ({ children, ...props }) => {
   )
 }
 
-const RenderQuizMdx = ({ children }) => {
-  return (
-    <MDXProvider components={{ ...componentsMapping, ul: QuizQuestion }}>
-      <MDXRenderer>{children}</MDXRenderer>
-    </MDXProvider>
-  )
-}
-
-export default RenderQuizMdx
+export default QuizQuestion

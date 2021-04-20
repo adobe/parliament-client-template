@@ -3852,10 +3852,10 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/popover/-/popover-3.0.1.tgz#5863c1efc53f98f9aba2de9186666780041303fc"
   integrity sha512-LmOSj/yCwQQ9iGmCYnHiJsJR/HfPiGqI1Jl7pkKxBOCxYBMS/5+ans9vfCN2Qnd0eK7WSbfPg72S6mjye7db2Q==
 
-"@spectrum-css/search@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@spectrum-css/search/-/search-3.0.1.tgz#7c22821f29dd40dc1ce59fa88af47976cced47bc"
-  integrity sha512-u2tJhaKvc6tZ2eg/SzzA5OpzHWT+q3Xi+wnqaAx9KSoxwuWBweyz8jKkYCMvXsWyMOC5hQGTbNDJ4ttc8myVMQ==
+"@spectrum-css/search@^3.0.1", "@spectrum-css/search@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/search/-/search-3.0.2.tgz#70e93e321032d40b399498b2324e3b70e050551e"
+  integrity sha512-3UbT8yZmNOwrZxq+CUmumE+26ZySZ8OoKNM6U20SLMPLgdx6MrRugVE88r3Bl0sJ0RZX/5bU8nausdiHeX+Jlw==
 
 "@spectrum-css/sidenav@^3.0.1":
   version "3.0.1"

@@ -20,7 +20,7 @@ import { Nav, Search } from "@adobe/parliament-ui-components"
 
 import "./sitenav.css"
 
-const SiteMenu = ({ gitRemote, currentPage, pages }) => {
+const SiteMenu = ({ gitRemote, currentPage, pages, CustomNavComponent }) => {
   const { ParliamentSearchIndex } = useStaticQuery(
     graphql`
       query {
@@ -35,6 +35,8 @@ const SiteMenu = ({ gitRemote, currentPage, pages }) => {
     name: gitRemote.name,
     branch: gitRemote.ref,
   }
+
+  const LeftNavComponent = CustomNavComponent ? CustomNavComponent : Nav
 
   return (
     <div
@@ -77,7 +79,7 @@ const SiteMenu = ({ gitRemote, currentPage, pages }) => {
           overflow-x: hidden;
         `}
       >
-        <Nav data={pages} selected={currentPage} gitInfo={gitInfo} />
+      <LeftNavComponent data={pages} selected={currentPage} gitInfo={gitInfo} />
       </div>
     </div>
   )

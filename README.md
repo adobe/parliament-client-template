@@ -31,14 +31,21 @@
    ```
    GATSBY_SITE_PATH_PREFIX =
    GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
+
    # Repo URL in given format which you want to use to generate a microsite
+   # NOTE: for Enterprise instances, this MUST be the FULL HTTPS URL
+   #       This repository must contain a manifest*.* file for Parliament to read.
+   #       (preferably in a .yaml format)
    GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git
    GATSBY_SOURCE_BRANCH=master
+
    # Strings starting with a "!" are considered ignore patterns. For example !CONTRIBUTING.md will tell the system to skip CONTRIBUTING.md
    GATSBY_SOURCE_PATTERNS=**/*,!CONTRIBUTING.md
    GATSBY_SOURCE_TITLE=My Docs Site
+
    # Url for your analytics script
    GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js
+   # NOTE: this is an absolute path to a local copy of $GATSBY_SOURCE
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
    ```

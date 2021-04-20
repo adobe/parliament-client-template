@@ -17,3 +17,42 @@
  */
 
 // You can delete this file if you're not using it
+import React from "react"
+
+function setColorsByTheme() {
+  const colorModeKey = "theme"
+  const colorModeCssProp = "--initial-theme"
+
+  const mql = window.matchMedia("(prefers-color-scheme: dark)")
+  const prefersDarkFromMQ = mql.matches
+  const persistedPreference = localStorage.getItem(colorModeKey)
+
+  let colorMode = "light"
+
+  const hasUsedToggle = typeof persistedPreference === "string"
+
+  if (hasUsedToggle) {
+    colorMode = persistedPreference
+  } else {
+    colorMode = prefersDarkFromMQ ? "dark" : "light"
+  }
+
+  let root = document.documentElement
+
+  root.style.setProperty(colorModeCssProp, colorMode)
+}
+
+const MagicScriptTag = () => {
+  const boundFn = String(setColorsByTheme)
+
+  let calledFunction = `(${boundFn})()`
+
+  // eslint-disable-next-line react/no-danger
+  return (
+    <script key="magic" dangerouslySetInnerHTML={{ __html: calledFunction }} />
+  )
+}
+
+export const onRenderBody = ({ setPreBodyComponents }) => {
+  setPreBodyComponents(<MagicScriptTag />)
+}

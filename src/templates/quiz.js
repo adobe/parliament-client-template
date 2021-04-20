@@ -59,6 +59,12 @@ const QuizTemplate = ({ data, location, pageContext }) => {
             height: 100%;
           `}
         >
+          <Link href="https://jira.corp.adobe.com/projects/EON/issues">
+            Something off with this quiz? File an EON.
+          </Link>
+
+          <hr />
+
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
@@ -72,15 +78,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           z-index: 100;
         `}
       >
-        {gitRemote !== null ? (
-          <ActionButtons
-            gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-            filePath={relativePath}
-            branch={gitRemote.ref}
-          />
-        ) : (
-          ""
-        )}
+
       </div>
       <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
 

@@ -7,6 +7,7 @@ author: ""
 tags: ""
 description: ""
 slug: ""
+courseVersion: ""
 ---
 
 # Don't Delete:

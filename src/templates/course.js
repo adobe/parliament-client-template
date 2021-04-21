@@ -29,15 +29,20 @@ import {
   Link,
 } from "@adobe/parliament-ui-components"
 
-const findSelectedPageNextPrev = (pathname, pages) => {
+const pageInSameDir = (page, dir) => (page && page.path.indexOf(dir) !== -1)
+
+const findSelectedPageNextPrev = (pathname, pages, cwd) => {
   const flat = flattenPages(pages)
   const selectedPage = flat.find((page) => {
     return withPrefix(page.path) === pathname
   })
 
+  const previous = flat[flat.indexOf(selectedPage) - 1]
+  const next = flat[flat.indexOf(selectedPage) + 1]
+
   return {
-    nextPage: flat[flat.indexOf(selectedPage) + 1],
-    previousPage: flat[flat.indexOf(selectedPage) - 1],
+    nextPage: pageInSameDir(next, cwd) ? next : null,
+    previousPage: pageInSameDir(previous, cwd) ? previous: null,
   }
 }
 
@@ -69,18 +74,21 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   const { sourceFiles } = siteMetadata
   const { absolutePath, childMdx } = file
   const { body, tableOfContents, timeToRead, frontmatter } = childMdx
-  const { contributors, gitRemote, dirname } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
 
-  const { nextPage, previousPage } = findSelectedPageNextPrev(
-    location.pathname,
-    parliamentNavigation.pages
-  )
+
+  // TODO: refactor dirname out of gatsby-node
   // dirname should be in the form /path/to/course/dir
   // which is just the dir of the slug for the path passed in
+  const { contributors, gitRemote, dirname } = pageContext
+  const { nextPage, previousPage } = findSelectedPageNextPrev(
+    location.pathname,
+    parliamentNavigation.pages,
+    dirname
+  )
   const { courseVersion } = frontmatter
   let courseModuleVersion = courseVersion ? courseVersion : `latest`
 

@@ -17,6 +17,7 @@ import { graphql, withPrefix } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import DocLayout from "../components/doclayout"
 import PageActions from "../components/PageActions"
+import ProgressBar from "../components/ProgressBar"
 import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
 import NextPrev from "../components/NextPrev"
@@ -30,6 +31,10 @@ import {
 } from "@adobe/parliament-ui-components"
 
 const pageInSameDir = (page, dir) => (page && page.path.indexOf(dir) !== -1)
+// TODO: efficiency 🥴
+const courseModulePages = (pages, course) => (flattenPages(pages).filter((page) => pageInSameDir(page, course)))
+const pageTitles = (pages) => pages.map((p) => p.title)
+const courseModuleIx = (pages, modulePath) => pages.map(p => p.path).indexOf(modulePath)
 
 const findSelectedPageNextPrev = (pathname, pages, cwd) => {
   const flat = flattenPages(pages)
@@ -120,6 +125,8 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     setVisited(true)
   }
 
+  const coursePages = courseModulePages(parliamentNavigation.pages, dirname)
+
   return (
     <DocLayout
       title={pageContext.seo}
@@ -149,6 +156,13 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
           />
+
+          <hr />
+
+          <ProgressBar
+            sections={pageTitles(coursePages)}
+            currentIx={courseModuleIx(coursePages, location.pathname)} />
+
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
@@ -180,7 +194,6 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           )}
         </Flex>
       </div>
-
       <RenderMdx>{body}</RenderMdx>
 
       <Flex

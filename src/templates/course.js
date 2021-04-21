@@ -11,7 +11,7 @@
  */
 
 /** @jsx jsx */
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
 import { graphql, withPrefix } from "gatsby"
 import CourseNav from "../components/CourseNav"
@@ -63,23 +63,6 @@ const flattenPages = (pages) => {
   )
 }
 
-const useLocalStorage = (dir, key, initialValue) => {
-  const [visited, flipVisited] = useState(() => {
-    let item = window.localStorage.getItem(dir)
-    item = item ? JSON.parse(item) : {}
-    return item[key] ? item[key] : initialValue
-  });
-
-  const markVisited = () => {
-    flipVisited(true);
-    let storedState = window.localStorage.getItem(dir)
-    storedState = storedState ? JSON.parse(storedState) : {}
-    storedState[key] = true
-    window.localStorage.setItem(dir, JSON.stringify(storedState));
-  };
-  return [visited, markVisited];
-}
-
 const CoursesTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
   const { siteMetadata } = site
@@ -100,9 +83,31 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   // which is just the dir of the slug for the path passed in
   const { courseVersion } = frontmatter
   let courseModuleVersion = courseVersion ? courseVersion : `latest`
-  const [visited, markVisited] = useLocalStorage(
-    dirname, `${courseModuleVersion}${location.pathname}`, false
-  )
+
+  const [visited, setVisited] = useState()
+  const key = `${courseModuleVersion}${location.pathname}`
+
+  // waits until after first render when window is available
+  useEffect(() => {
+    console.log("called to set initial value")
+    let item = window.localStorage.getItem(dirname)
+    item = item ? JSON.parse(item) : {}
+    setVisited(item[key] ? item[key] : false)
+  }, [dirname, key])
+
+  // called whenever visited is changed
+  useEffect(() => {
+    if (visited) {
+      let storedState = window.localStorage.getItem(dirname)
+      storedState = storedState ? JSON.parse(storedState) : {}
+      storedState[key] = true
+      window.localStorage.setItem(dirname, JSON.stringify(storedState))
+    }
+  }, [dirname, key, visited])
+
+  const markVisited = () => {
+    setVisited(true)
+  }
 
   return (
     <DocLayout
@@ -147,11 +152,11 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
         `}
       >
         <Flex alignItems="center">
-          { visited &&
+          {visited && (
             <Flex alignItems="center">
-              <Checkmark />{" "}You have already read this module!
+              <Checkmark /> You have already read this module!
             </Flex>
-          }
+          )}
 
           {gitRemote !== null ? (
             <ActionButtons
@@ -175,7 +180,11 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
         marginBottom="size-400"
       >
         <View>
-          <NextPrev markProgression={markVisited} nextPage={nextPage} previousPage={previousPage} />
+          <NextPrev
+            markProgression={markVisited}
+            nextPage={nextPage}
+            previousPage={previousPage}
+          />
         </View>
         <View>
           <Contributors

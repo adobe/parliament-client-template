@@ -13,6 +13,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
+import CourseNav from "../components/CourseNav"
 import DocLayout from "../components/doclayout"
 import QuizQuestion from "../components/QuizQuestion"
 import RenderMdx from "../components/RenderMdx"
@@ -49,6 +50,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           currentPage={location.pathname}
           gitRemote={gitRemote}
           pages={parliamentNavigation.pages}
+          CustomNavComponent={CourseNav}
         />
       }
       rightRail={

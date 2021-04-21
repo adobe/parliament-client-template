@@ -79,7 +79,6 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
 
-
   // TODO: refactor dirname out of gatsby-node
   // dirname should be in the form /path/to/course/dir
   // which is just the dir of the slug for the path passed in
@@ -91,27 +90,31 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   )
   const { courseVersion } = frontmatter
   let courseModuleVersion = courseVersion ? courseVersion : `latest`
-
-  const [visited, setVisited] = useState()
-  const key = `${courseModuleVersion}${location.pathname}`
+  let moduleInitState = {}
+  moduleInitState[courseModuleVersion] = false
+  moduleInitState.latest = false
+  const [visited, setVisited] = useState(false)
 
   // waits until after first render when window is available
   useEffect(() => {
-    console.log("called to set initial value")
-    let item = window.localStorage.getItem(dirname)
-    item = item ? JSON.parse(item) : {}
-    setVisited(item[key] ? item[key] : false)
-  }, [dirname, key])
+    let courseMeta = window.localStorage.getItem(dirname)
+    courseMeta = courseMeta ? JSON.parse(courseMeta) : {}
+    let moduleMeta = courseMeta[location.pathname] ? courseMeta[location.pathname] : {}
+    setVisited(moduleMeta[courseModuleVersion] || false)
+  }, [dirname, location.pathname, courseModuleVersion])
 
   // called whenever visited is changed
   useEffect(() => {
-    if (visited) {
-      let storedState = window.localStorage.getItem(dirname)
-      storedState = storedState ? JSON.parse(storedState) : {}
-      storedState[key] = true
-      window.localStorage.setItem(dirname, JSON.stringify(storedState))
+    if (!visited) { return }
+
+    let storedState = window.localStorage.getItem(dirname)
+    storedState = storedState ? JSON.parse(storedState) : {}
+    if (!storedState[location.pathname]) {
+      storedState[location.pathname] = {}
     }
-  }, [dirname, key, visited])
+    storedState[location.pathname][courseModuleVersion] = true
+    window.localStorage.setItem(dirname, JSON.stringify(storedState))
+  }, [dirname, location.pathname, courseModuleVersion, visited])
 
   const markVisited = () => {
     setVisited(true)

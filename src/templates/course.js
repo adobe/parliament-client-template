@@ -43,10 +43,13 @@ const findSelectedPageNextPrev = (pathname, pages, cwd) => {
   })
 
   const previous = flat[flat.indexOf(selectedPage) - 1]
-  const next = flat[flat.indexOf(selectedPage) + 1]
+  let next = flat[flat.indexOf(selectedPage) + 1]
+  if (!next) {
+    next = { path: pages[pages.length - 1].path, title: "Complete Course" }
+  }
 
   return {
-    nextPage: pageInSameDir(next, cwd) ? next : null,
+    nextPage: next,
     previousPage: pageInSameDir(previous, cwd) ? previous: null,
   }
 }

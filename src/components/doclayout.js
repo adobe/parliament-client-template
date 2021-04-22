@@ -43,7 +43,7 @@ const DocLayout = ({
   sideNav,
   rightRail,
 }) => {
-  const { allSiteTabs, allHeaderTabs } = useStaticQuery(
+  const { allSiteTabs, allHeaderTabs, parliamentNavigation } = useStaticQuery(
     graphql`
       query {
         allHeaderTabs {
@@ -64,13 +64,18 @@ const DocLayout = ({
             }
           }
         }
+        parliamentNavigation {
+          tabs
+        }
       }
     `
   )
 
+  
   const tabs = [
     ...allSiteTabs.edges.map(({ node }) => node),
     ...allHeaderTabs.edges.map(({ node }) => node),
+    ...parliamentNavigation.tabs,
   ]
 
   return (

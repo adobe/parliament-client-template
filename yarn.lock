@@ -77,10 +77,10 @@
   dependencies:
     glob "^7.1.6"
 
-"@adobe/parliament-transformer-navigation@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.0.5.tgz#17ce68a777becec2ebc1eb1608cd5edfec694040"
-  integrity sha512-yMHbzSXmH/EeLN2NiNZ8XhGQltnC7CdC1z6kO120ij1AykR6ypBV1R3mkUJanuEyiE2AHilcVMJVExZJbBMTqA==
+"@adobe/parliament-transformer-navigation@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.1.0.tgz#60fdde0e968f80ca2976bc71d4eb42709f6bfa1a"
+  integrity sha512-Uk1tfb02ezoEXV1uM7AcGfmII0eDxHRl6xDUYNmjSBTczprXlZy8vWDs64G3xEnec7aElLlIk+PJe9xWmHtqWA==
   dependencies:
     yaml "^1.10.0"
 

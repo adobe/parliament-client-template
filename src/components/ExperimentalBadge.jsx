@@ -10,14 +10,18 @@
  *  governing permissions and limitations under the License.
  */
 
-import { React, Fragment } from "react"
-import { Badge } from "rsuite"
+import { React } from "react"
+import "@spectrum-css/label"
 
 const ExperimentalBadge = ({ inline }) => (
-  <Fragment>
-    <Badge content={"EXPERIMENTAL"} />
-    { !inline && <br /> }
-  </Fragment>
+  <span
+    className="spectrum-Label spectrum-Label--red"
+    style={{
+      display: inline ? "inline" : "table",
+    }}
+  >
+    EXPERIMENTAL
+  </span>
 )
 
 export default ExperimentalBadge

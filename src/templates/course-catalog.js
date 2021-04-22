@@ -16,6 +16,7 @@ import { css, jsx } from "@emotion/react"
 import { graphql, navigate } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import DocLayout from "../components/doclayout"
+import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
@@ -211,6 +212,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
         </Flex>
       </div>
 
+      <ExperimentalBadge />
       <RenderMdx>{body}</RenderMdx>
 
       <br />

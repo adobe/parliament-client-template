@@ -16,6 +16,7 @@ import { css, jsx } from "@emotion/react"
 import { graphql, withPrefix } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import DocLayout from "../components/doclayout"
+import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
 import ProgressBar from "../components/ProgressBar"
 import SiteMenu from "../components/SiteMenu"
@@ -197,6 +198,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           )}
         </Flex>
       </div>
+      <ExperimentalBadge />
       <RenderMdx>{body}</RenderMdx>
 
       <Flex

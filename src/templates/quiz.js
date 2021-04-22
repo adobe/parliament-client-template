@@ -15,6 +15,7 @@ import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import DocLayout from "../components/doclayout"
+import ExperimentalBadge from "../components/ExperimentalBadge"
 import QuizQuestion from "../components/QuizQuestion"
 import RenderMdx from "../components/RenderMdx"
 import SiteMenu from "../components/SiteMenu"
@@ -80,8 +81,9 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           z-index: 100;
         `}
       >
-
       </div>
+
+      <ExperimentalBadge />
       <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
 
       <Flex

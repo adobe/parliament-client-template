@@ -92,17 +92,28 @@ const shuffle = arr =>
     (res.push(s.splice(0|Math.random()*s.length,1)[0]), res),[]);
 
 const QuizQuestion = ({ children, ...props }) => {
-  let [selected, setSelected] = useState([])
+  const { selected, setSelected } = props
   const [shuffledChoices] = useState(shuffle(Children.toArray(children)))
+  const correctChoiceSelections = correctChoices(shuffledChoices)
+
+  const _quizCb = (selectedAnswers) => {
+    const answered = questionDisabled(selectedAnswers, correctChoiceSelections)
+
+    setSelected({
+      selected: selectedAnswers,
+      correct: questionAnsweredCorrectly(selectedAnswers, correctChoiceSelections),
+      answered: answered
+    })
+  }
 
   return (
-    <CheckboxGroup aria-label="Question" onChange={setSelected}>
+    <CheckboxGroup aria-label="Question" onChange={_quizCb}>
       {shuffledChoices.map((choice, index) => (
         <QuizChoice
           value={index}
           choice={choice}
           selected={selected}
-          correct={correctChoices(shuffledChoices)} />
+          correct={correctChoiceSelections} />
       ))}
     </CheckboxGroup>
   )

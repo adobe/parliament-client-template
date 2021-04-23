@@ -32,37 +32,37 @@ const getOptionText = (choice) =>
     .join(" ")
     .trim()
 
-const QuizChoice = ({ choice, value, selected, correctChoices }) => {
+const questionAnsweredCorrectly = (selected, correct) =>
+  (correct.every((ix) => selected.includes(ix)))
+
+const questionDisabled = (selected, correct) => {
+  if (selected.length <= 0) { return false }
+
+  if (correct.length === 1) {
+    return true
+  }
+
+  // multiple choice answer
+  // any of the selected choices are wrong
+  if (selected.some((ix) => correct.indexOf(ix) === -1)) {
+    return true
+  }
+  else {
+    if (selected.length >= correct.length) {
+      return questionAnsweredCorrectly(selected, correct)
+    }
+  }
+
+  return false
+}
+
+const QuizChoice = ({ choice, value, selected, correct }) => {
   if (choice.props.originalType !== "li") {
     return null
   }
 
   const validSelection = answerIsCorrect(choice)
   const text = getOptionText(choice)
-  let questionDisabled = false
-
-  if (selected.length > 0) {
-    if (correctChoices.length === 1) {
-      questionDisabled = true
-    }
-    else {
-      // multiple choice answer
-
-      // any of the selected choices are wrong
-      if (selected.some((ix) => correctChoices.indexOf(ix) === -1)) {
-        questionDisabled = true
-      }
-      else {
-        if (selected.length >= correctChoices) {
-          const multipleChoiceCorrect = selected.all((ix) => correctChoices.includes(ix))
-          questionDisabled = multipleChoiceCorrect
-        }
-        else {
-          // not finished selecting all correct answers for multiple choice question
-        }
-      }
-    }
-  }
 
   // If the user has selected a value then we need to see if they got the correct answer
   if (selected.includes(value)) {
@@ -78,7 +78,7 @@ const QuizChoice = ({ choice, value, selected, correctChoices }) => {
     )
   } else {
     return (
-      <Checkbox isDisabled={questionDisabled} value={value}>
+      <Checkbox isDisabled={questionDisabled(selected, correct)} value={value}>
         {text}
       </Checkbox>
     )
@@ -102,7 +102,7 @@ const QuizQuestion = ({ children, ...props }) => {
           value={index}
           choice={choice}
           selected={selected}
-          correctChoices={correctChoices(shuffledChoices)} />
+          correct={correctChoices(shuffledChoices)} />
       ))}
     </CheckboxGroup>
   )

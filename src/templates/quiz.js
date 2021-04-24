@@ -13,62 +13,32 @@
 /** @jsx jsx */
 import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
-import { graphql, navigate  } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import CourseNav from "../components/CourseNav"
-import DocLayout from "../components/doclayout"
+import QuizLayout from "../components/quizlayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
 import QuizQuestion from "../components/QuizQuestion"
 import RenderMdx from "../components/RenderMdx"
 import SiteMenu from "../components/SiteMenu"
+import QuizQuestionComp from "../components/QuizQuestionComp"
+import QuizMeter from "../components/QuizMeter"
 
-import { AlertDialog, DialogTrigger, Flex, Meter, View } from "@adobe/react-spectrum"
-import {
-  Contributors,
-  Link,
-} from "@adobe/parliament-ui-components"
+import { AlertDialog, DialogTrigger, Flex, View } from "@adobe/react-spectrum"
+import { Contributors, Link } from "@adobe/parliament-ui-components"
 
 const QuizTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
-  const { pages } = parliamentNavigation
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
   const { absolutePath, childMdx } = file
-  const { body, headings, tableOfContents, timeToRead, frontmatter } = childMdx
-  const { contributors, gitRemote, dirname } = pageContext
+  const { body } = childMdx
+  const { contributors, gitRemote } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
-
-  let [questionStates, recordAnswers] = useState({ progress: 0, score: 0 })
-  const calcProgress = () => {
-    const answered = Object.entries(questionStates).filter(o => o.pop().answered).length
-    const total = Object.keys(questionStates).length - 2
-    const correct = Object.entries(questionStates).filter(o => o.pop().correct).length
-
-    questionStates.progress = answered / total * 100
-    questionStates.score = correct / total * 100
-  }
-
-  const QuizQuestionComp = ({ children, ...props }) => {
-    let [state, setSelected] = useState({ selected: [], correct: null, answered: false })
-    const questionProps = {
-      children,
-      selected: state.selected,
-      setSelected: setSelected,
-      ...props
-    }
-
-    // UHHHHH.....
-    questionStates[children.map((c) => c.props.children.toString()).join('')] = state
-    calcProgress()
-    recordAnswers(questionStates)
-
-    return QuizQuestion(questionProps) 
-  }
-
   return (
-    <DocLayout
+    <QuizLayout
       title={pageContext.seo}
       location={location}
       gitRemote={gitRemote}
@@ -87,19 +57,15 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           css={css`
             position: fixed;
             top: var(--spectrum-global-dimension-size-800);
-              height: 100%;
+            height: 100%;
           `}
         >
-
-          <Meter marginTop={8} marginBottom={16} label="Progress" value={questionStates.progress} />
-          <br/>
-
+          <QuizMeter />
+          <br />
           <Link href="https://jira.corp.adobe.com/projects/EON/issues">
             Something off with this quiz? File an EON.
           </Link>
-
           <hr />
-
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
@@ -112,13 +78,10 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           float: right;
           z-index: 100;
         `}
-      >
-      </div>
+      ></div>
 
       <ExperimentalBadge />
-      <RenderMdx overrides={ {ul: QuizQuestionComp} }>
-        {body}
-      </RenderMdx>
+      <RenderMdx overrides={{ ul: QuizQuestionComp }}>{body}</RenderMdx>
 
       <Flex
         direction="column"
@@ -139,7 +102,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           />
         </View>
       </Flex>
-    </DocLayout>
+    </QuizLayout>
   )
 }
 
@@ -153,8 +116,12 @@ export const query = graphql`
       absolutePath
       childMdx {
         body
-        headings { value }
-        frontmatter { courseVersion }
+        headings {
+          value
+        }
+        frontmatter {
+          courseVersion
+        }
       }
     }
     parliamentNavigation {

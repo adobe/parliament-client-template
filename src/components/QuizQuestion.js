@@ -9,8 +9,9 @@
  *  OF ANY KIND, either express or implied. See the License for the specific language
  *  governing permissions and limitations under the License.
  */
-import { React, useState, Children } from "react"
+import { React, useState, useEffect, Children } from "react"
 import { Checkbox, CheckboxGroup } from "@adobe/react-spectrum"
+import { useQuiz } from "./QuizContext"
 
 const answerIsCorrect = (choice) => {
   const checkBoxes = choice.props.children.filter(
@@ -24,7 +25,9 @@ const answerIsCorrect = (choice) => {
 }
 
 const correctChoices = (choices) =>
-  choices.map((choice, ix) => answerIsCorrect(choice) ? ix : null).filter((ix) => ix !== null)
+  choices
+    .map((choice, ix) => (answerIsCorrect(choice) ? ix : null))
+    .filter((ix) => ix !== null)
 
 const getOptionText = (choice) =>
   choice.props.children
@@ -32,11 +35,13 @@ const getOptionText = (choice) =>
     .join(" ")
     .trim()
 
-const questionAnsweredCorrectly = (selected, correct) =>
-  (correct.every((ix) => selected.includes(ix)))
+const questionAnsweredCorrectly = (selected = [], correct) =>
+  correct.every((ix) => selected.includes(ix))
 
-const questionDisabled = (selected, correct) => {
-  if (selected.length <= 0) { return false }
+const questionDisabled = (selected = [], correct) => {
+  if (selected.length <= 0) {
+    return false
+  }
 
   if (correct.length === 1) {
     return true
@@ -46,8 +51,7 @@ const questionDisabled = (selected, correct) => {
   // any of the selected choices are wrong
   if (selected.some((ix) => correct.indexOf(ix) === -1)) {
     return true
-  }
-  else {
+  } else {
     if (selected.length >= correct.length) {
       return questionAnsweredCorrectly(selected, correct)
     }
@@ -56,7 +60,7 @@ const questionDisabled = (selected, correct) => {
   return false
 }
 
-const QuizChoice = ({ choice, value, selected, correct }) => {
+const QuizChoice = ({ choice, value, selected = [], correct }) => {
   if (choice.props.originalType !== "li") {
     return null
   }
@@ -87,34 +91,54 @@ const QuizChoice = ({ choice, value, selected, correct }) => {
 
 // https://stackoverflow.com/a/56749849/158584
 // TODO: move into utils or something?
-const shuffle = arr =>
-  [...arr].reduceRight((res,_,__,s) =>
-    (res.push(s.splice(0|Math.random()*s.length,1)[0]), res),[]);
+const shuffle = (arr) =>
+  [...arr].reduceRight(
+    (res, _, __, s) => (
+      res.push(s.splice(0 | (Math.random() * s.length), 1)[0]), res
+    ),
+    []
+  )
 
 const QuizQuestion = ({ children, ...props }) => {
-  const { selected, setSelected } = props
+  const [quiz, updateQuiz] = useQuiz()
+  const [id] = useState(`id_${Math.random()}`)
   const [shuffledChoices] = useState(shuffle(Children.toArray(children)))
   const correctChoiceSelections = correctChoices(shuffledChoices)
 
-  const _quizCb = (selectedAnswers) => {
-    const answered = questionDisabled(selectedAnswers, correctChoiceSelections)
+  useEffect(() => {
+    updateQuiz({
+      type: "newQuestion",
+      id: id,
+    })
+  }, [])
 
-    setSelected({
-      selected: selectedAnswers,
-      correct: questionAnsweredCorrectly(selectedAnswers, correctChoiceSelections),
-      answered: answered
+  const _quizCb = (selectedAnswers) => {
+    updateQuiz({
+      type: "questionAnswered",
+      id: id,
+      question: {
+        selected: selectedAnswers,
+        correct: questionAnsweredCorrectly(
+          selectedAnswers,
+          correctChoiceSelections
+        ),
+        answered: questionDisabled(selectedAnswers, correctChoiceSelections),
+      },
     })
   }
 
   return (
     <CheckboxGroup aria-label="Question" onChange={_quizCb}>
-      {shuffledChoices.map((choice, index) => (
-        <QuizChoice
-          value={index}
-          choice={choice}
-          selected={selected}
-          correct={correctChoiceSelections} />
-      ))}
+      {shuffledChoices.map((choice, index) => {
+        return (
+          <QuizChoice
+            value={index}
+            choice={choice}
+            selected={quiz?.questions[id]?.selected}
+            correct={correctChoiceSelections}
+          />
+        )
+      })}
     </CheckboxGroup>
   )
 }

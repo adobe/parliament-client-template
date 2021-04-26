@@ -11,30 +11,118 @@
  */
 
 /** @jsx jsx */
+import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
-import { graphql, navigate } from "gatsby"
+import { graphql, navigate, withPrefix } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import QuizLayout from "../components/quizlayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
+import QuizNextPrev from "../components/QuizNextPrev"
 import QuizQuestion from "../components/QuizQuestion"
 import RenderMdx from "../components/RenderMdx"
 import SiteMenu from "../components/SiteMenu"
 import QuizMeter from "../components/QuizMeter"
+import QuizResults from "../components/QuizResults"
+import { useQuizState } from "../components/QuizContext"
 
-import { AlertDialog, DialogTrigger, Flex, View } from "@adobe/react-spectrum"
+import { Flex, View } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
+
+const pageInSameDir = (page, dir) => (page && page.path.indexOf(dir) !== -1)
+// TODO: efficiency 🥴
+const courseModulePages = (pages, course) => (flattenPages(pages).filter((page) => pageInSameDir(page, course)))
+const pageTitles = (pages) => pages.map((p) => p.title)
+const courseModuleIx = (pages, modulePath) => pages.map(p => p.path).indexOf(modulePath)
+
+const findSelectedPageNextPrev = (pathname, pages, cwd) => {
+  const flat = flattenPages(pages)
+  const selectedPage = flat.find((page) => {
+    return withPrefix(page.path) === pathname
+  })
+
+  const previous = flat[flat.indexOf(selectedPage) - 1]
+  let next = flat[flat.indexOf(selectedPage) + 1]
+  if (!next) {
+    next = { path: pages[pages.length - 1].path, title: "Complete Course" }
+  }
+
+  return {
+    nextPage: next,
+    previousPage: pageInSameDir(previous, cwd) ? previous: null,
+  }
+}
+
+const flattenPages = (pages) => {
+  if (pages === null) {
+    return []
+  }
+
+  let flat = []
+  const find = (page) => {
+    flat.push(page)
+
+    if (page.pages) {
+      page.pages.forEach(find)
+    }
+  }
+
+  pages.forEach(find)
+
+  flat = flat.flat()
+  return flat.filter(
+    (page, index) => page.path && page.path !== flat[index + 1]?.path
+  )
+}
 
 const QuizTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
   const { absolutePath, childMdx } = file
-  const { body } = childMdx
-  const { contributors, gitRemote } = pageContext
+  const { body, frontmatter } = childMdx
+  const { contributors, gitRemote, dirname } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
+  const { nextPage, previousPage } = findSelectedPageNextPrev(
+    location.pathname,
+    parliamentNavigation.pages,
+    dirname
+  )
+
+  const { courseVersion } = frontmatter
+  let courseModuleVersion = courseVersion ? courseVersion : `latest`
+  let moduleInitState = {}
+  moduleInitState[courseModuleVersion] = false
+  moduleInitState.latest = false
+  const [visited, setVisited] = useState(false)
+
+  // waits until after first render when window is available
+  useEffect(() => {
+    let courseMeta = window.localStorage.getItem(dirname)
+    courseMeta = courseMeta ? JSON.parse(courseMeta) : {}
+    let moduleMeta = courseMeta[location.pathname] ? courseMeta[location.pathname] : {}
+    setVisited(moduleMeta[courseModuleVersion] || false)
+  }, [dirname, location.pathname, courseModuleVersion])
+
+  // called whenever visited is changed
+  useEffect(() => {
+    if (!visited) { return }
+
+    let storedState = window.localStorage.getItem(dirname)
+    storedState = storedState ? JSON.parse(storedState) : {}
+    if (!storedState[location.pathname]) {
+      storedState[location.pathname] = {}
+    }
+    storedState[location.pathname][courseModuleVersion] = true
+    window.localStorage.setItem(dirname, JSON.stringify(storedState))
+  }, [dirname, location.pathname, courseModuleVersion, visited])
+
+  const markVisited = () => {
+    setVisited(true)
+  }
+
   return (
     <QuizLayout
       title={pageContext.seo}
@@ -61,7 +149,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           <QuizMeter />
           <br />
           <Link href="https://jira.corp.adobe.com/projects/EON/issues">
-            Something off with this quiz? File an EON.
+            Something wrong with this quiz? File an EON.
           </Link>
           <hr />
           Powered by{" "}
@@ -79,6 +167,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       ></div>
 
       <ExperimentalBadge />
+      <QuizResults />
       <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
 
       <Flex
@@ -89,6 +178,12 @@ const QuizTemplate = ({ data, location, pageContext }) => {
         marginBottom="size-400"
       >
         <View>
+          <QuizNextPrev
+            markProgression={markVisited}
+            nextPage={nextPage}
+            previousPage={previousPage}
+          />
+
           <Contributors
             href={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}/blob/${gitRemote.ref}/${relativePath}`}
             contributors={contributors}

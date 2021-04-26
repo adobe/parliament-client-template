@@ -11,7 +11,6 @@
  */
 
 /** @jsx jsx */
-import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
 import { graphql, navigate } from "gatsby"
 import CourseNav from "../components/CourseNav"

@@ -10,8 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-/** @jsx jsx */
-import { jsx } from "@emotion/react"
+import React from "react"
 import { Meter } from "@adobe/react-spectrum"
 import { useQuizState } from "./QuizContext"
 

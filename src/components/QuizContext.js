@@ -15,7 +15,6 @@ const QuizStateContext = React.createContext()
 const QuizDispatchContext = React.createContext()
 
 const ACTION_TYPES = {
-  INIT: "init",
   UPDATE_PROGRESS: "updateProgress",
   NEW_QUESTION: "newQuestion",
   QUESTION_ANSWERED: "questionAnswered",
@@ -32,19 +31,10 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ACTION_TYPES.INIT: {
-      console.log(action)
-      const { body, bodyType, headers, query } = action
-      return { ...state, body, bodyType, headers, query }
-    }
     case ACTION_TYPES.UPDATE_PROGRESS: {
-      console.log({ ...state, progress: action.progress })
       return { ...state, progress: action.progress }
     }
     case ACTION_TYPES.NEW_QUESTION: {
-      console.log("newQuestion")
-      console.log(action)
-
       const newState = { ...state }
       newState.totalQuestions++
       newState.questions[action.id] = {
@@ -55,8 +45,6 @@ const reducer = (state, action) => {
       return { ...newState }
     }
     case ACTION_TYPES.QUESTION_ANSWERED: {
-      console.log("QUESTION_ANSWERED")
-      console.log(action)
       const newState = { ...state }
       if (action.question.answered) {
         newState.answered++
@@ -67,7 +55,6 @@ const reducer = (state, action) => {
       newState.progress = (newState.answered / newState.totalQuestions) * 100
       newState.score = (newState.correct / newState.totalQuestions) * 100
       newState.questions[action.id] = action.question
-      console.log(newState)
       return { ...newState }
     }
     default:

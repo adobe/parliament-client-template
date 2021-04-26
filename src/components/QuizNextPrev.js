@@ -22,13 +22,18 @@ import NextPrev from "./NextPrev"
 
 const QuizNextPrev = ({ nextPage, previousPage, markProgression }) => {
   // rendering a quiz
-  const { answered, totalQuestions } = useQuizState()
+  const { answered, correct, totalQuestions } = useQuizState()
   if (totalQuestions > 0) {
     // only show nav if quiz completed
     if (answered < totalQuestions) { return "" }
   }
 
-  return <NextPrev nextPage={nextPage} previousPage={previousPage} markProgression={markProgression} />
+  let passQuiz = () => {}
+  if (correct === totalQuestions) {
+    passQuiz = markProgression
+  }
+
+  return <NextPrev nextPage={nextPage} previousPage={previousPage} markProgression={passQuiz} />
 }
 
 export default QuizNextPrev

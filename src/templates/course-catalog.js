@@ -48,9 +48,11 @@ const coursePages = (pages, catalogDir) => (
   })
 )
 
-const completedModules = (page, progress) =>
-  progress[page.path] && Object.keys(progress[page.path])
-        .filter((version) => progress[page.path][version])
+const completedModules = (page, progress) => {
+  if (!progress[page.path]) { return [] }
+  return Object.keys(progress[page.path])
+               .filter((version) => progress[page.path][version])
+}
 
 // TODO: actually match up versions
 const courseCompleted = (coursePage, progress) =>

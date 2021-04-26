@@ -20,7 +20,6 @@ import ExperimentalBadge from "../components/ExperimentalBadge"
 import QuizQuestion from "../components/QuizQuestion"
 import RenderMdx from "../components/RenderMdx"
 import SiteMenu from "../components/SiteMenu"
-import QuizQuestionComp from "../components/QuizQuestionComp"
 import QuizMeter from "../components/QuizMeter"
 
 import { AlertDialog, DialogTrigger, Flex, View } from "@adobe/react-spectrum"
@@ -81,7 +80,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       ></div>
 
       <ExperimentalBadge />
-      <RenderMdx overrides={{ ul: QuizQuestionComp }}>{body}</RenderMdx>
+      <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
 
       <Flex
         direction="column"

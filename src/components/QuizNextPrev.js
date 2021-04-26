@@ -11,19 +11,14 @@
  */
 
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react"
-import { Link as GatsbyLink } from "gatsby"
-import "@spectrum-css/typography"
-import { Link } from "@adobe/parliament-ui-components"
-import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft"
-import ChevronRight from "@spectrum-icons/workflow/ChevronRight"
+import { jsx } from "@emotion/react"
 import { useQuizState } from "./QuizContext"
 import NextPrev from "./NextPrev"
 
-const QuizNextPrev = ({ nextPage, previousPage, markProgression }) => {
+const QuizNextPrev = ({ nextPage, previousPage, markProgression, alreadyPassed = false }) => {
   // rendering a quiz
   const { answered, correct, totalQuestions } = useQuizState()
-  if (totalQuestions > 0) {
+  if (!alreadyPassed && totalQuestions > 0) {
     // only show nav if quiz completed
     if (answered < totalQuestions) { return "" }
   }

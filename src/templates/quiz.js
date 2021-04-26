@@ -11,8 +11,11 @@
  */
 
 /** @jsx jsx */
-import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
+
+import { Link as GatsbyLink } from "gatsby"
+import ChevronRight from "@spectrum-icons/workflow/ChevronRight"
+
 import { graphql } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import QuizLayout from "../components/quizlayout"
@@ -23,11 +26,10 @@ import RenderMdx from "../components/RenderMdx"
 import SiteMenu from "../components/SiteMenu"
 import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
-import { useQuizState } from "../components/QuizContext"
 import { findSelectedPageNextPrev } from "../util/index"
 import { useVersionedLocalStore } from "../util/localstore"
 
-import { Flex, View } from "@adobe/react-spectrum"
+import { Flex, View, Well } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
 
 const QuizTemplate = ({ data, location, pageContext }) => {
@@ -46,7 +48,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
   )
 
   const { courseVersion } = frontmatter
-  const [visited, markVisited] = useVersionedLocalStore(
+  const [alreadyPassed, markVisited] = useVersionedLocalStore(
     dirname, location.pathname, courseVersion
   )
 
@@ -74,6 +76,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           `}
         >
           <QuizMeter />
+
           <br />
           <Link href="https://jira.corp.adobe.com/projects/EON/issues">
             Something wrong with this quiz? File an EON.
@@ -94,6 +97,41 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       ></div>
 
       <ExperimentalBadge />
+      {
+        alreadyPassed &&
+        <Well marginTop={32}>
+          🎉  You already ACED this quiz!
+            <div
+              css={css`
+                margin-left: auto;
+                padding-left: var(--spectrum-global-dimension-size-200);
+              `}
+            >
+              {nextPage && (
+                <Link isQuiet={true}>
+                  <GatsbyLink to={nextPage.path} rel="next">
+                    <div
+                      css={css`
+                        display: flex;
+                        align-items: center;
+                      `}
+                    >
+                      <div
+                        css={css`
+                          margin-right: var(--spectrum-global-dimension-size-50);
+                        `}
+                      >
+                        You may skip it!
+                      </div>
+                      <ChevronRight />
+                    </div>
+                  </GatsbyLink>
+                </Link>
+              )}
+            </div>
+
+        </Well>
+      }
       <QuizResults />
       <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
 
@@ -109,6 +147,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
             markProgression={markVisited}
             nextPage={nextPage}
             previousPage={previousPage}
+            alreadyPassed={alreadyPassed}
           />
 
           <Contributors

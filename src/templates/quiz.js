@@ -13,7 +13,7 @@
 /** @jsx jsx */
 import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
-import { graphql, navigate, withPrefix } from "gatsby"
+import { graphql } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import QuizLayout from "../components/quizlayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
@@ -24,55 +24,10 @@ import SiteMenu from "../components/SiteMenu"
 import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
 import { useQuizState } from "../components/QuizContext"
+import { findSelectedPageNextPrev } from "../util/index"
 
 import { Flex, View } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
-
-const pageInSameDir = (page, dir) => (page && page.path.indexOf(dir) !== -1)
-// TODO: efficiency 🥴
-const courseModulePages = (pages, course) => (flattenPages(pages).filter((page) => pageInSameDir(page, course)))
-const pageTitles = (pages) => pages.map((p) => p.title)
-const courseModuleIx = (pages, modulePath) => pages.map(p => p.path).indexOf(modulePath)
-
-const findSelectedPageNextPrev = (pathname, pages, cwd) => {
-  const flat = flattenPages(pages)
-  const selectedPage = flat.find((page) => {
-    return withPrefix(page.path) === pathname
-  })
-
-  const previous = flat[flat.indexOf(selectedPage) - 1]
-  let next = flat[flat.indexOf(selectedPage) + 1]
-  if (!next) {
-    next = { path: pages[pages.length - 1].path, title: "Complete Course" }
-  }
-
-  return {
-    nextPage: next,
-    previousPage: pageInSameDir(previous, cwd) ? previous: null,
-  }
-}
-
-const flattenPages = (pages) => {
-  if (pages === null) {
-    return []
-  }
-
-  let flat = []
-  const find = (page) => {
-    flat.push(page)
-
-    if (page.pages) {
-      page.pages.forEach(find)
-    }
-  }
-
-  pages.forEach(find)
-
-  flat = flat.flat()
-  return flat.filter(
-    (page, index) => page.path && page.path !== flat[index + 1]?.path
-  )
-}
 
 const QuizTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data

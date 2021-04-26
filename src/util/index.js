@@ -13,7 +13,8 @@
 import { withPrefix } from "gatsby"
 
 // TODO: efficiency 🥴
-export const pageInSameDir = (page, dir) => (page && page.path.indexOf(dir) !== -1)
+export const pathDir = (path) => (path.split("/").slice(0, -1).join("/"))
+export const pageInSameDir = (page, dir) => (page && pathDir(page.path).indexOf(dir) !== -1)
 export const pageTitles = (pages) => pages.map((p) => p.title)
 
 export const findSelectedPageNextPrev = (pathname, pages, cwd, type = "") => {
@@ -24,7 +25,8 @@ export const findSelectedPageNextPrev = (pathname, pages, cwd, type = "") => {
 
   const previous = flat[flat.indexOf(selectedPage) - 1]
   let next = flat[flat.indexOf(selectedPage) + 1]
-  if (!next) {
+
+  if (!next || !pageInSameDir(next, pathDir(pathname))) {
     next = { path: pages[pages.length - 1].path, title: `Complete ${type}` }
   }
 

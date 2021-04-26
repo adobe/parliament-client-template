@@ -41,9 +41,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
   const { nextPage, previousPage } = findSelectedPageNextPrev(
-    location.pathname,
-    parliamentNavigation.pages,
-    dirname
+    location.pathname, parliamentNavigation.pages, dirname, "Quiz"
   )
 
   const { courseVersion } = frontmatter

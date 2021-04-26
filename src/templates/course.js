@@ -50,9 +50,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   // which is just the dir of the slug for the path passed in
   const { contributors, gitRemote, dirname } = pageContext
   const { nextPage, previousPage } = findSelectedPageNextPrev(
-    location.pathname,
-    parliamentNavigation.pages,
-    dirname
+    location.pathname, parliamentNavigation.pages, dirname, "Course"
   )
   const { courseVersion } = frontmatter
   let courseModuleVersion = courseVersion ? courseVersion : `latest`

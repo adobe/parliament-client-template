@@ -11,7 +11,7 @@
  */
 import { React, useState, useEffect, Children } from "react"
 import { Checkbox, CheckboxGroup } from "@adobe/react-spectrum"
-import { useQuiz } from "./QuizContext"
+import { QuizProvider, useQuiz } from "./QuizContext"
 
 const answerIsCorrect = (choice) => {
   const checkBoxes = choice.props.children.filter(
@@ -107,14 +107,14 @@ const QuizQuestion = ({ children, ...props }) => {
 
   useEffect(() => {
     updateQuiz({
-      type: "newQuestion",
+      type: QuizProvider.ACTION_TYPES.NEW_QUESTION,
       id: id,
     })
   }, [])
 
   const _quizCb = (selectedAnswers) => {
     updateQuiz({
-      type: "questionAnswered",
+      type: QuizProvider.ACTION_TYPES.QUESTION_ANSWERED,
       id: id,
       question: {
         selected: selectedAnswers,

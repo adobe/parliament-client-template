@@ -20,6 +20,7 @@ import { graphql } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import QuizLayout from "../components/quizlayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
+import { Next } from "../components/NextPrev"
 import QuizNextPrev from "../components/QuizNextPrev"
 import QuizQuestion from "../components/QuizQuestion"
 import RenderMdx from "../components/RenderMdx"
@@ -100,36 +101,8 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       {
         alreadyPassed &&
         <Well marginTop={32}>
-          🎉  You already ACED this quiz!
-            <div
-              css={css`
-                margin-left: auto;
-                padding-left: var(--spectrum-global-dimension-size-200);
-              `}
-            >
-              {nextPage && (
-                <Link isQuiet={true}>
-                  <GatsbyLink to={nextPage.path} rel="next">
-                    <div
-                      css={css`
-                        display: flex;
-                        align-items: center;
-                      `}
-                    >
-                      <div
-                        css={css`
-                          margin-right: var(--spectrum-global-dimension-size-50);
-                        `}
-                      >
-                        You may skip it!
-                      </div>
-                      <ChevronRight />
-                    </div>
-                  </GatsbyLink>
-                </Link>
-              )}
-            </div>
-
+          <span>🎉 You already ACED this quiz!</span>
+          <Next nextPage={nextPage} title="You may skip this page!" />
         </Well>
       }
       <QuizResults />

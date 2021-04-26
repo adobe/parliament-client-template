@@ -18,6 +18,85 @@ import { Link } from "@adobe/parliament-ui-components"
 import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft"
 import ChevronRight from "@spectrum-icons/workflow/ChevronRight"
 
+export const Prev = ({ prevPage, title, markProgression }) => {
+  if (!prevPage) {
+    return null
+  }
+
+  let linkTitle = title ? title : prevPage.title
+
+  let clickCb = () => {}
+  if (markProgression) {
+    clickCb = markProgression
+  }
+
+  return (
+    <div>
+      <Link isQuiet={true}>
+        <GatsbyLink to={prevPage.path} rel="prev">
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+            `}
+          >
+            <ChevronLeft />
+            <div
+              css={css`
+                margin-left: var(--spectrum-global-dimension-size-50);
+              `}
+            >
+              {linkTitle}
+            </div>
+          </div>
+        </GatsbyLink>
+      </Link>
+    </div>
+  )
+}
+
+export const Next = ({ nextPage, title, markProgression }) => {
+  if (!nextPage) {
+    return null
+  }
+
+  let linkTitle = title ? title : nextPage.title
+
+  let clickCb = () => {}
+  if (markProgression) {
+    clickCb = markProgression
+  }
+
+  return (
+    <div
+      css={css`
+        margin-left: auto;
+        padding-left: var(--spectrum-global-dimension-size-200);
+      `}
+    >
+      <Link isQuiet={true}>
+        <GatsbyLink to={nextPage.path} rel="next">
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+            `}
+          >
+            <div
+              css={css`
+                margin-right: var(--spectrum-global-dimension-size-50);
+              `}
+            >
+              {linkTitle}
+            </div>
+            <ChevronRight />
+          </div>
+        </GatsbyLink>
+      </Link>
+    </div>
+  )
+}
+
 const NextPrev = ({ nextPage, previousPage, markProgression }) =>
   nextPage || previousPage ? (
     <div className="spectrum-Body spectrum-Body--sizeM">
@@ -28,57 +107,9 @@ const NextPrev = ({ nextPage, previousPage, markProgression }) =>
           margin-top: var(--spectrum-global-dimension-size-800);
         `}
       >
-        <div>
-          {previousPage && (
-            <Link isQuiet={true}>
-              <GatsbyLink to={previousPage.path} rel="prev">
-                <div
-                  css={css`
-                    display: flex;
-                    align-items: center;
-                  `}
-                >
-                  <ChevronLeft />
-                  <div
-                    css={css`
-                      margin-left: var(--spectrum-global-dimension-size-50);
-                    `}
-                  >
-                    {previousPage.title}
-                  </div>
-                </div>
-              </GatsbyLink>
-            </Link>
-          )}
-        </div>
-        <div
-          css={css`
-            margin-left: auto;
-            padding-left: var(--spectrum-global-dimension-size-200);
-          `}
-        >
-          {nextPage && (
-            <Link isQuiet={true}>
-              <GatsbyLink to={nextPage.path} rel="next" onClick={markProgression}>
-                <div
-                  css={css`
-                    display: flex;
-                    align-items: center;
-                  `}
-                >
-                  <div
-                    css={css`
-                      margin-right: var(--spectrum-global-dimension-size-50);
-                    `}
-                  >
-                    {nextPage.title}
-                  </div>
-                  <ChevronRight />
-                </div>
-              </GatsbyLink>
-            </Link>
-          )}
-        </div>
+
+        <Prev prevPage={previousPage} markProgression={markProgression} />
+        <Next nextPage={nextPage} markProgression={markProgression} />
       </div>
     </div>
   ) : null

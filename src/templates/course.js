@@ -11,7 +11,6 @@
  */
 
 /** @jsx jsx */
-import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
 import CourseNav from "../components/CourseNav"
@@ -26,6 +25,7 @@ import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
 import { findSelectedPageNextPrev, pageTitles } from "../util/index"
 import { courseModulePages, courseModuleIx } from "../util/course"
+import { useVersionedLocalStore } from "../util/localstore"
 
 import { Flex, View } from "@adobe/react-spectrum"
 import {
@@ -40,51 +40,20 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   const { sourceFiles } = siteMetadata
   const { absolutePath, childMdx } = file
   const { body, tableOfContents, timeToRead, frontmatter } = childMdx
+  const { contributors, gitRemote, dirname } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
-
-  // TODO: refactor dirname out of gatsby-node
-  // dirname should be in the form /path/to/course/dir
-  // which is just the dir of the slug for the path passed in
-  const { contributors, gitRemote, dirname } = pageContext
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname, parliamentNavigation.pages, dirname, "Course"
   )
-  const { courseVersion } = frontmatter
-  let courseModuleVersion = courseVersion ? courseVersion : `latest`
-  let moduleInitState = {}
-  moduleInitState[courseModuleVersion] = false
-  moduleInitState.latest = false
-  const [visited, setVisited] = useState(false)
-
-  // waits until after first render when window is available
-  useEffect(() => {
-    let courseMeta = window.localStorage.getItem(dirname)
-    courseMeta = courseMeta ? JSON.parse(courseMeta) : {}
-    let moduleMeta = courseMeta[location.pathname] ? courseMeta[location.pathname] : {}
-    setVisited(moduleMeta[courseModuleVersion] || false)
-  }, [dirname, location.pathname, courseModuleVersion])
-
-  // called whenever visited is changed
-  useEffect(() => {
-    if (!visited) { return }
-
-    let storedState = window.localStorage.getItem(dirname)
-    storedState = storedState ? JSON.parse(storedState) : {}
-    if (!storedState[location.pathname]) {
-      storedState[location.pathname] = {}
-    }
-    storedState[location.pathname][courseModuleVersion] = true
-    window.localStorage.setItem(dirname, JSON.stringify(storedState))
-  }, [dirname, location.pathname, courseModuleVersion, visited])
-
-  const markVisited = () => {
-    setVisited(true)
-  }
 
   const coursePages = courseModulePages(parliamentNavigation.pages, dirname)
+  const { courseVersion } = frontmatter
+  const [visited, markVisited] = useVersionedLocalStore(
+    dirname, location.pathname, courseVersion
+  )
 
   return (
     <DocLayout

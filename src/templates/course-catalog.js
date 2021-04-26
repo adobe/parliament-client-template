@@ -35,7 +35,7 @@ import {
   Link,
 } from "@adobe/parliament-ui-components"
 
-import { flattenPages, pageInSameDir } from "../util/index"
+import { flattenPages } from "../util/index"
 
 // TODO: CLEAN - I am NOT proud of ANY of this
 // course.js template stores without leading slash

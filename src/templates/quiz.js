@@ -25,6 +25,7 @@ import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
 import { useQuizState } from "../components/QuizContext"
 import { findSelectedPageNextPrev } from "../util/index"
+import { useVersionedLocalStore } from "../util/localstore"
 
 import { Flex, View } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
@@ -45,36 +46,9 @@ const QuizTemplate = ({ data, location, pageContext }) => {
   )
 
   const { courseVersion } = frontmatter
-  let courseModuleVersion = courseVersion ? courseVersion : `latest`
-  let moduleInitState = {}
-  moduleInitState[courseModuleVersion] = false
-  moduleInitState.latest = false
-  const [visited, setVisited] = useState(false)
-
-  // waits until after first render when window is available
-  useEffect(() => {
-    let courseMeta = window.localStorage.getItem(dirname)
-    courseMeta = courseMeta ? JSON.parse(courseMeta) : {}
-    let moduleMeta = courseMeta[location.pathname] ? courseMeta[location.pathname] : {}
-    setVisited(moduleMeta[courseModuleVersion] || false)
-  }, [dirname, location.pathname, courseModuleVersion])
-
-  // called whenever visited is changed
-  useEffect(() => {
-    if (!visited) { return }
-
-    let storedState = window.localStorage.getItem(dirname)
-    storedState = storedState ? JSON.parse(storedState) : {}
-    if (!storedState[location.pathname]) {
-      storedState[location.pathname] = {}
-    }
-    storedState[location.pathname][courseModuleVersion] = true
-    window.localStorage.setItem(dirname, JSON.stringify(storedState))
-  }, [dirname, location.pathname, courseModuleVersion, visited])
-
-  const markVisited = () => {
-    setVisited(true)
-  }
+  const [visited, markVisited] = useVersionedLocalStore(
+    dirname, location.pathname, courseVersion
+  )
 
   return (
     <QuizLayout

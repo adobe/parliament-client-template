@@ -684,7 +684,9 @@ exports.sourceNodes = async ({
 }) => {
   const { createNode } = actions
 
-  const blogFiles = glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/blog/**`)
+  const blogFiles = glob.sync(
+    `${process.env.LOCAL_PROJECT_DIRECTORY}/blog/**/*.md`
+  )
   const docFiles = glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/**/*.md`, {
     ignore: blogFiles,
   })

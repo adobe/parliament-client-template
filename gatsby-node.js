@@ -685,8 +685,16 @@ exports.sourceNodes = async ({
 }) => {
   const { createNode } = actions
 
-  const data = [{ title: "Docs", path: "/" }]
-  if (glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/blog/**`).length > 0) {
+  const blogFiles = glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/blog/**`)
+  const docFiles = glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/**/*.md`, {
+    ignore: blogFiles,
+  })
+
+  const data = []
+  if (docFiles.length > 0) {
+    data.push({ title: "Docs", path: "/" })
+  }
+  if (blogFiles.length > 0) {
     data.push({ title: "Blog", path: "/blog" })
   }
 

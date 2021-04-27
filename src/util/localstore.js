@@ -52,9 +52,16 @@ export const useVersionedLocalStore = (localStoreKey, objKey, versionKey) => {
 
   // waits until after first render when window is available
   useEffect(() => {
+    // initial scaffolding
     let localStoreObj = window.localStorage.getItem(localStoreKey)
     let jsonObj = localStoreObj ? JSON.parse(localStoreObj) : {}
     let objVal = jsonObj[objKey] ? jsonObj[objKey] : {}
+
+    // ensure that localstore is initialized
+    jsonObj[objKey] = jsonObj[objKey] ? jsonObj[objKey] : {}
+    jsonObj[objKey][version] = objVal[version] || false
+    window.localStorage.setItem(localStoreKey, JSON.stringify(jsonObj))
+
     setBoolState(objVal[version] || false)
   }, [localStoreKey, objKey, version])
 

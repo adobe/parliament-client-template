@@ -11,6 +11,7 @@
  */
 
 /** @jsx jsx */
+import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
 import CourseNav from "../components/CourseNav"
@@ -24,7 +25,7 @@ import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
 import { findSelectedPageNextPrev, pageTitles } from "../util/index"
-import { courseModulePages, courseModuleIx } from "../util/course"
+import { completedModules, courseModulePages, courseModuleIx } from "../util/course"
 import { useVersionedLocalStore } from "../util/localstore"
 
 import { Flex, View } from "@adobe/react-spectrum"
@@ -53,6 +54,25 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   const { courseVersion } = frontmatter
   const [visited, markVisited] = useVersionedLocalStore(
     dirname, location.pathname, courseVersion
+  )
+
+  let [courseProgress, progressLoaded] = useState(false)
+  useEffect(() => {
+    // getItem returns null if key DNE
+    if (courseProgress || courseProgress === null) {
+      return
+    }
+
+    courseProgress = window.localStorage.getItem(dirname)
+    courseProgress = courseProgress ? JSON.parse(courseProgress) : false
+    progressLoaded(courseProgress)
+  })
+  let completedModulePaths = completedModules(courseProgress)
+  const currentModuleIx = courseModuleIx(coursePages, location.pathname) 
+  const progressedModulePages = coursePages.map((page, ix) =>
+    completedModulePaths.includes(page.path)
+      ? page
+      : { title: page.title }
   )
 
   return (
@@ -88,8 +108,8 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           <hr />
 
           <ProgressBar
-            sections={pageTitles(coursePages)}
-            currentIx={courseModuleIx(coursePages, location.pathname)} />
+            pages={progressedModulePages}
+            currentIx={currentModuleIx} />
 
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">

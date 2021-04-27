@@ -10,22 +10,28 @@
  * governing permissions and limitations under the License.
  */
 
-import { React, Fragment } from "react"
-import { Header, Well } from "@adobe/react-spectrum"
+import { React } from "react"
+import { Heading, Well } from "@adobe/react-spectrum"
+import { Paragraph } from "@adobe/parliament-ui-components"
 import { useQuizState } from "../components/QuizContext"
 
 const QuizResults = () => {
   const { answered, correct, totalQuestions } = useQuizState()
 
-  if (totalQuestions > 0 && answered < totalQuestions) { return null }
+  if (totalQuestions > 0 && answered < totalQuestions) {
+    return null
+  }
 
   return (
-    <Fragment>
-      <Well marginTop={32}>
-        <Header>{ (correct === answered) ? "Congrats, you aced the quiz! 🎉" : "Good try!" }</Header>
-        <p>If you want to try the quiz again, refresh the page. Or you can continue with the course below.</p>
-      </Well>
-    </Fragment>
+    <Well marginTop="size-400">
+      <Heading>
+        {correct === answered ? "Congrats, you aced the quiz! 🎉" : "Good try!"}
+      </Heading>
+      <Paragraph>
+        If you want to try the quiz again, refresh the page. Or you can continue
+        with the course below.
+      </Paragraph>
+    </Well>
   )
 }
 

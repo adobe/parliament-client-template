@@ -17,3 +17,16 @@ export const courseModulePages = (coursePages, course) =>
 
 export const courseModuleIx = (coursePages, modulePath) =>
   coursePages.map(p => p.path).indexOf(modulePath)
+
+// expected progress = structure described in util/localstore
+export const completedModules = (progress) => {
+  if (!progress) {
+    return []
+  }
+
+  return Object.keys(progress).filter((modulePath) =>
+    Object.keys(progress[modulePath]).some(
+      (version) => progress[modulePath][version]
+    )
+  )
+}

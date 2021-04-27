@@ -36,11 +36,13 @@ import {
 } from "@adobe/parliament-ui-components"
 
 import { flattenPages } from "../util/index"
+import { completedModules } from "../util/course"
 
 // TODO: CLEAN - I am NOT proud of ANY of this
 // course.js template stores without leading slash
 const courseDir = (page) =>
   page.path.split("README.md").shift().replace(/\/$/, "")
+
 const coursePages = (pages, catalogDir) =>
   flattenPages(pages).filter((page) => {
     const pieces = page.path.split(catalogDir).pop().split("/")
@@ -52,17 +54,11 @@ const coursePages = (pages, catalogDir) =>
     )
   })
 
-const completedModules = (progress) =>
-  Object.keys(progress).filter((modulePath) =>
-    Object.keys(progress[modulePath]).some(
-      (version) => progress[modulePath][version]
-    )
-  )
-
 // TODO: actually match up versions
+//       and actually properly fetch all pages for coursePage
 const courseCompleted = (coursePage, progress) => {
-  console.log("courseCompleted?", coursePage, completedModules(progress))
-  return coursePage.pages.length <= completedModules(progress).length
+  // coursePage.pages does not include course intro README.md
+  return coursePage.pages.length+1 === completedModules(progress).length
 }
 
 const courseButton = (page) => (

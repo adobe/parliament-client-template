@@ -24,7 +24,7 @@ export default (props) => {
       </div>
       <hr />
       <p>{`Posts: `}</p>
-      {postNodes.map(({ node: post }, idx) => (
+      {postNodes.map(({ node: post }) => (
         <div key={post.id}>
           <Link to={post.fields.slug}>{post.frontmatter.title}</Link>
         </div>

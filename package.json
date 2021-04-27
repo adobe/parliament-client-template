@@ -78,6 +78,10 @@
     "axe-core": "^4.1.1",
     "babel-jest": "^26.6.3",
     "babel-preset-gatsby": "^0.9.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
     "gh-pages": "^2.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
@@ -108,7 +112,8 @@
     "test:e2e": "CYPRESS_SUPPORT=y start-server-and-test develop http://localhost:8000 cy:open",
     "test:e2e:ci": "NODE_ENV=production start-server-and-test serve:prod http://localhost:8000$GATSBY_SITE_PATH_PREFIX/do-not-delete/index.html cy:run",
     "updatesearch": "NODE_ENV=development node ./scripts/updateSearch.js",
-    "updatesearch:prod": "NODE_ENV=production node ./scripts/updateSearch.js"
+    "updatesearch:prod": "NODE_ENV=production node ./scripts/updateSearch.js",
+    "lint": "yarn eslint src/**/*.js src/**/*.jsx"
   },
   "repository": {
     "type": "git",

@@ -25,7 +25,7 @@ export default ({
     </div>
     <hr />
     <p>{`Posted by ${author.name}: `}</p>
-    {postNodes.map(({ node: post }, idx) => (
+    {postNodes.map(({ node: post }) => (
       <div key={post.id}>
         <Link to={post.fields.slug}>{post.frontmatter.title}</Link>
       </div>

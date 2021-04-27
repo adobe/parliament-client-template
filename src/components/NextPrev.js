@@ -18,17 +18,11 @@ import { Link } from "@adobe/parliament-ui-components"
 import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft"
 import ChevronRight from "@spectrum-icons/workflow/ChevronRight"
 
-export const Prev = ({ prevPage, title, markProgression }) => {
+export const Prev = ({ prevPage, title }) => {
   if (!prevPage) {
     return null
   }
-
   let linkTitle = title ? title : prevPage.title
-
-  let clickCb = () => {}
-  if (markProgression) {
-    clickCb = markProgression
-  }
 
   return (
     <div>
@@ -75,7 +69,7 @@ export const Next = ({ nextPage, title, markProgression }) => {
       `}
     >
       <Link isQuiet={true}>
-        <GatsbyLink to={nextPage.path} rel="next">
+        <GatsbyLink to={nextPage.path} rel="next" onClick={markProgression}>
           <div
             css={css`
               display: flex;
@@ -108,7 +102,7 @@ const NextPrev = ({ nextPage, previousPage, markProgression }) =>
         `}
       >
 
-        <Prev prevPage={previousPage} markProgression={markProgression} />
+        <Prev prevPage={previousPage} />
         <Next nextPage={nextPage} markProgression={markProgression} />
       </div>
     </div>

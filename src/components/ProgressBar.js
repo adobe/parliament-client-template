@@ -13,6 +13,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react"
 import "@spectrum-css/typography"
+import { navigate } from "gatsby"
 
 import "rsuite/dist/styles/rsuite-default.css"
 import { Steps } from "rsuite"
@@ -23,15 +24,29 @@ const styles = {
   verticalAlign: 'top'
 };
 
-const ProgressBar = ({ sections, currentIx }) => {
-  if (!sections) { return ""; }
+const step = (page) =>
+  <Steps.Item title={page.title} />
+
+const linkedStep = (page) =>
+  page.path
+    ? <Steps.Item onClick={() => { navigate(page.path) }} title=<a href="#">{page.title}</a> />
+    : step(page)
+
+const ProgressBar = ({ pages, currentIx }) => {
+  if (!pages) { return ""; }
 
   return (
     <div>
       <Steps current={currentIx ? currentIx : 0} vertical style={styles}>
-        {sections.map((sectionTitle) => (
-          <Steps.Item title={sectionTitle} />
-        ))}
+        {
+          pages.map((page, ix) => {
+            if (!page.path || currentIx === ix) {
+              return step(page)
+            }
+
+            return linkedStep(page)
+          })
+        }
       </Steps>
     </div>
   )

@@ -27,7 +27,7 @@ import {
   Flex,
   ProgressCircle,
   View,
-  Well
+  Well,
 } from "@adobe/react-spectrum"
 import {
   ActionButtons,
@@ -39,20 +39,22 @@ import { flattenPages } from "../util/index"
 
 // TODO: CLEAN - I am NOT proud of ANY of this
 // course.js template stores without leading slash
-const courseDir = (page) => page.path.split("README.md").shift().replace(/\/$/, "")
-const coursePages = (pages, catalogDir) => (
+const courseDir = (page) =>
+  page.path.split("README.md").shift().replace(/\/$/, "")
+const coursePages = (pages, catalogDir) =>
   flattenPages(pages).filter((page) => {
     const pieces = page.path.split(catalogDir).pop().split("/")
 
-    return page.path.indexOf(catalogDir) === 0 &&
+    return (
+      page.path.indexOf(catalogDir) === 0 &&
       pieces.length === 3 &&
       pieces.pop() === "README.md"
+    )
   })
-)
 
 const completedModules = (progress) =>
-  Object.keys(progress).filter(
-    (modulePath) => Object.keys(progress[modulePath]).some(
+  Object.keys(progress).filter((modulePath) =>
+    Object.keys(progress[modulePath]).some(
       (version) => progress[modulePath][version]
     )
   )
@@ -64,8 +66,12 @@ const courseCompleted = (coursePage, progress) => {
 }
 
 const courseButton = (page) => (
-  <ActionButton minWidth={300} margin={4}>
-    <a onClick={() => navigate(page.path)}>{page.title}</a>
+  <ActionButton
+    minWidth={300}
+    margin="size-50"
+    onPress={() => navigate(page.path)}
+  >
+    {page.title}
   </ActionButton>
 )
 
@@ -75,18 +81,18 @@ const coursesBadgeList = (courses, header, emptyMsg) => {
   return (
     <Well margin={8}>
       <h3>{header}</h3>
-      {
-        courses.length > 0
-        ? courses.map((page) => courseButton(page))
-        : empty
-      }
+      {courses.length > 0 ? courses.map((page) => courseButton(page)) : empty}
     </Well>
   )
 }
 
 const bucketedCourses = (unstarted, started, completed) => (
   <Fragment>
-    {coursesBadgeList(started, "🚀 Courses In-Progress", "No Courses Started 😢")}
+    {coursesBadgeList(
+      started,
+      "🚀 Courses In-Progress",
+      "No Courses Started 😢"
+    )}
 
     <Divider margin={4} />
 
@@ -113,7 +119,9 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
   let [completedCourses, updateCompletedList] = useState([])
   const [coursesBucketed, setBucketed] = useState(false)
   useEffect(() => {
-    if (coursesBucketed) { return }
+    if (coursesBucketed) {
+      return
+    }
 
     allCoursePages.forEach((coursePage) => {
       const dir = courseDir(coursePage)
@@ -124,20 +132,24 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
         if (courseCompleted(coursePage, courseProgress)) {
           completedCourses.push(coursePage)
           updateCompletedList(completedCourses)
-        }
-        else {
+        } else {
           startedCourses.push(coursePage)
           updateStartedList(startedCourses)
         }
-      }
-      else {
+      } else {
         unstartedCourses.push(coursePage)
         updateUnstartedList(unstartedCourses)
       }
     })
 
     setBucketed(true)
-  }, [allCoursePages, unstartedCourses, startedCourses, completedCourses, coursesBucketed])
+  }, [
+    allCoursePages,
+    unstartedCourses,
+    startedCourses,
+    completedCourses,
+    coursesBucketed,
+  ])
 
   return (
     <DocLayout
@@ -168,9 +180,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
           />
-
           <hr />
-
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
@@ -201,11 +211,11 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
       <RenderMdx>{body}</RenderMdx>
 
       <br />
-      {
-        coursesBucketed
-        ? bucketedCourses(unstartedCourses, startedCourses, completedCourses)
-        : <ProgressCircle aria-label="Loading Courses..." isIndeterminate />
-      }
+      {coursesBucketed ? (
+        bucketedCourses(unstartedCourses, startedCourses, completedCourses)
+      ) : (
+        <ProgressCircle aria-label="Loading Courses..." isIndeterminate />
+      )}
 
       <Flex
         direction="column"

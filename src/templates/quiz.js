@@ -13,9 +13,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react"
 
-import { Link as GatsbyLink } from "gatsby"
-import ChevronRight from "@spectrum-icons/workflow/ChevronRight"
-
 import { graphql } from "gatsby"
 import CourseNav from "../components/CourseNav"
 import QuizLayout from "../components/quizlayout"
@@ -45,12 +42,17 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
   const { nextPage, previousPage } = findSelectedPageNextPrev(
-    location.pathname, parliamentNavigation.pages, dirname, "Quiz"
+    location.pathname,
+    parliamentNavigation.pages,
+    dirname,
+    "Quiz"
   )
 
   const { courseVersion } = frontmatter
   const [alreadyPassed, markVisited] = useVersionedLocalStore(
-    dirname, location.pathname, courseVersion
+    dirname,
+    location.pathname,
+    courseVersion
   )
 
   return (
@@ -77,7 +79,6 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           `}
         >
           <QuizMeter />
-
           <br />
           <Link href="https://jira.corp.adobe.com/projects/EON/issues">
             Something wrong with this quiz? File an EON.
@@ -98,13 +99,17 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       ></div>
 
       <ExperimentalBadge />
-      {
-        alreadyPassed &&
+      {alreadyPassed && (
         <Well marginTop={32}>
-          <span>🎉 You already ACED this quiz!</span>
+          <span>
+            <span role="img" aria-label="tada">
+              🎉
+            </span>{" "}
+            You already ACED this quiz!
+          </span>
           <Next nextPage={nextPage} title="You may skip this page!" />
         </Well>
-      }
+      )}
       <QuizResults />
       <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
 

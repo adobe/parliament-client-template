@@ -1,0 +1,35 @@
+---
+name: CI for PRs
+on:
+  pull_request:
+    types: [synchronize]
+
+jobs:
+  ci-build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR Branch/Tree
+        uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com" && \
+          git config --global user.name "$GITHUB_ACTOR"
+      - name: Merge Changes in main Into PR Branch
+        run: git fetch origin && git checkout $GITHUB_HEAD_REF && git merge origin/$GITHUB_BASE_REF
+
+      - name: Build Test Image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          file: Dockerfile.ci
+          push: false
+          tags: app-test-image:latest
+
+      - name: Check Installed Dependencies in Image
+        run: |
+          docker run --rm \
+          --entrypoint sh \
+          -w /workspace \
+          ${{ steps.docker_build.outputs.digest }} -c "yarn lint && yarn test"

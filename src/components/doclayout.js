@@ -37,6 +37,7 @@ const DocLayout = ({
   title,
   location,
   gitRemote,
+  // eslint-disable-next-line
   currentPage,
   pages,
   forceMobile = false,

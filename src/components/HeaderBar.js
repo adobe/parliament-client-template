@@ -33,7 +33,9 @@ const HeaderBar = ({ siteTitle, forceMobile, ...props }) => {
 }
 
 HeaderBar.defaultProps = {
+  /* eslint-disable */
   siteTitle: process.env.GATSBY_SOURCE_TITLE,
+  /* eslint-enable*/
 }
 
 export default HeaderBar

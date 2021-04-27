@@ -54,7 +54,7 @@ export const Next = ({ nextPage, title, markProgression }) => {
     return null
   }
 
-  let linkTitle = title ? title : nextPage.title
+  const linkTitle = title ? title : nextPage.title
 
   let clickCb = () => {}
   if (markProgression) {
@@ -69,7 +69,7 @@ export const Next = ({ nextPage, title, markProgression }) => {
       `}
     >
       <Link isQuiet={true}>
-        <GatsbyLink to={nextPage.path} rel="next" onClick={markProgression}>
+        <GatsbyLink to={nextPage.path} rel="next" onClick={clickCb}>
           <div
             css={css`
               display: flex;

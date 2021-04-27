@@ -99,7 +99,7 @@ const shuffle = (arr) =>
     []
   )
 
-const QuizQuestion = ({ children, ...props }) => {
+const QuizQuestion = ({ children }) => {
   const [quiz, updateQuiz] = useQuiz()
   const [id] = useState(`id_${Math.random()}`)
   const [shuffledChoices] = useState(shuffle(Children.toArray(children)))

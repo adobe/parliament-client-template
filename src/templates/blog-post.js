@@ -30,7 +30,7 @@ const generateTags = (tagString) => {
     tags &&
     tags.map((tag) => (
       <Fragment>
-        <span class="spectrum-Label spectrum-Label--red">#{tag}</span>{" "}
+        <span className="spectrum-Label spectrum-Label--red">#{tag}</span>{" "}
       </Fragment>
     ))
   )

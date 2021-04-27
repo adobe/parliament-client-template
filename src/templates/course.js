@@ -24,7 +24,7 @@ import RenderMdx from "../components/RenderMdx"
 import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
-import { findSelectedPageNextPrev, pageTitles } from "../util/index"
+import { findSelectedPageNextPrev } from "../util/index"
 import { completedModules, courseModulePages, courseModuleIx } from "../util/course"
 import { useVersionedLocalStore } from "../util/localstore"
 
@@ -69,7 +69,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   })
   let completedModulePaths = completedModules(courseProgress)
   const currentModuleIx = courseModuleIx(coursePages, location.pathname) 
-  const progressedModulePages = coursePages.map((page, ix) =>
+  const progressedModulePages = coursePages.map((page) =>
     completedModulePaths.includes(page.path)
       ? page
       : { title: page.title }

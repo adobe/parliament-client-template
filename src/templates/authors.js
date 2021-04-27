@@ -52,7 +52,7 @@ const Authors = ({ location, pageContext }) => {
     >
       <Heading1>Authors</Heading1>
       <Flex direction="column" marginTop="size-300" gap="size-100">
-        {authors.sort(compare).map((author, index) => (
+        {authors.sort(compare).map((author) => (
           <View elementType="p">
             <Link to={`/author/${author.login}`} key={`author-${author.login}`}>
               {author.name}

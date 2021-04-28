@@ -1,0 +1,8 @@
+# Docs:
+#   https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+# ongoing discussions for below:
+#    - https://github.community/t/protecting-github-workflows/16122
+#    - https://github.com/actions/runner/issues/494
+
+.github/workflows   @adobe/parliament-tc

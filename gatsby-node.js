@@ -95,14 +95,14 @@ const gitRepoInfo = () => {
 const loadTemplates = () => {
   const templateFiles = glob.sync(`src/templates/**`)
 
-  return templateFiles.reduce(function (result, item, index, array) {
+  return templateFiles.reduce(function (result, item) {
     const templateName = path.parse(item).name
     result[templateName] = path.resolve(item)
     return result
   }, {})
 }
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `Mdx`) {
     let slug = ""
@@ -142,7 +142,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 }
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
+exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
 
   const templates = loadTemplates()
@@ -253,7 +253,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     // Create the map of all the tags
     const tagMap = new Map()
 
-    posts.forEach((post, index) => {
+    posts.forEach((post) => {
       postsNav.pages.push({
         importedFileName: "posts",
         pages: [],
@@ -561,7 +561,7 @@ const createOpenApiPage = async (
   }
 }
 
-exports.onCreateWebpackConfig = ({ loaders, actions }) => {
+exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       // Put main before module else it messes up react spectrum css import
@@ -618,7 +618,7 @@ const createIndex = async (nodes, pages) => {
 
   const project = []
 
-  for (node of nodes) {
+  for (let node of nodes) {
     const { slug } = node.fields
     let title = getTitle(pages, slug, node)
     const type = slug.includes("blog/") ? "blog" : "docs"
@@ -646,7 +646,7 @@ const createIndex = async (nodes, pages) => {
   }
 
   // Open API specs are not in graphql db, hence this hack
-  for (spec of openApiSearchDocs) {
+  for (let spec of openApiSearchDocs) {
     index.addDoc(spec)
     const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${spec.path}`.replace(
       /\/\//g,
@@ -681,12 +681,21 @@ exports.sourceNodes = async ({
   actions,
   createContentDigest,
   createNodeId,
-  getNodesByType,
 }) => {
   const { createNode } = actions
 
-  const data = [{ title: "Docs", path: "/" }]
-  if (glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/blog/**`).length > 0) {
+  const blogFiles = glob.sync(
+    `${process.env.LOCAL_PROJECT_DIRECTORY}/blog/**/*.md`
+  )
+  const docFiles = glob.sync(`${process.env.LOCAL_PROJECT_DIRECTORY}/**/*.md`, {
+    ignore: blogFiles,
+  })
+
+  const data = []
+  if (docFiles.length > 0) {
+    data.push({ title: "Docs", path: "/" })
+  }
+  if (blogFiles.length > 0) {
     data.push({ title: "Blog", path: "/blog" })
   }
 

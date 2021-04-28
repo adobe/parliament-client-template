@@ -5,5 +5,4 @@
 #    - https://github.community/t/protecting-github-workflows/16122
 #    - https://github.com/actions/runner/issues/494
 
-.github/   @adobe/parliament-tc
-CODEOWNERS @adobe/parliament-tc
+.github/workflows   @adobe/parliament-tc

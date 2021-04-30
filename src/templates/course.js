@@ -25,15 +25,16 @@ import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
 import { findSelectedPageNextPrev } from "../util/index"
-import { completedModules, courseModulePages, courseModuleIx } from "../util/course"
+import {
+  completedModules,
+  courseModulePages,
+  courseModuleIx,
+} from "../util/course"
 import { useVersionedLocalStore } from "../util/localstore"
 
 import { Flex, View } from "@adobe/react-spectrum"
-import {
-  ActionButtons,
-  Contributors,
-  Link,
-} from "@adobe/parliament-ui-components"
+import { Contributors, Link } from "@adobe/parliament-ui-components"
+import SiteActionButtons from "../components/SiteActionButtons"
 
 const CoursesTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
@@ -47,13 +48,18 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
   const { nextPage, previousPage } = findSelectedPageNextPrev(
-    location.pathname, parliamentNavigation.pages, dirname, "Course"
+    location.pathname,
+    parliamentNavigation.pages,
+    dirname,
+    "Course"
   )
 
   const coursePages = courseModulePages(parliamentNavigation.pages, dirname)
   const { courseVersion } = frontmatter
   const [visited, markVisited] = useVersionedLocalStore(
-    dirname, location.pathname, courseVersion
+    dirname,
+    location.pathname,
+    courseVersion
   )
 
   let [courseProgress, progressLoaded] = useState(false)
@@ -68,11 +74,9 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     progressLoaded(courseProgress)
   })
   let completedModulePaths = completedModules(courseProgress)
-  const currentModuleIx = courseModuleIx(coursePages, location.pathname) 
+  const currentModuleIx = courseModuleIx(coursePages, location.pathname)
   const progressedModulePages = coursePages.map((page) =>
-    completedModulePaths.includes(page.path)
-      ? page
-      : { title: page.title }
+    completedModulePaths.includes(page.path) ? page : { title: page.title }
   )
 
   return (
@@ -104,13 +108,11 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
           />
-
           <hr />
-
           <ProgressBar
             pages={progressedModulePages}
-            currentIx={currentModuleIx} />
-
+            currentIx={currentModuleIx}
+          />
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
@@ -131,15 +133,11 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
             </Flex>
           )}
 
-          {gitRemote !== null ? (
-            <ActionButtons
-              gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-              filePath={relativePath}
-              branch={gitRemote.ref}
-            />
-          ) : (
-            ""
-          )}
+          <SiteActionButtons
+            gitRemote={gitRemote}
+            relativePath={relativePath}
+            issues={parliamentNavigation.issues}
+          />
         </Flex>
       </div>
       <ExperimentalBadge />
@@ -194,6 +192,7 @@ export const query = graphql`
     }
     parliamentNavigation {
       pages
+      issues
     }
     site {
       siteMetadata {

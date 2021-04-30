@@ -21,6 +21,7 @@ import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
 import SiteActionButtons from "../components/SiteActionButtons"
+import RightRail from "../components/RightRail"
 
 import {
   ActionButton,
@@ -160,13 +161,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
         />
       }
       rightRail={
-        <aside
-          css={css`
-            position: fixed;
-            top: var(--spectrum-global-dimension-size-800);
-            height: 100%;
-          `}
-        >
+        <RightRail>
           <PageActions
             gitRemote={gitRemote}
             relativePath={relativePath}
@@ -178,7 +173,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
           </Link>
-        </aside>
+        </RightRail>
       }
     >
       <div

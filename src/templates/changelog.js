@@ -8,6 +8,7 @@ import { SideNav, TableOfContents } from "@adobe/parliament-ui-components"
 
 import DocLayout from "../components/doclayout"
 import RenderMdx from "../components/RenderMdx"
+import RightRail from "../components/RightRail"
 
 export default function ChangeLogTemplate({ data, location, pageContext }) {
   const { mdx } = data
@@ -35,18 +36,12 @@ export default function ChangeLogTemplate({ data, location, pageContext }) {
         </View>
       }
       rightRail={
-        <aside
-          css={css`
-            position: fixed;
-            top: var(--spectrum-global-dimension-size-800);
-            height: 100%;
-          `}
-        >
+        <RightRail>
           <TableOfContents
             tableOfContents={tableOfContents}
             title="In this Update"
           />
-        </aside>
+        </RightRail>
       }
     >
       <View paddingX="size-300">

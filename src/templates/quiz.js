@@ -26,6 +26,7 @@ import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
 import { findSelectedPageNextPrev } from "../util/index"
 import { useVersionedLocalStore } from "../util/localstore"
+import RightRail from "../components/RightRail"
 
 import { Flex, View, Well } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
@@ -71,13 +72,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
         />
       }
       rightRail={
-        <aside
-          css={css`
-            position: fixed;
-            top: var(--spectrum-global-dimension-size-800);
-            height: 100%;
-          `}
-        >
+        <RightRail>
           <QuizMeter />
           <br />
           <Link href="https://jira.corp.adobe.com/projects/EON/issues">
@@ -88,7 +83,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
           </Link>
-        </aside>
+        </RightRail>
       }
     >
       <div

@@ -25,6 +25,7 @@ import {
   stripManifestPath,
 } from "@adobe/parliament-ui-components"
 import SiteActionButtons from "../components/SiteActionButtons"
+import RightRail from "../components/RightRail"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
@@ -55,13 +56,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
         />
       }
       rightRail={
-        <aside
-          css={css`
-            position: fixed;
-            top: var(--spectrum-global-dimension-size-800);
-            height: 100%;
-          `}
-        >
+        <RightRail>
           <PageActions
             gitRemote={gitRemote}
             relativePath={relativePath}
@@ -72,7 +67,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
           </Link>
-        </aside>
+        </RightRail>
       }
     >
       <div

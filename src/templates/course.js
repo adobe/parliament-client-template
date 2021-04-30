@@ -35,6 +35,7 @@ import { useVersionedLocalStore } from "../util/localstore"
 import { Flex, View } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
 import SiteActionButtons from "../components/SiteActionButtons"
+import RightRail from "../components/RightRail"
 
 const CoursesTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
@@ -95,13 +96,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
         />
       }
       rightRail={
-        <aside
-          css={css`
-            position: fixed;
-            top: var(--spectrum-global-dimension-size-800);
-            height: 100%;
-          `}
-        >
+        <RightRail>
           <PageActions
             gitRemote={gitRemote}
             relativePath={relativePath}
@@ -117,7 +112,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament
           </Link>
-        </aside>
+        </RightRail>
       }
     >
       <div

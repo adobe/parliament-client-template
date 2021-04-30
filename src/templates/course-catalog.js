@@ -20,6 +20,7 @@ import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
+import SiteActionButtons from "../components/SiteActionButtons"
 
 import {
   ActionButton,
@@ -29,11 +30,7 @@ import {
   View,
   Well,
 } from "@adobe/react-spectrum"
-import {
-  ActionButtons,
-  Contributors,
-  Link,
-} from "@adobe/parliament-ui-components"
+import { Contributors, Link } from "@adobe/parliament-ui-components"
 
 import { flattenPages } from "../util/index"
 import { completedModules } from "../util/course"
@@ -58,7 +55,7 @@ const coursePages = (pages, catalogDir) =>
 //       and actually properly fetch all pages for coursePage
 const courseCompleted = (coursePage, progress) => {
   // coursePage.pages does not include course intro README.md
-  return coursePage.pages.length+1 === completedModules(progress).length
+  return coursePage.pages.length + 1 === completedModules(progress).length
 }
 
 const courseButton = (page) => (
@@ -191,15 +188,11 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
         `}
       >
         <Flex alignItems="center">
-          {gitRemote !== null ? (
-            <ActionButtons
-              gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-              filePath={relativePath}
-              branch={gitRemote.ref}
-            />
-          ) : (
-            ""
-          )}
+          <SiteActionButtons
+            gitRemote={gitRemote}
+            relativePath={relativePath}
+            issues={parliamentNavigation.issues}
+          />
         </Flex>
       </div>
 
@@ -252,6 +245,7 @@ export const query = graphql`
     }
     parliamentNavigation {
       pages
+      issues
     }
     site {
       siteMetadata {

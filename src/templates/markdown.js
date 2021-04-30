@@ -20,11 +20,11 @@ import RenderMdx from "../components/RenderMdx"
 
 import { Flex, View } from "@adobe/react-spectrum"
 import {
-  ActionButtons,
   Contributors,
   Link,
   stripManifestPath,
 } from "@adobe/parliament-ui-components"
+import SiteActionButtons from "../components/SiteActionButtons"
 
 const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
@@ -81,15 +81,11 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
           z-index: 100;
         `}
       >
-        {gitRemote !== null ? (
-          <ActionButtons
-            gitUrl={`${gitRemote.protocol}://${gitRemote.resource}/${gitRemote.full_name}`}
-            filePath={relativePath}
-            branch={gitRemote.ref}
-          />
-        ) : (
-          ""
-        )}
+        <SiteActionButtons
+          gitRemote={gitRemote}
+          relativePath={relativePath}
+          issues={parliamentNavigation.issues}
+        />
       </div>
       <RenderMdx>{body}</RenderMdx>
 
@@ -132,6 +128,7 @@ export const query = graphql`
     parliamentNavigation {
       pages
       homePage
+      issues
     }
     site {
       siteMetadata {

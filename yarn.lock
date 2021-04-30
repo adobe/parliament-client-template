@@ -79,17 +79,17 @@
   dependencies:
     glob "^7.1.6"
 
-"@adobe/parliament-transformer-navigation@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.1.0.tgz#60fdde0e968f80ca2976bc71d4eb42709f6bfa1a"
-  integrity sha512-Uk1tfb02ezoEXV1uM7AcGfmII0eDxHRl6xDUYNmjSBTczprXlZy8vWDs64G3xEnec7aElLlIk+PJe9xWmHtqWA==
+"@adobe/parliament-transformer-navigation@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.2.0.tgz#637c3118ab148eaeb609421f28df20d30b6580a8"
+  integrity sha512-00tkIwu6cN9pxIps1F4fp+anUz0AVKBayU5R2xdYStWHE+NGJ90cWp7Kj8+di3RE4ezcXwv5LFmsY61w6C8LKQ==
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^4.1.10":
-  version "4.1.10"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.1.10.tgz#5839272bf68de0e0cfc5f72f1036d556ba402196"
-  integrity sha512-mye7gKGr7ESKJM3cxtmt5onsE6fxxWP0RWAsTPxeJHA5X5mxu8yhEI7H4B7YdkP0OiRvzhH3hK/ySQbXT+2X/Q==
+"@adobe/parliament-ui-components@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.2.0.tgz#6a4802a635d7061d5763d2e8a754c423cba22c85"
+  integrity sha512-1neCt4uQFJPSxINcZIQkNrqu2JiT4ZY2Txnq42HzOrj77u5io30GRaMyOBhP6pcByj7W6rUTU83wI7pukODBJg==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"

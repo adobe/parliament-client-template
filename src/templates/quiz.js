@@ -14,7 +14,6 @@
 import { css, jsx } from "@emotion/react"
 
 import { graphql } from "gatsby"
-import CourseNav from "../components/CourseNav"
 import QuizLayout from "../components/quizlayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
 import { Next } from "../components/NextPrev"
@@ -66,9 +65,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       sideNav={
         <SiteMenu
           currentPage={location.pathname}
-          gitRemote={gitRemote}
           pages={parliamentNavigation.pages}
-          CustomNavComponent={CourseNav}
         />
       }
       rightRail={

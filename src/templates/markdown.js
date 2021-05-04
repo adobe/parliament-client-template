@@ -19,11 +19,7 @@ import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
 
 import { Flex, View } from "@adobe/react-spectrum"
-import {
-  Contributors,
-  Link,
-  stripManifestPath,
-} from "@adobe/parliament-ui-components"
+import { Contributors, Link } from "@adobe/parliament-ui-components"
 import SiteActionButtons from "../components/SiteActionButtons"
 import RightRail from "../components/RightRail"
 
@@ -38,7 +34,6 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
-  const homePage = stripManifestPath(parliamentNavigation.homePage, gitRemote)
   return (
     <DocLayout
       title={pageContext.seo}
@@ -49,9 +44,10 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
       sideNav={
         <SiteMenu
           currentPage={
-            location.pathname !== withPrefix("/") ? location.pathname : homePage
+            location.pathname !== withPrefix("/")
+              ? location.pathname
+              : parliamentNavigation.homePage
           }
-          gitRemote={gitRemote}
           pages={parliamentNavigation.pages}
         />
       }

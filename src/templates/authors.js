@@ -35,20 +35,14 @@ const compare = (a, b) => {
 }
 
 const Authors = ({ location, pageContext }) => {
-  const { authors, pages, gitRemote } = pageContext
+  const { authors, pages } = pageContext
 
   return (
     <DocLayout
       location={location}
       title="All Posts"
       pages={pages}
-      sideNav={
-        <SiteMenu
-          currentPage={location.pathname}
-          pages={pages}
-          gitRemote={gitRemote}
-        />
-      }
+      sideNav={<SiteMenu currentPage={location.pathname} pages={pages} />}
     >
       <Heading1>Authors</Heading1>
       <Flex direction="column" marginTop="size-300" gap="size-100">

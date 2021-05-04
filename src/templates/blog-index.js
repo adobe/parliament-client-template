@@ -43,13 +43,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
       title={data.site.siteMetadata.title}
       gitRemote={gitRemote}
       pages={pages}
-      sideNav={
-        <SiteMenu
-          gitRemote={gitRemote}
-          currentPage={location.pathname}
-          pages={pages}
-        />
-      }
+      sideNav={<SiteMenu currentPage={location.pathname} pages={pages} />}
     >
       {posts.map(({ node }) => {
         if (node.fields.slug.includes("blog/")) {

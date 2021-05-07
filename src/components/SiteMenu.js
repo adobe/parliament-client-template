@@ -20,7 +20,11 @@ import { Nav, Search } from "@adobe/parliament-ui-components"
 
 import "./sitenav.css"
 
-const SiteMenu = ({ currentPage, pages }) => {
+// NOTE: spectrum _visually_ renders everything past 2 levels the same
+// i.e.: it seemingly flattens all of the pages. Consequently, depth only
+// controls the _number_ of pages rendered, allowing templates to logically
+// organize/group their pages. It does not visually change anything.
+const SiteMenu = ({ currentPage, pages , depth = 8 }) => {
   const { ParliamentSearchIndex } = useStaticQuery(
     graphql`
       query {
@@ -71,7 +75,7 @@ const SiteMenu = ({ currentPage, pages }) => {
           overflow-x: hidden;
         `}
       >
-        <Nav data={pages} selected={currentPage} />
+        <Nav data={pages} selected={currentPage} depth={depth} />
       </div>
     </div>
   )

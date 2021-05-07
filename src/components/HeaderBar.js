@@ -17,7 +17,7 @@ import SiteMenu from "./SiteMenu"
 
 import { useMediaQuery } from "react-responsive"
 
-const HeaderBar = ({ siteTitle, forceMobile, ...props }) => {
+const HeaderBar = ({ siteTitle, forceMobile, gitRemote, ...props }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
 
   return (
@@ -26,7 +26,7 @@ const HeaderBar = ({ siteTitle, forceMobile, ...props }) => {
       titleUrl="https://developers.corp.adobe.com"
       siteTitle={siteTitle}
       forceMobile={forceMobile}
-      menu={<SiteMenu isMobile={isMobile} {...props} />}
+      menu={<SiteMenu isMobile={isMobile} gitRemote={gitRemote} {...props} />}
       {...props}
     />
   )

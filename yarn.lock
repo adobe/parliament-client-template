@@ -86,10 +86,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.4.1.tgz#6e2209d1fc28d13bef8c1a73bf9705d9c57c1e78"
-  integrity sha512-Uk9ngUsMeA5enwARm6ZX4jqiJWjsHifnvvAz27327/CtxdXKA3/5gbpXsK2GRJImwY+obrdgb2WvYrL8gHh1DQ==
+"@adobe/parliament-ui-components@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.4.2.tgz#f438a15a8e99ff29ddf16be98a8dbcf5fbe8f6bf"
+  integrity sha512-As2o5XnaqDAWykbwwzyBklpekYAL/aNSYofVEokegNmb68ALsrfrun/7tkqsqxYteDyIWNPNkzphSUmmTWUOTg==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"

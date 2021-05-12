@@ -171,5 +171,12 @@ module.exports = {
         path: `${process.env.LOCAL_PROJECT_DIRECTORY}/changelog`,
       },
     },
+    {
+      resolve: `@adobe/parliament-source-jsonschema`,
+      options: {
+        path: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+        patterns: patterns,
+      },
+    },
   ],
 }

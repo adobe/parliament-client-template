@@ -32,7 +32,7 @@
     "@spectrum-css/textfield": "^3.0.2",
     "@spectrum-css/vars": "^3.0.2",
     "@spectrum-icons/workflow": "^3.2.0",
-    "core-js": "^3.2.1",
+    "core-js": "^3.12.1",
     "elasticlunr": "^0.9.5",
     "eslint-plugin-flowtype": "^5.2.0",
     "fast-glob": "^3.2.4",

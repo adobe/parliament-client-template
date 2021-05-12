@@ -79,6 +79,14 @@
   dependencies:
     glob "^7.1.6"
 
+"@adobe/parliament-source-jsonschema@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-source-jsonschema/-/parliament-source-jsonschema-0.0.2.tgz#875fe74b62ec0a5284b273964b3aa0578c8b5be2"
+  integrity sha512-Q6w5zqo4LmStLu5mqdWOir/4hhLw9bvEid8fEe2iGw/jEqj+CCnrVT8IZ0jEr/tajfWBos7g/YYyFKDQPhBDJA==
+  dependencies:
+    "@apidevtools/json-schema-ref-parser" "^9.0.7"
+    fast-glob "^3.2.5"
+
 "@adobe/parliament-transformer-navigation@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.2.0.tgz#637c3118ab148eaeb609421f28df20d30b6580a8"
@@ -200,7 +208,7 @@
     "@react-stately/collections" "^3.3.2"
     "@react-stately/data" "^3.4.0"
 
-"@apidevtools/json-schema-ref-parser@^9.0.6":
+"@apidevtools/json-schema-ref-parser@^9.0.6", "@apidevtools/json-schema-ref-parser@^9.0.7":
   version "9.0.7"
   resolved "https://registry.yarnpkg.com/@apidevtools/json-schema-ref-parser/-/json-schema-ref-parser-9.0.7.tgz#64aa7f5b34e43d74ea9e408b90ddfba02050dde3"
   integrity sha512-QdwOGF1+eeyFh+17v2Tz626WX0nucd1iKOm6JUTUvCZdbolblCOOQCxGrQPY0f7jEhn36PiAWqZnsC2r5vmUWg==
@@ -9400,7 +9408,7 @@ fast-glob@^2.2.3:
     merge2 "^1.2.3"
     micromatch "^3.1.10"
 
-fast-glob@^3.0.3, fast-glob@^3.1.1, fast-glob@^3.2.4:
+fast-glob@^3.0.3, fast-glob@^3.1.1, fast-glob@^3.2.4, fast-glob@^3.2.5:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.5.tgz#7939af2a656de79a4f1901903ee8adcaa7cb9661"
   integrity sha512-2DtFcgT68wiTTiwZ2hNdJfcHNke9XOfnwmBRWXhmeKM8rF0TGwmC/Qto3S7RoZKp5cilZbxzO5iTNTQsJ+EeDg==

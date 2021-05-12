@@ -69,7 +69,7 @@
     "remark-slug": "^6.0.0",
     "rsuite": "^4.10.0",
     "shelljs": "^0.8.4",
-    "styled-components": "^5.2.0",
+    "styled-components": "^5.3.0",
     "widdershins": "^4.0.1",
     "yaml": "^1.7.2"
   },

@@ -46,7 +46,7 @@ const coursePages = (pages, catalogDir) =>
 
     return (
       page.path.indexOf(catalogDir) === 0 &&
-      pieces.length === 3 &&
+      pieces.length > 2 &&
       pieces.pop() === "README.md"
     )
   })

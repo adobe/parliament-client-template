@@ -66,6 +66,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
         <SiteMenu
           currentPage={location.pathname}
           pages={parliamentNavigation.pages}
+          depth={2}
         />
       }
       rightRail={

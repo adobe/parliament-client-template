@@ -15235,10 +15235,10 @@ openapi-sampler@^1.0.0-beta.14, openapi-sampler@^1.0.0-beta.15, openapi-sampler@
   dependencies:
     json-pointer "^0.6.0"
 
-openapi-snippet@^0.7.0:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/openapi-snippet/-/openapi-snippet-0.7.1.tgz#77b26d98e452be3ce626e7fc13308b99c15ac088"
-  integrity sha512-aHsxgrsoKgUVCtRlo06UZgVQjx5AfC51iuKyuwp7OovKoV58WUz5OTp7dQ2L51xfKGiO1+ooQvHhdHqHqaFaRg==
+openapi-snippet@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/openapi-snippet/-/openapi-snippet-0.9.2.tgz#ba8313790fbd7066a5ee5fd1d9b4266181f0d0a7"
+  integrity sha512-wkULZpUrAzRJfUZu0KoWUOj/UVgzg8C4MuAVqHF6YBRvbANHnxRdAYs5ARJmbYytcsV/euiV779a4K8RvZir4A==
   dependencies:
     httpsnippet "^1.16.7"
     openapi-sampler "^1.0.0-beta.14"

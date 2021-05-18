@@ -191,6 +191,21 @@ exports.createPages = async ({ actions, graphql }) => {
           pages
           homePage
         }
+        allParliamentJsonSchema {
+          edges {
+            node {
+              id
+              _id
+              _schema
+              description
+              properties
+              slug
+              title
+              type
+              _defs
+            }
+          }
+        }
       }
     `
   )
@@ -206,6 +221,20 @@ exports.createPages = async ({ actions, graphql }) => {
   })
   const contributors = result.data.allGithubContributors.edges
   const parliamentNavigation = result.data.parliamentNavigation
+
+  // Create JSON Schema pages
+  result.data.allParliamentJsonSchema.edges.map(({ node }) => {
+    createPage({
+      path: node.slug,
+      component: templates["json-schema"],
+      context: {
+        id: node.id,
+        slug: node.slug,
+        gitRemote: gitRemote,
+        schema: node,
+      },
+    })
+  })
 
   if (posts.length > 0) {
     const postsNav = {
@@ -635,10 +664,11 @@ const createIndex = async (nodes, pages) => {
         project: `${process.env.JOB_NAME}`,
       }
       index.addDoc(doc)
-      const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`.replace(
-        /\/\//g,
-        "/"
-      )
+      const fullSitePath =
+        `${process.env.GATSBY_SITE_PATH_PREFIX}/${doc.path}`.replace(
+          /\/\//g,
+          "/"
+        )
       doc.id = fullSitePath
       doc.path = fullSitePath
       project.push(doc)
@@ -648,10 +678,11 @@ const createIndex = async (nodes, pages) => {
   // Open API specs are not in graphql db, hence this hack
   for (let spec of openApiSearchDocs) {
     index.addDoc(spec)
-    const fullSitePath = `${process.env.GATSBY_SITE_PATH_PREFIX}/${spec.path}`.replace(
-      /\/\//g,
-      "/"
-    )
+    const fullSitePath =
+      `${process.env.GATSBY_SITE_PATH_PREFIX}/${spec.path}`.replace(
+        /\/\//g,
+        "/"
+      )
     spec.id = fullSitePath
     spec.path = fullSitePath
     spec.group = `${process.env.BUSINESS_GROUP}`

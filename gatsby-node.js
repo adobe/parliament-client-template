@@ -203,6 +203,7 @@ exports.createPages = async ({ actions, graphql }) => {
               title
               type
               _defs
+              required
             }
           }
         }
@@ -224,16 +225,18 @@ exports.createPages = async ({ actions, graphql }) => {
 
   // Create JSON Schema pages
   result.data.allParliamentJsonSchema.edges.map(({ node }) => {
-    createPage({
-      path: node.slug,
-      component: templates["json-schema"],
-      context: {
-        id: node.id,
-        slug: node.slug,
-        gitRemote: gitRemote,
-        schema: node,
-      },
-    })
+    if (node.slug !== "/dummy-schema") {
+      createPage({
+        path: node.slug,
+        component: templates["json-schema"],
+        context: {
+          id: node.id,
+          slug: node.slug,
+          gitRemote: gitRemote,
+          schema: node,
+        },
+      })
+    }
   })
 
   if (posts.length > 0) {

@@ -79,10 +79,10 @@
   dependencies:
     glob "^7.1.6"
 
-"@adobe/parliament-source-jsonschema@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-source-jsonschema/-/parliament-source-jsonschema-0.0.3.tgz#1a7c5f274a3aa02c634670062bebee38dcef77c9"
-  integrity sha512-XFV1wE62gqYWROydk/TXdLG4Hx7PzGsjDe74gOQ4cyNR0kAqJG568gBo6LrN+cPNzL97hqJef1JGgThutkRfiA==
+"@adobe/parliament-source-jsonschema@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-source-jsonschema/-/parliament-source-jsonschema-0.0.4.tgz#1076be3f8e27c6c452ca48243c8e0f9a9f5e34f0"
+  integrity sha512-K/7w9hUyw+lYD/bPugq18Y+IysReSwtRu9RI1b+e2bnEA7De6Th4ugXdEd2W2jaDCDicZvKjtYiMSTsikjkGDw==
   dependencies:
     "@apidevtools/json-schema-ref-parser" "^9.0.7"
     fast-glob "^3.2.5"
@@ -94,10 +94,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.5.1.tgz#c85859d88a7c75ef4e7bf766f01be56b4dd2fa1a"
-  integrity sha512-TtMO+w+Et/BBhyY3we881GT5N0uIvkaqpw7mi4myis/3Jh4Zss2a1zwRhfto8hpNhCH5iAsb3dhy84T0q7S0pA==
+"@adobe/parliament-ui-components@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.5.3.tgz#e4334b954735d9cd9ead52bc65c55dd48967aeab"
+  integrity sha512-OiMPyQNYo1fKdZFjPfXN8k0dMwZ+/C8YJsGdRIjbMu972EPgOKwGr2qcP02pJepknsh5NJHOwBc+zxteTrrt6Q==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"

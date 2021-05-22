@@ -19,7 +19,6 @@ import "rsuite/dist/styles/rsuite-default.css"
 import { Steps } from "rsuite"
 
 const styles = {
-  width: '200px',
   display: 'inline-table',
   verticalAlign: 'top'
 };

@@ -17,7 +17,7 @@ import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
-import ProgressBar from "../components/ProgressBar"
+import ProgressBarDrawer from "../components/ProgressBarDrawer"
 import SiteMenu from "../components/SiteMenu"
 import RenderMdx from "../components/RenderMdx"
 import NextPrev from "../components/NextPrev"
@@ -101,11 +101,12 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
           />
-          <hr />
-          <ProgressBar
+          <br />
+          <ProgressBarDrawer
             pages={progressedModulePages}
             currentIx={currentModuleIx}
           />
+          <hr />
           Powered by{" "}
           <Link href="https://developers.corp.adobe.com/parliament-docs/README.md">
             Parliament

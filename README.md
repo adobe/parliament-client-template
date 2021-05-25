@@ -2,7 +2,6 @@
 
 ## 🚀 Quick start
 
-
 1. **Clone your docs repo**
 
    ```sh

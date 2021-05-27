@@ -53,10 +53,10 @@
     gatsby-source-filesystem "^2.1.19"
     rimraf "^2.6.2"
 
-"@adobe/parliament-markdown-cleaner@^1.5.4":
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-markdown-cleaner/-/parliament-markdown-cleaner-1.5.4.tgz#c635b638d222da9e70752a5a26e14852b6c6c265"
-  integrity sha512-Sm8X+kCiTFIAxdvdxHZb9lvKnPjT38Av3JEG2uuL/MjW084kqYkIlFWCapPAm6PulRErbtFArDqAXHg4BEfvTw==
+"@adobe/parliament-markdown-cleaner@^1.5.5":
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-markdown-cleaner/-/parliament-markdown-cleaner-1.5.5.tgz#4bb57a3acd029b7eec7263b6e06a3a8ca8e78634"
+  integrity sha512-tEws4LRYfa1DlgNDzZmQhYHSK+Lbh6x8D+A5Xx5L9rkMmK+dOn8ogdRxduftdoeVqhkBLU4LKI42SSH/NTJ/lQ==
   dependencies:
     "@svgr/core" "^5.5.0"
     download "^8.0.0"

@@ -20,6 +20,7 @@ import {
   Heading4,
   Heading5,
   Heading6,
+  JsonSchema,
   Link,
   List,
   Paragraph,
@@ -70,5 +71,6 @@ export const componentsMapping = {
   query: Query,
   headers: Headers,
   parameter: Parameter,
+  jsonschema: JsonSchema,
   ...inlineImages,
 }

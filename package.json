@@ -12,7 +12,7 @@
     "@adobe/gatsby-remark-afm": "^0.8.4",
     "@adobe/gatsby-source-github-file-contributors": "https://github.com/macdonst/gatsby-source-github-file-contributors.git",
     "@adobe/gatsby-source-parliament": "^1.0.0",
-    "@adobe/parliament-markdown-cleaner": "^1.5.8",
+    "@adobe/parliament-markdown-cleaner": "^1.5.9",
     "@adobe/parliament-source-changelog": "^0.0.4",
     "@adobe/parliament-source-jsonschema": "^0.0.4",
     "@adobe/parliament-transformer-navigation": "^1.2.0",

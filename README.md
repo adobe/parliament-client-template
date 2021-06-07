@@ -47,6 +47,9 @@
    # NOTE: this is an absolute path to a local copy of $GATSBY_SOURCE
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
+
+   # used to mock out features that require a username
+   LDAP_USER=<your LDAP>
    ```
 
    For Jenkins:

@@ -38,7 +38,7 @@
 
 "@adobe/gatsby-source-github-file-contributors@https://github.com/macdonst/gatsby-source-github-file-contributors.git":
   version "0.2.0"
-  resolved "https://github.com/macdonst/gatsby-source-github-file-contributors.git#84e313fb1a2f96acf4c260eb4df821aced3ac4a9"
+  resolved "https://github.com/macdonst/gatsby-source-github-file-contributors.git#d2d977ffb1b4401d448d50817ba1a3e618f8689f"
   dependencies:
     globby "^11.0.1"
     graphql-fetch "^1.0.1"

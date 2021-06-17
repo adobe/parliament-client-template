@@ -124,5 +124,8 @@
   },
   "bugs": {
     "url": "https://github.com/adobe/parliament-client-template.git/issues"
+  },
+  "peerDependencies": {
+    "swagger-ui-react": "^3.50.0"
   }
 }

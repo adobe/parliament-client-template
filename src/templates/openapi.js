@@ -18,23 +18,23 @@ import SiteMenu from "../components/SiteMenu"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {
   const { parliamentNavigation } = data
-  const menu =
-    parliamentNavigation.openApiEngine === "swagger-ui" ? (
-      <SiteMenu
-        currentPage={
-          location.pathname !== withPrefix("/")
-            ? location.pathname
-            : parliamentNavigation.homePage
-        }
-        pages={parliamentNavigation.pages}
-      />
-    ) : null
+  const forceMobile = parliamentNavigation.openApiEngine === "redoc"
+  const menu = !forceMobile ? (
+    <SiteMenu
+      currentPage={
+        location.pathname !== withPrefix("/")
+          ? location.pathname
+          : parliamentNavigation.homePage
+      }
+      pages={parliamentNavigation.pages}
+    />
+  ) : null
 
   return (
     <DocLayout
       title={pageContext.seo}
       location={location}
-      forceMobile={true}
+      forceMobile={forceMobile}
       gitRemote={pageContext.gitRemote}
       currentPage={location.pathname}
       pages={parliamentNavigation.pages}

@@ -11,12 +11,24 @@
  */
 
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, withPrefix } from "gatsby"
 import DocLayout from "../components/doclayout"
 import { OpenAPIBlock } from "@adobe/parliament-ui-components"
+import SiteMenu from "../components/SiteMenu"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {
   const { parliamentNavigation } = data
+  const menu =
+    parliamentNavigation.openApiEngine === "swagger-ui" ? (
+      <SiteMenu
+        currentPage={
+          location.pathname !== withPrefix("/")
+            ? location.pathname
+            : parliamentNavigation.homePage
+        }
+        pages={parliamentNavigation.pages}
+      />
+    ) : null
 
   return (
     <DocLayout
@@ -26,6 +38,7 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
       gitRemote={pageContext.gitRemote}
       currentPage={location.pathname}
       pages={parliamentNavigation.pages}
+      sideNav={menu}
     >
       <OpenAPIBlock
         spec={pageContext.spec}

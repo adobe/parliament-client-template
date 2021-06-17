@@ -30,6 +30,7 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
       <OpenAPIBlock
         spec={pageContext.spec}
         backUrl={parliamentNavigation.homePage}
+        engine={parliamentNavigation.openApiEngine}
       />
     </DocLayout>
   )
@@ -40,6 +41,7 @@ export const query = graphql`
     parliamentNavigation {
       pages
       homePage
+      openApiEngine
     }
   }
 `

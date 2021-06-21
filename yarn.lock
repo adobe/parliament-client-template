@@ -88,17 +88,17 @@
     "@apidevtools/json-schema-ref-parser" "^9.0.7"
     fast-glob "^3.2.5"
 
-"@adobe/parliament-transformer-navigation@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.2.0.tgz#637c3118ab148eaeb609421f28df20d30b6580a8"
-  integrity sha512-00tkIwu6cN9pxIps1F4fp+anUz0AVKBayU5R2xdYStWHE+NGJ90cWp7Kj8+di3RE4ezcXwv5LFmsY61w6C8LKQ==
+"@adobe/parliament-transformer-navigation@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.3.0.tgz#fe9fae110cc4207de66ce4ece43d200cde604d22"
+  integrity sha512-a3Za+vCxqpG4aq0mBN9Npebu7oTslv+NgGkU9Wl1d1KgOOw38tr3MUXHIvWDah3EBidJE7d6HQuhKJn9BXBm7g==
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^4.5.9":
-  version "4.5.9"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.5.9.tgz#15f416a149dc196433c24bdc1b629743446115c1"
-  integrity sha512-tuiofjKWRic1icelY+088fFgSEsT9K8Gvy+6fqyRgnMSA060Y1dUergw+u2GCktB6gk7bBWcgOy49mEU/Gz65Q==
+"@adobe/parliament-ui-components@^4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.6.0.tgz#425fa93c49465dc184ef4764e3547c331f55b83d"
+  integrity sha512-nnjbp/w/IAfN609zLpoqKlIFBXRuTx123pLVBlO7zl4iDuB79cvqVLi2ZTDSh8yzc4znAn3CexXMzeuO9XtxrQ==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
@@ -151,6 +151,7 @@
     stream-browserify "^3.0.0"
     stream-http "^3.2.0"
     styled-components "^5.1.1"
+    swagger-ui-react "^3.50.0"
 
 "@adobe/prism-adobe@^1.0.3":
   version "1.0.3"

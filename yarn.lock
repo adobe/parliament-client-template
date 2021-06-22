@@ -95,18 +95,17 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.6.0.tgz#425fa93c49465dc184ef4764e3547c331f55b83d"
-  integrity sha512-nnjbp/w/IAfN609zLpoqKlIFBXRuTx123pLVBlO7zl4iDuB79cvqVLi2ZTDSh8yzc4znAn3CexXMzeuO9XtxrQ==
+"@adobe/parliament-ui-components@^4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-4.6.1.tgz#6ce386f3655ba606cb8b65c9a8832a302541ef3d"
+  integrity sha512-ZyoKCej3lAHCZkkbNjBLT2xZbkJkAu4kdsi4upzqwORfLTyVtp4633DeUqQFaGlIvAqNwEb83ltvnOccIUe9pw==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
-    "@adobe/react-spectrum" "^3.10.0"
+    "@adobe/react-spectrum" "^3.11.0"
     "@emotion/babel-preset-css-prop" "^10.0.27"
     "@emotion/react" "^11.1.2"
     "@emotion/styled" "^11.0.0"
-    "@react-spectrum/tabs" "^3.0.0-rc.0"
     "@spectrum-css/accordion" "^3.0.1"
     "@spectrum-css/alert" "^3.0.0-beta.3"
     "@spectrum-css/assetlist" "^3.0.1"
@@ -194,6 +193,52 @@
     "@react-spectrum/meter" "^3.1.2"
     "@react-spectrum/numberfield" "^3.0.0"
     "@react-spectrum/overlays" "^3.4.2"
+    "@react-spectrum/picker" "^3.2.4"
+    "@react-spectrum/progress" "^3.1.2"
+    "@react-spectrum/provider" "^3.2.0"
+    "@react-spectrum/radio" "^3.1.3"
+    "@react-spectrum/searchfield" "^3.1.4"
+    "@react-spectrum/slider" "^3.0.3"
+    "@react-spectrum/statuslight" "^3.2.1"
+    "@react-spectrum/switch" "^3.1.2"
+    "@react-spectrum/tabs" "^3.0.0"
+    "@react-spectrum/text" "^3.1.2"
+    "@react-spectrum/textfield" "^3.1.6"
+    "@react-spectrum/theme-dark" "^3.2.1"
+    "@react-spectrum/theme-default" "^3.2.1"
+    "@react-spectrum/theme-light" "^3.1.1"
+    "@react-spectrum/tooltip" "^3.1.3"
+    "@react-spectrum/view" "^3.1.2"
+    "@react-spectrum/well" "^3.1.2"
+    "@react-stately/collections" "^3.3.2"
+    "@react-stately/data" "^3.4.0"
+
+"@adobe/react-spectrum@^3.11.0":
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/@adobe/react-spectrum/-/react-spectrum-3.11.1.tgz#81ea02a59804b218f6d17b0356700fa72ec20df1"
+  integrity sha512-3/5uENTMc0vQ6Y/DKyRL+ivgCIGU/kQYzRbJ1bx281odf7yzj9mPiKzh/MlQ8/qfNjzIJJ/2vxFVJyhVKy+QBg==
+  dependencies:
+    "@react-aria/i18n" "^3.3.1"
+    "@react-aria/ssr" "^3.0.2"
+    "@react-aria/visually-hidden" "^3.2.2"
+    "@react-spectrum/actiongroup" "^3.2.0"
+    "@react-spectrum/breadcrumbs" "^3.2.2"
+    "@react-spectrum/button" "^3.5.0"
+    "@react-spectrum/buttongroup" "^3.2.1"
+    "@react-spectrum/checkbox" "^3.2.3"
+    "@react-spectrum/dialog" "^3.3.2"
+    "@react-spectrum/divider" "^3.1.2"
+    "@react-spectrum/form" "^3.2.2"
+    "@react-spectrum/icon" "^3.3.1"
+    "@react-spectrum/illustratedmessage" "^3.1.2"
+    "@react-spectrum/image" "^3.1.2"
+    "@react-spectrum/layout" "^3.2.0"
+    "@react-spectrum/link" "^3.1.2"
+    "@react-spectrum/listbox" "^3.4.3"
+    "@react-spectrum/menu" "^3.3.0"
+    "@react-spectrum/meter" "^3.1.2"
+    "@react-spectrum/numberfield" "^3.0.0"
+    "@react-spectrum/overlays" "^3.4.3"
     "@react-spectrum/picker" "^3.2.4"
     "@react-spectrum/progress" "^3.1.2"
     "@react-spectrum/provider" "^3.2.0"
@@ -3234,6 +3279,20 @@
     "@react-types/shared" "^3.7.0"
     react-transition-group "^2.2.0"
 
+"@react-spectrum/overlays@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@react-spectrum/overlays/-/overlays-3.4.3.tgz#96c02790d3154a3049e97c2095300202fdc2f519"
+  integrity sha512-ry5nXBntOWiAS27EompJfY6ERLpivCu+rpqlr7bkrjvKsdrvnoIF2W6XewdESTdp5W3oU9nrSeuMDDMtzMamBA==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/overlays" "^3.7.0"
+    "@react-aria/utils" "^3.8.1"
+    "@react-spectrum/utils" "^3.6.1"
+    "@react-stately/overlays" "^3.1.2"
+    "@react-types/overlays" "^3.5.0"
+    "@react-types/shared" "^3.7.0"
+    react-transition-group "^2.2.0"
+
 "@react-spectrum/picker@^3.2.4":
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/@react-spectrum/picker/-/picker-3.2.4.tgz#b989ef861c454dcc9741d4cb4b94fa58ed976d5a"
@@ -3363,7 +3422,7 @@
     "@react-types/switch" "^3.1.1"
     "@spectrum-icons/ui" "^3.2.0"
 
-"@react-spectrum/tabs@^3.0.0", "@react-spectrum/tabs@^3.0.0-rc.0":
+"@react-spectrum/tabs@^3.0.0":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@react-spectrum/tabs/-/tabs-3.0.1.tgz#ad224cf929e448e610b5020aed94b4e8f82176a5"
   integrity sha512-CuT0EBBoMz7vKTPK0tAm8BPfBCN//0n8R8+h8uaeIKfIXSS7BTBmwMkDFPeCcI64uhs9H3dlJ1pwDifNua/l2A==
@@ -3465,6 +3524,18 @@
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@react-spectrum/utils/-/utils-3.6.0.tgz#4759c71c655205656b560a6f7dad3fe2fcf8a029"
   integrity sha512-tRHaohWujn2Mz9Lam6TKUYtNYy4WLXt506LOFBq5WRkbaCQ6288NK30/Jb/0PHu9V3k/T98HAAoru6BzLeouNg==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.3.1"
+    "@react-aria/ssr" "^3.0.2"
+    "@react-aria/utils" "^3.8.1"
+    "@react-types/shared" "^3.7.0"
+    clsx "^1.1.1"
+
+"@react-spectrum/utils@^3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@react-spectrum/utils/-/utils-3.6.1.tgz#50738d8fe2ecebbc8ccf28868faeebcd8c2999d9"
+  integrity sha512-tQyQ7o5CBFghfgnYmPpM50YuGSPG2psL+rKayrQGvqUiFsZXz7Qy60/Fn/Py9lDB9OKRk2QbiJapnnTbU45w/g==
   dependencies:
     "@babel/runtime" "^7.6.2"
     "@react-aria/i18n" "^3.3.1"

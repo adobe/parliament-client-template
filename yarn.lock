@@ -4089,7 +4089,7 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/popover/-/popover-3.0.3.tgz#6fb69873474fb968afb738eacb9e121f93e83a09"
   integrity sha512-KvmXv4TV19FBx39KfmgVlDYtvtBqv/8RRK7RRLDDHGViTxZtShjVsVpwIgfkfgn4iJztCnXpWzFqRXWUu2XCpQ==
 
-"@spectrum-css/search@^3.0.1", "@spectrum-css/search@^3.0.3":
+"@spectrum-css/search@^3.0.1":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@spectrum-css/search/-/search-3.0.3.tgz#3415dc106aca0d5dd996e87084a1b47c2b95a882"
   integrity sha512-kdLpKTt0obljuhS1q1tukujRlvSs8sBwij76D4Qp8KpMzwePfZyvv1kYzuWPNZfTeISxWsmyZ6Wxd1uvzjn+UA==
@@ -4104,7 +4104,7 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/table/-/table-3.0.3.tgz#7f7f19905ef3275cbf907ce3a5818e63c30b2caf"
   integrity sha512-nxwzVjLPsXoY/v4sdxOVYLcC+cEbGgJyLcLclT5LT9MGSbngFeUMJzzVR4EvehzuN4dH7hrATG7Mbuq29Mf0Hg==
 
-"@spectrum-css/tabs@^3.0.1", "@spectrum-css/tabs@^3.0.3":
+"@spectrum-css/tabs@^3.0.1":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@spectrum-css/tabs/-/tabs-3.0.3.tgz#51dd6f168c897b0fdc3a7e9f901df7bd2288b4fc"
   integrity sha512-iLP1I72bJWz9APdQB1jiw+pOv5a7N+hYOCJvRoc56Us/hJKVzowkyGRe3uH+8v36nCG9bHxiAQNLoU8eXisVrg==

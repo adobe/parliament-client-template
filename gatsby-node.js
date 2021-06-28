@@ -212,6 +212,30 @@ exports.createPages = async ({ actions, graphql }) => {
   )
 
   if (result.errors) {
+    // console.log(result.errors)
+    result.errors.map((error) => {
+      if (error.message.indexOf("parliamentNavigation")) {
+        console.log("❌  Build Failed")
+        console.log("")
+        console.log("We were unable to find a manifest file.")
+        console.log("")
+        console.log("Possible causes of this problem:")
+        console.log("")
+        console.log("1. Your repo does not contain a manifest file.")
+        console.log(
+          `2. The source patterns you have configured [${process.env.GATSBY_SOURCE_PATTERNS}]`
+        )
+        console.log(
+          "   does not include the folder where the manifest file is contained."
+        )
+        console.log(
+          "3. Your manifest file is not valid JSON or YAML. Try running it against a JSON/YAML linter"
+        )
+        console.log("   JSON: https://jsonformatter.org/json-pretty-print")
+        console.log("   YAML: http://www.yamllint.com/")
+        process.exit(1)
+      }
+    })
     throw result.errors
   }
 

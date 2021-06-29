@@ -142,7 +142,7 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 }
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
+exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
 
   const templates = loadTemplates()
@@ -215,28 +215,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     // console.log(result.errors)
     result.errors.map((error) => {
       if (error.message.indexOf("parliamentNavigation")) {
-        reporter.error("❌  Build Failed")
-        reporter.log("")
-        reporter.log("We were unable to find a manifest file.")
-        reporter.log("")
-        reporter.log("Possible causes of this problem:")
-        reporter.log("")
-        reporter.log("1. Your repo does not contain a manifest file.")
-        reporter.log(
-          `2. The source patterns you have configured [${process.env.GATSBY_SOURCE_PATTERNS}]`
-        )
-        reporter.log(
-          "   does not include the folder where the manifest file is contained."
-        )
-        reporter.log(
-          "3. Your manifest file is not valid JSON or YAML. Try running it against a JSON/YAML linter"
-        )
-        reporter.log("   JSON: https://jsonformatter.org/json-pretty-print")
-        reporter.log("   YAML: http://www.yamllint.com/")
         process.exit(1)
       }
     })
-    throw result.errors
   }
 
   const posts = [],

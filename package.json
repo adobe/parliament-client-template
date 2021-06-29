@@ -95,8 +95,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "build:prod": "gatsby build --prefix-paths",
+    "build": "gatsby build ; yarn run checkbuilderrors $?",
+    "build:prod": "gatsby build --prefix-paths ; yarn run checkbuilderrors $?",
+    "checkbuilderrors": "node ./scripts/checkBuildErrors.js",
     "clean": "gatsby clean",
     "full-clean": "gatsby clean && rm -rf node_modules yarn.lock package-lock.json .cache",
     "cleanmarkdown": "markdown-cleaner",

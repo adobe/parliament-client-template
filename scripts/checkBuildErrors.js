@@ -11,6 +11,8 @@
  */
 
 if (process.argv[2] == 1) {
+  console.log("")
+  console.log("")
   console.log("❌  Build Failed")
   console.log("")
   console.log("We were unable to find a manifest file.")
@@ -29,4 +31,7 @@ if (process.argv[2] == 1) {
   )
   console.log("   JSON: https://jsonformatter.org/json-pretty-print")
   console.log("   YAML: http://www.yamllint.com/")
+  console.log("")
+  console.log("")
+  process.exit(1)
 }

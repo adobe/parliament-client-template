@@ -42,7 +42,7 @@ const OpenApiTemplate = ({ data, pageContext, location }) => {
     >
       <OpenAPIBlock
         spec={pageContext.spec}
-        backUrl={parliamentNavigation.homePage}
+        backUrl={withPrefix(parliamentNavigation.homePage)}
         engine={parliamentNavigation.openApiEngine}
       />
     </DocLayout>

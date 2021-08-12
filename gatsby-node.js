@@ -150,6 +150,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const docTemplate = path.resolve(`src/templates/markdown.js`)
 
   const gitRemote = gitRepoInfo()
+  const gitPathPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
 
   const result = await graphql(
     `
@@ -242,7 +243,7 @@ exports.createPages = async ({ actions, graphql }) => {
     const postsNav = {
       importedFileName: "posts",
       pages: [],
-      path: `/blog`,
+      path: `${gitPathPrefix}/blog`,
       title: "Posts",
     }
 
@@ -288,7 +289,7 @@ exports.createPages = async ({ actions, graphql }) => {
       postsNav.pages.push({
         importedFileName: "posts",
         pages: [],
-        path: `/${post.node.fields.slug}`.replace(/\/\//g, "/"),
+        path: `${gitPathPrefix}/${post.node.fields.slug}`.replace(/\/\//g, "/"),
         title: post.node.frontmatter.title,
       })
 

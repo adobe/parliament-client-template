@@ -29,7 +29,6 @@ const { GraphQLJSONObject } = require("graphql-type-json")
 const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 const glob = require("fast-glob")
-const { withPrefix } = require("gatsby")
 
 const SITE_TAB_TYPE = `SiteTabs`
 
@@ -243,7 +242,7 @@ exports.createPages = async ({ actions, graphql }) => {
     const postsNav = {
       importedFileName: "posts",
       pages: [],
-      path: withPrefix('/blog'),
+      path: `/blog`,
       title: "Posts",
     }
 
@@ -289,7 +288,7 @@ exports.createPages = async ({ actions, graphql }) => {
       postsNav.pages.push({
         importedFileName: "posts",
         pages: [],
-        path: withPrefix(`/${post.node.fields.slug}`).replace(/\/\//g, "/"),
+        path: `/${post.node.fields.slug}`.replace(/\/\//g, "/"),
         title: post.node.frontmatter.title,
       })
 
@@ -310,7 +309,7 @@ exports.createPages = async ({ actions, graphql }) => {
     const authors = {
       importedFileName: "authors",
       pages: [],
-      path: withPrefix('/blog/authors/'),
+      path: `/blog/authors/`,
       title: "Authors",
     }
 
@@ -319,7 +318,7 @@ exports.createPages = async ({ actions, graphql }) => {
       authors.pages.push({
         importedFileName: `${author.login}`,
         pages: [],
-        path: withPrefix(`/blog/author/${author.login}/`),
+        path: `/blog/author/${author.login}/`,
         title: `${author.name || author.login}`,
       })
     })
@@ -327,7 +326,7 @@ exports.createPages = async ({ actions, graphql }) => {
     const tags = {
       importedFileName: "tags",
       pages: [],
-      path: withPrefix('/blog/tags/'),
+      path: `/blog/tags/`,
       title: "Tags",
     }
 
@@ -341,7 +340,7 @@ exports.createPages = async ({ actions, graphql }) => {
       tags.pages.push({
         importedFileName: `${key}`,
         pages: [],
-        path: withPrefix(`/blog/tags/${key}/`),
+        path: `/blog/tags/${key}/`,
         title: `${value} #${key}`,
       })
 

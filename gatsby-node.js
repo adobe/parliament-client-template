@@ -29,6 +29,7 @@ const { GraphQLJSONObject } = require("graphql-type-json")
 const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 const glob = require("fast-glob")
+const { withPrefix } = require("gatsby")
 
 const SITE_TAB_TYPE = `SiteTabs`
 
@@ -211,7 +212,12 @@ exports.createPages = async ({ actions, graphql }) => {
   )
 
   if (result.errors) {
-    throw result.errors
+    // console.log(result.errors)
+    result.errors.map((error) => {
+      if (error.message.indexOf("parliamentNavigation")) {
+        process.exit(1)
+      }
+    })
   }
 
   const posts = [],

@@ -499,12 +499,12 @@ const processOpenApiFiles = async (
           let openapi = false
           if (ext === '.json') {
             let json = JSON.parse(content)
-            if(json.openapi) {
+            if(json.openapi || json.swagger) {
               openapi = true
             }
           } else {
             let yaml = YAML.parse(content)
-            if(yaml.openapi) {
+            if(yaml.openapi || yaml.swagger) {
               openapi = true
             }
           }

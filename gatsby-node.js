@@ -504,6 +504,7 @@ const processOpenApiFiles = async (
             gitRemote
           )
         } catch (e) {
+          console.log(e)
           console.log(`Skipping ${filepath} as it is not an OpenAPI spec`)
         }
       })

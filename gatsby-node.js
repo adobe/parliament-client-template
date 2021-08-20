@@ -29,7 +29,6 @@ const { GraphQLJSONObject } = require("graphql-type-json")
 const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 const glob = require("fast-glob")
-const { YAMLError } = require("yaml/util")
 const YAML = require("yaml")
 
 const SITE_TAB_TYPE = `SiteTabs`

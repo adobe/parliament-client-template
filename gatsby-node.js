@@ -29,6 +29,7 @@ const { GraphQLJSONObject } = require("graphql-type-json")
 const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 const glob = require("fast-glob")
+const YAML = require("yaml")
 const { withPrefix } = require("gatsby")
 
 const SITE_TAB_TYPE = `SiteTabs`
@@ -482,6 +483,9 @@ const processOpenApiFiles = async (
               absolutePath
               name
               ext
+              internal {
+                content
+              }
             }
           }
         }
@@ -490,26 +494,47 @@ const processOpenApiFiles = async (
     if (data.allFile.edges.length > 0) {
       await asyncForEach(data.allFile.edges, async ({ node }) => {
         let filepath = node.absolutePath
+        let ext = node.ext
+        let content = node.internal.content
         let seo = searchTree(
           parliamentNavigation.pages,
           `${node.name}${node.ext}`
         )
-
         try {
-          const swaggerObject = await SwaggerParser.bundle(filepath)
-          if (Object.keys(swaggerObject.paths).includes("")) {
-            swaggerObject.paths = renameProp("", "/", swaggerObject.paths)
+          let openapi = false
+          if (ext === '.json') {
+            let json = JSON.parse(content)
+            if(json.openapi || json.swagger) {
+              openapi = true
+            }
+          } else {
+            let yaml = YAML.parse(content)
+            if(yaml.openapi || yaml.swagger) {
+              openapi = true
+            }
           }
-          await createOpenApiPage(
-            createPage,
-            openapiTemplate,
-            swaggerObject,
-            filepath,
-            seo,
-            gitRemote
-          )
+          if(openapi) {
+            try {
+              const swaggerObject = await SwaggerParser.bundle(filepath)
+              if (Object.keys(swaggerObject.paths).includes("")) {
+                swaggerObject.paths = renameProp("", "/", swaggerObject.paths)
+              }
+              await createOpenApiPage(
+                createPage,
+                openapiTemplate,
+                swaggerObject,
+                filepath,
+                seo,
+                gitRemote
+              )
+            } catch (e) {
+              console.log(`Error parsing the OpenAPI spec at ${filepath}, please fix the below error`)
+              console.log(e.message)
+            } 
+          }
         } catch (e) {
-          console.log(`Skipping ${filepath} as it is not an OpenAPI spec`)
+          // console.log("Error parsing the file: " + filepath)
+          // console.log(e.message)
         }
       })
     }

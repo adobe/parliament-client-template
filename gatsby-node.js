@@ -30,6 +30,7 @@ const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 const glob = require("fast-glob")
 const YAML = require("yaml")
+const { withPrefix } = require("gatsby")
 
 const SITE_TAB_TYPE = `SiteTabs`
 
@@ -151,7 +152,6 @@ exports.createPages = async ({ actions, graphql }) => {
   const docTemplate = path.resolve(`src/templates/markdown.js`)
 
   const gitRemote = gitRepoInfo()
-  const gitPathPrefix = `${gitRemote.organization}/${gitRemote.name}/${gitRemote.ref}`
 
   const result = await graphql(
     `
@@ -213,7 +213,12 @@ exports.createPages = async ({ actions, graphql }) => {
   )
 
   if (result.errors) {
-    throw result.errors
+    // console.log(result.errors)
+    result.errors.map((error) => {
+      if (error.message.indexOf("parliamentNavigation")) {
+        process.exit(1)
+      }
+    })
   }
 
   const posts = [],

@@ -15,7 +15,7 @@ import { graphql, Link } from "gatsby"
 
 export default ({
   data: {
-    allMdx: { edges: postNodes },
+    allMarkdownRemark: { edges: postNodes },
   },
   pageContext: { author },
 }) => (
@@ -35,7 +35,7 @@ export default ({
 
 export const pageQuery = graphql`
   query PostsByAuthorId($authorId: String!) {
-    allMdx(filter: { fields: { authorId: { eq: $authorId } } }) {
+    allMarkdownRemark(filter: { fields: { authorId: { eq: $authorId } } }) {
       edges {
         node {
           id

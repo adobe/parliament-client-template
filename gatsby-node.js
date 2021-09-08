@@ -30,7 +30,7 @@ const converter = require("widdershins")
 const SwaggerParser = require("@apidevtools/swagger-parser")
 const glob = require("fast-glob")
 const YAML = require("yaml")
-const { withPrefix } = require("gatsby")
+// const { withPrefix } = require("gatsby")
 
 const SITE_TAB_TYPE = `SiteTabs`
 
@@ -106,7 +106,7 @@ const loadTemplates = () => {
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === `Mdx`) {
+  if (node.internal.type === `MarkdownRemark`) {
     let slug = ""
     if (node.frontmatter.path) {
       slug = node.frontmatter.path
@@ -156,7 +156,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const result = await graphql(
     `
       query {
-        allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
             node {
               fileAbsolutePath
@@ -223,7 +223,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const posts = [],
     docs = []
-  result.data.allMdx.edges.map((post) => {
+  result.data.allMarkdownRemark.edges.map((post) => {
     post.node.fields.slug.includes("blog/") ? posts.push(post) : docs.push(post)
   })
   const contributors = result.data.allGithubContributors.edges
@@ -502,18 +502,18 @@ const processOpenApiFiles = async (
         )
         try {
           let openapi = false
-          if (ext === '.json') {
+          if (ext === ".json") {
             let json = JSON.parse(content)
-            if(json.openapi || json.swagger) {
+            if (json.openapi || json.swagger) {
               openapi = true
             }
           } else {
             let yaml = YAML.parse(content)
-            if(yaml.openapi || yaml.swagger) {
+            if (yaml.openapi || yaml.swagger) {
               openapi = true
             }
           }
-          if(openapi) {
+          if (openapi) {
             try {
               const swaggerObject = await SwaggerParser.bundle(filepath)
               if (Object.keys(swaggerObject.paths).includes("")) {
@@ -528,9 +528,11 @@ const processOpenApiFiles = async (
                 gitRemote
               )
             } catch (e) {
-              console.log(`Error parsing the OpenAPI spec at ${filepath}, please fix the below error`)
+              console.log(
+                `Error parsing the OpenAPI spec at ${filepath}, please fix the below error`
+              )
               console.log(e.message)
-            } 
+            }
           }
         } catch (e) {
           // console.log("Error parsing the file: " + filepath)

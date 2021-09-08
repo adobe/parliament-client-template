@@ -20,7 +20,7 @@ import Bio from "../components/bio"
 import DocLayout from "../components/doclayout"
 import Link from "../components/Link"
 import SiteMenu from "../components/SiteMenu"
-import RenderMdx from "../components/RenderMdx"
+import renderAst from "../util/AFMRehype"
 
 import "../components/layout.css"
 
@@ -37,7 +37,7 @@ const generateTags = (tagString) => {
 }
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
-  const post = data.mdx
+  const post = data.markdownRemark
   const { author, previous, next, pages, gitRemote } = pageContext
 
   return (
@@ -66,7 +66,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             {generateTags(post.frontmatter.tags)}
           </p>
         </header>
-        <RenderMdx>{post.body}</RenderMdx>
+        {renderAst(post.body)}
         <hr />
         <footer>
           <Bio author={author} />
@@ -111,9 +111,9 @@ export const pageQuery = graphql`
         title
       }
     }
-    mdx(fields: { slug: { eq: $slug } }) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       id
-      body
+      htmlAst
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

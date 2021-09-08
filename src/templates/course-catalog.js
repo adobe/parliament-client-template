@@ -18,7 +18,7 @@ import DocLayout from "../components/doclayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
-import RenderMdx from "../components/RenderMdx"
+import renderAst from "../util/AFMRehype"
 import SiteActionButtons from "../components/SiteActionButtons"
 import RightRail from "../components/RightRail"
 
@@ -99,8 +99,8 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
   const { contributors, gitRemote, dirname } = pageContext
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
-  const { absolutePath, childMdx } = file
-  const { body, tableOfContents, timeToRead } = childMdx
+  const { absolutePath, childMarkdownRemark } = file
+  const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
     : `${sourceFiles}/`
@@ -190,7 +190,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
       </div>
 
       <ExperimentalBadge />
-      <RenderMdx>{body}</RenderMdx>
+      {renderAst(htmlAst)}
 
       <br />
       {coursesBucketed ? (
@@ -230,8 +230,8 @@ export const query = graphql`
       id
       name
       absolutePath
-      childMdx {
-        body
+      childMarkdownRemark {
+        htmlAst
         tableOfContents(maxDepth: 3)
         timeToRead
       }

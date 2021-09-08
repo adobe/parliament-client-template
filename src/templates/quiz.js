@@ -34,8 +34,8 @@ const QuizTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
-  const { absolutePath, childMdx } = file
-  const { body, frontmatter } = childMdx
+  const { absolutePath, childMarkdownRemark } = file
+  const { htmlAst, frontmatter } = childMarkdownRemark
   const { contributors, gitRemote, dirname } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
@@ -144,8 +144,8 @@ export const query = graphql`
       id
       name
       absolutePath
-      childMdx {
-        body
+      childMarkdownRemark {
+        htmlAst
         headings {
           value
         }

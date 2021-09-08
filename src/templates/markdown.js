@@ -16,7 +16,7 @@ import { graphql, withPrefix } from "gatsby"
 import DocLayout from "../components/doclayout"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
-import RenderMdx from "../components/RenderMdx"
+import renderAst from "../util/AFMRehype"
 
 import { Flex, View } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
@@ -27,8 +27,8 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
-  const { absolutePath, childMdx } = file
-  const { body, tableOfContents, timeToRead } = childMdx
+  const { absolutePath, childMarkdownRemark } = file
+  const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
   const { contributors, gitRemote } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
@@ -78,7 +78,7 @@ const MarkdownTemplate = ({ data, location, pageContext }) => {
           issues={parliamentNavigation.issues}
         />
       </div>
-      <RenderMdx>{body}</RenderMdx>
+      {renderAst(htmlAst)}
 
       <Flex
         alignItems="center"
@@ -110,8 +110,8 @@ export const query = graphql`
       id
       name
       absolutePath
-      childMdx {
-        body
+      childMarkdownRemark {
+        htmlAst
         tableOfContents(maxDepth: 3)
         timeToRead
       }

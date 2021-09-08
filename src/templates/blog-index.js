@@ -34,7 +34,7 @@ const generateTags = (tagString) => {
 }
 
 const BlogIndex = ({ data, location, pageContext }) => {
-  const posts = data.allMdx.edges
+  const posts = data.allMarkdownRemark.edges
   const { pages, contributors, gitRemote } = pageContext
 
   return (
@@ -104,7 +104,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           fileAbsolutePath

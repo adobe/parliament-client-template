@@ -114,10 +114,9 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: `gatsby-transformer-remark`,
       options: {
-        extensions: [`.mdx`, `.md`],
-        gatsbyRemarkPlugins: [
+        plugins: [
           {
             resolve: `@adobe/gatsby-remark-afm`,
             options: {

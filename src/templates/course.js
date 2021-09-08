@@ -19,7 +19,7 @@ import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
 import ProgressBarDrawer from "../components/ProgressBarDrawer"
 import SiteMenu from "../components/SiteMenu"
-import RenderMdx from "../components/RenderMdx"
+import renderAst from "../util/AFMRehype"
 import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
@@ -40,8 +40,9 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
   const { file, parliamentNavigation, site } = data
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
-  const { absolutePath, childMdx } = file
-  const { body, tableOfContents, timeToRead, frontmatter } = childMdx
+  const { absolutePath, childMarkdownRemark } = file
+  const { htmlAst, tableOfContents, timeToRead, frontmatter } =
+    childMarkdownRemark
   const { contributors, gitRemote, dirname } = pageContext
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
@@ -135,7 +136,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
         </Flex>
       </div>
       <ExperimentalBadge />
-      <RenderMdx>{body}</RenderMdx>
+      {renderAst(htmlAst)}
 
       <Flex
         direction="column"
@@ -175,8 +176,8 @@ export const query = graphql`
       id
       name
       absolutePath
-      childMdx {
-        body
+      childMarkdownRemark {
+        htmlAst
         tableOfContents(maxDepth: 3)
         timeToRead
         frontmatter {

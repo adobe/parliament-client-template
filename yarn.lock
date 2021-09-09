@@ -73,10 +73,10 @@
     unified "^9.2.0"
     uuid "^8.3.2"
 
-"@adobe/parliament-source-changelog@^0.0.4":
-  version "0.0.4"
-  resolved "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/@adobe/parliament-source-changelog/-/parliament-source-changelog-0.0.4.tgz#f56a15e03b0683fd40c1e0c7f78e163a234440e9"
-  integrity sha1-9WoV4DsGg/1AweDH944WOiNEQOk=
+"@adobe/parliament-source-changelog@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-source-changelog/-/parliament-source-changelog-1.0.0.tgz#b5fd0ebbff47ff44cefc071b06a02ba5ef282111"
+  integrity sha512-2J92Bz41LZxcUGwcK7juvS63VTAKXnCxDzwMXndcEhu+aL0nsUA2tl1oK30GBhSllGOmEWLycaCb6lcIyzOqVw==
   dependencies:
     glob "^7.1.6"
 

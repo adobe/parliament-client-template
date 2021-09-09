@@ -13,7 +13,19 @@
 /** @jsx jsx */
 import React from "react"
 import { css, jsx } from "@emotion/react"
-import { TableOfContents } from "@adobe/parliament-ui-components"
+import { View } from "@adobe/react-spectrum"
+
+const rewriteToc = (tableOfContents) => {
+  let toc = tableOfContents
+    .replaceAll(
+      "<ul",
+      `<ul class='spectrum-Body--sizeM' style="list-style: none; padding-left: var(--spectrum-global-dimension-static-size-200); margin-left: 0; margin-bottom: 0; margin-top: 0;"`
+    )
+    .replaceAll("<li", '<li style="margin-bottom: 0"')
+    .replaceAll("<a", `<a class="spectrum-Link spectrum-Link--quiet"`)
+    .replaceAll("<p", '<p style="margin-bottom: 0"')
+  return toc
+}
 
 const PageActions = ({ tableOfContents, timeToRead }) => {
   return (
@@ -29,7 +41,25 @@ const PageActions = ({ tableOfContents, timeToRead }) => {
         `}
       >
         {tableOfContents ? (
-          <TableOfContents tableOfContents={tableOfContents} />
+          <View
+            elementType="nav"
+            role="navigation"
+            aria-label="Article Outline"
+            marginY="size-400"
+          >
+            <h4
+              className="spectrum-Detail--sizeL"
+              css={css`
+                color: var(--spectrum-global-color-gray-600);
+                margin-bottom: var(--spectrum-global-dimension-static-size-250);
+              `}
+            >
+              On this page
+            </h4>
+            <div
+              dangerouslySetInnerHTML={{ __html: rewriteToc(tableOfContents) }}
+            />
+          </View>
         ) : null}
         {timeToRead ? (
           <p>

@@ -40,6 +40,7 @@ import {
   Tr,
 } from "@adobe/parliament-ui-components"
 import NewtonButton from "../components/NewtonButton"
+import { CodeUI } from "../components/CodeUI"
 import { inlineImages } from "../components/inlineImages"
 
 const renderAst = new rehypeReact({
@@ -66,6 +67,7 @@ const renderAst = new rehypeReact({
       </List>
     ),
     // pre: Pre,
+    pre: CodeUI,
     inlineCode: InlineCode,
     code: InlineCode,
     a: Link,

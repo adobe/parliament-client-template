@@ -16886,7 +16886,7 @@ pretty-ms@^7.0.1:
   dependencies:
     parse-ms "^2.1.0"
 
-prism-react-renderer@^1.1.1:
+prism-react-renderer@^1.1.1, prism-react-renderer@^1.2.1:
   version "1.2.1"
   resolved "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/prism-react-renderer/-/prism-react-renderer-1.2.1.tgz#392460acf63540960e5e3caa699d851264e99b89"
   integrity sha1-OSRgrPY1QJYOXjyqaZ2FEmTpm4k=

@@ -16,15 +16,14 @@ import { css, jsx } from "@emotion/react"
 import { View } from "@adobe/react-spectrum"
 
 const rewriteToc = (tableOfContents) => {
-  console.log("ToC", tableOfContents)
   return tableOfContents
-    .replaceAll(
-      "<ul",
+    .replace(
+      /<ul/g,
       `<ul class='spectrum-Body--sizeM' style="list-style: none; padding-left: var(--spectrum-global-dimension-static-size-200); margin-left: 0; margin-bottom: 0; margin-top: 0;"`
     )
-    .replaceAll("<li", '<li style="margin-bottom: 0"')
-    .replaceAll("<a", `<a class="spectrum-Link spectrum-Link--quiet"`)
-    .replaceAll("<p", '<p style="margin-bottom: 0"')
+    .replace(/<li/g, '<li style="margin-bottom: 0"')
+    .replace(/<a/g, `<a class="spectrum-Link spectrum-Link--quiet"`)
+    .replace(/<p/g, '<p style="margin-bottom: 0"')
 }
 
 const PageActions = ({ tableOfContents, timeToRead }) => {

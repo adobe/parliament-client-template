@@ -15,7 +15,8 @@ import React from "react"
 import { css, jsx } from "@emotion/react"
 import { View } from "@adobe/react-spectrum"
 
-const rewriteToc = (tableOfContents = "") => {
+const rewriteToc = (tableOfContents) => {
+  console.log("ToC", tableOfContents)
   return tableOfContents
     .replaceAll(
       "<ul",

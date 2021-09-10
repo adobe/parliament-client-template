@@ -16,7 +16,7 @@ import rehypeReact from "rehype-react"
 import {
   Alert,
   InlineCode,
-  // Code as Pre,
+  Code as Pre,
   Heading1,
   Heading2,
   Heading3,
@@ -40,7 +40,6 @@ import {
   Tr,
 } from "@adobe/parliament-ui-components"
 import NewtonButton from "../components/NewtonButton"
-import { CodeUI } from "../components/CodeUI"
 import { inlineImages } from "../components/inlineImages"
 
 const renderAst = new rehypeReact({
@@ -66,8 +65,7 @@ const renderAst = new rehypeReact({
         {children}
       </List>
     ),
-    // pre: Pre,
-    pre: CodeUI,
+    pre: Pre,
     inlineCode: InlineCode,
     code: InlineCode,
     a: Link,

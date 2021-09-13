@@ -66,7 +66,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             {generateTags(post.frontmatter.tags)}
           </p>
         </header>
-        {renderAst(post.body)}
+        {renderAst(post.htmlAst)}
         <hr />
         <footer>
           <Bio author={author} />

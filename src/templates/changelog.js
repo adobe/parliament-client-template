@@ -4,7 +4,8 @@ import { css, jsx } from "@emotion/react"
 import { graphql } from "gatsby"
 
 import { View } from "@adobe/react-spectrum"
-import { SideNav, TableOfContents } from "@adobe/parliament-ui-components"
+import { SideNav } from "@adobe/parliament-ui-components"
+import PageActions from "../components/PageActions"
 
 import DocLayout from "../components/doclayout"
 import renderAst from "../util/AFMRehype"
@@ -12,7 +13,7 @@ import RightRail from "../components/RightRail"
 
 export default function ChangeLogTemplate({ data, location, pageContext }) {
   const { markdownRemark } = data
-  const { frontmatter, htmlAst, tableOfContents } = markdownRemark
+  const { frontmatter, htmlAst, timeToRead, tableOfContents } = markdownRemark
   const { pages, selectedKey } = pageContext
   return (
     <DocLayout
@@ -37,9 +38,9 @@ export default function ChangeLogTemplate({ data, location, pageContext }) {
       }
       rightRail={
         <RightRail>
-          <TableOfContents
+          <PageActions
             tableOfContents={tableOfContents}
-            title="In this Update"
+            timeToRead={timeToRead}
           />
         </RightRail>
       }

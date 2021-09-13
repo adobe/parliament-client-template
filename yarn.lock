@@ -95,10 +95,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@5.0.0-beta.3":
-  version "5.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.0.0-beta.3.tgz#9bceb9f2706b145abfab6343f450d93e0e7453af"
-  integrity sha512-1ka5XMo+1xVqImEgFb5CXu5PHYtm24PrBQr2e+BmI07ELya8L/f1/KaxZbcbjKa0I5w5PJd+b/KoFlwWUwk5tg==
+"@adobe/parliament-ui-components@5.0.0-beta.4":
+  version "5.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.0.0-beta.4.tgz#66871a097a340de02d0c1961117395fc93641f9f"
+  integrity sha512-Ul0iQzM63EKoqGtsqh30X/EmeM/OBbALQsb5q86GyxluSBQYT37MnqqfFUkpnUsyjLhzEt+s2vpDtSSsJX2AMQ==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
@@ -16893,8 +16893,8 @@ prism-react-renderer@^1.1.1, prism-react-renderer@^1.2.1:
 
 prismjs@^1.20.0, prismjs@^1.22.0, prismjs@~1.24.0:
   version "1.24.1"
-  resolved "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/prismjs/-/prismjs-1.24.1.tgz#c4d7895c4d6500289482fa8936d9cdd192684036"
-  integrity sha1-xNeJXE1lACiUgvqJNtnN0ZJoQDY=
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.24.1.tgz#c4d7895c4d6500289482fa8936d9cdd192684036"
+  integrity sha512-mNPsedLuk90RVJioIky8ANZEwYm5w9LcvCXrxHlwf4fNVSn8jEipMybMkWUyyF0JhnC+C4VcOVSBuHRKs1L5Ow==
 
 probe-image-size@^6.0.0:
   version "6.0.0"

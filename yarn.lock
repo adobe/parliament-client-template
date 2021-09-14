@@ -95,10 +95,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@5.0.0-beta.6":
-  version "5.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.0.0-beta.6.tgz#bc1e4cd3b3fd5a6115270db9c647a8dfbbb0854e"
-  integrity sha512-GxazCQBU06JTMsa8b/IY+HkdLEGeyoOyINP1cRBXSph2YL2iYxaXPIzXGjWbAs0nmwiVmBVOU4owpj9rtRuMzg==
+"@adobe/parliament-ui-components@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.0.0-beta.7.tgz#716ed8aed53aeded71fb67f19b69c11aa2b70b6d"
+  integrity sha512-W0KSGOFmUw265uIoAz0s3lpY2SOAT14Pla6bcG6VKotV9yOQaMNiNExP6P08GqcheOMbzK191NrSECUCQMZiRg==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
@@ -127,6 +127,7 @@
     "@spectrum-css/vars" "^3.0.1"
     "@spectrum-icons/workflow" "^3.2.0"
     "@stoplight/elements" "^7.3.2"
+    "@stoplight/elements-core" "^7.3.2"
     classnames "^2.2.6"
     elasticlunr "^0.9.5"
     gatsby "^2.29.0"
@@ -4355,7 +4356,7 @@
     "@adobe/react-spectrum-workflow" "^1.0.0"
     "@react-spectrum/icon" "^3.3.2"
 
-"@stoplight/elements-core@~7.3.2":
+"@stoplight/elements-core@^7.3.2", "@stoplight/elements-core@~7.3.2":
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/@stoplight/elements-core/-/elements-core-7.3.2.tgz#c617bee37c3179de55768a1e564d6e658cb4dca7"
   integrity sha512-ePqK6eAurP1KrQVO0iX8OpJG4bad6SfWKqlGY3iiaLgTVl6s65GId5i2+UazQERQvs5TB7JHmK7PpEMGyi3Apw==

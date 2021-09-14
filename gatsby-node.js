@@ -629,7 +629,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       // Put main before module else it messes up react spectrum css import
-      mainFields: ["browser", "main", "module"],
+      mainFields: ["browser", "module", "main"],
     },
   })
 }

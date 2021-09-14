@@ -39,6 +39,7 @@ module.exports = {
     sourceFiles: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
   },
   plugins: [
+    'gatsby-plugin-debug-build',
     {
       resolve: `@adobe/gatsby-source-parliament`,
       options: {

@@ -95,7 +95,7 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@5.0.0-beta.6":
+"@adobe/parliament-ui-components@^5.0.0-beta.6":
   version "5.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.0.0-beta.6.tgz#bc1e4cd3b3fd5a6115270db9c647a8dfbbb0854e"
   integrity sha512-GxazCQBU06JTMsa8b/IY+HkdLEGeyoOyINP1cRBXSph2YL2iYxaXPIzXGjWbAs0nmwiVmBVOU4owpj9rtRuMzg==

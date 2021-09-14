@@ -4355,7 +4355,7 @@
     "@adobe/react-spectrum-workflow" "^1.0.0"
     "@react-spectrum/icon" "^3.3.2"
 
-"@stoplight/elements-core@^7.3.2", "@stoplight/elements-core@~7.3.2":
+"@stoplight/elements-core@~7.3.2":
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/@stoplight/elements-core/-/elements-core-7.3.2.tgz#c617bee37c3179de55768a1e564d6e658cb4dca7"
   integrity sha512-ePqK6eAurP1KrQVO0iX8OpJG4bad6SfWKqlGY3iiaLgTVl6s65GId5i2+UazQERQvs5TB7JHmK7PpEMGyi3Apw==

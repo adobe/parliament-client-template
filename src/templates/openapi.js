@@ -18,7 +18,7 @@ import SiteMenu from "../components/SiteMenu"
 
 const OpenApiTemplate = ({ data, pageContext, location }) => {
   const { parliamentNavigation } = data
-  const forceMobile = parliamentNavigation.openApiEngine === "redoc"
+  const forceMobile = parliamentNavigation.openApiEngine === "redoc" || parliamentNavigation.openApiEngine === "stoplight"
   const menu = !forceMobile ? (
     <SiteMenu
       currentPage={

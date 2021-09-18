@@ -88,10 +88,10 @@
     "@apidevtools/json-schema-ref-parser" "^9.0.7"
     fast-glob "^3.2.5"
 
-"@adobe/parliament-transformer-navigation@^1.4.0-beta.1":
-  version "1.4.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.4.0-beta.1.tgz#24b6d0b4bc4959aa3090fd2ecf79dc88b72b20fe"
-  integrity sha512-A3Ieyc2RV5fYkoStVtpsT/cVE8MY4PgRNt2zWSEjlfpFAC2zHtRsJ/qNg0lUnbPNXDbKWy61l/8W9sS5vjdfkA==
+"@adobe/parliament-transformer-navigation@^1.4.0-beta.2":
+  version "1.4.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-transformer-navigation/-/parliament-transformer-navigation-1.4.0-beta.2.tgz#155456236d2e8c350aa21f9e2f427276b777f957"
+  integrity sha512-ORnn+TnuGmwqRDlXTi6KgloNIeRVkyBZGOS4maufWJY1FZA2LJdTY9XbiPS2VqRCYfD2b3TNEvHiLwARCsH3gw==
   dependencies:
     yaml "^1.10.0"
 

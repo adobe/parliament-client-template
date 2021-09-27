@@ -18,8 +18,7 @@ import QuizLayout from "../components/quizlayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
 import { Next } from "../components/NextPrev"
 import QuizNextPrev from "../components/QuizNextPrev"
-import QuizQuestion from "../components/QuizQuestion"
-import RenderMdx from "../components/RenderMdx"
+import renderQuizAst from "../util/QuizRehype"
 import SiteMenu from "../components/SiteMenu"
 import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
@@ -104,7 +103,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
         </Well>
       )}
       <QuizResults />
-      <RenderMdx overrides={{ ul: QuizQuestion }}>{body}</RenderMdx>
+      {renderQuizAst(htmlAst)}
 
       <Flex
         direction="column"

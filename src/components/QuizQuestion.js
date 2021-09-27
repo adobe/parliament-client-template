@@ -14,10 +14,10 @@ import { Checkbox, CheckboxGroup } from "@adobe/react-spectrum"
 import { QuizProvider, useQuiz } from "./QuizContext"
 
 const answerIsCorrect = (choice) => {
-  const checkBoxes = choice.props.children.filter(
+  const checkBoxes = choice.props?.children?.filter(
     (child) => child.props && child.props.type === "checkbox"
   )
-  if (checkBoxes.length !== 1) {
+  if (!checkBoxes || checkBoxes.length !== 1) {
     return false
   }
 
@@ -61,7 +61,7 @@ const questionDisabled = (selected = [], correct) => {
 }
 
 const QuizChoice = ({ choice, value, selected = [], correct }) => {
-  if (choice.props.originalType !== "li") {
+  if (choice.type !== "li") {
     return null
   }
 

@@ -737,8 +737,8 @@ const createIndex = async (nodes, pages) => {
 const getTitle = (pages, slug, node) => {
   let title = searchTree(pages, slug) || node.frontmatter?.title
   if (!title) {
-    const firstLine = node.rawBody.split("\n", 1)[0]
-    title = firstLine.replace(/#/g, "")
+    const firstLine = node?.rawBody?.split("\n", 1)[0]
+    title = firstLine?.replace(/#/g, "")
   }
   return title
 }

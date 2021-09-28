@@ -48,6 +48,7 @@
     "gatsby-remark-embedder": "^1.11.2",
     "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-images": "^3.1.22",
+    "gatsby-remark-remove-comments": "^0.1.0",
     "gatsby-source-filesystem": "^2.1.18",
     "gatsby-transformer-remark": "^4.10.0",
     "gatsby-transformer-sharp": "^2.8.0",

@@ -150,6 +150,7 @@ module.exports = {
             },
           },
           `gatsby-remark-embedder`,
+          `gatsby-remark-remove-comments`,
         ],
       },
     },

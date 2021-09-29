@@ -11172,13 +11172,6 @@ gatsby-remark-images@^3.1.22:
     unist-util-select "^1.5.0"
     unist-util-visit-parents "^2.1.2"
 
-gatsby-remark-remove-comments@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-remove-comments/-/gatsby-remark-remove-comments-0.1.0.tgz#28fd43f4588b00306d5b038e5d966e850b20aabb"
-  integrity sha512-o/pYK7a67krRHxJLwDInXx1Vst/rT0VGDrULDx9k+vw94/ynO/wqVAuARVOQqsy1QP3omC3qYhxOvEeBRnzh/A==
-  dependencies:
-    remark-remove-comments "^0.1.3"
-
 gatsby-source-filesystem@^2.1.18, gatsby-source-filesystem@^2.1.19:
   version "2.11.1"
   resolved "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/gatsby-source-filesystem/-/gatsby-source-filesystem-2.11.1.tgz#c90f49c096c4bdafd8e68462966b3a6e21fd746b"
@@ -12374,11 +12367,6 @@ hsla-regex@^1.0.0:
   version "1.0.0"
   resolved "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/hsla-regex/-/hsla-regex-1.0.0.tgz#c1ce7a3168c8c6614033a4b5f7877f3b225f9c38"
   integrity sha1-wc56MWjIxmFAM6S194d/OyJfnDg=
-
-html-comment-regex@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.2.tgz#97d4688aeb5c81886a364faa0cad1dda14d433a7"
-  integrity sha512-P+M65QY2JQ5Y0G9KKdlDpo0zK+/OHptU5AaBwUfAIDJZk1MYf32Frm84EcOytfJE0t5JvkAnKlmjsXDnWzCJmQ==
 
 html-encoding-sniffer@^2.0.1:
   version "2.0.1"
@@ -19056,14 +19044,6 @@ remark-parse@^9.0.0:
   integrity sha1-TSCimWZYgOT0r12Qt8e4qTWFNkA=
   dependencies:
     mdast-util-from-markdown "^0.8.0"
-
-remark-remove-comments@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/remark-remove-comments/-/remark-remove-comments-0.1.3.tgz#d06190329bc9584690d8774738850fab53b5cee1"
-  integrity sha512-hfJ1YaY9/fkZ8FPf/ay0t6LD52HylzUBmZbPrYi0UGdvW5Lo4vOB6EOaOCF7ZuOpHhnXLPArIgTGl5yP/2nJlw==
-  dependencies:
-    html-comment-regex "^1.1.2"
-    unist-util-visit "^2.0.3"
 
 remark-retext@^3.1.3:
   version "3.1.3"

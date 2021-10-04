@@ -11,6 +11,7 @@
  */
 
 /** @jsx jsx */
+import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
 
 import { graphql } from "gatsby"
@@ -19,12 +20,17 @@ import ExperimentalBadge from "../components/ExperimentalBadge"
 import { Next } from "../components/NextPrev"
 import QuizNextPrev from "../components/QuizNextPrev"
 import renderQuizAst from "../util/QuizRehype"
-import SiteMenu from "../components/SiteMenu"
+import CourseMenu from "../components/CourseMenu"
 import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
 import { findSelectedPageNextPrev } from "../util/index"
 import { useVersionedLocalStore } from "../util/localstore"
 import RightRail from "../components/RightRail"
+import {
+  completedModules,
+  courseModulePages,
+} from "../util/course"
+
 
 import { Flex, View, Well } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
@@ -54,6 +60,24 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     courseVersion
   )
 
+  const coursePages = courseModulePages(parliamentNavigation.pages, dirname)
+  let [courseProgress, progressLoaded] = useState(false)
+  useEffect(() => {
+    // getItem returns null if key DNE
+    if (courseProgress || courseProgress === null) {
+      return
+    }
+
+    courseProgress = window.localStorage.getItem(dirname)
+    courseProgress = courseProgress ? JSON.parse(courseProgress) : false
+    progressLoaded(courseProgress)
+  })
+
+  let completedModulePaths = completedModules(courseProgress)
+  const progressedModulePages = coursePages.map((page) =>
+    completedModulePaths.includes(page.path) ? page : { title: page.title, path: page.path }
+  )
+
   return (
     <QuizLayout
       title={pageContext.seo}
@@ -62,10 +86,10 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       currentPage={location.pathname}
       pages={parliamentNavigation.pages}
       sideNav={
-        <SiteMenu
+        <CourseMenu
+          completedModulePaths={completedModulePaths}
           currentPage={location.pathname}
-          pages={parliamentNavigation.pages}
-          depth={2}
+          pages={progressedModulePages}
         />
       }
       rightRail={

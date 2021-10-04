@@ -13,6 +13,8 @@ import { React, useState, useEffect, Children } from "react"
 import { Checkbox, CheckboxGroup } from "@adobe/react-spectrum"
 import { QuizProvider, useQuiz } from "./QuizContext"
 
+import PropTypes from 'prop-types'
+
 const answerIsCorrect = (choice) => {
   const checkBoxes = choice.props?.children?.filter(
     (child) => child.props && child.props.type === "checkbox"
@@ -60,7 +62,7 @@ const questionDisabled = (selected = [], correct) => {
   return false
 }
 
-const QuizChoice = ({ choice, value, selected = [], correct }) => {
+const QuizChoice = ({ choice, value, selected = [], correct, ...props }) => {
   if (choice.type !== "li") {
     return null
   }
@@ -82,7 +84,7 @@ const QuizChoice = ({ choice, value, selected = [], correct }) => {
     )
   } else {
     return (
-      <Checkbox isDisabled={questionDisabled(selected, correct)} value={value}>
+      <Checkbox isDisabled={questionDisabled(selected, correct)} value={value} { ...props } >
         {text}
       </Checkbox>
     )
@@ -99,7 +101,8 @@ const shuffle = (arr) =>
     []
   )
 
-const QuizQuestion = ({ children }) => {
+
+const QuizQuestion = ({ children, ...props }) => {
   const [quiz, updateQuiz] = useQuiz()
   const [id] = useState(`id_${Math.random()}`)
   const [shuffledChoices] = useState(shuffle(Children.toArray(children)))
@@ -136,11 +139,16 @@ const QuizQuestion = ({ children }) => {
             choice={choice}
             selected={quiz?.questions[id]?.selected}
             correct={correctChoiceSelections}
+            { ...props }
           />
         )
       })}
     </CheckboxGroup>
   )
+}
+
+QuizQuestion.propTypes = {
+  elementType: PropTypes.string
 }
 
 export default QuizQuestion

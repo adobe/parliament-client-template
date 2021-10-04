@@ -17,9 +17,8 @@ import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
-import ProgressBarDrawer from "../components/ProgressBarDrawer"
-import SiteMenu from "../components/SiteMenu"
 import renderAst from "../util/AFMRehype"
+import CourseMenu from "../components/CourseMenu"
 import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
@@ -27,7 +26,6 @@ import { findSelectedPageNextPrev } from "../util/index"
 import {
   completedModules,
   courseModulePages,
-  courseModuleIx,
 } from "../util/course"
 import { useVersionedLocalStore } from "../util/localstore"
 
@@ -75,9 +73,8 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     progressLoaded(courseProgress)
   })
   let completedModulePaths = completedModules(courseProgress)
-  const currentModuleIx = courseModuleIx(coursePages, location.pathname)
   const progressedModulePages = coursePages.map((page) =>
-    completedModulePaths.includes(page.path) ? page : { title: page.title }
+    completedModulePaths.includes(page.path) ? page : { title: page.title, path: page.path }
   )
 
   return (
@@ -88,10 +85,10 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
       currentPage={location.pathname}
       pages={parliamentNavigation.pages}
       sideNav={
-        <SiteMenu
+        <CourseMenu
+          completedModulePaths={completedModulePaths}
           currentPage={location.pathname}
-          pages={parliamentNavigation.pages}
-          depth={2}
+          pages={progressedModulePages}
         />
       }
       rightRail={
@@ -101,11 +98,6 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
             relativePath={relativePath}
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
-          />
-          <br />
-          <ProgressBarDrawer
-            pages={progressedModulePages}
-            currentIx={currentModuleIx}
           />
           <hr />
           Powered by{" "}

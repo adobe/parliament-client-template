@@ -46,16 +46,14 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
-  const { homePage, issues, pages } = parliamentNavigation
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname,
-    pages,
+    parliamentNavigation.pages,
     dirname,
-    "Course",
-    homePage
+    "Course"
   )
 
-  const coursePages = courseModulePages(pages, dirname)
+  const coursePages = courseModulePages(parliamentNavigation.pages, dirname)
   const { courseVersion } = frontmatter
   const [visited, markVisited] = useVersionedLocalStore(
     dirname,
@@ -85,7 +83,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
       location={location}
       gitRemote={gitRemote}
       currentPage={location.pathname}
-      pages={pages}
+      pages={parliamentNavigation.pages}
       sideNav={
         <CourseMenu
           completedModulePaths={completedModulePaths}
@@ -125,7 +123,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           <SiteActionButtons
             gitRemote={gitRemote}
             relativePath={relativePath}
-            issues={issues}
+            issues={parliamentNavigation.issues}
           />
         </Flex>
       </div>
@@ -180,9 +178,8 @@ export const query = graphql`
       }
     }
     parliamentNavigation {
-      homePage
-      issues
       pages
+      issues
     }
     site {
       siteMetadata {

@@ -60,11 +60,7 @@ const renderQuizAst = new rehypeReact({
     thead: THead,
     tr: Tr,
     p: Paragraph,
-    ul: ({ children, ...props }) => (
-      <QuizQuestion { ...props }>
-        {children}
-      </QuizQuestion>
-    ),
+    ul: QuizQuestion,
     ol: ({ children, ...props }) => (
       <List elementType="ol" {...props}>
         {children}

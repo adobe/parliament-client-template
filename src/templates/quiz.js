@@ -46,13 +46,11 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
-  const { homePage, pages } = parliamentNavigation
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname,
-    pages,
+    parliamentNavigation.pages,
     dirname,
-    "Quiz",
-    homePage
+    "Quiz"
   )
 
   const { courseVersion } = frontmatter
@@ -62,7 +60,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     courseVersion
   )
 
-  const coursePages = courseModulePages(pages, dirname)
+  const coursePages = courseModulePages(parliamentNavigation.pages, dirname)
   let [courseProgress, progressLoaded] = useState(false)
   useEffect(() => {
     // getItem returns null if key DNE
@@ -86,7 +84,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       location={location}
       gitRemote={gitRemote}
       currentPage={location.pathname}
-      pages={pages}
+      pages={parliamentNavigation.pages}
       sideNav={
         <CourseMenu
           completedModulePaths={completedModulePaths}
@@ -180,7 +178,6 @@ export const query = graphql`
       }
     }
     parliamentNavigation {
-      homePage
       pages
     }
     site {

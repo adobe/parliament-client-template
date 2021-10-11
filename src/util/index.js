@@ -17,7 +17,7 @@ export const pathDir = (path) => (path.split("/").slice(0, -1).join("/"))
 export const pageInSameDir = (page, dir) => (page && pathDir(page.path).indexOf(dir) !== -1)
 export const pageTitles = (pages) => pages.map((p) => p.title)
 
-export const findSelectedPageNextPrev = (pathname, pages, cwd, type = "", defaultHomePage = "/") => {
+export const findSelectedPageNextPrev = (pathname, pages, cwd, type = "") => {
   const flat = flattenPages(pages)
   const selectedPage = flat.find((page) => {
     return withPrefix(page.path) === pathname
@@ -27,7 +27,7 @@ export const findSelectedPageNextPrev = (pathname, pages, cwd, type = "", defaul
   let next = flat[flat.indexOf(selectedPage) + 1]
 
   if (!next || !pageInSameDir(next, pathDir(pathname))) {
-    next = { path: defaultHomePage, title: `Complete ${type}` }
+    next = { path: pages[pages.length - 1].path, title: `Complete ${type}` }
   }
 
   return {

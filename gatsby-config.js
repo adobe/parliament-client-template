@@ -20,11 +20,13 @@ require("dotenv").config({
 
 const projectRootDir = __dirname
 const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
-const apiUrl =
+/*const apiUrl =
   gitInfo.source === `github.com`
     ? `https://api.github.com/graphql`
     : `https://git.corp.adobe.com/api/graphql`
+*/
 
+const apiUrl = `https://api.github.com/graphql`
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",").map((item) =>
   item.trim()
 )

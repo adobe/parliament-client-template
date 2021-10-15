@@ -23,10 +23,7 @@ import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
 import { findSelectedPageNextPrev } from "../util/index"
-import {
-  completedModules,
-  courseModulePages,
-} from "../util/course"
+import { completedModules } from "../util/course"
 import { useVersionedLocalStore } from "../util/localstore"
 
 import { Flex, View } from "@adobe/react-spectrum"
@@ -55,7 +52,6 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     homePage
   )
 
-  const coursePages = courseModulePages(pages, dirname)
   const { courseVersion } = frontmatter
   const [visited, markVisited] = useVersionedLocalStore(
     dirname,
@@ -75,9 +71,6 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     progressLoaded(courseProgress)
   })
   let completedModulePaths = completedModules(courseProgress)
-  const progressedModulePages = coursePages.map((page) =>
-    completedModulePaths.includes(page.path) ? page : { title: page.title, path: page.path }
-  )
 
   return (
     <DocLayout
@@ -90,7 +83,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
         <CourseMenu
           completedModulePaths={completedModulePaths}
           currentPage={location.pathname}
-          pages={progressedModulePages}
+          pages={pages}
         />
       }
       rightRail={

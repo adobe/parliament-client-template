@@ -26,10 +26,7 @@ import QuizResults from "../components/QuizResults"
 import { findSelectedPageNextPrev } from "../util/index"
 import { useVersionedLocalStore } from "../util/localstore"
 import RightRail from "../components/RightRail"
-import {
-  completedModules,
-  courseModulePages,
-} from "../util/course"
+import { completedModules } from "../util/course"
 
 
 import { Flex, View, Well } from "@adobe/react-spectrum"
@@ -62,7 +59,6 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     courseVersion
   )
 
-  const coursePages = courseModulePages(pages, dirname)
   let [courseProgress, progressLoaded] = useState(false)
   useEffect(() => {
     // getItem returns null if key DNE
@@ -76,9 +72,6 @@ const QuizTemplate = ({ data, location, pageContext }) => {
   })
 
   let completedModulePaths = completedModules(courseProgress)
-  const progressedModulePages = coursePages.map((page) =>
-    completedModulePaths.includes(page.path) ? page : { title: page.title, path: page.path }
-  )
 
   return (
     <QuizLayout
@@ -91,7 +84,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
         <CourseMenu
           completedModulePaths={completedModulePaths}
           currentPage={location.pathname}
-          pages={progressedModulePages}
+          pages={pages}
         />
       }
       rightRail={

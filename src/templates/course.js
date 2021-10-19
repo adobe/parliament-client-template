@@ -22,7 +22,7 @@ import CourseMenu from "../components/CourseMenu"
 import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
-import { findSelectedPageNextPrev } from "../util/index"
+import { findSelectedPageNextPrev, flattenPages } from "../util/index"
 import { completedModules } from "../util/course"
 import { useVersionedLocalStore } from "../util/localstore"
 
@@ -44,9 +44,10 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
   const { homePage, issues, pages } = parliamentNavigation
+  const flattenedPages = flattenPages(pages)
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname,
-    pages,
+    flattenedPages,
     "Course",
     homePage
   )
@@ -82,7 +83,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
         <CourseMenu
           completedModulePaths={completedModulePaths}
           currentPage={location.pathname}
-          pages={pages}
+          pages={flattenedPages}
         />
       }
       rightRail={

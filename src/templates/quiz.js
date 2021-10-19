@@ -23,7 +23,7 @@ import renderQuizAst from "../util/QuizRehype"
 import CourseMenu from "../components/CourseMenu"
 import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
-import { findSelectedPageNextPrev } from "../util/index"
+import { findSelectedPageNextPrev, flattenPages } from "../util/index"
 import { useVersionedLocalStore } from "../util/localstore"
 import RightRail from "../components/RightRail"
 import { completedModules } from "../util/course"
@@ -44,9 +44,10 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
   const { homePage, pages } = parliamentNavigation
+  const flattenedPages = flattenPages(pages)
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname,
-    pages,
+    flattenedPages,
     "Quiz",
     homePage
   )
@@ -83,7 +84,7 @@ const QuizTemplate = ({ data, location, pageContext }) => {
         <CourseMenu
           completedModulePaths={completedModulePaths}
           currentPage={location.pathname}
-          pages={pages}
+          pages={flattenedPages}
         />
       }
       rightRail={

@@ -22,7 +22,7 @@ import "./sitenav.css"
 // i.e.: it seemingly flattens all of the pages. Consequently, depth only
 // controls the _number_ of pages rendered, allowing templates to logically
 // organize/group their pages. It does not visually change anything.
-const CourseMenu = ({ currentPage, pages, completedModulePaths }) => {
+const CourseMenu = ({ currentPageFullPath, pages, seenPaths }) => {
   return (
     <div
       css={css`
@@ -41,8 +41,8 @@ const CourseMenu = ({ currentPage, pages, completedModulePaths }) => {
       >
         <CourseNav
           data={pages}
-          selected={currentPage}
-          completedModulePaths={completedModulePaths}
+          selected={currentPageFullPath}
+          seenPaths={seenPaths}
         />
       </div>
     </div>
@@ -50,12 +50,15 @@ const CourseMenu = ({ currentPage, pages, completedModulePaths }) => {
 }
 
 CourseMenu.propTypes = {
-  currentPage: PropTypes.string,
-  forceMobile: PropTypes.bool,
+  currentPageFullPath: PropTypes.string,
+  seenPaths: PropTypes.array,
+  pages: PropTypes.array,
 }
 
 CourseMenu.defaultProps = {
-  currentPage: "",
+  currentPageFullPath: "/",
+  seenPaths: [],
+  pages: PropTypes.array,
   forceMobile: false,
 }
 

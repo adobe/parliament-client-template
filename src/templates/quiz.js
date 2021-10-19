@@ -82,8 +82,8 @@ const QuizTemplate = ({ data, location, pageContext }) => {
       pages={pages}
       sideNav={
         <CourseMenu
-          completedModulePaths={completedModulePaths}
-          currentPage={location.pathname}
+          seenPaths={completedModulePaths}
+          currentPageFullPath={location.pathname}
           pages={flattenedPages}
         />
       }

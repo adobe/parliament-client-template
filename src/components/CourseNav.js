@@ -10,6 +10,7 @@ governing permissions and limitations under the License.
 */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link as GatsbyLink } from "gatsby"
 
 import '@spectrum-css/sidenav'
 
@@ -36,13 +37,13 @@ const navItemClass = (path, selectedPathUri, completedModulePaths) => {
 
 const navListItemLink = (liIndex, path, title, selected, completedModulePaths) => (
   <li className={navItemClass(path, selected, completedModulePaths)} key={liIndex}>
-    <a
-      href={path}
+    <GatsbyLink
+      to={path}
       className='spectrum-SideNav-itemLink'
       style={liStyles}
     >
       {title}
-    </a>
+    </GatsbyLink>
   </li>
 )
 

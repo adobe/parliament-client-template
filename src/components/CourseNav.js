@@ -49,12 +49,18 @@ const navListItemLink = (liIndex, path, title, selected, completedModulePaths) =
 const navListItemDeadLink = (liIndex, path, title, selected, completedModulePaths) =>
   navListItemLink(liIndex, '#', title, selected, completedModulePaths)
 
+// here to get around page paths being pre-pended with different roots. Only valid in the context of projects
+// 🤷‍♂️
+const moduleCanBeNavigatedTo = (completedModulePaths, selected, modulePath) =>
+  selected.endsWith(modulePath) || modulePath.endsWith(selected) ||
+    completedModulePaths.some(path => path.endsWith(modulePath) || modulePath.endsWith(path))
+
 const nav = (data, selected, completedModulePaths) => {
     return (
       <ul className='spectrum-SideNav spectrum-SideNav--multiLevel'>
         {data.map(
           (node, index) => {
-            if (completedModulePaths.includes(node.path) || node.path == selected) {
+            if (moduleCanBeNavigatedTo(completedModulePaths, selected, node.path)) {
               return navListItemLink(index, node.path, node.title, selected, completedModulePaths)
             }
 

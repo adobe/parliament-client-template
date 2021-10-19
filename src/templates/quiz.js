@@ -47,7 +47,6 @@ const QuizTemplate = ({ data, location, pageContext }) => {
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname,
     pages,
-    dirname,
     "Quiz",
     homePage
   )

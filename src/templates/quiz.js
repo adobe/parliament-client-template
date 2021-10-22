@@ -11,6 +11,7 @@
  */
 
 /** @jsx jsx */
+import { useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
 
 import { graphql } from "gatsby"
@@ -19,12 +20,14 @@ import ExperimentalBadge from "../components/ExperimentalBadge"
 import { Next } from "../components/NextPrev"
 import QuizNextPrev from "../components/QuizNextPrev"
 import renderQuizAst from "../util/QuizRehype"
-import SiteMenu from "../components/SiteMenu"
+import CourseMenu from "../components/CourseMenu"
 import QuizMeter from "../components/QuizMeter"
 import QuizResults from "../components/QuizResults"
-import { findSelectedPageNextPrev } from "../util/index"
+import { findSelectedPageNextPrev, flattenPages } from "../util/index"
 import { useVersionedLocalStore } from "../util/localstore"
 import RightRail from "../components/RightRail"
+import { completedModules } from "../util/course"
+
 
 import { Flex, View, Well } from "@adobe/react-spectrum"
 import { Contributors, Link } from "@adobe/parliament-ui-components"
@@ -40,11 +43,13 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
+  const { homePage, pages } = parliamentNavigation
+  const flattenedPages = flattenPages(pages)
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname,
-    parliamentNavigation.pages,
-    dirname,
-    "Quiz"
+    flattenedPages,
+    "Quiz",
+    homePage
   )
 
   const { courseVersion } = frontmatter
@@ -54,18 +59,32 @@ const QuizTemplate = ({ data, location, pageContext }) => {
     courseVersion
   )
 
+  let [courseProgress, progressLoaded] = useState(false)
+  useEffect(() => {
+    // getItem returns null if key DNE
+    if (courseProgress || courseProgress === null) {
+      return
+    }
+
+    courseProgress = window.localStorage.getItem(dirname)
+    courseProgress = courseProgress ? JSON.parse(courseProgress) : false
+    progressLoaded(courseProgress)
+  })
+
+  let completedModulePaths = completedModules(courseProgress)
+
   return (
     <QuizLayout
       title={pageContext.seo}
       location={location}
       gitRemote={gitRemote}
       currentPage={location.pathname}
-      pages={parliamentNavigation.pages}
+      pages={pages}
       sideNav={
-        <SiteMenu
-          currentPage={location.pathname}
-          pages={parliamentNavigation.pages}
-          depth={2}
+        <CourseMenu
+          seenPaths={completedModulePaths}
+          currentPageFullPath={location.pathname}
+          pages={flattenedPages}
         />
       }
       rightRail={
@@ -154,6 +173,7 @@ export const query = graphql`
       }
     }
     parliamentNavigation {
+      homePage
       pages
     }
     site {

@@ -17,18 +17,13 @@ import { graphql } from "gatsby"
 import DocLayout from "../components/doclayout"
 import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
-import ProgressBarDrawer from "../components/ProgressBarDrawer"
-import SiteMenu from "../components/SiteMenu"
 import renderAst from "../util/AFMRehype"
+import CourseMenu from "../components/CourseMenu"
 import NextPrev from "../components/NextPrev"
 import Checkmark from "@spectrum-icons/workflow/Checkmark"
 
-import { findSelectedPageNextPrev } from "../util/index"
-import {
-  completedModules,
-  courseModulePages,
-  courseModuleIx,
-} from "../util/course"
+import { findSelectedPageNextPrev, flattenPages } from "../util/index"
+import { completedModules } from "../util/course"
 import { useVersionedLocalStore } from "../util/localstore"
 
 import { Flex, View } from "@adobe/react-spectrum"
@@ -48,14 +43,15 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     ? sourceFiles
     : `${sourceFiles}/`
   const relativePath = absolutePath.replace(pathToFiles, "")
+  const { homePage, issues, pages } = parliamentNavigation
+  const flattenedPages = flattenPages(pages)
   const { nextPage, previousPage } = findSelectedPageNextPrev(
     location.pathname,
-    parliamentNavigation.pages,
-    dirname,
-    "Course"
+    flattenedPages,
+    "Course",
+    homePage
   )
 
-  const coursePages = courseModulePages(parliamentNavigation.pages, dirname)
   const { courseVersion } = frontmatter
   const [visited, markVisited] = useVersionedLocalStore(
     dirname,
@@ -75,10 +71,6 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
     progressLoaded(courseProgress)
   })
   let completedModulePaths = completedModules(courseProgress)
-  const currentModuleIx = courseModuleIx(coursePages, location.pathname)
-  const progressedModulePages = coursePages.map((page) =>
-    completedModulePaths.includes(page.path) ? page : { title: page.title }
-  )
 
   return (
     <DocLayout
@@ -86,12 +78,12 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
       location={location}
       gitRemote={gitRemote}
       currentPage={location.pathname}
-      pages={parliamentNavigation.pages}
+      pages={pages}
       sideNav={
-        <SiteMenu
-          currentPage={location.pathname}
-          pages={parliamentNavigation.pages}
-          depth={2}
+        <CourseMenu
+          seenPaths={completedModulePaths}
+          currentPageFullPath={location.pathname}
+          pages={flattenedPages}
         />
       }
       rightRail={
@@ -101,11 +93,6 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
             relativePath={relativePath}
             tableOfContents={tableOfContents}
             timeToRead={timeToRead}
-          />
-          <br />
-          <ProgressBarDrawer
-            pages={progressedModulePages}
-            currentIx={currentModuleIx}
           />
           <hr />
           Powered by{" "}
@@ -131,7 +118,7 @@ const CoursesTemplate = ({ data, location, pageContext }) => {
           <SiteActionButtons
             gitRemote={gitRemote}
             relativePath={relativePath}
-            issues={parliamentNavigation.issues}
+            issues={issues}
           />
         </Flex>
       </div>
@@ -186,8 +173,9 @@ export const query = graphql`
       }
     }
     parliamentNavigation {
-      pages
+      homePage
       issues
+      pages
     }
     site {
       siteMetadata {

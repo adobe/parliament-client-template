@@ -25,7 +25,6 @@ const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
     ? `https://api.github.com/graphql`
     : `https://git.corp.adobe.com/api/graphql`
 */
-
 const apiUrl = `https://api.github.com/graphql`
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",").map((item) =>
   item.trim()

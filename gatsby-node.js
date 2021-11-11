@@ -630,6 +630,12 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       // Put main before module else it messes up react spectrum css import
       mainFields: ["browser", "module", "main"],
+      fallback: {
+        "http": require.resolve("stream-http"),
+        "https": require.resolve("https-browserify"),
+        "path": require.resolve("path-browserify"),
+        process: require.resolve("process")
+      }
     },
   })
 }
@@ -649,14 +655,14 @@ exports.createResolvers = ({ createResolvers }) => {
     Query: {
       ParliamentSearchIndex: {
         type: GraphQLJSONObject,
-        resolve(source, args, context) {
-          const siteNodes = context.nodeModel.getAllNodes({
+        async resolve(source, args, context) {  
+          const { entries:nodes } = await context.nodeModel.findAll({
             type: `MarkdownRemark`,
           })
-          const pages = context.nodeModel.getAllNodes({
+          const { entries:pages } = await context.nodeModel.findAll({
             type: `ParliamentNavigation`,
           })
-          return createIndex(siteNodes, pages)
+          return createIndex(Array.from(nodes), Array.from(pages))
         },
       },
     },

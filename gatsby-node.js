@@ -625,7 +625,7 @@ const createOpenApiPage = async (
   }
 }
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   actions.setWebpackConfig({
     resolve: {
       // Put main before module else it messes up react spectrum css import
@@ -634,9 +634,12 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         "http": require.resolve("stream-http"),
         "https": require.resolve("https-browserify"),
         "path": require.resolve("path-browserify"),
-        process: require.resolve("process")
+        "to-arraybuffer": require.resolve("to-arraybuffer"),
       }
     },
+    plugins: [
+      plugins.provide({ process: 'process/browser' })
+    ]
   })
 }
 

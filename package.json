@@ -45,7 +45,6 @@
     "gatsby-plugin-svgr-loader": "^0.1.0",
     "gatsby-remark-autolink-headers": "^5.1.0",
     "gatsby-remark-copy-linked-files": "^5.1.0",
-    "gatsby-remark-embedder": "^5.0.0",
     "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-images": "^6.1.0",
     "gatsby-source-filesystem": "^4.1.0",
@@ -72,6 +71,7 @@
     "rsuite": "^4.10.0",
     "shelljs": "^0.8.4",
     "styled-components": "^5.2.0",
+    "to-arraybuffer": "^1.0.1",
     "universal-cookie": "^4.0.4",
     "widdershins": "^4.0.1",
     "yaml": "^1.7.2"

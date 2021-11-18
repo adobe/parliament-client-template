@@ -21,9 +21,9 @@ const rewriteToc = (tableOfContents) => {
       /<ul/g,
       `<ul class='spectrum-Body--sizeM' style="list-style: none; padding-left: var(--spectrum-global-dimension-static-size-200); margin-left: 0; margin-bottom: 0; margin-top: 0;"`
     )
-    .replace(/<li/g, '<li style="margin-bottom: 0"')
+    .replace(/<li/g, '<li style="margin-bottom: var(--spectrum-global-dimension-static-size-100)"')
     .replace(/<a/g, `<a class="spectrum-Link spectrum-Link--quiet"`)
-    .replace(/<p/g, '<p style="margin-bottom: 0"')
+    .replace(/<p/g, '<p style="margin-bottom: var(--spectrum-global-dimension-static-size-100)"')
 }
 
 const PageActions = ({ tableOfContents, timeToRead }) => {

@@ -95,10 +95,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^5.1.2":
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.1.2.tgz#274b217fac61cc9f09fb36faa0160c013ba85044"
-  integrity sha512-i2bR+NSWkUt2T4fbo5ID+oeH6wRLoWw6dM6K3+x55oBJfyVxP+RCdC+LZu508BqunxJ2HRojug6RqJLlukXbdA==
+"@adobe/parliament-ui-components@^5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.1.3.tgz#9a8096c531e6316f86921de4d9a57bb812f6c88b"
+  integrity sha512-1ooKkVoSO9tI5zPY61m0s6gbo8uAtkaQstRubULGoN32eupZPfg5XEAx2YuuDwAzwyU2MDxXqEsgYVE8tA7h8w==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
@@ -129,7 +129,7 @@
     "@stoplight/elements" "^7.3.7"
     classnames "^2.2.6"
     elasticlunr "^0.9.5"
-    gatsby "^4.1.1"
+    gatsby "^4.3.0"
     gatsby-plugin-remove-serviceworker "^1.0.0"
     https-browserify "^1.0.0"
     httpsnippet "^2.0.0"
@@ -4491,16 +4491,16 @@
     "@adobe/react-spectrum-workflow" "^1.0.0"
     "@react-spectrum/icon" "^3.3.2"
 
-"@stoplight/elements-core@~7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/elements-core/-/elements-core-7.4.0.tgz#1357d3d8b84157dfc0f1135805d67893cd20a75c"
-  integrity sha512-iZ6KDlipXj2lcg02ARBhR0pQhcWP40/xADV5Y9ZDygGtXjRO5uCkOPaI4xoFZfsJH42nnqPBrAbQO8Vtmug+lg==
+"@stoplight/elements-core@~7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/elements-core/-/elements-core-7.4.1.tgz#b3792cbff3a01bd4e8af4b77c8ec6df78ad75846"
+  integrity sha512-NB5LBEuMU9QV0f7lLpMlUPjiP6CvSoBGxcGzXXm06VOmFyNGTd4vQepWCvidc+dwS9eC2hHYVoUV4uixMOm63A==
   dependencies:
     "@fortawesome/free-solid-svg-icons" "^5.14.0"
     "@stoplight/json" "^3.10.0"
     "@stoplight/json-schema-ref-parser" "^9.0.5"
     "@stoplight/json-schema-sampler" "0.2.2"
-    "@stoplight/json-schema-viewer" "^4.3.4"
+    "@stoplight/json-schema-viewer" "^4.3.6"
     "@stoplight/markdown" "^3.1.1"
     "@stoplight/markdown-viewer" "^5.3.2"
     "@stoplight/mosaic" "^1.12.4"
@@ -4527,12 +4527,12 @@
     xml-formatter "^2.4.0"
 
 "@stoplight/elements@^7.3.7":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/elements/-/elements-7.4.0.tgz#4338a5cf43fc0ecf92834059804a6d009e448a38"
-  integrity sha512-uhQELMo3WjCDTbUCWAR+aKZJuFieHRQTAnUkdu2mq9l1NZoVtHC8e9Atchm1G23fXqeR0kSI0lxRsC2Wro0KhQ==
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/elements/-/elements-7.4.1.tgz#46b2c4951bb6c944320d5a1bd8145f4da628e5e1"
+  integrity sha512-uYRVtK+LCfRv8VtmyqQr6MKGyVJOni4JhY0b8+gM66XV24KoGe2wltxwCF0TyUkN3pSs9KTZSa6UY93bLzNwaQ==
   dependencies:
     "@fortawesome/free-solid-svg-icons" "^5.14.0"
-    "@stoplight/elements-core" "~7.4.0"
+    "@stoplight/elements-core" "~7.4.1"
     "@stoplight/http-spec" "^4.2.2"
     "@stoplight/json" "^3.10.0"
     "@stoplight/mosaic" "^1.12.4"
@@ -4604,7 +4604,7 @@
     "@types/json-schema" "^7.0.7"
     magic-error "0.0.1"
 
-"@stoplight/json-schema-viewer@^4.3.4":
+"@stoplight/json-schema-viewer@^4.3.6":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@stoplight/json-schema-viewer/-/json-schema-viewer-4.4.0.tgz#23efb683ddae86a5df28b05682b08320d6645617"
   integrity sha512-ZVEjZPC9OJJ1b7kEV2SufJUj6SefdipPodm2vTHRnFH/NOVRFteyXneRvCITYl8yndTKc2KRkIjARUqjIKpvow==
@@ -4677,9 +4677,9 @@
     unist-util-visit "^3.1.0"
 
 "@stoplight/mosaic-code-editor@^1.12.4":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-editor/-/mosaic-code-editor-1.14.0.tgz#03b8eec6c089a4eb19971e30c385ee18e48e4a87"
-  integrity sha512-opVB/YAS5HRcK/QIFbaX8nrNYBLcW0kEqfavZkogBMrfdkvlI6VBmtTIWipsucn+d1KqtQvvrzFaLcoefTGPXg==
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-editor/-/mosaic-code-editor-1.14.1.tgz#aa8e291f88878b61c3a80eac6651885760208136"
+  integrity sha512-6CwD1WfXMc9+HaAuEwawGTWWvObItQ4RWc2z4l81U7t+GQz9En5Dqc0qylVg6i0KFj1/uRU4N6ObIqOK+5/7aQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.35"
     "@fortawesome/free-solid-svg-icons" "^5.15.3"
@@ -4689,8 +4689,8 @@
     "@react-types/radio" "3.1.2"
     "@react-types/shared" "3.9.0"
     "@react-types/switch" "3.1.2"
-    "@stoplight/mosaic" "1.14.0"
-    "@stoplight/mosaic-code-viewer" "1.14.0"
+    "@stoplight/mosaic" "1.14.1"
+    "@stoplight/mosaic-code-viewer" "1.14.1"
     clsx "^1.1.1"
     copy-to-clipboard "^3.3.1"
     dom-helpers "^3.3.1"
@@ -4704,10 +4704,10 @@
     tslib "^2.1.0"
     zustand "^3.5.2"
 
-"@stoplight/mosaic-code-viewer@1.14.0", "@stoplight/mosaic-code-viewer@^1.12.4":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-viewer/-/mosaic-code-viewer-1.14.0.tgz#1145ee6a11d4e9439b2334a8b78fea96c75b9e93"
-  integrity sha512-di7KuMYZ92pxMAEECIioYFEQ+YTI6+jgGeImtm0GKd17NOh/HaxsV5MY9xuZTohoqaEZ8oFmroHCG9QFcBaZKg==
+"@stoplight/mosaic-code-viewer@1.14.1", "@stoplight/mosaic-code-viewer@^1.12.4":
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-viewer/-/mosaic-code-viewer-1.14.1.tgz#cad1025572d5da11b205d494162ad46e11675dcb"
+  integrity sha512-+YW1U4/Ei3SXug8qxm6SAgRdWJqeKEOM6SiqBnUPtxSlZ+XuS3HEEfnva+DTn+51nT8GBdur0YzRPX+/by4fsQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.35"
     "@fortawesome/free-solid-svg-icons" "^5.15.3"
@@ -4717,7 +4717,7 @@
     "@react-types/radio" "3.1.2"
     "@react-types/shared" "3.9.0"
     "@react-types/switch" "3.1.2"
-    "@stoplight/mosaic" "1.14.0"
+    "@stoplight/mosaic" "1.14.1"
     clsx "^1.1.1"
     copy-to-clipboard "^3.3.1"
     dom-helpers "^3.3.1"
@@ -4731,10 +4731,10 @@
     tslib "^2.1.0"
     zustand "^3.5.2"
 
-"@stoplight/mosaic@1.14.0", "@stoplight/mosaic@^1.12.4":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.14.0.tgz#97ccd631c1694ad013cf6f3c14101cdc1ad57578"
-  integrity sha512-xoHD4M9gZsDZwX9llTF0M59R1SoC//EAXQdG8DMa012bxcXtwbyEwCz4H4eE+gf7egOdXAvYHaW1oavuBtgmVg==
+"@stoplight/mosaic@1.14.1", "@stoplight/mosaic@^1.12.4":
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.14.1.tgz#9138c3d3a54c8dca5067251866a4f6cd4196d502"
+  integrity sha512-1G5vieQYTQrppE9Qb+LUTKQXyOKRLygFc/vdPa6LJjhnFYo4PblLGL1Bso12QdKYIKMiDT16MhF4OLVO+t0P3Q==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.35"
     "@fortawesome/free-solid-svg-icons" "^5.15.3"
@@ -10288,7 +10288,7 @@ gatsby-worker@^1.3.0:
     "@babel/core" "^7.15.5"
     "@babel/runtime" "^7.15.4"
 
-gatsby@^4.1.1, gatsby@^4.3.0:
+gatsby@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.3.0.tgz#84013dcedb267b1dce165da35f05ba8825d6258b"
   integrity sha512-f0CpCUiSGIZ7aJbl3JB1D9YWCqCw+KesLbbkxyfNMnaFXoiShRU9Z5PYPQBTx4XJohrvuDhdjkJreNiIQQke+A==

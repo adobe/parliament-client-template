@@ -15,7 +15,6 @@ import { Fragment, useEffect, useState } from "react"
 import { css, jsx } from "@emotion/react"
 import { graphql, navigate } from "gatsby"
 import DocLayout from "../components/doclayout"
-import ExperimentalBadge from "../components/ExperimentalBadge"
 import PageActions from "../components/PageActions"
 import SiteMenu from "../components/SiteMenu"
 import renderAst from "../util/AFMRehype"
@@ -188,8 +187,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
           />
         </Flex>
       </div>
-
-      <ExperimentalBadge />
+      
       {renderAst(htmlAst)}
 
       <br />

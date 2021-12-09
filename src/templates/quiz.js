@@ -16,7 +16,6 @@ import { css, jsx } from "@emotion/react"
 
 import { graphql } from "gatsby"
 import QuizLayout from "../components/quizlayout"
-import ExperimentalBadge from "../components/ExperimentalBadge"
 import { Next } from "../components/NextPrev"
 import QuizNextPrev from "../components/QuizNextPrev"
 import renderQuizAst from "../util/QuizRehype"
@@ -109,7 +108,6 @@ const QuizTemplate = ({ data, location, pageContext }) => {
         `}
       ></div>
 
-      <ExperimentalBadge />
       {alreadyPassed && (
         <Well marginTop={32}>
           <span>

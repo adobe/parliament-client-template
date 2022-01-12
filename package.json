@@ -35,7 +35,7 @@
     "elasticlunr": "^0.9.5",
     "eslint-plugin-flowtype": "^5.2.0",
     "fast-glob": "^3.2.4",
-    "gatsby": "^4.3.0",
+    "gatsby": "^4.5.2",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-catch-links": "^4.1.0",
     "gatsby-plugin-emotion": "^7.1.0",

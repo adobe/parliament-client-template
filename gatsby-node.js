@@ -726,6 +726,18 @@ const createIndex = async (nodes, pages) => {
 
     project.push(spec)
   }
+  
+  const projectPath = {
+    id: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
+    title: `${process.env.GATSBY_SOURCE_TITLE}`,
+    type: "docs",
+    path: `${process.env.GATSBY_SITE_PATH_PREFIX}`,
+    group: `${process.env.BUSINESS_GROUP}`,
+    product: `${process.env.PRODUCT_KEY || ``}`,
+    project: `${process.env.JOB_NAME}`,
+  }
+  index.addDoc(projectPath)
+  project.push(projectPath)
 
   fs.writeFileSync("searchIndex.json", JSON.stringify(project), {
     encoding: "utf8",

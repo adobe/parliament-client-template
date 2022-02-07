@@ -119,6 +119,13 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: `gatsby-remark-plantuml-lite`,
+            options: {
+              // Configuration options
+              imageType: `svg`,
+            },
+          },
+          {
             resolve: `@adobe/gatsby-remark-afm`,
             options: {
               directory: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
@@ -131,6 +138,7 @@ module.exports = {
               icon: false,
             },
           },
+          'gatsby-remark-check-links',
           `gatsby-plugin-catch-links`,
           {
             resolve: "gatsby-remark-external-links",

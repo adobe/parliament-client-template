@@ -138,7 +138,6 @@ module.exports = {
               icon: false,
             },
           },
-          'gatsby-remark-check-links',
           `gatsby-plugin-catch-links`,
           {
             resolve: "gatsby-remark-external-links",

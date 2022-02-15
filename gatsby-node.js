@@ -625,12 +625,27 @@ const createOpenApiPage = async (
   }
 }
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   actions.setWebpackConfig({
     resolve: {
       // Put main before module else it messes up react spectrum css import
       mainFields: ["browser", "module", "main"],
+      fallback: {
+        http: require.resolve("stream-http"),
+        tty: require.resolve("tty-browserify"),
+        stream: require.resolve("stream-browserify"),
+        https: require.resolve("https-browserify"),
+        path: require.resolve("path-browserify"),
+        "to-arraybuffer": require.resolve("to-arraybuffer"),
+        os: require.resolve("os-browserify/browser"),
+      },
     },
+    plugins: [
+      plugins.provide({
+        process: "process/browser",
+        Buffer: ['buffer', 'Buffer'],
+      }),
+    ],
   })
 }
 
@@ -649,14 +664,14 @@ exports.createResolvers = ({ createResolvers }) => {
     Query: {
       ParliamentSearchIndex: {
         type: GraphQLJSONObject,
-        resolve(source, args, context) {
-          const siteNodes = context.nodeModel.getAllNodes({
+        async resolve(source, args, context) {
+          const { entries: nodes } = await context.nodeModel.findAll({
             type: `MarkdownRemark`,
           })
-          const pages = context.nodeModel.getAllNodes({
+          const { entries: pages } = await context.nodeModel.findAll({
             type: `ParliamentNavigation`,
           })
-          return createIndex(siteNodes, pages)
+          return createIndex(Array.from(nodes), Array.from(pages))
         },
       },
     },

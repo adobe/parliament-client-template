@@ -638,6 +638,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
         path: require.resolve("path-browserify"),
         "to-arraybuffer": require.resolve("to-arraybuffer"),
         os: require.resolve("os-browserify/browser"),
+        assert: require.resolve("assert/"),
+        net: false,
+        tls: false
       },
     },
     plugins: [

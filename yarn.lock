@@ -95,10 +95,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.1.5.tgz#773db45846ac57a02981cbf454675ac8b44ebcb3"
-  integrity sha512-yjNYLJVb1UeAp5U8cdYmsFQBtx6wOtiRp9N+ZzIydmDDvfVu7Zw4urjDvYImkutwLiOlswFNpZ0gdmFRxV/eRg==
+"@adobe/parliament-ui-components@^5.1.6":
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.1.6.tgz#f7e2a9e5934f964d2620a981372366e1f0fdb2bf"
+  integrity sha512-Ev9CMtg5cyn6elm+nJX9OsQKnyJCucGv17WEyAazpcWP+rYk5FZvw9vkQ/CGN09eHUprCqJJ78rtaCNt3Mqizw==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
@@ -9494,6 +9494,11 @@ fd@~0.0.2:
   resolved "https://registry.yarnpkg.com/fd/-/fd-0.0.3.tgz#b3240de86dbf5a345baae7382a07d4713566ff0c"
   integrity sha512-iAHrIslQb3U68OcMSP0kkNWabp7sSN6d2TBSb2JO3gcLJVDd4owr/hKM4SFJovFOUeeXeItjYgouEDTMWiVAnA==
 
+fetch-retry@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/fetch-retry/-/fetch-retry-4.1.1.tgz#fafe0bb22b54f4d0a9c788dff6dd7f8673ca63f3"
+  integrity sha512-e6eB7zN6UBSwGVwrbWVH+gdLnkW9WwHhmq2YDK1Sh30pzx1onRVGBvogTlUeWxwTa+L86NYdo4hFkh7O8ZjSnA==
+
 figures@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-3.2.0.tgz#625c18bd293c604dc4a8ddb2febf0c88341746af"
@@ -10321,6 +10326,18 @@ gatsby-remark-copy-linked-files@^5.1.0:
     lodash "^4.17.21"
     path-is-inside "^1.0.2"
     probe-image-size "^6.0.0"
+    unist-util-visit "^2.0.3"
+
+gatsby-remark-embedder@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-embedder/-/gatsby-remark-embedder-5.0.0.tgz#87863c546816863bb3161897788433d5d85995c4"
+  integrity sha512-frNy0DEEo5dgGtBokNPmDbX7PWSA76UFkLzSfqpwKAAL4zKm5++F4uDeRujYEdbbj5/yoXUMbUHQIxyplaw1oQ==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    fetch-retry "^4.1.1"
+    hast-util-from-parse5 "^6.0.1"
+    node-fetch "^2.6.1"
+    parse5 "^6.0.1"
     unist-util-visit "^2.0.3"
 
 gatsby-remark-external-links@0.0.4:
@@ -11383,7 +11400,7 @@ hast-to-hyperscript@^9.0.0:
     unist-util-is "^4.0.0"
     web-namespaces "^1.0.0"
 
-hast-util-from-parse5@^6.0.0:
+hast-util-from-parse5@^6.0.0, hast-util-from-parse5@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/hast-util-from-parse5/-/hast-util-from-parse5-6.0.1.tgz#554e34abdeea25ac76f5bd950a1f0180e0b3bc2a"
   integrity sha512-jeJUWiN5pSxW12Rh01smtVkZgZr33wBokLzKLwinYOUfSzm1Nl/c3GUGebDyOKjdsRgMvoVbV0VpAcpjF4NrJA==

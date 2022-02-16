@@ -16,7 +16,7 @@
     "@adobe/parliament-source-changelog": "^1.0.0",
     "@adobe/parliament-source-jsonschema": "^0.0.4",
     "@adobe/parliament-transformer-navigation": "^1.4.0",
-    "@adobe/parliament-ui-components": "^5.1.6",
+    "@adobe/parliament-ui-components": "^5.1.7",
     "@adobe/prism-adobe": "^1.0.3",
     "@adobe/react-spectrum": "^3.11.0",
     "@apidevtools/swagger-parser": "^10.0.1",

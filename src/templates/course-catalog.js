@@ -99,7 +99,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
   const { siteMetadata } = site
   const { sourceFiles } = siteMetadata
   const { absolutePath, childMarkdownRemark } = file
-  const { htmlAst, tableOfContents, timeToRead } = childMarkdownRemark
+  const { htmlAst, headings, timeToRead } = childMarkdownRemark
   const pathToFiles = sourceFiles.endsWith("/")
     ? sourceFiles
     : `${sourceFiles}/`
@@ -162,7 +162,7 @@ const CourseCatalogTemplate = ({ data, location, pageContext }) => {
           <PageActions
             gitRemote={gitRemote}
             relativePath={relativePath}
-            tableOfContents={tableOfContents}
+            headings={headings}
             timeToRead={timeToRead}
           />
           <hr />
@@ -230,7 +230,11 @@ export const query = graphql`
       absolutePath
       childMarkdownRemark {
         htmlAst
-        tableOfContents(maxDepth: 3)
+        headings {
+          depth
+          id
+          value
+        }
         timeToRead
       }
     }

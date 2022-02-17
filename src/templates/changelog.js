@@ -13,7 +13,7 @@ import RightRail from "../components/RightRail"
 
 export default function ChangeLogTemplate({ data, location, pageContext }) {
   const { markdownRemark } = data
-  const { frontmatter, htmlAst, timeToRead, tableOfContents } = markdownRemark
+  const { frontmatter, htmlAst, timeToRead, headings } = markdownRemark
   const { pages, selectedKey } = pageContext
   return (
     <DocLayout
@@ -39,7 +39,7 @@ export default function ChangeLogTemplate({ data, location, pageContext }) {
       rightRail={
         <RightRail>
           <PageActions
-            tableOfContents={tableOfContents}
+            headings={headings}
             timeToRead={timeToRead}
           />
         </RightRail>
@@ -53,7 +53,11 @@ export const pageQuery = graphql`
   query ChangeLogTemplateQuery($slug: String!) {
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       htmlAst
-      tableOfContents(maxDepth: 3)
+      headings {
+        depth
+        id
+        value
+      }
       timeToRead
       frontmatter {
         date(formatString: "MMMM DD, YYYY")

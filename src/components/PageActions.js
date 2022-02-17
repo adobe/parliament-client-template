@@ -11,22 +11,59 @@
  */
 
 /** @jsx jsx */
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { css, jsx } from "@emotion/react"
-import { View } from "@adobe/react-spectrum"
+import { TableOfContents } from "@adobe/parliament-ui-components"
 
-const rewriteToc = (tableOfContents) => {
-  return tableOfContents
-    .replace(
-      /<ul/g,
-      `<ul class='spectrum-Body--sizeM' style="list-style: none; padding-left: var(--spectrum-global-dimension-static-size-200); margin-left: 0; margin-bottom: 0; margin-top: 0;"`
-    )
-    .replace(/<li/g, '<li style="margin-bottom: var(--spectrum-global-dimension-static-size-100)"')
-    .replace(/<a/g, `<a class="spectrum-Link spectrum-Link--quiet"`)
-    .replace(/<p/g, '<p style="margin-bottom: var(--spectrum-global-dimension-static-size-100)"')
+const rewriteToc = (headings) => {
+  let items = []
+
+  const formatHeading = (heading) => {
+    return {
+      url: `#${heading.id}`,
+      title: heading.value,
+      depth: heading.depth,
+    }
+  }
+
+  while (headings.length) {
+    let current = formatHeading(headings.shift())
+    let mainLength = items.length
+    if (mainLength) {
+      let last = items[mainLength - 1]
+      if (current.depth <= last.depth) {
+        items.push(current)
+      } else {
+        let secLength = items[mainLength - 1]?.items?.length
+        if (secLength) {
+          let last = items[mainLength - 1].items[secLength - 1]
+          if (current.depth <= last.depth) {
+            items[mainLength - 1].items.push(current)
+          } else {
+            items[mainLength - 1]?.items[secLength - 1]?.items
+              ? items[mainLength - 1].items[secLength - 1].items.push(current)
+              : (items[mainLength - 1].items[secLength - 1].items = [current])
+          }
+        } else {
+          items[mainLength - 1].items
+            ? items[mainLength - 1].items.push(current)
+            : (items[mainLength - 1].items = [current])
+        }
+      }
+    } else {
+      items.push(current)
+    }
+  }
+  return { items: items }
 }
 
-const PageActions = ({ tableOfContents, timeToRead }) => {
+const PageActions = ({ headings, timeToRead }) => {
+  const [tableOfContents, setTableOfContents ] = useState({})
+
+  useEffect(() => {
+    setTableOfContents(rewriteToc(headings));
+  }, [headings]);
+  
   return (
     <React.Fragment>
       <div
@@ -39,27 +76,13 @@ const PageActions = ({ tableOfContents, timeToRead }) => {
           }
         `}
       >
-        {tableOfContents ? (
-          <View
-            elementType="nav"
-            role="navigation"
-            aria-label="Article Outline"
-            marginY="size-400"
-          >
-            <h4
-              className="spectrum-Detail--sizeL"
-              css={css`
-                color: var(--spectrum-global-color-gray-600);
-                margin-bottom: var(--spectrum-global-dimension-static-size-250);
-              `}
-            >
-              On this page
-            </h4>
-            <div
-              dangerouslySetInnerHTML={{ __html: rewriteToc(tableOfContents) }}
-            />
-          </View>
-        ) : null}
+        <div>
+          {tableOfContents &&
+          tableOfContents.items &&
+          tableOfContents.items.length ? (
+            <TableOfContents tableOfContents={tableOfContents} />
+          ) : null}
+        </div>
         {timeToRead ? (
           <p>
             <span

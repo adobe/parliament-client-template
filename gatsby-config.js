@@ -157,6 +157,7 @@ module.exports = {
               maxWidth: 970,
             },
           },
+          `gatsby-remark-embedder`,
         ],
       },
     },

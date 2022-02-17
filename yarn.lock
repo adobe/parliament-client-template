@@ -95,10 +95,10 @@
   dependencies:
     yaml "^1.10.0"
 
-"@adobe/parliament-ui-components@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.2.0.tgz#23d5e6d134e56d77b9106819a53b95784afb9eac"
-  integrity sha512-64xkzAHXYxAsApfoSJM6MNKH3fUk31c8JMBsm58V5fwihhFotklXfGXw3MfBRtMPiWHK9WioyV8AgiwLUWiZyg==
+"@adobe/parliament-ui-components@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@adobe/parliament-ui-components/-/parliament-ui-components-5.2.1.tgz#a57f75c39ca0ee5a81e4fc4028006d4359189b9d"
+  integrity sha512-7Ijk8aVGFvqf1wfqe4HWuJgPM4QVvOwxEmaZuEB3SKn5hqosSASJoGUnfh4cD37GKOy3npI6+5AZK/1EqveUSA==
   dependencies:
     "@adobe/focus-ring-polyfill" "^0.1.5"
     "@adobe/prism-adobe" "^1.0.3"
@@ -4712,9 +4712,9 @@
     unist-util-visit "^3.1.0"
 
 "@stoplight/mosaic-code-editor@^1.15.4":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-editor/-/mosaic-code-editor-1.16.1.tgz#686015e96bcc18f817919c015fc77f47866a3984"
-  integrity sha512-dugpBAwbRzt6bsLDLAYlPS4QrLxLnlPpBTroIHbcRnfWGhiX/T/mXP6H9N21NpRGGKvw2lOcVJy6DrIwHnCs7g==
+  version "1.16.2"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-editor/-/mosaic-code-editor-1.16.2.tgz#d33204c916da0ffda7d6ded50a50d1717df378a1"
+  integrity sha512-cs+L09gbdjeDOtWZoH9jgTa9Cc08h7Z/mSmUvkjLV7SKCmW5nWlB75fDzp/HhkS7rIRPbqiSMS0qUO7xmVpYuA==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.35"
     "@fortawesome/free-solid-svg-icons" "^5.15.3"
@@ -4724,8 +4724,8 @@
     "@react-types/radio" "3.1.2"
     "@react-types/shared" "3.9.0"
     "@react-types/switch" "3.1.2"
-    "@stoplight/mosaic" "1.16.1"
-    "@stoplight/mosaic-code-viewer" "1.16.1"
+    "@stoplight/mosaic" "1.16.2"
+    "@stoplight/mosaic-code-viewer" "1.16.2"
     clsx "^1.1.1"
     copy-to-clipboard "^3.3.1"
     dom-helpers "^3.3.1"
@@ -4739,10 +4739,10 @@
     tslib "^2.1.0"
     zustand "^3.5.2"
 
-"@stoplight/mosaic-code-viewer@1.16.1", "@stoplight/mosaic-code-viewer@^1.15.4":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-viewer/-/mosaic-code-viewer-1.16.1.tgz#8ca319d2f5761babc436fb65b28a695cb8dd62d2"
-  integrity sha512-HFA55sg6c9uMDFl99S/KPeAPSpmkMfuNm3LoNtuPn9eHF+r/uNg+TGipcsIYiVyfpWldjizU2/B5YwwSm+90ag==
+"@stoplight/mosaic-code-viewer@1.16.2", "@stoplight/mosaic-code-viewer@^1.15.4":
+  version "1.16.2"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic-code-viewer/-/mosaic-code-viewer-1.16.2.tgz#02df7c88bee0a6a532ea8a5fb4e71e60f9be4702"
+  integrity sha512-+OXcbEFLMFlRY4OHZKVPfwFQdeqVBpg+lgj8Ogx8nyE9CNtpn/dEY26PQRRgkkg2UayVZ+uHXY8YeocF1RMrSg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.35"
     "@fortawesome/free-solid-svg-icons" "^5.15.3"
@@ -4752,7 +4752,7 @@
     "@react-types/radio" "3.1.2"
     "@react-types/shared" "3.9.0"
     "@react-types/switch" "3.1.2"
-    "@stoplight/mosaic" "1.16.1"
+    "@stoplight/mosaic" "1.16.2"
     clsx "^1.1.1"
     copy-to-clipboard "^3.3.1"
     dom-helpers "^3.3.1"
@@ -4766,10 +4766,10 @@
     tslib "^2.1.0"
     zustand "^3.5.2"
 
-"@stoplight/mosaic@1.16.1", "@stoplight/mosaic@^1.15.4":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.16.1.tgz#1b5497178ff746ccd917c79c12fa75f9e7344b0d"
-  integrity sha512-xxCV/Kj8UI2rqfsJlA/jZoqjc2/a16YqLJEBw+3F++xDqATnys7nF59alwLMJkjiI01a9At7qWfANrNboPlU/Q==
+"@stoplight/mosaic@1.16.2", "@stoplight/mosaic@^1.15.4":
+  version "1.16.2"
+  resolved "https://registry.yarnpkg.com/@stoplight/mosaic/-/mosaic-1.16.2.tgz#661389236095ba0abbdefd13018c19c42ff8920b"
+  integrity sha512-uF/PSEiXGRc0xoVvLSTKPmc4vCFW3CVwOyebvepQpXaZGORrBVCvkyONE38Pa+OpBtXJ47CMAkUbiObBW7oKbw==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.35"
     "@fortawesome/free-solid-svg-icons" "^5.15.3"
@@ -12773,7 +12773,14 @@ json-parse-even-better-errors@^2.3.0:
   resolved "https://registry.yarnpkg.com/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
   integrity sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==
 
-json-pointer@^0.6.0, json-pointer@^0.6.1:
+json-pointer@^0.6.0:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/json-pointer/-/json-pointer-0.6.2.tgz#f97bd7550be5e9ea901f8c9264c9d436a22a93cd"
+  integrity sha512-vLWcKbOaXlO+jvRy4qNd+TI1QUPZzfJj1tpJ3vAXDych5XJf93ftpUKe5pKCrzyIIwgBJcOcCVRUfqQP25afBw==
+  dependencies:
+    foreach "^2.0.4"
+
+json-pointer@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/json-pointer/-/json-pointer-0.6.1.tgz#3c6caa6ac139e2599f5a1659d39852154015054d"
   integrity sha512-3OvjqKdCBvH41DLpV4iSt6v2XhZXV1bPB4OROuknvUXI7ZQNofieCPkmE26stEJ9zdQuvIxDHCuYhfgxFAAs+Q==
@@ -14068,17 +14075,17 @@ mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobx-react-lite@^3.2.0:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-3.2.3.tgz#83d2b32ebf4383cd0dc0d397acbf53a8e9c66765"
-  integrity sha512-7exWp1FV0M9dP08H9PIeHlJqDw4IdkQVRMfLYaZFMmlbzSS6ZU6p/kx392KN+rVf81hH3IQYewvRGQ70oiwmbw==
+mobx-react-lite@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-3.3.0.tgz#7174e807201943beff6f9d3701492314c9fc0db3"
+  integrity sha512-U/kMSFtV/bNVgY01FuiGWpRkaQVHozBq5CEBZltFvPt4FcV111hEWkgwqVg9GPPZSEuEdV438PEz8mk8mKpYlA==
 
 mobx-react@^7.0.5:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-7.2.1.tgz#e9d4c04dc63d05e1139ce773f5fee7a5b4cb7c78"
-  integrity sha512-LZS99KFLn75VWDXPdRJhILzVQ7qLcRjQbzkK+wVs0Qg4kWw5hOI2USp7tmu+9zP9KYsVBmKyx2k/8cTTBfsymw==
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-7.3.0.tgz#a17dedb71b75dad2337e3f95eb753179f6cfe732"
+  integrity sha512-RGEcwZokopqyJE5JPwXKB9FWMSqFM9NJVO2QPI+z6laJTJeBHqvPicjnKgY5mvihxTeXB1+72TnooqUePeGV1g==
   dependencies:
-    mobx-react-lite "^3.2.0"
+    mobx-react-lite "^3.3.0"
 
 mobx@^4.2.0:
   version "4.15.7"
@@ -14086,9 +14093,9 @@ mobx@^4.2.0:
   integrity sha512-X4uQvuf2zYKHVO5kRT5Utmr+J9fDnRgxWWnSqJ4oiccPTQU38YG+/O3nPmOhUy4jeHexl7XJJpWDBgEnEfp+8w==
 
 mobx@^6.3.7:
-  version "6.3.13"
-  resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.3.13.tgz#93e56a57ee72369f850cf3d6398fd36ee8ef062e"
-  integrity sha512-zDDKDhYUk9QCHQUdLG+wb4Jv/nXutSLt/P8kkwHyjdbrJO4OZS6QTEsrOnrKM39puqXSrJZHdB6+yRys2NBFFA==
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.4.0.tgz#71beda560230527f75ad150638f061af9d9f5312"
+  integrity sha512-HluTl14lJjL1xeUfXekDstHT/RqdxtmgIQ+75eMXsy9zAwt5vOWMdrbYD/sLS3CAKTo7ctIZi6cI2aX47Fk05g==
 
 moment@^2.29.1:
   version "2.29.1"

@@ -28,13 +28,16 @@
    For local:
 
    ```
-   GATSBY_SITE_PATH_PREFIX =
+   GATSBY_SITE_PATH_PREFIX = Demo
+   
+   # Personal access token with read access created from github as per instructions [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
    GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
 
    # Repo URL in given format which you want to use to generate a microsite
    # NOTE: for Enterprise instances, this MUST be the FULL HTTPS URL
    #       This repository must contain a manifest*.* file for Parliament to read.
    #       (preferably in a .yaml format)
+   # For development/testing, the following sample repo can be used: https://github.com/AdobeDocs/parliament-docs-template
    GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git
    GATSBY_SOURCE_BRANCH=master
 
@@ -44,7 +47,8 @@
 
    # Url for your analytics script
    GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js
-   # NOTE: this is an absolute path to a local copy of $GATSBY_SOURCE
+   
+   # NOTE: LOCAL_PROJECT_DIRECTORY is the absolute path to a local copy of the repository specified in $GATSBY_SOURCE
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
 

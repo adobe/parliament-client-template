@@ -10,13 +10,14 @@
  *  governing permissions and limitations under the License.
  */
 import React from "react"
+import { Link as UILink } from "@adobe/parliament-ui-components"
 
-import { Link as GatsbyLink } from "gatsby"
+import { withPrefix } from "gatsby"
 
 const Link = ({ to, children, ...props }) => (
-  <GatsbyLink to={to} className="spectrum-Link spectrum-Link--quiet" {...props}>
+  <UILink href={withPrefix(to)} {...props}>
     {children}
-  </GatsbyLink>
+  </UILink>
 )
 
 export default Link

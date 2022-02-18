@@ -674,7 +674,7 @@ exports.createResolvers = ({ createResolvers }) => {
           const { entries: pages } = await context.nodeModel.findAll({
             type: `ParliamentNavigation`,
           })
-          return createIndex(Array.from(nodes), Array.from(pages))
+          return await createIndex(Array.from(nodes), Array.from(pages))
         },
       },
     },

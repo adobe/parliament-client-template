@@ -23,38 +23,28 @@ const rewriteToc = (headings) => {
       url: `#${heading.id}`,
       title: heading.value,
       depth: heading.depth,
+      items: [],
     }
   }
 
+  let current;
   while (headings.length) {
-    let current = formatHeading(headings.shift())
-    let mainLength = items.length
-    if (mainLength) {
-      let last = items[mainLength - 1]
-      if (current.depth <= last.depth) {
-        items.push(current)
-      } else {
-        let secLength = items[mainLength - 1]?.items?.length
-        if (secLength) {
-          let last = items[mainLength - 1].items[secLength - 1]
-          if (current.depth <= last.depth) {
-            items[mainLength - 1].items.push(current)
-          } else {
-            items[mainLength - 1]?.items[secLength - 1]?.items
-              ? items[mainLength - 1].items[secLength - 1].items.push(current)
-              : (items[mainLength - 1].items[secLength - 1].items = [current])
-          }
-        } else {
-          items[mainLength - 1].items
-            ? items[mainLength - 1].items.push(current)
-            : (items[mainLength - 1].items = [current])
-        }
-      }
+    let parent = current;
+    current = formatHeading(headings.shift());
+
+    // find nearest possible parent heading
+    while (current.depth <= parent?.depth) {
+      parent = parent.parent;
+    }
+
+    if (parent) {
+      current.parent = parent;
+      parent.items.push(current);
     } else {
-      items.push(current)
+      items.push(current);
     }
   }
-  return { items: items }
+  return { items }
 }
 
 const PageActions = ({ headings, timeToRead }) => {

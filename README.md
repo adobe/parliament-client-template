@@ -1,7 +1,12 @@
 # parliament-client-template
 
 ## 🚀 Quick start
+### Prerequisites
+1. `node` 14.15 <= version < 16 (e.g., if using nvm, type `nvm use 14.17.5`)
+2. `yarn`
+3. `git`
 
+### Steps
 1. **Clone your docs repo**
 
    ```sh
@@ -23,35 +28,36 @@
 
 1. **Create an environment File**
 
-   Create a `.env.development` and `.env.production` files and define environment variables as below. Refer: [https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
+   Create a `.env.development` (local) or `.env.production` (prod) file and define environment variables as below. 
 
    For local:
 
    ```
    GATSBY_SITE_PATH_PREFIX = Demo
    
-   # Personal access token with read access created from github as per instructions [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
+   # Personal access token with read access created from Github Enterprise
+   # Instructions: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
    GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
 
-   # Repo URL in given format which you want to use to generate a microsite
-   # NOTE: for Enterprise instances, this MUST be the FULL HTTPS URL
+   # Site repo URL which you want to use to generate a microsite
+   # NOTE: This MUST be the FULL HTTPS URL
    #       This repository must contain a manifest*.* file for Parliament to read.
    #       (preferably in a .yaml format)
    # For development/testing, the following sample repo can be used: https://github.com/AdobeDocs/parliament-docs-template
-   GATSBY_SOURCE = github.com/<source_org>/<source_repo>.git
+   GATSBY_SOURCE=https://github.com/<source_org>/<source_repo>
    GATSBY_SOURCE_BRANCH=master
 
    # Strings starting with a "!" are considered ignore patterns. For example !CONTRIBUTING.md will tell the system to skip CONTRIBUTING.md
    GATSBY_SOURCE_PATTERNS=**/*,!CONTRIBUTING.md
    GATSBY_SOURCE_TITLE=My Docs Site
 
-   # Url for your analytics script
-   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js
-   
    # NOTE: LOCAL_PROJECT_DIRECTORY is the absolute path to a local copy of the repository specified in $GATSBY_SOURCE
    LOCAL_PROJECT_DIRECTORY=/absolute/path/to/docs/project
    SWAGGER_SOURCE_PATTERNS=**/petstore.json,**/swagger.json
 
+   # URL for your analytics script (optional)
+   GATSBY_LAUNCH_SRC=//assets.adobedtm.com/<id>/launch-<id>.min.js
+   
    # used to mock out features that require a username
    LDAP_USER=<your LDAP>
    ```

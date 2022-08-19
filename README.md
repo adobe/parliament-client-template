@@ -2,7 +2,7 @@
 
 ## 🚀 Quick start
 ### Prerequisites
-1. `node` 14.15 <= version < 16 (e.g., if using nvm, type `nvm use 14.17.5`)
+1. `node`: Use a version between 14.15 and 16 (e.g., if using nvm, type `nvm use 14.17.5`)
 2. `yarn`
 3. `git`
 

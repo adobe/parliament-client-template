@@ -35,7 +35,7 @@
    ```
    GATSBY_SITE_PATH_PREFIX = Demo
    
-   # Personal access token with read access created from Github Enterprise
+   # Personal access token with read access created from Github Enterprise (https://git.corp.adobe.com)
    # Instructions: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
    GATSBY_GIT_CORP_TOKEN = 1cdba7077XXXXXXXXXXXXXXXX633c1
 

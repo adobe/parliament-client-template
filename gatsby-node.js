@@ -171,6 +171,9 @@ exports.createPages = async ({ actions, graphql }) => {
                 author
                 template
               }
+              headings(depth: h1) {
+                value
+              }
             }
           }
         }
@@ -415,6 +418,14 @@ exports.createPages = async ({ actions, graphql }) => {
 
         if (node.fields.slug !== "") {
           let seo = searchTree(parliamentNavigation.pages, node.fields.slug)
+
+          if (seo === null || seo.trim() === "") {
+            const { headings } = node
+
+            // Fallback to first h1 heading
+            seo = headings?.length > 0 ? headings[0].value : seo
+          }
+
           createPage({
             path: node.fields.slug,
             component: template,

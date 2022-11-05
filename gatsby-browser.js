@@ -17,3 +17,12 @@
  */
 
 // You can delete this file if you're not using it
+
+// Add support for more languages
+// See https://github.com/FormidableLabs/prism-react-renderer#faq
+import Prism from "prism-react-renderer/prism";
+
+(typeof global !== "undefined" ? global : window).Prism = Prism;
+
+require("prismjs/components/prism-java");
+require("prismjs/components/prism-scala");

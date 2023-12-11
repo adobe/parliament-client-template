@@ -11,16 +11,18 @@
  */
 
 import React from "react"
+import { Provider } from "@adobe/parliament-ui-components"
 import { render } from "@testing-library/react"
 
 import HeaderBar from "../HeaderBar"
 
-// TODO: fix the `cannot read colorMode of undefined` error
-describe.skip(`HeaderBar`, () => {
+describe('HeaderBar', () => {
   it(`renders header`, () => {
     const testTitle = `Test Title`
     const { getByText } = render(
-      <HeaderBar siteTitle={testTitle} forceMobile={false} />
+      <Provider>
+        <HeaderBar siteTitle={testTitle} forceMobile={false} />
+      </Provider>
     )
 
     const text = getByText(testTitle)

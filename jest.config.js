@@ -20,7 +20,6 @@ module.exports = {
     ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": `<rootDir>/__mocks__/file-mock.js`,
     "@spectrum-css/*": "identity-obj-proxy",
     "@adobe/prism-adobe": "identity-obj-proxy",
-    "^gatsby-page-utils/(.*)$": `gatsby-page-utils/dist/$1`
   },
   testPathIgnorePatterns: [`node_modules`, `.cache`, `examples`],
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],

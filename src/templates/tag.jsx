@@ -14,7 +14,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Link from "../components/Link"
 
-const Tag = (props) => {
+export default (props) => {
   const postNodes = props.data.allMarkdownRemark.edges
   const tagName = props.pageContext.tagName.slice(1, -1)
   return (
@@ -32,9 +32,6 @@ const Tag = (props) => {
     </div>
   )
 }
-
-export default Tag;
-
 export const pageQuery = graphql`
   query PostsByTag($tagName: String!) {
     allMarkdownRemark(filter: { frontmatter: { tags: { regex: $tagName } } }) {

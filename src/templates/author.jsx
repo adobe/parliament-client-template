@@ -13,7 +13,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-export default ({
+const Author = ({
   data: {
     allMarkdownRemark: { edges: postNodes },
   },
@@ -32,6 +32,8 @@ export default ({
     ))}
   </div>
 )
+
+export default Author;
 
 export const pageQuery = graphql`
   query PostsByAuthorId($authorId: String!) {

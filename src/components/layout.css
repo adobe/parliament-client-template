@@ -322,6 +322,7 @@ figure {
 code[class*="language-"],
 pre[class*="language-"] {
   white-space: pre-wrap !important;
+  font-feature-settings: "liga" 0;
 }
 
 table {

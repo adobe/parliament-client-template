@@ -787,7 +787,6 @@ const getTitle = (pages, slug, node) => {
           .match(/^.+$/m)?.[0] // match first non-empty line
           .trim()
   }
-
   return title
 }
 

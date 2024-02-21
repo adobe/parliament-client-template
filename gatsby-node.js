@@ -720,7 +720,7 @@ const createIndex = async (nodes, pages) => {
       const doc = {
         id: slug,
         title: title,
-        body: node.internal.content,
+        body: node.internal.content?.replace(/<!--.*?-->/gs, ''),
         path: slug,
         type: type,
         group: `${process.env.BUSINESS_GROUP}`,

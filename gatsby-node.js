@@ -778,10 +778,17 @@ const createIndex = async (nodes, pages) => {
 const getTitle = (pages, slug, node) => {
   let title = searchTree(pages, slug) || node.frontmatter?.title
   if (!title) {
-    const firstLine = node?.rawMarkdownBody?.split("\n", 1)[0]
-    title = firstLine?.replace(/#/g, "")
+    const headingRegex = /^#+\s+(.*)/m // match Markdown heading
+    const match = node?.rawMarkdownBody?.match(headingRegex)
+    title = match
+      ? match[1]
+      : node?.rawMarkdownBody
+          ?.replace(/<!--.*?-->/gs, "")
+          .match(/^.+$/m)?.[0] // match first non-empty line
+          .trim()
   }
-  return title?.replace(/<!--.*?-->/gs, "")
+
+  return title
 }
 
 exports.sourceNodes = async ({

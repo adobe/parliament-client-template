@@ -781,7 +781,7 @@ const getTitle = (pages, slug, node) => {
     const firstLine = node?.rawMarkdownBody?.split("\n", 1)[0]
     title = firstLine?.replace(/#/g, "")
   }
-  return title
+  return title?.replace(/<!--.*?-->/gs, "")
 }
 
 exports.sourceNodes = async ({

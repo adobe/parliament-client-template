@@ -419,7 +419,7 @@ exports.createPages = async ({ actions, graphql }) => {
         if (node.fields.slug !== "") {
           let seo = searchTree(parliamentNavigation.pages, node.fields.slug)
 
-          if (seo === null || seo.trim() === "") {
+          if (seo == null || seo.trim() === "") {
             const { headings } = node
 
             // Fallback to first h1 heading

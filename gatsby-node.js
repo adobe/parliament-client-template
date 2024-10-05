@@ -177,20 +177,6 @@ exports.createPages = async ({ actions, graphql }) => {
             }
           }
         }
-        allGithubContributors {
-          edges {
-            node {
-              id
-              contributors {
-                date
-                login
-                name
-                avatarUrl
-              }
-              path
-            }
-          }
-        }
         parliamentNavigation {
           pages
           homePage
@@ -229,7 +215,7 @@ exports.createPages = async ({ actions, graphql }) => {
   result.data.allMarkdownRemark.edges.map((post) => {
     post.node.fields.slug.includes("blog/") ? posts.push(post) : docs.push(post)
   })
-  const contributors = result.data.allGithubContributors.edges
+  const contributors = [] // result.data.allGithubContributors.edges
   const parliamentNavigation = result.data.parliamentNavigation
 
   // Create JSON Schema pages

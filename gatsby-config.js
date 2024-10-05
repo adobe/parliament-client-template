@@ -25,7 +25,7 @@ const gitInfo = GitUrlParse(process.env.GATSBY_SOURCE)
     ? `https://api.github.com/graphql`
     : `https://git.corp.adobe.com/api/graphql`
 */
-const apiUrl = `https://api.github.com/graphql`
+// const apiUrl = `https://api.github.com/graphql`
 const patterns = process.env.GATSBY_SOURCE_PATTERNS.split(",").map((item) =>
   item.trim()
 )
@@ -48,24 +48,24 @@ module.exports = {
         patterns: patterns,
       },
     },
-    {
-      resolve: `@adobe/gatsby-source-github-file-contributors`,
-      options: {
-        pages: {
-          root: `${process.env.LOCAL_PROJECT_DIRECTORY}`, // root of the page paths (below) in the Github repo
-          paths: [`${process.env.LOCAL_PROJECT_DIRECTORY}`], // relative path of the pages from the config
-          extensions: ["md", "mdx"], // page extensions to filter for
-          prefix: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
-        },
-        repo: {
-          token: process.env.GATSBY_GIT_CORP_TOKEN,
-          owner: gitInfo.owner,
-          name: gitInfo.name,
-          branch: process.env.GATSBY_SOURCE_BRANCH,
-          api: apiUrl,
-        },
-      },
-    },
+    // {
+    //   resolve: `@adobe/gatsby-source-github-file-contributors`,
+    //   options: {
+    //     pages: {
+    //       root: `${process.env.LOCAL_PROJECT_DIRECTORY}`, // root of the page paths (below) in the Github repo
+    //       paths: [`${process.env.LOCAL_PROJECT_DIRECTORY}`], // relative path of the pages from the config
+    //       extensions: ["md", "mdx"], // page extensions to filter for
+    //       prefix: `${process.env.LOCAL_PROJECT_DIRECTORY}`,
+    //     },
+    //     repo: {
+    //       token: process.env.GATSBY_GIT_CORP_TOKEN,
+    //       owner: gitInfo.owner,
+    //       name: gitInfo.name,
+    //       branch: process.env.GATSBY_SOURCE_BRANCH,
+    //       api: apiUrl,
+    //     },
+    //   },
+    // },
     `gatsby-plugin-react-helmet`,
     {
       resolve: "@adobe/gatsby-add-launch-script",

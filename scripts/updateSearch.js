@@ -17,22 +17,23 @@ require("dotenv").config({
 ;(async () => {
   if (!process.env.VISIBLE || process.env.VISIBLE !== "false") {
     if (fs.existsSync("./searchIndex.json")) {
-      const data = JSON.parse(fs.readFileSync("./searchIndex.json"))
+      // Search update is disabled due to JS heap error
+      // const data = JSON.parse(fs.readFileSync("./searchIndex.json"))
 
-      const response = await fetch(
-        `${process.env.SEARCH_URL}/projects/${process.env.JOB_NAME}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({ id: `${process.env.JOB_NAME}`, data }),
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": `${process.env.X_API_KEY}`,
-          },
-        }
-      )
-      const json = await response.json()
+      // const response = await fetch(
+      //   `${process.env.SEARCH_URL}/projects/${process.env.JOB_NAME}`,
+      //   {
+      //     method: "PATCH",
+      //     body: JSON.stringify({ id: `${process.env.JOB_NAME}`, data }),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "x-api-key": `${process.env.X_API_KEY}`,
+      //     },
+      //   }
+      // )
+      // const json = await response.json()
   
-      console.log(json)
+      // console.log(json)
     } else {
       console.log("Error: searchIndex.json not found!")
     }

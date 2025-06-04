@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@adobe/gatsby-add-launch-script": "^0.0.5",
-    "@adobe/gatsby-remark-afm": "^0.8.6",
+    "@adobe/gatsby-remark-afm": "^0.8.7",
     "@adobe/gatsby-source-github-file-contributors": "https://github.com/macdonst/gatsby-source-github-file-contributors.git",
     "@adobe/gatsby-source-parliament": "^1.0.1",
     "@adobe/parliament-markdown-cleaner": "^1.5.9",
